@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\ElementsController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />
@@ -404,6 +405,8 @@
     <Content Include="Scripts\Charts\Inline.js" />
     <Content Include="Scripts\Charts\Morris-menu.js" />
     <Content Include="Scripts\Charts\Morris.js" />
+    <Content Include="Scripts\Company\Company-menu.js" />
+    <Content Include="Scripts\Company\Data.js" />
     <Content Include="Scripts\Documentation\Documentation-menu.js" />
     <Content Include="Scripts\Elements\Buttons-menu.js" />
     <Content Include="Scripts\Elements\General-menu.js" />
@@ -512,6 +515,7 @@
     <Content Include="Views\Widgets\Index.cshtml" />
     <Content Include="Views\Home\DashboardV1.cshtml" />
     <Content Include="Views\Home\DashboardV2.cshtml" />
+    <Content Include="Views\Company\Company.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
