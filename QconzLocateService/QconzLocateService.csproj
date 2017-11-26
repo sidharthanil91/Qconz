@@ -40,11 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CompanyServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QconzLocateInterface\ICompanyService.cs" />
+    <Compile Include="QconzLocateService\CompanyService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="QconzLocateInterface\" />
-    <Folder Include="QconzLocateService\" />
+    <ProjectReference Include="..\QconzLocateDAL\QconzLocateDAL.csproj">
+      <Project>{f49dc7b7-e7a4-45a9-8599-5bdca9981a28}</Project>
+      <Name>QconzLocateDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -67,6 +67,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QconzModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="QConzRepositoryInterface\ICompanyRepository.cs" />
+    <Compile Include="QConzRepositoryModel\CompanyModel.cs" />
+    <Compile Include="QConzRepository\CompanyRepository.cs" />
     <Compile Include="tblCustomer.cs">
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
@@ -86,11 +89,7 @@
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="QConzRepositoryInterface\" />
-    <Folder Include="QConzRepositoryModel\" />
-    <Folder Include="QConzRepository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EntityDeploy Include="QconzModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

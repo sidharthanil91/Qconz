@@ -31,6 +31,8 @@ namespace QconzLocate
             RegisterExamples(bundles);
 
             RegisterDocumentation(bundles);
+
+            RegisterCompany(bundles);
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -115,6 +117,16 @@ namespace QconzLocate
 
             bundles.Add(new ScriptBundle("~/Scripts/Tables/Data/menu").Include(
                 "~/Scripts/Tables/Data-menu.js"));
+        }
+
+        private static void RegisterCompany(BundleCollection bundles)
+        {
+
+            bundles.Add(new ScriptBundle("~/Scripts/Company/Data").Include(
+                "~/Scripts/Company/Data.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Company/Company/menu").Include(
+                "~/Scripts/Company/Company-menu.js"));
         }
 
         private static void RegisterForms(BundleCollection bundles)
