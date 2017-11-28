@@ -41,9 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CompanyServiceModel.cs" />
+    <Compile Include="Models\UserServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QconzLocateInterface\ICompanyService.cs" />
+    <Compile Include="QconzLocateInterface\IUserService.cs" />
     <Compile Include="QconzLocateService\CompanyService.cs" />
+    <Compile Include="QconzLocateService\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QconzLocateDAL\QconzLocateDAL.csproj">

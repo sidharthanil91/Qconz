@@ -1,0 +1,108 @@
+﻿
+
+@{
+    ViewBag.Title = "Company Details";
+}
+
+
+
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/plugins/icheck/css")
+@Styles.Render("~/AdminLTE/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/plugins/select2/css")
+@Styles.Render("~/AdminLTE/dist/css")
+@Styles.Render("~/AdminLTE/dist/css/skins")
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        @*<h3 class="box-title">Select2</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>*@
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Title</label>
+                        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" placeholder="Enter title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address1</label>
+                        <input type="text" class="form-control" id="Address1" name="Address1" value="@Model.Address1" placeholder="Enter address1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone 1</label>
+                        <input type="text" class="form-control" id="Phone1" name="Phone1" value="@Model.Phone1" placeholder="Enter phone1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Zip Code</label>
+                        <input type="text" class="form-control" id="ZipCode" name="ZipCode" value="@Model.ZipCode" placeholder="Enter zipCode">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contact Name</label>
+                        <input type="text" class="form-control" id="ContactName" name="ContactName" value="@Model.ContactName" placeholder="Enter contact name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address2</label>
+                        <input type="text" class="form-control" id="Address2" name="Address2" value="@Model.Address2" placeholder="Enter address2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone2</label>
+                        <input type="text" class="form-control" id="Phone2" name="Phone2" value="@Model.Phone2" placeholder="Enter phone2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Website</label>
+                        <input type="text" class="form-control" id="Website" name="Website" value="@Model.Website" placeholder="Enter website">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/plugins/input-mask/js")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Company/Advanced")
+}
+
+
+
+
+
+

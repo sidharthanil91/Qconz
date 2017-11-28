@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\User.cs" />
@@ -209,6 +210,8 @@
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserListViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -411,6 +414,8 @@
     <Content Include="Scripts\Charts\Inline.js" />
     <Content Include="Scripts\Charts\Morris-menu.js" />
     <Content Include="Scripts\Charts\Morris.js" />
+    <Content Include="Scripts\Company\Advanced.js" />
+    <Content Include="Scripts\Company\CompanyDetails-menu.js" />
     <Content Include="Scripts\Company\Company-menu.js" />
     <Content Include="Scripts\Company\Data.js" />
     <Content Include="Scripts\Documentation\Documentation-menu.js" />
@@ -451,6 +456,9 @@
     <Content Include="Scripts\Tables\Data-menu.js" />
     <Content Include="Scripts\Tables\Data.js" />
     <Content Include="Scripts\Tables\Simple-menu.js" />
+    <Content Include="Scripts\User\User-menu.js" />
+    <Content Include="Scripts\User\UserDetails-menu.js" />
+    <Content Include="Scripts\User\Data.js" />
     <Content Include="Scripts\Widgets\Widgets-menu.js" />
     <Content Include="Styles\Elements\General.css" />
     <Content Include="Styles\Elements\Icons.css" />
@@ -522,6 +530,9 @@
     <Content Include="Views\Home\DashboardV1.cshtml" />
     <Content Include="Views\Home\DashboardV2.cshtml" />
     <Content Include="Views\Company\Company.cshtml" />
+    <Content Include="Views\Company\CompanyDetails.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
+    <None Include="Properties\PublishProfiles\QconzPublish.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

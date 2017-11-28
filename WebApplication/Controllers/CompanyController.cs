@@ -37,7 +37,6 @@ namespace QconzLocate.Controllers
                 ZipCode = c.ZipCode
             }).ToList();
             companies.Companies = CompanyList;
-          //  return Content("Hello");
             return View("Company", companies);
         }
 
@@ -60,7 +59,7 @@ namespace QconzLocate.Controllers
                 Website = y.Website,
                 ZipCode = y.ZipCode
             };
-            return Content(CompanyDetails.Title);
+            return View("CompanyDetails",CompanyDetails);
         }
     }
 }
