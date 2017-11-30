@@ -532,6 +532,8 @@
     <Content Include="Views\Company\Company.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
     <Content Include="Views\User\User.cshtml" />
+    <None Include="Properties\PublishProfiles\Custompro.pubxml" />
+    <None Include="Properties\PublishProfiles\Qconz.pubxml" />
     <None Include="Properties\PublishProfiles\QconzPublish.pubxml" />
   </ItemGroup>
   <ItemGroup>

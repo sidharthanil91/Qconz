@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>QconzLocate</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-    @Styles.Render("~/AdminLTE/plugins/font-awesome/css")
-    @Styles.Render("~/AdminLTE/plugins/ionicons/css")
-    @Styles.Render("~/AdminLTE/bootstrap/css")
-    @Styles.Render("~/AdminLTE/dist/css")
-    @Styles.Render("~/AdminLTE/dist/css/skins")
+  
+    @Styles.Render("~/AdminLTE/Bundle/plugins/font-awesome/css")
+    @Styles.Render("~/AdminLTE/Bundle/plugins/ionicons/css")
+    @Styles.Render("~/AdminLTE/Bundle/bootstrap/css")
+    @Styles.Render("~/AdminLTE/Bundle/dist/css")
+    @Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -466,13 +466,13 @@
         <div class="control-sidebar-bg"></div>
     </div>
 
-    @Scripts.Render("~/AdminLTE/plugins/jquery/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery/js")
     @RenderSection("menu", required: false)
-    @Scripts.Render("~/AdminLTE/bootstrap/js")
-    @Scripts.Render("~/AdminLTE/plugins/slimscroll/js")
-    @Scripts.Render("~/AdminLTE/plugins/fastclick/js")
-    @Scripts.Render("~/Scripts/Shared/_Layout")
-    @Scripts.Render("~/AdminLTE/dist/js")
+    @Scripts.Render("~/AdminLTE/Bundle/bootstrap/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/slimscroll/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/fastclick/js")
+    @Scripts.Render("~/Scripts/Bundle/Shared/_Layout")
+    @Scripts.Render("~/AdminLTE/Bundle/dist/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
