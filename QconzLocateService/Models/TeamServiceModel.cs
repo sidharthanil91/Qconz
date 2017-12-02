@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QconzLocateDAL.QConzRepositoryModel
+namespace QconzLocateService.Models
 {
-    public class TeamModel
+   public class TeamServiceModel
     {
         public int Id { get; set; }
         public int TeamName { get; set; }

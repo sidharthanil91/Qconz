@@ -78,6 +78,9 @@
     <Compile Include="QConzRepositoryModel\TeamModel.cs" />
     <Compile Include="QConzRepositoryModel\UserModel.cs" />
     <Compile Include="QConzRepository\CompanyRepository.cs" />
+    <Compile Include="QConzRepository\CustomerRepository.cs" />
+    <Compile Include="QConzRepository\RosterRepository.cs" />
+    <Compile Include="QConzRepository\TeamRepository.cs" />
     <Compile Include="QConzRepository\UserRepository.cs" />
     <Compile Include="tblCustomer.cs">
       <DependentUpon>QconzModel.tt</DependentUpon>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QconzLocateDAL.QConzRepositoryModel
+namespace QconzLocateService.Models
 {
-    public class CustomerModel
+    public class CustomerServiceModel
     {
         public int Id { get; set; }
         public string CustomerCode { get; set; }
@@ -24,6 +24,5 @@ namespace QconzLocateDAL.QConzRepositoryModel
         public string Lng { get; set; }
         public DateTime? AddedDate { get; set; }
         public int? CompanyId { get; set; }
-
     }
 }
