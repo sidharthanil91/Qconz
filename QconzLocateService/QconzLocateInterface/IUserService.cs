@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace QconzLocateService.QconzLocateInterface
 {
-    interface IUserService
+    public interface IUserService
     {
         List<UserServiceModel> GetAllUsers();
         UserServiceModel GetUserDetails(int Id);
+        void SaveUserDetails(UserServiceModel UserModel);
     }
 }

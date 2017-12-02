@@ -78,5 +78,49 @@ namespace QconzLocateDAL.QConzRepository
                 return null;
             }
         }
+
+        public void SaveUserDetails(UserModel UserModel)
+        {
+            if (UserModel.Id == 0)
+            {
+                var user = new tblUserMaster()
+                {
+                    CELLPHONE = UserModel.Cellphone,
+                    COMPANYID = UserModel.CompanyId,
+                    EMERGENCYCONTACT = UserModel.EmergencyContact,
+                    EMAIL = UserModel.Email,
+                    ENDTIME = UserModel.EndTime,
+                    FIRSTNAME = UserModel.FirstName,
+                    PASSWORD = UserModel.Password,
+                    SURNAME = UserModel.SurName,
+                    USERNAME = UserModel.UserName,
+                    USERSTATUS = UserModel.UserStatus,
+                    USERTEAMID = UserModel.UserTeamId,
+                    USERTOKEN = UserModel.UserToken,
+                    USERTYPE = UserModel.UserType,
+                    WORKINGDAYS = UserModel.WorkingDays
+                };
+                entity.tblUserMasters.Add(user);
+            }
+            else
+            {
+                var y = entity.tblUserMasters.FirstOrDefault(t => t.ID == UserModel.Id);
+                    y.CELLPHONE = UserModel.Cellphone;
+                    y.COMPANYID = UserModel.CompanyId;
+                    y.EMERGENCYCONTACT = UserModel.EmergencyContact;
+                    y.EMAIL = UserModel.Email;
+                    y.ENDTIME = UserModel.EndTime;
+                    y.FIRSTNAME = UserModel.FirstName;
+                    y.PASSWORD = UserModel.Password;
+                    y.SURNAME = UserModel.SurName;
+                    y.USERNAME = UserModel.UserName;
+                    y.USERSTATUS = UserModel.UserStatus;
+                    y.USERTEAMID = UserModel.UserTeamId;
+                    y.USERTOKEN = UserModel.UserToken;
+                    y.USERTYPE = UserModel.UserType;
+                    y.WORKINGDAYS = UserModel.WorkingDays;
+            }
+            entity.SaveChanges();
+        }
     }
 }

@@ -535,6 +535,7 @@
     <None Include="Properties\PublishProfiles\Custompro.pubxml" />
     <None Include="Properties\PublishProfiles\Qconz.pubxml" />
     <None Include="Properties\PublishProfiles\QconzPublish.pubxml" />
+    <Content Include="Views\User\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

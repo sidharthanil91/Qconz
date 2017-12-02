@@ -1,4 +1,6 @@
 ﻿using QconzLocateDAL.QConzRepository;
+using QconzLocateDAL.QConzRepositoryInterface;
+using QconzLocateDAL.QConzRepositoryModel;
 using QconzLocateService.Models;
 using QconzLocateService.QconzLocateInterface;
 using System;
@@ -11,7 +13,7 @@ namespace QconzLocateService.QconzLocateService
 {
     public class UserService:IUserService
     {
-        private UserRepository _IUserRepository = new UserRepository();
+        private IUserRepository _IUserRepository = new UserRepository();
         //Get all companies
         public List<UserServiceModel> GetAllUsers()
         {
@@ -75,6 +77,31 @@ namespace QconzLocateService.QconzLocateService
             {
                 return null;
             }
+        }
+
+        public void SaveUserDetails(UserServiceModel UserDetails)
+        {
+
+            var user = new UserModel()
+            {
+                Id = UserDetails.Id,
+                Cellphone = UserDetails.Cellphone,
+                CompanyId = UserDetails.CompanyId,
+                EmergencyContact = UserDetails.EmergencyContact,
+                Email = UserDetails.Email,
+                EndTime = UserDetails.EndTime,
+                FirstName = UserDetails.FirstName,
+                Password = UserDetails.Password,
+                StartTime = UserDetails.StartTime,
+                SurName = UserDetails.SurName,
+                UserName = UserDetails.UserName,
+                UserStatus = UserDetails.UserStatus,
+                UserTeamId = UserDetails.UserTeamId,
+                UserToken = UserDetails.UserToken,
+                UserType = UserDetails.UserType,
+                WorkingDays = UserDetails.WorkingDays
+            };
+            _IUserRepository.SaveUserDetails(user);
         }
     }
 }

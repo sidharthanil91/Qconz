@@ -88,7 +88,7 @@ namespace QconzLocate.Controllers
         [HttpPost]
         public JsonResult SaveDetails(CompanyViewModel company)
         {
-            CompanyServiceModel CompanyModel;  new CompanyServiceModel();
+            CompanyServiceModel CompanyModel;  
             CompanyModel = new CompanyServiceModel()
             {
                 Id = company.Id,

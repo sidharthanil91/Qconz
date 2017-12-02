@@ -68,8 +68,14 @@
       <DependentUpon>QconzModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="QConzRepositoryInterface\ICompanyRepository.cs" />
+    <Compile Include="QConzRepositoryInterface\ICustomerRepository.cs" />
+    <Compile Include="QConzRepositoryInterface\IRosterRepository.cs" />
+    <Compile Include="QConzRepositoryInterface\ITeamRepository.cs" />
     <Compile Include="QConzRepositoryInterface\IUserRepository.cs" />
     <Compile Include="QConzRepositoryModel\CompanyModel.cs" />
+    <Compile Include="QConzRepositoryModel\CustomerModel.cs" />
+    <Compile Include="QConzRepositoryModel\RosterModel.cs" />
+    <Compile Include="QConzRepositoryModel\TeamModel.cs" />
     <Compile Include="QConzRepositoryModel\UserModel.cs" />
     <Compile Include="QConzRepository\CompanyRepository.cs" />
     <Compile Include="QConzRepository\UserRepository.cs" />

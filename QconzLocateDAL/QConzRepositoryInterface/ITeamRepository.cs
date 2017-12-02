@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace QconzLocateDAL.QConzRepositoryInterface
 {
-    public interface IUserRepository
+    public interface ITeamRepository
     {
-        List<UserModel> GetAllUsers();
-        UserModel GetUserDetails(int Id);
-        void SaveUserDetails(UserModel UserModel);
+        List<TeamModel> GetAllTeam();
+        TeamModel GetTeamDetails(int Id);
+        void SaveTeamDetails(TeamModel TeamModel);
     }
 }
