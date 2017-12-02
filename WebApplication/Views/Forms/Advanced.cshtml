@@ -4,16 +4,16 @@
 }
 
 @section Menu {
-    @Scripts.Render("~/Scripts/Forms/Advanced/menu")
+    @Scripts.Render("~/Scripts/Bundle/Forms/Advanced/menu")
 }
 
-@Styles.Render("~/AdminLTE/plugins/daterangepicker/css")
-@Styles.Render("~/AdminLTE/plugins/icheck/css")
-@Styles.Render("~/AdminLTE/plugins/colorpicker/css")
-@Styles.Render("~/AdminLTE/plugins/timepicker/css")
-@Styles.Render("~/AdminLTE/plugins/select2/css")
-@Styles.Render("~/AdminLTE/dist/css")
-@Styles.Render("~/AdminLTE/dist/css/skins")
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/icheck/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
 
 <div class="box box-default">
     <div class="box-header with-border">
@@ -54,14 +54,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Multiple</label>
-                    <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
+                    <select class="form-control select2" multiple="multiple" data-placeholder="Select working days" style="width: 100%;">
+                        <option>Mon</option>
+                        <option>Tue</option>
+                        <option>Wed</option>
+                        <option>Thu</option>
+                        <option>Fri</option>
+                        <option>Sat</option>
+                        <option>Sun</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -290,14 +290,14 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/AdminLTE/plugins/select2/js")
-    @Scripts.Render("~/AdminLTE/plugins/input-mask/js")
-    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
-    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/colorpicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/icheck/js")
-    @Scripts.Render("~/Scripts/Forms/Advanced")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/Forms/Advanced")
 }
 
 

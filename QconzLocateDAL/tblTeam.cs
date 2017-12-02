@@ -21,7 +21,7 @@ namespace QconzLocateDAL
         }
     
         public int ID { get; set; }
-        public int TEAMNAME { get; set; }
+        public string TEAMNAME { get; set; }
         public string TEAMDESC { get; set; }
         public Nullable<System.DateTime> TEAMCREATED { get; set; }
         public string TEAMSTATUS { get; set; }

@@ -34,7 +34,12 @@ namespace QconzLocate
             RegisterDocumentation(bundles);
 
             RegisterCompany(bundles);
-            //RegisterUser(bundles);
+
+            RegisterUser(bundles);
+
+            RegisterCustomer(bundles);
+
+            RegisterTeam(bundles);
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -134,8 +139,34 @@ namespace QconzLocate
                "~/Scripts/Company/Advanved.js"));
         }
 
+        private static void RegisterCustomer(BundleCollection bundles)
+        {
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/Customer/Data").Include(
+                "~/Scripts/Customer/Data.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/Customer/Customer/menu").Include(
+                "~/Scripts/Customer/Customer-menu.js"));
+
+        }
+
+        private static void RegisterTeam(BundleCollection bundles)
+        {
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/Team/Data").Include(
+                "~/Scripts/Team/Data.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/Team/Team/menu").Include(
+                "~/Scripts/Team/Team-menu.js"));
+
+        }
+
         private static void RegisterUser(BundleCollection bundles)
         {
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/User/Advanced").Include(
+               "~/Scripts/User/Advanced.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/Bundle/User/Data").Include(
                 "~/Scripts/User/Data.js"));
@@ -143,8 +174,6 @@ namespace QconzLocate
             bundles.Add(new ScriptBundle("~/Scripts/Bundle/User/User/menu").Include(
                 "~/Scripts/User/User-menu.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/Bundle/User/Advanced").Include(
-               "~/Scripts/User/Advanved.js"));
         }
 
         private static void RegisterForms(BundleCollection bundles)

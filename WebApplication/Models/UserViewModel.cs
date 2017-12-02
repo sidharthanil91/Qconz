@@ -9,6 +9,7 @@ namespace QconzLocate.Models
     {
         public int Id { get; set; }
         public int UserType { get; set; }
+        public string UserRole { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string UserStatus { get; set; }
@@ -24,6 +25,6 @@ namespace QconzLocate.Models
         public Nullable<System.DateTime> EndTime { get; set; }
         public string EmergencyContact { get; set; }
     }
+   
 
-  
 }

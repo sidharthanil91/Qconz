@@ -61,7 +61,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TEAMNAME" Type="int" Nullable="false" />
+          <Property Name="TEAMNAME" Type="varchar" MaxLength="100" />
           <Property Name="TEAMDESC" Type="varchar(max)" />
           <Property Name="TEAMCREATED" Type="datetime" />
           <Property Name="TEAMSTATUS" Type="char" MaxLength="1" Nullable="false" />
@@ -268,7 +268,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TEAMNAME" Type="Int32" Nullable="false" />
+          <Property Name="TEAMNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TEAMDESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TEAMCREATED" Type="DateTime" Precision="3" />
           <Property Name="TEAMSTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />

@@ -22,7 +22,14 @@ namespace QconzLocate.Controllers
         // GET: User
         public ActionResult UserReport()
         {
+            var user = System.Web.HttpContext.Current.User;
             UserListViewModel users1 = new UserListViewModel();
+            Dictionary<int, string> UserRole
+                       = new Dictionary<int, string>() {
+                         {2,"Admin User"},
+                         {3,"Dashboard User"},
+                         {4,"App User" } };
+
             UserList = _IUserService.GetAllUsers().Select(c => new UserViewModel
             {
                 Id = c.Id,
@@ -40,6 +47,7 @@ namespace QconzLocate.Controllers
                 UserTeamId = c.UserTeamId,
                 UserToken = c.UserToken,
                 UserType = c.UserType,
+                UserRole = UserRole[c.UserType],
                 WorkingDays = c.WorkingDays
             }).ToList();
 

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace QconzLocateDAL.QConzRepositoryModel
+namespace QconzLocate.Models
 {
-    public class TeamModel
+    public class TeamViewModel
+    {
+        List<TeamViewModelList> TeamList { get; set; }
+    }
+    public class TeamViewModelList
     {
         public int Id { get; set; }
         public string TeamName { get; set; }

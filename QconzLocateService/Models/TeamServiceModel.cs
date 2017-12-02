@@ -9,7 +9,7 @@ namespace QconzLocateService.Models
    public class TeamServiceModel
     {
         public int Id { get; set; }
-        public int TeamName { get; set; }
+        public string TeamName { get; set; }
         public string Teamdesc { get; set; }
         public DateTime? TeamCreatedDate { get; set; }
         public string TeamStatus { get; set; }

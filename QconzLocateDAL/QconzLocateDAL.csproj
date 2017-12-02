@@ -101,20 +101,6 @@
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EntityDeploy Include="QconzModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QconzModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
-    <None Include="QconzModel.edmx.diagram">
-      <DependentUpon>QconzModel.edmx</DependentUpon>
-    </None>
-  </ItemGroup>
   <ItemGroup>
     <Content Include="QconzModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -126,6 +112,17 @@
       <DependentUpon>QconzModel.edmx</DependentUpon>
       <LastGenOutput>QconzModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="QconzModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QconzModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="QconzModel.edmx.diagram">
+      <DependentUpon>QconzModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
