@@ -10,6 +10,8 @@ namespace QconzLocateService.QconzLocateInterface
     public interface ICompanyService
     {
          List<CompanyServiceModel> GetAllCompany();
+         void SaveCompanyDetails(CompanyServiceModel CompanyModel);
          CompanyServiceModel GetCompanyDetails(int Id);
+         
     }
 }

@@ -1,5 +1,6 @@
 ﻿using QconzLocateDAL.QConzRepository;
 using QconzLocateDAL.QConzRepositoryInterface;
+using QconzLocateDAL.QConzRepositoryModel;
 using QconzLocateService.Models;
 using QconzLocateService.QconzLocateInterface;
 using System;
@@ -68,6 +69,27 @@ namespace QconzLocateService.QconzLocateService
             {
                 return null;
             }
+        }
+
+        public void SaveCompanyDetails(CompanyServiceModel CompanyDetails)
+        {
+
+            var company = new CompanyModel()
+            {
+                Id = CompanyDetails.Id,
+                Address1 = CompanyDetails.Address1,
+                Address2 = CompanyDetails.Address2,
+                ContactName = CompanyDetails.ContactName,
+                Email = CompanyDetails.Email,
+                Lat = CompanyDetails.Lat,
+                Lng = CompanyDetails.Lng,
+                Phone1 = CompanyDetails.Phone1,
+                Phone2 = CompanyDetails.Phone2,
+                Title = CompanyDetails.Title,
+                Website = CompanyDetails.Website,
+                ZipCode = CompanyDetails.ZipCode
+            };
+            _ICompanyRepository.SaveCompanyDetails(company);
         }
     }
 }

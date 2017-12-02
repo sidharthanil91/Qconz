@@ -11,5 +11,6 @@ namespace QconzLocateDAL.QConzRepositoryInterface
     {
          List<CompanyModel> GetAllCompany();
          CompanyModel GetCompanyDetails(int Id);
+         void SaveCompanyDetails(CompanyModel CompanyModel);
     }
 }

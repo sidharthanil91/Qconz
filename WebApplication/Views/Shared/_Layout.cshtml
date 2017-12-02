@@ -7,9 +7,12 @@
     <title>QconzLocate</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
-    @Styles.Render("~/AdminLTE/Bundle/plugins/font-awesome/css")
-    @Styles.Render("~/AdminLTE/Bundle/plugins/ionicons/css")
-    @Styles.Render("~/AdminLTE/Bundle/bootstrap/css")
+    @*@Styles.Render("~/AdminLTE/Bundle/plugins/font-awesome/css")
+    @Styles.Render("~/AdminLTE/Bundle/plugins/ionicons/css")*@
+    <link rel="stylesheet" type="text/css" href="~/AdminLTE/plugins/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminLTE/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminLTE/bootstrap/css/bootstrap.min.css">
+    @*@Styles.Render("~/AdminLTE/Bundle/bootstrap/css")*@
     @Styles.Render("~/AdminLTE/Bundle/dist/css")
     @Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
 
@@ -240,27 +243,27 @@
                 </form>*@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN MENU</li>
-                    <li id="left-sidebar-menu-dashboard" class="treeview">
-                        <a href="#">
-                            <i class="fa fa-map-marker"></i> <span>Team Map</span> <i class="fa fa-angle-left pull-right"></i>
+                    <li id="left-sidebar-menu-dashboard" >
+                        <a href="@Url.Action("DashboardV1", "Home")">
+                            <i class="fa fa-map-marker"></i> <span>Team Map</span> 
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li id="left-sidebar-menu-dashboard-dashboardV1"><a href="@Url.Action("DashboardV1", "Home")"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
                             <li id="left-sidebar-menu-dashboard-dashboardV2"><a href="@Url.Action("DashboardV2", "Home")"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li id="left-sidebar-menu-admin-company">
-                        <a href="@Url.Action("Data", "Tables")">
+                        <a href="#">
                             <i class="fa fa-location-arrow"></i> <span>Locator</span>
                         </a>
                     </li>
                     <li id="left-sidebar-menu-admin-company">
-                        <a href="@Url.Action("Data", "Tables")">
+                        <a href="#">
                             <i class="fa fa-history"></i> <span>History</span>
                         </a>
                     </li>
-                    <li id="left-sidebar-menu-admin-company">
-                        <a href="@Url.Action("CompanyReport", "Company")">
+                    <li id="left-sidebar-menu-admin-companies">
+                        <a href="#">
                             <i class="fa fa-bell"></i> <span>Emergency Calls</span>
                         </a>
                     </li>
@@ -272,12 +275,12 @@
                         </a>
                     </li>
                     <li id="left-sidebar-menu-admin-company">
-                        <a href="@Url.Action("Data", "Tables")">
+                        <a href="#">
                             <i class="fa fa-calendar"></i> <span>Roster</span>
                         </a>
                     </li>
                     <li id="left-sidebar-menu-admin-company">
-                        <a href="@Url.Action("Data", "Tables")">
+                        <a href="#">
                             <i class="fa fa-users"></i> <span>Groups</span>
                         </a>
                     </li>
@@ -287,7 +290,7 @@
                         </a>
                     </li>
                     <li id="left-sidebar-menu-admin-company">
-                        <a href="@Url.Action("Data", "Tables")">
+                        <a href="#">
                             <i class="fa fa-shopping-cart"></i> <span>Customers</span>
                         </a>
                     </li>
@@ -298,10 +301,10 @@
             <section class="content-header">
                 <h1>
                     @ViewBag.Title
-                    <small>@ViewBag.SubTitle</small>
+                    @*<small>@ViewBag.SubTitle</small>*@
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>@ViewBag.SubTitle</a></li>
+                    <li><a href="@Url.Action("DashboardV1", "Home")"><i class="fa fa-map-marker"></i>@ViewBag.SubTitle</a></li>
                     <li class="active">@ViewBag.Title</li>
                 </ol>
             </section>

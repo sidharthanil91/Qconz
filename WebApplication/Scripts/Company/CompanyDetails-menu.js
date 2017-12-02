@@ -1,5 +1,5 @@
 ﻿$(function () {
-    var menuItem = $('#left-sidebar-menu-forms');
+    var menuItem = $('#left-sidebar-menu-admin-companies');
     menuItem.addClass('active');
     var subMenuItem = menuItem.find('#left-sidebar-menu-forms-advanced');
     subMenuItem.addClass('active');

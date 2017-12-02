@@ -6,14 +6,14 @@
 
 
 
-@Styles.Render("~/AdminLTE/plugins/daterangepicker/css")
-@Styles.Render("~/AdminLTE/plugins/icheck/css")
-@Styles.Render("~/AdminLTE/plugins/colorpicker/css")
-@Styles.Render("~/AdminLTE/plugins/timepicker/css")
-@Styles.Render("~/AdminLTE/plugins/select2/css")
-@Styles.Render("~/AdminLTE/dist/css")
-@Styles.Render("~/AdminLTE/dist/css/skins")
-
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/icheck/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
+@Styles.Render("~/Styles/Bundle/Elements/Modals")
 <div class="box box-default">
     <div class="box-header with-border">
         @*<h3 class="box-title">Select2</h3>
@@ -85,20 +85,74 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button  class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Launch demo modal
+    </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                   Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 
 @section Scripts {
-    @Scripts.Render("~/AdminLTE/plugins/select2/js")
-    @Scripts.Render("~/AdminLTE/plugins/input-mask/js")
-    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
-    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/colorpicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/icheck/js")
-    @Scripts.Render("~/Scripts/Company/Advanced")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+<script type="text/javascript">
+
+    $('#savebtn').click(function(){
+        var data={ Id : @Model.Id,
+            Address1 : $('#Address1').val(),
+            Address2 : $('#Address2').val(),
+            ContactName : $('#ContactName').val(),
+            Email : $('#Email').val(),
+            Lat : $('#Lat').val(),
+            Lng : $('#Lng').val(),
+            Phone1 : $('#Phone1').val(),
+            Phone2 : $('#Phone2').val(),
+            Title : $('#Title').val(),
+            Website : $('#Website').val(),
+            ZipCode : $('#ZipCode').val()}
+        var url='@Url.Action("SaveDetails", "Company")';
+        $.ajax({
+            type:"POST",
+            url:url,
+            data: JSON.stringify(data) ,  
+            dataType: "json",  
+            contentType: "application/json; charset=utf-8",  
+            success: function () {  
+                window.location.href= '@Url.Action("CompanyReport", "Company")';
+            },  
+            error: function () {  
+                alert("Error while inserting data");  
+            }  
+        })
+    });
+
+    </script>
+    
 }
 
 

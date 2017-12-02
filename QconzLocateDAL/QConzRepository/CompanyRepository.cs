@@ -66,5 +66,43 @@ namespace QconzLocateDAL.QConzRepository
                 return null;
             }
         }
+
+        public void SaveCompanyDetails(CompanyModel CompanyModel)
+        {
+            if (CompanyModel.Id == 0)
+            {
+                var company = new tblOrganization()
+                {
+                    ADDRESS1 = CompanyModel.Address1,
+                    ADDRESS2 = CompanyModel.Address2,
+                    CONTACTNAME = CompanyModel.ContactName,
+                    EMAIL = CompanyModel.Email,
+                    LAT = CompanyModel.Lat,
+                    LNG = CompanyModel.Lng,
+                    PHONE_1 = CompanyModel.Phone1,
+                    PHONE_2 = CompanyModel.Phone2,
+                    TITLE = CompanyModel.Title,
+                    WEBSITE = CompanyModel.Website,
+                    ZIPCODE = CompanyModel.ZipCode
+                };
+                entity.tblOrganizations.Add(company);
+            }
+            else
+            {
+                var y = entity.tblOrganizations.FirstOrDefault(t => t.ID == CompanyModel.Id);
+                    y.ADDRESS1 = CompanyModel.Address1;
+                    y.ADDRESS2 = CompanyModel.Address2;
+                    y.CONTACTNAME = CompanyModel.ContactName;
+                    y.EMAIL = CompanyModel.Email;
+                    y.LAT = CompanyModel.Lat;
+                    y.LNG = CompanyModel.Lng;
+                    y.PHONE_1 = CompanyModel.Phone1;
+                    y.PHONE_2 = CompanyModel.Phone2;
+                    y.TITLE = CompanyModel.Title;
+                    y.WEBSITE = CompanyModel.Website;
+                    y.ZIPCODE = CompanyModel.ZipCode;
+            }
+            entity.SaveChanges();
+        }
     }
 }

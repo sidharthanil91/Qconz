@@ -314,35 +314,35 @@ namespace QconzLocate
             bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/colorpicker/css").Include(
                                         "~/AdminLTE/plugins/colorpicker/css/bootstrap-colorpicker.css"));
 
-            //// plugins | datatables
+            // plugins | datatables
             //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/datatables/js").Include(
             //                             "~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js",
             //                             "~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/datatables/css").Include(
-            //                            "~/AdminLTE/plugins/datatables/css/dataTables.bootstrap.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/datatables/css").Include(
+                                        "~/AdminLTE/plugins/datatables/css/dataTables.bootstrap.css"));
 
-            //// plugins | datepicker
+            // plugins | datepicker
             //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/datepicker/js").Include(
             //                             "~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js",
             //                             "~/AdminLTE/plugins/datepicker/js/locales/bootstrap-datepicker*"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/datepicker/css").Include(
-            //                            "~/AdminLTE/plugins/datepicker/css/datepicker3.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/datepicker/css").Include(
+                                        "~/AdminLTE/plugins/datepicker/css/datepicker3.css"));
 
-            //// plugins | daterangepicker
+            // plugins | daterangepicker
             //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/daterangepicker/js").Include(
             //                             "~/AdminLTE/plugins/daterangepicker/js/moment.min.js",
             //                             "~/AdminLTE/plugins/daterangepicker/js/daterangepicker.js"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/daterangepicker/css").Include(
-            //                            "~/AdminLTE/plugins/daterangepicker/css/daterangepicker-bs3.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/daterangepicker/css").Include(
+                                        "~/AdminLTE/plugins/daterangepicker/css/daterangepicker-bs3.css"));
 
-            //// plugins | fastclick
-            //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/fastclick/js").Include(
-            //                             "~/AdminLTE/plugins/fastclick/js/fastclick.min.js"));
+            // plugins | fastclick
+            bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/fastclick/js").Include(
+                                         "~/AdminLTE/plugins/fastclick/js/fastclick.min.js"));
 
-            //// plugins | flot
+            // plugins | flot
             //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/flot/js").Include(
             //                             "~/AdminLTE/plugins/flot/js/jquery.flot.min.js",
             //                             "~/AdminLTE/plugins/flot/js/jquery.flot.resize.min.js",
@@ -353,30 +353,30 @@ namespace QconzLocate
             bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/font-awesome/css").Include(
                                         "~/AdminLTE/plugins/font-awesome/css/font-awesome.min.css"));
 
-            //// plugins | fullcalendar
-            //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/fullcalendar/js").Include(
-            //                             "~/AdminLTE/plugins/fullcalendar/js/fullcalendar.min.js"));
+            // plugins | fullcalendar
+            bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/fullcalendar/js").Include(
+                                         "~/AdminLTE/plugins/fullcalendar/js/fullcalendar.min.js"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/fullcalendar/css").Include(
-            //                            "~/AdminLTE/plugins/fullcalendar/css/fullcalendar.min.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/fullcalendar/css").Include(
+                                        "~/AdminLTE/plugins/fullcalendar/css/fullcalendar.min.css"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/fullcalendar/css/print").Include(
-            //                            "~/AdminLTE/plugins/fullcalendar/css/print/fullcalendar.print.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/fullcalendar/css/print").Include(
+                                        "~/AdminLTE/plugins/fullcalendar/css/print/fullcalendar.print.css"));
 
-            //// plugins | icheck
-            //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/icheck/js").Include(
-            //                             "~/AdminLTE/plugins/icheck/js/icheck.min.js"));
+            // plugins | icheck
+            bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/icheck/js").Include(
+                                         "~/AdminLTE/plugins/icheck/js/icheck.min.js"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/icheck/css").Include(
-            //                            "~/AdminLTE/plugins/icheck/css/all.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/icheck/css").Include(
+                                        "~/AdminLTE/plugins/icheck/css/all.css"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/icheck/css/flat").Include(
-            //                            "~/AdminLTE/plugins/icheck/css/flat/flat.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/icheck/css/flat").Include(
+                                        "~/AdminLTE/plugins/icheck/css/flat/flat.css"));
 
-            //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/icheck/css/sqare/blue").Include(
-            //                            "~/AdminLTE/plugins/icheck/css/sqare/blue.css"));
+            bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/icheck/css/sqare/blue").Include(
+                                        "~/AdminLTE/plugins/icheck/css/sqare/blue.css"));
 
-            //// plugins | input-mask
+            // plugins | input-mask
             //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/input-mask/js").Include(
             //                             "~/AdminLTE/plugins/input-mask/js/jquery.inputmask.js",
             //                             "~/AdminLTE/plugins/input-mask/js/jquery.inputmask.date.extensions.js",
@@ -386,9 +386,9 @@ namespace QconzLocate
             bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/ionicons/css").Include(
                                         "~/AdminLTE/plugins/ionicons/css/ionicons.min.css"));
 
-            //// plugins | ionslider
-            //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/ionslider/js").Include(
-            //                             "~/AdminLTE/plugins/ionslider/js/ion.rangeSlider.min.js"));
+            // plugins | ionslider
+            bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/ionslider/js").Include(
+                                         "~/AdminLTE/plugins/ionslider/js/ion.rangeSlider.min.js"));
 
             //bundles.Add(new StyleBundle("~/AdminLTE/Bundle/plugins/ionslider/css").Include(
             //                            "~/AdminLTE/plugins/ionslider/css/ion.rangeSlider.css",
@@ -406,7 +406,7 @@ namespace QconzLocate
             bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/jquery-ui/js").Include(
                                          "~/AdminLTE/plugins/jquery-ui/js/jquery-ui.min.js"));
 
-            //// plugins | jvectormap
+            // plugins | jvectormap
             //bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/jvectormap/js").Include(
             //                             "~/AdminLTE/plugins/jvectormap/js/jquery-jvectormap-1.2.2.min.js",
             //                             "~/AdminLTE/plugins/jvectormap/js/jquery-jvectormap-world-mill-en.js"));
