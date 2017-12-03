@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace QconzLocate.Controllers
 {
+    [Authorize(Roles = "SUPER,ADMIN")]
     public class CustomerController : Controller
     {
         private ICustomerService _ICustomerService = new CustomerService();

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace QconzLocate.Controllers
 {
+    [Authorize(Roles = "SUPER,ADMIN")]
     public class UserController : Controller
     {
         private IUserService _IUserService = new UserService();
@@ -23,6 +24,7 @@ namespace QconzLocate.Controllers
         public ActionResult UserReport()
         {
             var user = System.Web.HttpContext.Current.User;
+            int CompanyId = (int)(Session["CompanyId"]);
             UserListViewModel users1 = new UserListViewModel();
             Dictionary<int, string> UserRole
                        = new Dictionary<int, string>() {
@@ -30,12 +32,13 @@ namespace QconzLocate.Controllers
                          {3,"Dashboard User"},
                          {4,"App User" } };
 
-            UserList = _IUserService.GetAllUsers().Select(c => new UserViewModel
+            UserList = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModel
             {
                 Id = c.Id,
                 Cellphone = c.Cellphone,
                 CompanyId = c.CompanyId,
                 EmergencyContact = c.EmergencyContact,
+                EmergencyContactNo=c.EmergencyContactNo,
                 Email = c.Email,
                 EndTime = c.EndTime,
                 FirstName = c.FirstName,
@@ -67,6 +70,7 @@ namespace QconzLocate.Controllers
                     Cellphone = c.Cellphone,
                     CompanyId = c.CompanyId,
                     EmergencyContact = c.EmergencyContact,
+                    EmergencyContactNo=c.EmergencyContactNo,
                     Email = c.Email,
                     EndTime = c.EndTime,
                     FirstName = c.FirstName,
@@ -90,6 +94,7 @@ namespace QconzLocate.Controllers
                     Cellphone = null,
                     CompanyId = null,
                     EmergencyContact = null,
+                    EmergencyContactNo=null,
                     Email = null,
                     EndTime = null,
                     FirstName = null,
@@ -117,6 +122,7 @@ namespace QconzLocate.Controllers
                 Cellphone = user.Cellphone,
                 CompanyId = user.CompanyId,
                 EmergencyContact = user.EmergencyContact,
+                EmergencyContactNo=user.EmergencyContactNo,
                 Email = user.Email,
                 EndTime = user.EndTime,
                 FirstName = user.FirstName,

@@ -1,4 +1,5 @@
 ﻿using QconzLocate.Models;
+using QconzLocateService.Models;
 using QconzLocateService.QconzLocateInterface;
 using QconzLocateService.QconzLocateService;
 using System;
@@ -9,93 +10,88 @@ using System.Web.Mvc;
 
 namespace QconzLocate.Controllers
 {
+    [Authorize(Roles = "SUPER,ADMIN")]
     public class TeamController : Controller
     {
         
         private ITeamService _ITeamService = new TeamService();
-      
+        private CommonService _commonService = new CommonService();
+        
         // GET: Team
         public ActionResult TeamReport()
         {
-            
-            var TeamList = _ITeamService.GetAllTeam().Select(c => new TeamViewModelList
+            int CompanyId = (int)(Session["CompanyId"]);
+            var TeamList = _ITeamService.GetAllTeam(CompanyId).Select(c => new TeamViewModelList
             {
                 Id = c.Id,
                 CompanyId = c.CompanyId,
                 TeamCreatedDate = c.TeamCreatedDate,
                 Teamdesc = c.Teamdesc,
                 TeamName = c.TeamName,
-                TeamStatus = c.TeamStatus
+                TeamStatus = c.TeamStatus,
+                CompanyName=c.CompanyName
             }).ToList();
             return View("Team", TeamList);
         }
 
-        //public ActionResult CompanyDetails(int id)
-        //{
-        //    CompanyViewModel CompanyDetails;
-        //    if (id != 0)
-        //    {
-        //        var y = _ICompanyService.GetCompanyDetails(id);
-        //        CompanyDetails = new CompanyViewModel
-        //        {
-        //            Id = y.Id,
-        //            Address1 = y.Address1,
-        //            Address2 = y.Address2,
-        //            ContactName = y.ContactName,
-        //            Email = y.Email,
-        //            Lat = y.Lat,
-        //            Lng = y.Lng,
-        //            Phone1 = y.Phone1,
-        //            Phone2 = y.Phone2,
-        //            Title = y.Title,
-        //            Website = y.Website,
-        //            ZipCode = y.ZipCode
-        //        };
-        //        return View("CompanyDetails", CompanyDetails);
-        //    }
-        //    else
-        //    {
-        //        CompanyDetails = new CompanyViewModel
-        //        {
-        //            Id = 0,
-        //            Address1 = null,
-        //            Address2 = null,
-        //            ContactName = null,
-        //            Email = null,
-        //            Lat = null,
-        //            Lng = null,
-        //            Phone1 = null,
-        //            Phone2 = null,
-        //            Title = null,
-        //            Website = null,
-        //            ZipCode = null
-        //        };
-        //        return View("CompanyDetails", CompanyDetails);
-        //    }
-        //}
+        public ActionResult TeamDetails(int id)
+        {
+            int CompanyId = (int)(Session["CompanyId"]);
+            TeamViewModel TeamViewModel = new TeamViewModel();
+            List<SelectListItems> companyselect = new List<SelectListItems>();
+            TeamViewModelList TeamDetails;
+            if (id != 0)
+            {
+                var c = _ITeamService.GetTeamDetails(id);
+                TeamDetails = new TeamViewModelList
+                {
+                    Id = c.Id,
+                    CompanyId = c.CompanyId,
+                    TeamCreatedDate = c.TeamCreatedDate,
+                    Teamdesc = c.Teamdesc,
+                    TeamName = c.TeamName,
+                    TeamStatus = c.TeamStatus
+                };
+                TeamViewModel.SingleTeam = TeamDetails;
+                var y = _commonService.GetCompanySelectList(CompanyId);
+                companyselect = y.CompanyList.Select(t=>new SelectListItems {
+                    id=t.Id,
+                    text=t.Text
+                }).ToList();
+                TeamViewModel.CompanyList = companyselect;
+                return View("TeamDetails", TeamViewModel);
+            }
+            else
+            {
+                TeamDetails = new TeamViewModelList
+                {
+                    Id = 0,
+                    CompanyId =0,
+                    TeamCreatedDate = null,
+                    Teamdesc = null,
+                    TeamName = null,
+                    TeamStatus = null
+                };
+                return View("TeamDetails", TeamDetails);
+            }
+        }
 
-        //[HttpPost]
-        //public JsonResult SaveDetails(CompanyViewModel company)
-        //{
-        //    CompanyServiceModel CompanyModel;
-        //    CompanyModel = new CompanyServiceModel()
-        //    {
-        //        Id = company.Id,
-        //        Address1 = company.Address1,
-        //        Address2 = company.Address2,
-        //        ContactName = company.ContactName,
-        //        Email = company.Email,
-        //        Lat = company.Lat,
-        //        Lng = company.Lng,
-        //        Phone1 = company.Phone1,
-        //        Phone2 = company.Phone2,
-        //        Title = company.Title,
-        //        Website = company.Website,
-        //        ZipCode = company.ZipCode
-        //    };
-        //    _ICompanyService.SaveCompanyDetails(CompanyModel);
-        //    bool success = true;
-        //    return Json(success, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public JsonResult SaveDetails(TeamViewModelList team)
+        {
+            TeamServiceModel TeamModel;
+            TeamModel = new TeamServiceModel()
+            {
+                Id = team.Id,
+                CompanyId = team.CompanyId,
+                TeamCreatedDate = team.TeamCreatedDate,
+                Teamdesc = team.Teamdesc,
+                TeamName = team.TeamName,
+                TeamStatus = team.TeamStatus
+            };
+            _ITeamService.SaveTeamDetails(TeamModel);
+            bool success = true;
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
     }
 }

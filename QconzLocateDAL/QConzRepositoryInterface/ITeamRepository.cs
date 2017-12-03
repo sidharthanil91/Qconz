@@ -9,7 +9,7 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface ITeamRepository
     {
-        List<TeamModel> GetAllTeam();
+        List<TeamModel> GetAllTeam(int CompanyId);
         TeamModel GetTeamDetails(int Id);
         void SaveTeamDetails(TeamModel TeamModel);
     }

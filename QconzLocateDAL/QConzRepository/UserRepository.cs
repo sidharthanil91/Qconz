@@ -12,18 +12,19 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<UserModel> GetAllUsers()
+        public List<UserModel> GetAllUsers(int CompanyId)
         {
             try
             {
                 List<UserModel> UserList = new List<UserModel>();
-                var y = (from t in entity.tblUserMasters select t).ToList();
+                var y = (from t in entity.tblUserMasters where t.USERTYPE>1 && (t.COMPANYID==CompanyId || CompanyId==0) select t).ToList();
                 UserList = y.Select(c => new UserModel
                 {
                     Id = c.ID,
                     Cellphone = c.CELLPHONE,
                     CompanyId = c.COMPANYID,
                     EmergencyContact = c.EMERGENCYCONTACT,
+                    EmergencyContactNo=c.EMERGENCYCONTACTNO,
                     Email = c.EMAIL,
                     EndTime = c.ENDTIME,
                     FirstName = c.FIRSTNAME,
@@ -58,6 +59,7 @@ namespace QconzLocateDAL.QConzRepository
                              Cellphone = c.CELLPHONE,
                              CompanyId = c.COMPANYID,
                              EmergencyContact = c.EMERGENCYCONTACT,
+                             EmergencyContactNo=c.EMERGENCYCONTACTNO,
                              Email = c.EMAIL,
                              EndTime = c.ENDTIME,
                              FirstName = c.FIRSTNAME,
@@ -88,6 +90,7 @@ namespace QconzLocateDAL.QConzRepository
                     CELLPHONE = UserModel.Cellphone,
                     COMPANYID = UserModel.CompanyId,
                     EMERGENCYCONTACT = UserModel.EmergencyContact,
+                    EMERGENCYCONTACTNO=UserModel.EmergencyContactNo,
                     EMAIL = UserModel.Email,
                     ENDTIME = UserModel.EndTime,
                     FIRSTNAME = UserModel.FirstName,
@@ -108,6 +111,7 @@ namespace QconzLocateDAL.QConzRepository
                     y.CELLPHONE = UserModel.Cellphone;
                     y.COMPANYID = UserModel.CompanyId;
                     y.EMERGENCYCONTACT = UserModel.EmergencyContact;
+                    y.EMERGENCYCONTACTNO = UserModel.EmergencyContactNo;
                     y.EMAIL = UserModel.Email;
                     y.ENDTIME = UserModel.EndTime;
                     y.FIRSTNAME = UserModel.FirstName;

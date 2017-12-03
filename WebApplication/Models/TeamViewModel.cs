@@ -7,7 +7,12 @@ namespace QconzLocate.Models
 {
     public class TeamViewModel
     {
-        List<TeamViewModelList> TeamList { get; set; }
+        public List<TeamViewModelList> TeamList { get; set; }
+        public TeamViewModelList SingleTeam { get; set; }
+        public List<SelectListItems> GroupList { get; set; }
+        public List<SelectListItems> CompanyList { get; set; }
+      
+       
     }
     public class TeamViewModelList
     {
@@ -17,5 +22,11 @@ namespace QconzLocate.Models
         public DateTime? TeamCreatedDate { get; set; }
         public string TeamStatus { get; set; }
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
+    }
+    public class SelectListItems
+    {
+        public int id { get; set; }
+        public string text { get; set; }
     }
 }

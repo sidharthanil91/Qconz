@@ -15,11 +15,11 @@ namespace QconzLocateService.QconzLocateService
     {
         private ITeamRepository _ITeamRepository = new TeamRepository();
         //Get all companies
-        public List<TeamServiceModel> GetAllTeam()
+        public List<TeamServiceModel> GetAllTeam(int CompanyId)
         {
             try
             {
-                var y = _ITeamRepository.GetAllTeam();
+                var y = _ITeamRepository.GetAllTeam(CompanyId);
                 return y.Select(c => new TeamServiceModel
                 {
                     Id = c.Id,
@@ -27,7 +27,8 @@ namespace QconzLocateService.QconzLocateService
                     TeamCreatedDate=c.TeamCreatedDate,
                     Teamdesc=c.Teamdesc,
                     TeamName=c.TeamName,
-                    TeamStatus=c.TeamStatus
+                    TeamStatus=c.TeamStatus,
+                    CompanyName=c.CompanyName
                 }).ToList();
             }
             catch (Exception ex)

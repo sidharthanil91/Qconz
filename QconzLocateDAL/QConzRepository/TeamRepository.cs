@@ -12,16 +12,17 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<TeamModel> GetAllTeam()
+        public List<TeamModel> GetAllTeam(int CompanyId)
         {
             try
             {
                 List<TeamModel> TeamList = new List<TeamModel>();
-                var y = (from t in entity.tblTeams select t).ToList();
+                // var y = (from t in entity.tblTeams select t).ToList();
+                var y = entity.tblTeams.Select(t1=>t1).Where(t => t.COMPANYID == CompanyId || CompanyId == 0).ToList();
                 TeamList = y.Select(c => new TeamModel
                 {
                     Id = c.ID,
-                    CompanyId=c.COMPANYID,
+                    CompanyName=c.tblOrganization.TITLE,
                     TeamCreatedDate=c.TEAMCREATED,
                     Teamdesc=c.TEAMDESC,
                     TeamName=c.TEAMNAME,

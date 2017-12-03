@@ -9,7 +9,7 @@ namespace QconzLocateService.QconzLocateInterface
 {
     public interface IUserService
     {
-        List<UserServiceModel> GetAllUsers();
+        List<UserServiceModel> GetAllUsers(int CompanyId);
         UserServiceModel GetUserDetails(int Id);
         void SaveUserDetails(UserServiceModel UserModel);
     }

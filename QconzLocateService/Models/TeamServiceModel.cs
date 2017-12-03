@@ -14,5 +14,6 @@ namespace QconzLocateService.Models
         public DateTime? TeamCreatedDate { get; set; }
         public string TeamStatus { get; set; }
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
     }
 }

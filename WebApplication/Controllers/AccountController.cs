@@ -9,6 +9,8 @@ using QconzLocate.Models;
 using System.Web.Security;
 using QconzLocate.DAL;
 using System;
+using QconzLocateService.QconzLocateService;
+using QconzLocateService.Models;
 
 namespace QconzLocate.Controllers
 {
@@ -16,7 +18,7 @@ namespace QconzLocate.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private CommonService _commonService = new CommonService();
         public AccountController()
         {
         }
@@ -70,15 +72,16 @@ namespace QconzLocate.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            User user = new User() { Email = model.Email, Password = model.Password };
+            UserAuthServiceModel user = new UserAuthServiceModel() { Email = model.Email, Password = model.Password };
 
-            user = Repository.GetUserDetails(user);
+            user = _commonService.GetLoginUserDetails(user);
 
             if (user != null)
             {
                 FormsAuthentication.SetAuthCookie(model.Email, false);
 
                 var authTicket = new FormsAuthenticationTicket(1, user.Email, System.DateTime.Now, DateTime.Now.AddMinutes(20), false, user.Roles);
+                Session["CompanyId"] = user.CompanyId==null?0:user.CompanyId;
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);
@@ -360,6 +363,7 @@ namespace QconzLocate.Controllers
         {
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             FormsAuthentication.SignOut();
+            Session.Abandon();
             //return RedirectToAction("Index", "Home");
             return RedirectToAction("DashboardV1", "Home");
         }

@@ -24,5 +24,6 @@ namespace QconzLocateService.Models
         public Nullable<System.DateTime> StartTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
         public string EmergencyContact { get; set; }
+        public string EmergencyContactNo { get; set; }
     }
 }

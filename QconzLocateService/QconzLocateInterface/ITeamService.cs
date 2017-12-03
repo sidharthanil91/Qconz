@@ -9,7 +9,7 @@ namespace QconzLocateService.QconzLocateInterface
 {
     public interface ITeamService
     {
-        List<TeamServiceModel> GetAllTeam();
+        List<TeamServiceModel> GetAllTeam(int CompanyId);
         void SaveTeamDetails(TeamServiceModel TeamModel);
         TeamServiceModel GetTeamDetails(int Id);
     }

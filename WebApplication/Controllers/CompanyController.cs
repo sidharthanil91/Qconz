@@ -10,6 +10,7 @@ using QconzLocateService.Models;
 
 namespace QconzLocate.Controllers
 {
+    [Authorize(Roles = "SUPER,ADMIN")]
     public class CompanyController : Controller
     {
         private ICompanyService _ICompanyService = new CompanyService();

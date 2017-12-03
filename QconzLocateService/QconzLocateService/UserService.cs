@@ -15,17 +15,18 @@ namespace QconzLocateService.QconzLocateService
     {
         private IUserRepository _IUserRepository = new UserRepository();
         //Get all companies
-        public List<UserServiceModel> GetAllUsers()
+        public List<UserServiceModel> GetAllUsers(int CompanyId)
         {
             try
             {
-                var y = _IUserRepository.GetAllUsers();
+                var y = _IUserRepository.GetAllUsers(CompanyId);
                 return y.Select(c => new UserServiceModel
                 {
                     Id = c.Id,
                     Cellphone = c.Cellphone,
                     CompanyId = c.CompanyId,
                     EmergencyContact = c.EmergencyContact,
+                    EmergencyContactNo=c.EmergencyContactNo,
                     Email = c.Email,
                     EndTime = c.EndTime,
                     FirstName = c.FirstName,
@@ -59,6 +60,7 @@ namespace QconzLocateService.QconzLocateService
                     Cellphone = c.Cellphone,
                     CompanyId = c.CompanyId,
                     EmergencyContact = c.EmergencyContact,
+                    EmergencyContactNo=c.EmergencyContactNo,
                     Email = c.Email,
                     EndTime = c.EndTime,
                     FirstName = c.FirstName,
@@ -88,6 +90,7 @@ namespace QconzLocateService.QconzLocateService
                 Cellphone = UserDetails.Cellphone,
                 CompanyId = UserDetails.CompanyId,
                 EmergencyContact = UserDetails.EmergencyContact,
+                EmergencyContactNo=UserDetails.EmergencyContactNo,
                 Email = UserDetails.Email,
                 EndTime = UserDetails.EndTime,
                 FirstName = UserDetails.FirstName,

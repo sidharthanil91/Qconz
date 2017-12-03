@@ -548,6 +548,7 @@
     <Content Include="Views\User\UserDetails.cshtml" />
     <Content Include="Views\Customer\Customer.cshtml" />
     <Content Include="Views\Team\Team.cshtml" />
+    <Content Include="Views\Team\TeamDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,7 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface IUserRepository
     {
-        List<UserModel> GetAllUsers();
+        List<UserModel> GetAllUsers(int CompanyId);
         UserModel GetUserDetails(int Id);
         void SaveUserDetails(UserModel UserModel);
     }

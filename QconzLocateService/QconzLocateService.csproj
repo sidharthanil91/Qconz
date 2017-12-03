@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CommonServiceModel.cs" />
     <Compile Include="Models\CompanyServiceModel.cs" />
     <Compile Include="Models\CustomerServiceModel.cs" />
     <Compile Include="Models\RosterServiceModel.cs" />
     <Compile Include="Models\TeamServiceModel.cs" />
+    <Compile Include="Models\UserAuthServiceModel.cs" />
     <Compile Include="Models\UserServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QconzLocateInterface\ICompanyService.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="QconzLocateInterface\IRosterService.cs" />
     <Compile Include="QconzLocateInterface\ITeamService.cs" />
     <Compile Include="QconzLocateInterface\IUserService.cs" />
+    <Compile Include="QconzLocateService\CommonService.cs" />
     <Compile Include="QconzLocateService\CompanyService.cs" />
     <Compile Include="QconzLocateService\CustomerService.cs" />
     <Compile Include="QconzLocateService\RosterService.cs" />
