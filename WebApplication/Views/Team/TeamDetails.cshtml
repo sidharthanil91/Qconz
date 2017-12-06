@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" rows="3" value="@Model.SingleTeam.Teamdesc" placeholder="Enter description"></textarea>
+                        <textarea class="form-control" rows="3" id="Teamdesc" value="@Model.SingleTeam.Teamdesc" placeholder="Enter description"></textarea>
                     </div>
                 </div>
               
@@ -90,7 +90,7 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
     <script type="text/javascript">
-
+        $('#Teamdesc').html('@Model.SingleTeam.Teamdesc');
         var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
         var data = JSON.parse(jsontext);
         $('#Company').select2({
@@ -98,20 +98,13 @@
         })
         $("#Company").val("@Model.SingleTeam.CompanyId").trigger("change");
 
-        @*$('#savebtn').click(function(){
-            var data={ Id : @Model.Id,
-                Address1 : $('#Address1').val(),
-                Address2 : $('#Address2').val(),
-                ContactName : $('#ContactName').val(),
-                Email : $('#Email').val(),
-                Lat : $('#Lat').val(),
-                Lng : $('#Lng').val(),
-                Phone1 : $('#Phone1').val(),
-                Phone2 : $('#Phone2').val(),
-                Title : $('#Title').val(),
-                Website : $('#Website').val(),
-                ZipCode : $('#ZipCode').val()}
-            var url='@Url.Action("SaveDetails", "Company")';
+        $('#savebtn').click(function(){
+            var data={ Id : @Model.SingleTeam.Id,
+                TeamName : $('#TeamName').val(),
+                Teamdesc : $('#Teamdesc').val(),
+                CompanyId : $('#Company').val()
+                }
+            var url='@Url.Action("SaveDetails", "Team")';
             $.ajax({
                 type:"POST",
                 url:url,
@@ -119,13 +112,13 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function () {
-                    window.location.href= '@Url.Action("CompanyReport", "Company")';
+                    window.location.href= '@Url.Action("TeamReport", "Team")';
                 },
                 error: function () {
                     alert("Error while inserting data");
                 }
             })
-        });*@
+        });
 
     </script>
 

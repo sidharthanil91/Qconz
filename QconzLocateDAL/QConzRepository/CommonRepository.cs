@@ -25,6 +25,21 @@ namespace QconzLocateDAL.QConzRepository
             CommonModel.CompanyList = CompanySelectList;
             return CommonModel;
         }
+
+        public CommonModel GetGroupSelectList(int CompanyId)
+        {
+            CommonModel CommonModel = new CommonModel();
+            List<SelectList> GroupSelectList = new List<SelectList>();
+            var y = (from t in entity.tblTeams where t.ID == CompanyId || CompanyId == 0 select new { t.ID, t.TEAMNAME }).ToList();
+            GroupSelectList = y.Select(c => new SelectList
+            {
+                Id = c.ID,
+                Text = c.TEAMNAME,
+            }
+             ).ToList();
+            CommonModel.GroupList = GroupSelectList;
+            return CommonModel;
+        }
         public UserAuthRepositoryModel GetLoginUserDetails(UserAuthRepositoryModel user)
         {
             UserAuthRepositoryModel UserDetails = new UserAuthRepositoryModel();

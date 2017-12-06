@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QconzLocateDAL.QConzRepository
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
@@ -17,14 +17,14 @@ namespace QconzLocateDAL.QConzRepository
             try
             {
                 List<UserModel> UserList = new List<UserModel>();
-                var y = (from t in entity.tblUserMasters where t.USERTYPE>1 && (t.COMPANYID==CompanyId || CompanyId==0) select t).ToList();
+                var y = (from t in entity.tblUserMasters where t.USERTYPE > 1 && (t.COMPANYID == CompanyId || CompanyId == 0) select t).ToList();
                 UserList = y.Select(c => new UserModel
                 {
                     Id = c.ID,
                     Cellphone = c.CELLPHONE,
                     CompanyId = c.COMPANYID,
                     EmergencyContact = c.EMERGENCYCONTACT,
-                    EmergencyContactNo=c.EMERGENCYCONTACTNO,
+                    EmergencyContactNo = c.EMERGENCYCONTACTNO,
                     Email = c.EMAIL,
                     EndTime = c.ENDTIME,
                     FirstName = c.FIRSTNAME,
@@ -33,10 +33,10 @@ namespace QconzLocateDAL.QConzRepository
                     SurName = c.SURNAME,
                     UserName = c.USERNAME,
                     UserStatus = c.USERSTATUS,
-                    UserTeamId=c.USERTEAMID,
-                    UserToken=c.USERTOKEN,
-                    UserType=c.USERTYPE,
-                    WorkingDays=c.WORKINGDAYS
+                    UserTeamId = c.USERTEAMID,
+                    UserToken = c.USERTOKEN,
+                    UserType = c.USERTYPE,
+                    WorkingDays = c.WORKINGDAYS
                 }
                 ).ToList();
                 return UserList;
@@ -59,7 +59,7 @@ namespace QconzLocateDAL.QConzRepository
                              Cellphone = c.CELLPHONE,
                              CompanyId = c.COMPANYID,
                              EmergencyContact = c.EMERGENCYCONTACT,
-                             EmergencyContactNo=c.EMERGENCYCONTACTNO,
+                             EmergencyContactNo = c.EMERGENCYCONTACTNO,
                              Email = c.EMAIL,
                              EndTime = c.ENDTIME,
                              FirstName = c.FIRSTNAME,
@@ -83,48 +83,56 @@ namespace QconzLocateDAL.QConzRepository
 
         public void SaveUserDetails(UserModel UserModel)
         {
-            if (UserModel.Id == 0)
+            try
             {
-                var user = new tblUserMaster()
+                if (UserModel.Id == 0)
                 {
-                    CELLPHONE = UserModel.Cellphone,
-                    COMPANYID = UserModel.CompanyId,
-                    EMERGENCYCONTACT = UserModel.EmergencyContact,
-                    EMERGENCYCONTACTNO=UserModel.EmergencyContactNo,
-                    EMAIL = UserModel.Email,
-                    ENDTIME = UserModel.EndTime,
-                    FIRSTNAME = UserModel.FirstName,
-                    PASSWORD = UserModel.Password,
-                    SURNAME = UserModel.SurName,
-                    USERNAME = UserModel.UserName,
-                    USERSTATUS = UserModel.UserStatus,
-                    USERTEAMID = UserModel.UserTeamId,
-                    USERTOKEN = UserModel.UserToken,
-                    USERTYPE = UserModel.UserType,
-                    WORKINGDAYS = UserModel.WorkingDays
-                };
-                entity.tblUserMasters.Add(user);
-            }
-            else
-            {
-                var y = entity.tblUserMasters.FirstOrDefault(t => t.ID == UserModel.Id);
+                    var user = new tblUserMaster()
+                    {
+                        CELLPHONE = UserModel.Cellphone,
+                        COMPANYID = UserModel.CompanyId,
+                        EMERGENCYCONTACT = UserModel.EmergencyContact,
+                        EMERGENCYCONTACTNO = UserModel.EmergencyContactNo,
+                        EMAIL = UserModel.Email,
+                        ENDTIME = UserModel.EndTime,
+                        STARTTIME=UserModel.StartTime,
+                        FIRSTNAME = UserModel.FirstName,
+                        PASSWORD = UserModel.Password,
+                        SURNAME = UserModel.SurName,
+                        USERNAME = UserModel.UserName,
+                        USERSTATUS = "A",
+                        USERTEAMID = UserModel.UserTeamId,
+                        USERTOKEN = UserModel.UserToken,
+                        USERTYPE = UserModel.UserType,
+                        WORKINGDAYS = UserModel.WorkingDays
+                    };
+                    entity.tblUserMasters.Add(user);
+                }
+                else
+                {
+                    var y = entity.tblUserMasters.FirstOrDefault(t => t.ID == UserModel.Id);
                     y.CELLPHONE = UserModel.Cellphone;
                     y.COMPANYID = UserModel.CompanyId;
                     y.EMERGENCYCONTACT = UserModel.EmergencyContact;
                     y.EMERGENCYCONTACTNO = UserModel.EmergencyContactNo;
                     y.EMAIL = UserModel.Email;
                     y.ENDTIME = UserModel.EndTime;
+                    y.STARTTIME = UserModel.StartTime;
                     y.FIRSTNAME = UserModel.FirstName;
                     y.PASSWORD = UserModel.Password;
                     y.SURNAME = UserModel.SurName;
                     y.USERNAME = UserModel.UserName;
-                    y.USERSTATUS = UserModel.UserStatus;
-                    y.USERTEAMID = UserModel.UserTeamId;
-                    y.USERTOKEN = UserModel.UserToken;
+                    y.USERSTATUS = "A";
+                    //y.USERTEAMID = 1;
                     y.USERTYPE = UserModel.UserType;
                     y.WORKINGDAYS = UserModel.WorkingDays;
+                }
+                entity.SaveChanges();
             }
-            entity.SaveChanges();
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

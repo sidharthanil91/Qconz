@@ -66,11 +66,11 @@ namespace QconzLocateDAL.QConzRepository
             {
                 var team = new tblTeam()
                 {
-                    COMPANYID=TeamModel.CompanyId,
-                    TEAMCREATED=TeamModel.TeamCreatedDate,
+                    COMPANYID = TeamModel.CompanyId,
+                    TEAMCREATED = DateTime.Now,
                     TEAMDESC=TeamModel.Teamdesc,
                     TEAMNAME=TeamModel.TeamName,
-                    TEAMSTATUS=TeamModel.TeamStatus
+                    TEAMSTATUS="A"
                 };
                 entity.tblTeams.Add(team);
             }
@@ -78,10 +78,10 @@ namespace QconzLocateDAL.QConzRepository
             {
                 var y = entity.tblTeams.FirstOrDefault(t => t.ID == TeamModel.Id);
                 y.COMPANYID = TeamModel.CompanyId;
-                y.TEAMCREATED = TeamModel.TeamCreatedDate;
+                y.TEAMCREATED = DateTime.Now;
                 y.TEAMDESC = TeamModel.Teamdesc;
                 y.TEAMNAME = TeamModel.TeamName;
-                y.TEAMSTATUS = TeamModel.TeamStatus;
+                y.TEAMSTATUS = "A";
             }
             entity.SaveChanges();
         }

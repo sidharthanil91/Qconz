@@ -25,6 +25,19 @@ namespace QconzLocateService.QconzLocateService
             return CommonServiceModel;
         }
 
+        public CommonServiceModel GetGroupSelectList(int CompanyId)
+        {
+            CommonServiceModel CommonServiceModel = new CommonServiceModel();
+            List<SelectLists> GroupSelectList = new List<SelectLists>();
+            var y = _commonRepository.GetCompanySelectList(CompanyId);
+            foreach (var item in y.CompanyList)
+            {
+                GroupSelectList.Add(new SelectLists { Id = item.Id, Text = item.Text });
+            }
+            CommonServiceModel.GroupList = GroupSelectList;
+            return CommonServiceModel;
+        }
+
         public UserAuthServiceModel GetLoginUserDetails(UserAuthServiceModel user)
         {
             UserAuthRepositoryModel UserDetails = new UserAuthRepositoryModel();

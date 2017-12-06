@@ -17,6 +17,7 @@
                 <h3 class="box-title">User List</h3>
             </div>
             <div class="box-body">
+                <button style="width:35px" onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -30,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.users)
+                        @foreach (var item in Model)
                         {
 
                             <tr>

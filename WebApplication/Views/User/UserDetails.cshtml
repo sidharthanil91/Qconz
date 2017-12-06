@@ -29,26 +29,26 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">First name</label>
-                        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" placeholder="Enter first name">
+                        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.UserDetails.FirstName" placeholder="Enter first name">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="Enter email">
+                        <input type="text" class="form-control" id="Email" name="Email" value="@Model.UserDetails.Email" placeholder="Enter email">
                     </div>
                 </div>
+              
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Company</label>
-                        <input type="text" class="form-control" id="Company" name="Company" value="@Model.CompanyId" placeholder="Enter company">
+                        <label>Company</label>
+                        <select id="Company" class="form-control select2" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
                     </div>
                 </div>
-               
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Group</label>
-                        <input type="text" class="form-control" id="Email" name="Group" value="@Model.UserTeamId" placeholder="Enter group">
+                        <input type="text" class="form-control" id="Email" name="Group" value="@Model.UserDetails.UserTeamId" placeholder="Enter group">
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,7 +56,7 @@
                         <div class="form-group">
                             <label>Start time</label>
                             <div class="input-group">
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" id="StartTime" value="@Model.UserDetails.StartTime.ToString("hh:mm")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -67,14 +67,14 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Emergency contact name</label>
-                        <input type="text" class="form-control" id="EmergencyContact" name="EmergencyContact" value="@Model.EmergencyContact" placeholder="Enter emergency contact name">
+                        <input type="text" class="form-control" id="EmergencyContact" name="EmergencyContact" value="@Model.UserDetails.EmergencyContact" placeholder="Enter emergency contact name">
                     </div>
                 </div>
-              
+
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">User name</label>
-                        <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserName" placeholder="Enter user name">
+                        <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserDetails.UserName" placeholder="Enter user name">
                     </div>
                 </div>
             </div>
@@ -82,24 +82,19 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Surname</label>
-                        <input type="text" class="form-control" id="SurName" name="SurName" value="@Model.SurName" placeholder="Enter surname">
+                        <input type="text" class="form-control" id="SurName" name="SurName" value="@Model.UserDetails.SurName" placeholder="Enter surname">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Cellphone</label>
-                        <input type="text" class="form-control" id="Cellphone" name="Cellphone" value="@Model.Cellphone" placeholder="Enter cellphone">
+                        <input type="text" class="form-control" id="Cellphone" name="Cellphone" value="@Model.UserDetails.Cellphone" placeholder="Enter cellphone">
                     </div>
                 </div>
-                @*<div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Type</label>
-                        <input type="text" class="form-control" id="Type" name="Type" value="@Model.UserType" placeholder="Enter type">
-                    </div>
-                </div>*@
+             
                 <div class="form-group">
                     <label>Type</label>
-                    <select id="Type" class="form-control select2" value="@Model.UserType" style="width: 100%;">
+                    <select id="Type" class="form-control select2" value="@Model.UserDetails.UserType" style="width: 100%;">
                         <option value="2">Admin User</option>
                         <option value="3">Dashboard User</option>
                         <option value="4">App User</option>
@@ -119,18 +114,13 @@
                         </select>
                     </div>
                 </div>
-                @*<div class="form-group">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">End time</label>
-                    <input type="text" class="form-control" id="EndTime" name="EndTime" value="@Model.EndTime" placeholder="Enter end time">
-                </div>
-            </div>*@
+               
                 <div class="form-group">
                     <div class="bootstrap-timepicker">
                         <div class="form-group">
                             <label>End time</label>
                             <div class="input-group">
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" id="EndTime" value="@Model.UserDetails.EndTime.ToString("hh:mm")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -138,17 +128,17 @@
                         </div>
                     </div>
                 </div>
-         
+
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Emergency contact cellphone</label>
-                        <input type="text" class="form-control" id="EmergencyContactNo" name="StartTime" value="@Model.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
+                        <input type="text" class="form-control" id="EmergencyContactNo" name="EmergencyContactNo" value="@Model.UserDetails.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Password</label>
-                        <input type="text" class="form-control" id="Password" name="Password" value="@Model.Password" placeholder="Enter password">
+                        <input type="text" class="form-control" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
                     </div>
                 </div>
             </div>
@@ -184,48 +174,67 @@
 @section Scripts {
 
 
-@Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
-@*@Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")*@
-@Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
-@Scripts.Render("~/Scripts/Bundle/User/Advanced")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @*@Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")*@
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/User/Advanced")
     <script type="text/javascript">
-        $("#Type").val("@Model.UserType").trigger("change");
+        $("#Type").val("@Model.UserDetails.UserType").trigger("change");
         //$('#WorkingDays').select2();
         //$('#WorkingDays').val("[1,2,4]").trigger("change");
-        var array = '@Model.WorkingDays'.split(',')
+        var array = '@Model.UserDetails.WorkingDays'.split(',')
         $('#WorkingDays').select2().val(array).trigger("change")
-    $('#savebtn').click(function(){
-        var data={ Id : @Model.Id,
-            Address1 : $('#Address1').val(),
-            Address2 : $('#Address2').val(),
-            ContactName : $('#ContactName').val(),
-            Email : $('#Email').val(),
-            Lat : $('#Lat').val(),
-            Lng : $('#Lng').val(),
-            Phone1 : $('#Phone1').val(),
-            Phone2 : $('#Phone2').val(),
-            Title : $('#Title').val(),
-            Website : $('#Website').val(),
-            ZipCode : $('#ZipCode').val()}
-        var url='@Url.Action("SaveDetails", "Company")';
-        $.ajax({
-            type:"POST",
-            url:url,
-            data: JSON.stringify(data) ,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                window.location.href= '@Url.Action("CompanyReport", "Company")';
-            },
-            error: function () {
-                alert("Error while inserting data");
-            }
+        var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
+        var data = JSON.parse(jsontext);
+        $('#Company').select2({
+            data: data
         })
-    });
+        $("#Company").val("@Model.UserDetails.CompanyId").trigger("change");
+        @*var jsontext1 = '@Html.Raw(Json.Encode(Model.GroupList))';
+        var data1 = JSON.parse(jsontext);
+        $('#Company').select2({
+            data: data
+        })
+        $("#Company").val("@Model.UserDetails.CompanyId").trigger("change");*@
+        $('#savebtn').click(function(){
+            var data={ Id : @Model.UserDetails.Id,
+                Cellphone : $('#Cellphone').val(),
+                CompanyId : $('#Company').val(),
+                EmergencyContact : $('#EmergencyContact').val(),
+                EmergencyContactNo : $('#EmergencyContactNo').val(),
+                Email : $('#Email').val(),
+                EndTime : $('#EndTime').val(),
+                FirstName : $('#FirstName').val(),
+                Password : $('#Password').val(),
+                StartTime : $('#StartTime').val(),
+                SurName : $('#SurName').val(),
+                UserName : $('#UserName').val(),
+                //UserStatus : $('#UserName').val(),
+                UserTeamId : $('#UserTeamId').val(),
+                //UserToken : $('#UserToken').val(),
+                UserType : $('#Type').val(),
+                WorkingDays : $('#WorkingDays').val().toString(),
+            }
+
+            var url='@Url.Action("SaveDetails", "User")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    window.location.href= '@Url.Action("UserReport", "User")';
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        });
 
     </script>
 

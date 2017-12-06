@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "CustomerDetails";
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/icheck/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
+@Styles.Render("~/Styles/Bundle/Elements/Modals")
+<div class="box box-default">
+    <div class="box-header with-border">
+        @*<h3 class="box-title">Select2</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>*@
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Customer code</label>
+                        <input type="text" class="form-control" id="CustomerCode" name="CustomerCode" value="@Model.CustomerDetails.CustomerCode" placeholder="Enter customer code">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First name</label>
+                        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.CustomerDetails.FirstName" placeholder="Enter first name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address1</label>
+                        <input type="text" class="form-control" id="Address1" name="Address1" value="@Model.CustomerDetails.Address1" placeholder="Enter address1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone 1</label>
+                        <input type="text" class="form-control" id="Phone1" name="Phone1" value="@Model.CustomerDetails.Phone1" placeholder="Enter phone1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="text" class="form-control" id="Email" name="Email" value="@Model.CustomerDetails.Email" placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Latitude</label>
+                        <input type="text" class="form-control" id="Lat" name="Lat" value="@Model.CustomerDetails.Lat" placeholder="Enter latitude">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Zip Code</label>
+                        <input type="text" class="form-control" id="ZipCode" name="ZipCode" value="@Model.CustomerDetails.ZipCode" placeholder="Enter zipCode">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contact Name</label>
+                        <input type="text" class="form-control" id="OfficeName" name="OfficeName" value="@Model.CustomerDetails.OfficeName" placeholder="Enter office name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Last name</label>
+                        <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.CustomerDetails.LastName" placeholder="Enter last name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address2</label>
+                        <input type="text" class="form-control" id="Address2" name="Address2" value="@Model.CustomerDetails.Address2" placeholder="Enter address2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone2</label>
+                        <input type="text" class="form-control" id="Phone2" name="Phone2" value="@Model.CustomerDetails.Phone2" placeholder="Enter phone2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Website</label>
+                        <input type="text" class="form-control" id="Website" name="Website" value="@Model.CustomerDetails.Website" placeholder="Enter website">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Longitude</label>
+                        <input type="text" class="form-control" id="Lng" name="Lng" value="@Model.CustomerDetails.Lng" placeholder="Enter longitude">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Company</label>
+                        <select id="Company" class="form-control select2" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+    <script type="text/javascript">
+
+        var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
+        var data = JSON.parse(jsontext);
+        $('#Company').select2({
+            data: data
+        })
+        $("#Company").val("@Model.CustomerDetails.CompanyId").trigger("change");
+
+        $('#savebtn').click(function(){
+            var data={ Id : @Model.CustomerDetails.Id,
+                Address1 : $('#Address1').val(),
+                Address2 : $('#Address2').val(),
+                CustomerCode: $('#CustomerCode').val(),
+                FirstName : $('#FirstName').val(),
+                LastName : $('#LastName').val(),
+                CompanyId:$('#Company').val(),
+                Email : $('#Email').val(),
+                Lat : $('#Lat').val(),
+                Lng : $('#Lng').val(),
+                Phone1 : $('#Phone1').val(),
+                Phone2 : $('#Phone2').val(),
+                OfficeName : $('#OfficeName').val(),
+                Website : $('#Website').val(),
+                ZipCode : $('#ZipCode').val()}
+            var url='@Url.Action("SaveDetails", "Customer")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    window.location.href= '@Url.Action("CustomerReport", "Customer")';
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        });
+
+    </script>
+
+}
+
+
+
+

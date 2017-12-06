@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Locator";
+}
+
+@Styles.Render("~/AdminLTE/plugins/morris/css")
+@Styles.Render("~/AdminLTE/plugins/jvectormap/css")
+@Styles.Render("~/AdminLTE/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Customer code</label>
+                    <input type="text" class="form-control" id="CustomerCode" name="CustomerCode" value="" placeholder="Enter customer code">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label>Company</label>
+                    <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script>
+function myMap() {
+var mapProp= {
+    center: new google.maps.LatLng(-37.785796,175.276155),
+    zoom:5,
+};
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
+    @*@Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
+        @Scripts.Render("~/AdminLTE/plugins/sparkline/js")
+        @Scripts.Render("~/AdminLTE/plugins/jvectormap/js")
+        @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
+        @Scripts.Render("~/AdminLTE/plugins/knob/js")
+        @Scripts.Render("~/AdminLTE/plugins/raphael/js")
+        @Scripts.Render("~/AdminLTE/plugins/morris/js")
+        @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
+        @Scripts.Render("~/Scripts/Home/DashboardV1")*@
+}
+

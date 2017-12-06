@@ -7,6 +7,14 @@ namespace QconzLocate.Models
 {
     public class UserViewModel
     {
+       public List<UserViewModelList> UserListViewModel { get; set; }
+       public UserViewModelList UserDetails { get; set; }
+       public List<SelectListItems> GroupList { get; set; }
+       public List<SelectListItems> CompanyList { get; set; }
+    }
+
+    public class UserViewModelList
+    {
         public int Id { get; set; }
         public int UserType { get; set; }
         public string UserRole { get; set; }
@@ -26,6 +34,7 @@ namespace QconzLocate.Models
         public string EmergencyContact { get; set; }
         public string EmergencyContactNo { get; set; }
     }
-   
+
+    
 
 }

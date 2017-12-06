@@ -7,7 +7,9 @@ namespace QconzLocate.Models
 {
     public class CustomerViewModel
     {
-        List<CustomerListViewModel> CustomerList { get; set; }
+        public List<CustomerListViewModel> CustomerList { get; set; }
+        public CustomerListViewModel CustomerDetails { get; set; }
+        public List<SelectListItems> CompanyList { get; set; }
     }
     public class CustomerListViewModel
     {

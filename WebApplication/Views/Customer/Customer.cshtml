@@ -16,11 +16,11 @@
                 <h3 class="box-title">Customer List</h3>
             </div>
             <div class="box-body">
-                <button style="width:35px" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                <button style="width:35px" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Company</th>
+                            <th>Customer Code</th>
                             <th>Contact Name</th>
                             <th>Phone</th>
                             <th>Email</th>
@@ -46,7 +46,7 @@
                                     @item.Email
                                 </td>
                                 <td width="5%">
-                                    <button type="button" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                    <button type="button" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
                                 </td>
                                 @*<td width="5%">
                                         <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>

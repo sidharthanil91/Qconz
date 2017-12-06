@@ -14,7 +14,8 @@ namespace QconzLocate.Controllers
     public class UserController : Controller
     {
         private IUserService _IUserService = new UserService();
-        private List<UserViewModel> UserList = new List<UserViewModel>();
+        private UserViewModel UserList = new UserViewModel();
+        private CommonService _commonservice = new CommonService();
        
         public UserController()
         {
@@ -32,7 +33,7 @@ namespace QconzLocate.Controllers
                          {3,"Dashboard User"},
                          {4,"App User" } };
 
-            UserList = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModel
+            UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModelList
             {
                 Id = c.Id,
                 Cellphone = c.Cellphone,
@@ -54,17 +55,17 @@ namespace QconzLocate.Controllers
                 WorkingDays = c.WorkingDays
             }).ToList();
 
-            users1.users = UserList;
-            return View("User", users1);
+            return View("User", UserList.UserListViewModel);
         }
 
         public ActionResult UserDetails(int id)
         {
-            UserViewModel UserDetails;
+            int CompanyId = (int)(Session["CompanyId"]);
+            UserViewModelList UserDetails;
             if (id != 0)
             {
                 var c = _IUserService.GetUserDetails(id);
-                UserDetails = new UserViewModel
+                UserDetails = new UserViewModelList
                 {
                     Id = c.Id,
                     Cellphone = c.Cellphone,
@@ -72,10 +73,10 @@ namespace QconzLocate.Controllers
                     EmergencyContact = c.EmergencyContact,
                     EmergencyContactNo=c.EmergencyContactNo,
                     Email = c.Email,
-                    EndTime = c.EndTime,
+                    EndTime = c.EndTime==null?DateTime.Now:c.EndTime,
                     FirstName = c.FirstName,
                     Password = c.Password,
-                    StartTime = c.StartTime,
+                    StartTime = c.StartTime==null?DateTime.Now:c.StartTime,
                     SurName = c.SurName,
                     UserName = c.UserName,
                     UserStatus = c.UserStatus,
@@ -84,36 +85,49 @@ namespace QconzLocate.Controllers
                     UserType = c.UserType,
                     WorkingDays = c.WorkingDays
                 };
-                return View("UserDetails", UserDetails);
+                //UserList.UserDetails = UserDetails;
+                //return View("UserDetails", UserDetails);
             }
             else
             {
-                UserDetails = new UserViewModel
+                UserDetails = new UserViewModelList
                 {
                     Id = 0,
                     Cellphone = null,
-                    CompanyId = null,
+                    CompanyId = CompanyId,
                     EmergencyContact = null,
-                    EmergencyContactNo=null,
+                    EmergencyContactNo= null,
                     Email = null,
-                    EndTime = null,
+                    EndTime =DateTime.Now ,
                     FirstName = null,
-                    Password =null,
-                    StartTime = null,
+                    Password = null,
+                    StartTime = DateTime.Now,
                     SurName = null,
                     UserName = null,
                     UserStatus = null,
-                    UserTeamId = null,
-                    UserToken = null,
+                    UserTeamId = 0,
                     UserType = 0,
                     WorkingDays = null
                 };
-                return View("UserDetails", UserDetails);
             }
+            UserList.UserDetails = UserDetails;
+            var y=_commonservice.GetCompanySelectList(CompanyId);
+            UserList.CompanyList = y.CompanyList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            var grp = _commonservice.GetGroupSelectList(CompanyId);
+            UserList.GroupList = grp.GroupList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            return View("UserDetails", UserList);
         }
 
         [HttpPost]
-        public JsonResult SaveDetails(UserViewModel user)
+        public JsonResult SaveDetails(UserViewModelList user)
         {
             UserServiceModel UserModel;
             UserModel = new UserServiceModel()

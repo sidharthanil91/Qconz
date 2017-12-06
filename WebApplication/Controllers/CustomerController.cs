@@ -1,4 +1,5 @@
 ﻿using QconzLocate.Models;
+using QconzLocateService.Models;
 using QconzLocateService.QconzLocateInterface;
 using QconzLocateService.QconzLocateService;
 using System;
@@ -13,8 +14,7 @@ namespace QconzLocate.Controllers
     public class CustomerController : Controller
     {
         private ICustomerService _ICustomerService = new CustomerService();
-        private List<CompanyViewModel> CompanyList = new List<CompanyViewModel>();
-       
+        private CommonService _commonService = new CommonService();
         // GET: Customer
         public ActionResult CustomerReport()
         {
@@ -41,72 +41,94 @@ namespace QconzLocate.Controllers
             return View("Customer", customers);
         }
 
-        //public ActionResult CompanyDetails(int id)
-        //{
-        //    CompanyViewModel CompanyDetails;
-        //    if (id != 0)
-        //    {
-        //        var y = _ICompanyService.GetCompanyDetails(id);
-        //        CompanyDetails = new CompanyViewModel
-        //        {
-        //            Id = y.Id,
-        //            Address1 = y.Address1,
-        //            Address2 = y.Address2,
-        //            ContactName = y.ContactName,
-        //            Email = y.Email,
-        //            Lat = y.Lat,
-        //            Lng = y.Lng,
-        //            Phone1 = y.Phone1,
-        //            Phone2 = y.Phone2,
-        //            Title = y.Title,
-        //            Website = y.Website,
-        //            ZipCode = y.ZipCode
-        //        };
-        //        return View("CompanyDetails", CompanyDetails);
-        //    }
-        //    else
-        //    {
-        //        CompanyDetails = new CompanyViewModel
-        //        {
-        //            Id = 0,
-        //            Address1 = null,
-        //            Address2 = null,
-        //            ContactName = null,
-        //            Email = null,
-        //            Lat = null,
-        //            Lng = null,
-        //            Phone1 = null,
-        //            Phone2 = null,
-        //            Title = null,
-        //            Website = null,
-        //            ZipCode = null
-        //        };
-        //        return View("CompanyDetails", CompanyDetails);
-        //    }
-        //}
+        public ActionResult CustomerDetails(int id)
+        {
+            int CompanyId = (int)(Session["CompanyId"]);
+            CustomerViewModel CustomerViewModel = new CustomerViewModel();
+            CustomerListViewModel CustomerDetails;
+            var c = _ICustomerService.GetCustomerDetails(id);
+            if (id != 0)
+            {
+                CustomerDetails = new CustomerListViewModel
+                {
+                    Id = c.Id,
+                    Address1 = c.Address1,
+                    Address2 = c.Address2,
+                    AddedDate = c.AddedDate,
+                    CompanyId = c.CompanyId,
+                    CustomerCode = c.CustomerCode,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    OfficeName = c.OfficeName,
+                    Email = c.Email,
+                    Lat = c.Lat,
+                    Lng = c.Lng,
+                    Phone1 = c.Phone1,
+                    Phone2 = c.Phone2,
+                    Website = c.Website,
+                    ZipCode = c.ZipCode
+                };
+                
+            }
+            else
+            {
+                CustomerDetails = new CustomerListViewModel
+                {
+                    Id = 0,
+                    Address1 = null,
+                    Address2 = null,
+                    //AddedDate = null,
+                    CompanyId = CompanyId,
+                    CustomerCode = null,
+                    FirstName = null,
+                    LastName = null,
+                    OfficeName = null,
+                    Email = null,
+                    Lat = null,
+                    Lng = null,
+                    Phone1 = null,
+                    Phone2 = null,
+                    Website = null,
+                    ZipCode = null
+                };
+            }
+            CustomerViewModel.CustomerDetails = CustomerDetails;
+           
+            var y = _commonService.GetCompanySelectList(CompanyId);
+            CustomerViewModel.CompanyList = y.CompanyList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            return View("CustomerDetails", CustomerViewModel);
+        }
 
-        //[HttpPost]
-        //public JsonResult SaveDetails(CompanyViewModel company)
-        //{
-        //    CompanyServiceModel CompanyModel;
-        //    CompanyModel = new CompanyServiceModel()
-        //    {
-        //        Id = company.Id,
-        //        Address1 = company.Address1,
-        //        Address2 = company.Address2,
-        //        ContactName = company.ContactName,
-        //        Email = company.Email,
-        //        Lat = company.Lat,
-        //        Lng = company.Lng,
-        //        Phone1 = company.Phone1,
-        //        Phone2 = company.Phone2,
-        //        Title = company.Title,
-        //        Website = company.Website,
-        //        ZipCode = company.ZipCode
-        //    };
-        //    _ICompanyService.SaveCompanyDetails(CompanyModel);
-        //    bool success = true;
-        //    return Json(success, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public JsonResult SaveDetails(CustomerListViewModel customer)
+        {
+            CustomerServiceModel CustomerModel;
+            CustomerModel = new CustomerServiceModel()
+            {
+                Id = customer.Id,
+                Address1 = customer.Address1,
+                Address2 = customer.Address2,
+                AddedDate = customer.AddedDate,
+                CompanyId = customer.CompanyId,
+                CustomerCode = customer.CustomerCode,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                OfficeName = customer.OfficeName,
+                Email = customer.Email,
+                Lat = customer.Lat,
+                Lng = customer.Lng,
+                Phone1 = customer.Phone1,
+                Phone2 = customer.Phone2,
+                Website = customer.Website,
+                ZipCode = customer.ZipCode
+            };
+            _ICustomerService.SaveCustomerDetails(CustomerModel);
+            bool success = true;
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
     }
 }

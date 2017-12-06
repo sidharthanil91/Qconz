@@ -25,7 +25,7 @@
                             <th>Group name</th>
                             <th>Company</th>
                             <th></th>
-                            <th></th>
+                            @*<th></th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -42,9 +42,9 @@
                                 <td width="5%">
                                     <button type="button" onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
                                 </td>
-                                <td width="5%">
+                                @*<td width="5%">
                                         <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </td>
+                                    </td>*@
                             </tr>
 
                         }

@@ -52,28 +52,30 @@ namespace QconzLocate.Controllers
                     TeamName = c.TeamName,
                     TeamStatus = c.TeamStatus
                 };
-                TeamViewModel.SingleTeam = TeamDetails;
-                var y = _commonService.GetCompanySelectList(CompanyId);
-                companyselect = y.CompanyList.Select(t=>new SelectListItems {
-                    id=t.Id,
-                    text=t.Text
-                }).ToList();
-                TeamViewModel.CompanyList = companyselect;
-                return View("TeamDetails", TeamViewModel);
+               
             }
             else
             {
                 TeamDetails = new TeamViewModelList
                 {
                     Id = 0,
-                    CompanyId =0,
-                    TeamCreatedDate = null,
+                    CompanyId = CompanyId,
+                    TeamCreatedDate = DateTime.Now,
                     Teamdesc = null,
                     TeamName = null,
                     TeamStatus = null
                 };
-                return View("TeamDetails", TeamDetails);
+              //  return View("TeamDetails", TeamDetails);
             }
+            TeamViewModel.SingleTeam = TeamDetails;
+            var y = _commonService.GetCompanySelectList(CompanyId);
+            companyselect = y.CompanyList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            TeamViewModel.CompanyList = companyselect;
+            return View("TeamDetails", TeamViewModel);
         }
 
         [HttpPost]

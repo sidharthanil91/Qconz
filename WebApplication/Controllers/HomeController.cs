@@ -9,7 +9,7 @@ namespace QconzLocate.Controllers
         {
             return View();
         }
-        public ActionResult DashboardV2()
+        public ActionResult Locator()
         {
             return View();
         }
