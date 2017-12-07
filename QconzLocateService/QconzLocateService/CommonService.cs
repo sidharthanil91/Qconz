@@ -29,8 +29,8 @@ namespace QconzLocateService.QconzLocateService
         {
             CommonServiceModel CommonServiceModel = new CommonServiceModel();
             List<SelectLists> GroupSelectList = new List<SelectLists>();
-            var y = _commonRepository.GetCompanySelectList(CompanyId);
-            foreach (var item in y.CompanyList)
+            var y = _commonRepository.GetGroupSelectList(CompanyId);
+            foreach (var item in y.GroupList)
             {
                 GroupSelectList.Add(new SelectLists { Id = item.Id, Text = item.Text });
             }

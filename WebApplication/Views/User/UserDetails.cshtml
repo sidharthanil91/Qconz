@@ -29,26 +29,29 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">First name</label>
-                        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.UserDetails.FirstName" placeholder="Enter first name">
+                        <input type="text" class="form-control" id="FirstName" tabindex="1" name="FirstName" value="@Model.UserDetails.FirstName" placeholder="Enter first name">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" id="Email" name="Email" value="@Model.UserDetails.Email" placeholder="Enter email">
+                        <input type="text" class="form-control" id="Email" tabindex="3" name="Email" value="@Model.UserDetails.Email" placeholder="Enter email">
                     </div>
                 </div>
               
                 <div class="form-group">
                     <div class="form-group">
                         <label>Company</label>
-                        <select id="Company" class="form-control select2" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
+                        <select id="Company" class="form-control select2" tabindex="5" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Group</label>
-                        <input type="text" class="form-control" id="Email" name="Group" value="@Model.UserDetails.UserTeamId" placeholder="Enter group">
+                        <select id="Groups" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select groups" style="width: 100%;">
+                           
+                        </select>
+                         @*<input type="text" class="form-control" id="Email" name="Group" value="@Model.UserDetails.UserTeamId" placeholder="Enter group">*@
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,7 +59,7 @@
                         <div class="form-group">
                             <label>Start time</label>
                             <div class="input-group">
-                                <input type="text" id="StartTime" value="@Model.UserDetails.StartTime.ToString("hh:mm")" class="form-control timepicker">
+                                <input type="text" id="StartTime" tabindex="9" value="@Model.UserDetails.StartTime.ToString("hh:mm")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -67,14 +70,14 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Emergency contact name</label>
-                        <input type="text" class="form-control" id="EmergencyContact" name="EmergencyContact" value="@Model.UserDetails.EmergencyContact" placeholder="Enter emergency contact name">
+                        <input type="text" class="form-control" tabindex="11" id="EmergencyContact" name="EmergencyContact" value="@Model.UserDetails.EmergencyContact" placeholder="Enter emergency contact name">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">User name</label>
-                        <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserDetails.UserName" placeholder="Enter user name">
+                        <input type="text" class="form-control" tabindex="13" id="UserName" name="UserName" value="@Model.UserDetails.UserName" placeholder="Enter user name">
                     </div>
                 </div>
             </div>
@@ -82,19 +85,19 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Surname</label>
-                        <input type="text" class="form-control" id="SurName" name="SurName" value="@Model.UserDetails.SurName" placeholder="Enter surname">
+                        <input type="text" class="form-control" tabindex="2" id="SurName" name="SurName" value="@Model.UserDetails.SurName" placeholder="Enter surname">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Cellphone</label>
-                        <input type="text" class="form-control" id="Cellphone" name="Cellphone" value="@Model.UserDetails.Cellphone" placeholder="Enter cellphone">
+                        <input type="text" class="form-control" tabindex="4" id="Cellphone" name="Cellphone" value="@Model.UserDetails.Cellphone" placeholder="Enter cellphone">
                     </div>
                 </div>
              
                 <div class="form-group">
                     <label>Type</label>
-                    <select id="Type" class="form-control select2" value="@Model.UserDetails.UserType" style="width: 100%;">
+                    <select id="Type" class="form-control select2" tabindex="6" value="@Model.UserDetails.UserType" style="width: 100%;">
                         <option value="2">Admin User</option>
                         <option value="3">Dashboard User</option>
                         <option value="4">App User</option>
@@ -103,7 +106,7 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label>Working days</label>
-                        <select id="WorkingDays" class="form-control select2" multiple="multiple" data-placeholder="Select working days" style="width: 100%;">
+                        <select id="WorkingDays" class="form-control select2" tabindex="8" multiple="multiple" data-placeholder="Select working days" style="width: 100%;">
                             <option value="1">Mon</option>
                             <option value="2">Tue</option>
                             <option value="3">Wed</option>
@@ -120,7 +123,7 @@
                         <div class="form-group">
                             <label>End time</label>
                             <div class="input-group">
-                                <input type="text" id="EndTime" value="@Model.UserDetails.EndTime.ToString("hh:mm")" class="form-control timepicker">
+                                <input type="text" id="EndTime" tabindex="10" value="@Model.UserDetails.EndTime.ToString("hh:mm")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -132,13 +135,13 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Emergency contact cellphone</label>
-                        <input type="text" class="form-control" id="EmergencyContactNo" name="EmergencyContactNo" value="@Model.UserDetails.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
+                        <input type="text" class="form-control" tabindex="12" id="EmergencyContactNo" name="EmergencyContactNo" value="@Model.UserDetails.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Password</label>
-                        <input type="text" class="form-control" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
+                        <input type="password" class="form-control" tabindex="14" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
                     </div>
                 </div>
             </div>
@@ -194,12 +197,13 @@
             data: data
         })
         $("#Company").val("@Model.UserDetails.CompanyId").trigger("change");
-        @*var jsontext1 = '@Html.Raw(Json.Encode(Model.GroupList))';
-        var data1 = JSON.parse(jsontext);
-        $('#Company').select2({
-            data: data
+
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.GroupList))';
+        var data1 = JSON.parse(jsontext1);
+        $('#Groups').select2({
+            data: data1
         })
-        $("#Company").val("@Model.UserDetails.CompanyId").trigger("change");*@
+        @*$("#Groups").val("@Model.UserDetails.CompanyId").trigger("change");*@
         $('#savebtn').click(function(){
             var data={ Id : @Model.UserDetails.Id,
                 Cellphone : $('#Cellphone').val(),

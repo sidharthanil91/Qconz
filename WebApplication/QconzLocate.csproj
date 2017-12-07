@@ -214,6 +214,7 @@
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RosterViewModel.cs" />
     <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -551,10 +552,10 @@
     <Content Include="Views\Team\TeamDetails.cshtml" />
     <Content Include="Views\Customer\CustomerDetails.cshtml" />
     <Content Include="Views\Home\Locator.cshtml" />
+    <Content Include="Views\Roster\Roster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Roster\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

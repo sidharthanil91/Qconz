@@ -43,6 +43,7 @@
     <Compile Include="Models\CommonServiceModel.cs" />
     <Compile Include="Models\CompanyServiceModel.cs" />
     <Compile Include="Models\CustomerServiceModel.cs" />
+    <Compile Include="Models\LocationServiceModel.cs" />
     <Compile Include="Models\RosterServiceModel.cs" />
     <Compile Include="Models\TeamServiceModel.cs" />
     <Compile Include="Models\UserAuthServiceModel.cs" />
@@ -50,12 +51,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QconzLocateInterface\ICompanyService.cs" />
     <Compile Include="QconzLocateInterface\ICustomerService.cs" />
+    <Compile Include="QconzLocateInterface\ILocationService.cs" />
     <Compile Include="QconzLocateInterface\IRosterService.cs" />
     <Compile Include="QconzLocateInterface\ITeamService.cs" />
     <Compile Include="QconzLocateInterface\IUserService.cs" />
     <Compile Include="QconzLocateService\CommonService.cs" />
     <Compile Include="QconzLocateService\CompanyService.cs" />
     <Compile Include="QconzLocateService\CustomerService.cs" />
+    <Compile Include="QconzLocateService\LocationService.cs" />
     <Compile Include="QconzLocateService\RosterService.cs" />
     <Compile Include="QconzLocateService\TeamService.cs" />
     <Compile Include="QconzLocateService\UserService.cs" />
