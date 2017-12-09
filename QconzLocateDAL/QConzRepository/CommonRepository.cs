@@ -30,7 +30,7 @@ namespace QconzLocateDAL.QConzRepository
         {
             CommonModel CommonModel = new CommonModel();
             List<SelectList> GroupSelectList = new List<SelectList>();
-            var y = (from t in entity.tblTeams where t.ID == CompanyId || CompanyId == 0 select new { t.ID, t.TEAMNAME }).ToList();
+            var y = (from t in entity.tblTeams where t.COMPANYID == CompanyId || CompanyId == 0 select new { t.ID, t.TEAMNAME }).ToList();
             GroupSelectList = y.Select(c => new SelectList
             {
                 Id = c.ID,
@@ -38,6 +38,20 @@ namespace QconzLocateDAL.QConzRepository
             }
              ).ToList();
             CommonModel.GroupList = GroupSelectList;
+            return CommonModel;
+        }
+        public CommonModel GetUserSelectList(int CompanyId)
+        {
+            CommonModel CommonModel = new CommonModel();
+            List<SelectList> UserSelectList = new List<SelectList>();
+            var y = (from t in entity.tblUserMasters where t.COMPANYID == CompanyId || CompanyId == 0 select new { t.ID, t.FIRSTNAME,t.SURNAME}).ToList();
+            UserSelectList = y.Select(c => new SelectList
+            {
+                Id = c.ID,
+                Text = c.FIRSTNAME+" "+c.SURNAME,
+            }
+             ).ToList();
+            CommonModel.UserList = UserSelectList;
             return CommonModel;
         }
         public UserAuthRepositoryModel GetLoginUserDetails(UserAuthRepositoryModel user)

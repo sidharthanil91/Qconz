@@ -15,12 +15,10 @@ namespace QconzLocateDAL
     public partial class tblRoaster
     {
         public int ID { get; set; }
-        public int USERID { get; set; }
         public Nullable<System.DateTime> STARTDATE { get; set; }
         public Nullable<System.DateTime> ENDDATE { get; set; }
         public System.TimeSpan STARTTIME { get; set; }
         public System.TimeSpan FINISHTIME { get; set; }
-    
-        public virtual tblUserMaster tblUserMaster { get; set; }
+        public string USERID { get; set; }
     }
 }

@@ -124,5 +124,32 @@ namespace QconzLocateDAL.QConzRepository
             }
             entity.SaveChanges();
         }
+
+        public void SaveBulkCustomerDetails(List<CustomerModel> CustomerModel)
+        {
+            foreach (var item in CustomerModel)
+            {
+                var customer = new tblCustomer()
+                {
+                    ADDRESS1 = item.Address1,
+                    ADDRESS2 = item.Address2,
+                    ADDED_DATE = item.AddedDate,
+                    COMPANYID = 1,
+                    CUSTOMERCODE = item.CustomerCode,
+                    FIRSTNAME = item.FirstName,
+                    LASTNAME = item.LastName,
+                    OFFICENAME = item.OfficeName,
+                    EMAIL = item.Email,
+                    LAT = item.Lat,
+                    LNG = item.Lng,
+                    PHONE_1 = item.Phone1,
+                    PHONE_2 = item.Phone2,
+                    WEBSITE = item.Website,
+                    ZIPCODE = item.ZipCode
+                };
+                entity.tblCustomers.Add(customer);
+            }
+            entity.SaveChanges();
+        }
     }
 }

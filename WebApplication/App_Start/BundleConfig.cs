@@ -40,6 +40,8 @@ namespace QconzLocate
             RegisterCustomer(bundles);
 
             RegisterTeam(bundles);
+
+            RegisterRoster(bundles);
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -158,6 +160,17 @@ namespace QconzLocate
 
             bundles.Add(new ScriptBundle("~/Scripts/Bundle/Team/Team/menu").Include(
                 "~/Scripts/Team/Team-menu.js"));
+
+        }
+
+        private static void RegisterRoster(BundleCollection bundles)
+        {
+
+            //bundles.Add(new ScriptBundle("~/Scripts/Bundle/Team/Data").Include(
+            //    "~/Scripts/Team/Data.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/Roster/Roster/menu").Include(
+                "~/Scripts/Roster/Roster-menu.js"));
 
         }
 

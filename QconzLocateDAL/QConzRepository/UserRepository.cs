@@ -73,6 +73,8 @@ namespace QconzLocateDAL.QConzRepository
                              UserType = c.USERTYPE,
                              WorkingDays = c.WORKINGDAYS
                          }).FirstOrDefault();
+                y.UserGroups = string.Join(",", ((from t in entity.tblUserTeams where t.USERID == y.Id select t.TEAMID).ToArray()));
+                                 
                 return y;
             }
             catch (Exception ex)
@@ -81,10 +83,19 @@ namespace QconzLocateDAL.QConzRepository
             }
         }
 
-        public void SaveUserDetails(UserModel UserModel)
+        public string SaveUserDetails(UserModel UserModel)
         {
             try
             {
+                if(entity.tblUserMasters.Any(t=>t.EMAIL.ToLower()==UserModel.Email.ToLower() && t.ID != UserModel.Id))
+                {
+                    return ("Email already exists");
+                }
+                List<int> GroupIds = new List<int>();
+                if (UserModel.UserGroups != null)
+                {
+                   GroupIds = UserModel.UserGroups.Split(',').Select(int.Parse).ToList();
+                }
                 if (UserModel.Id == 0)
                 {
                     var user = new tblUserMaster()
@@ -107,6 +118,20 @@ namespace QconzLocateDAL.QConzRepository
                         WORKINGDAYS = UserModel.WorkingDays
                     };
                     entity.tblUserMasters.Add(user);
+                    if(GroupIds != null)
+                    {
+                        foreach(var item in GroupIds)
+                        {
+                            var usergroup = new tblUserTeam()
+                            {
+                                TEAMID = item,
+                                USERID=user.ID,
+                                ARCHIVE="A"
+                            };
+                            entity.tblUserTeams.Add(usergroup);
+                        }
+                    }
+                    
                 }
                 else
                 {
@@ -126,12 +151,49 @@ namespace QconzLocateDAL.QConzRepository
                     //y.USERTEAMID = 1;
                     y.USERTYPE = UserModel.UserType;
                     y.WORKINGDAYS = UserModel.WorkingDays;
+                    if (GroupIds != null)
+                    {
+                        var UserTeam = y.tblUserTeams.ToList();
+                        var DeleteUserGroups = from p in UserTeam
+                                               where !GroupIds.Contains(p.TEAMID)
+                                               select p;
+                        foreach (var deleteItem in DeleteUserGroups)
+                        {
+                            entity.tblUserTeams.Remove(deleteItem);
+                        }
+                        //var InsertUserGroups = from p in GroupIds
+                        //                       join t in UserTeam
+                        //                       on p equals t.TEAMID into tp
+                        //                       from list in tp.Where(x=>x.TEAMID)
+                        //                       select p;
+
+                        var InsertUserGroups =new List<int>();
+                        foreach (var item in GroupIds)
+                        {
+                            if((from t in entity.tblUserTeams where t.USERID== UserModel.Id && t.TEAMID==item select t.ID).Count()==0)
+                            {
+                                InsertUserGroups.Add(item);
+                            }
+                        }
+
+                        foreach (var item in InsertUserGroups)
+                        {
+                            var usergroup = new tblUserTeam()
+                            {
+                                TEAMID = item,
+                                USERID = UserModel.Id,
+                                ARCHIVE = "A"
+                            };
+                            entity.tblUserTeams.Add(usergroup);
+                        }
+                    }
                 }
                 entity.SaveChanges();
+                return null;
             }
             catch (Exception ex)
             {
-
+                return "Error";
             }
         }
     }

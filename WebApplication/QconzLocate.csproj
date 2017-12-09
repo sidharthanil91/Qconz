@@ -48,6 +48,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelDataReader, Version=3.3.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.3.0\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.3.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.3.0\lib\net45\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -57,6 +65,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -198,6 +207,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
+    <Compile Include="Controllers\SessionExpireFilterAttribute.cs" />
     <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -214,6 +224,7 @@
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ResponseViewModel.cs" />
     <Compile Include="Models\RosterViewModel.cs" />
     <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
@@ -460,6 +471,7 @@
     <Content Include="Scripts\Mailbox\Inbox-menu.js" />
     <Content Include="Scripts\Mailbox\Inbox.js" />
     <Content Include="Scripts\Mailbox\Read-menu.js" />
+    <Content Include="Scripts\Roster\Roster-menu.js" />
     <Content Include="Scripts\Shared\_Layout.js" />
     <Content Include="Scripts\Tables\Data-menu.js" />
     <Content Include="Scripts\Tables\Data.js" />
@@ -543,6 +555,7 @@
     <Content Include="Views\Company\Company.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
     <Content Include="Views\User\User.cshtml" />
+    <Content Include="Doc\Customer.xlsx" />
     <None Include="Properties\PublishProfiles\Custompro.pubxml" />
     <None Include="Properties\PublishProfiles\Qconz.pubxml" />
     <None Include="Properties\PublishProfiles\QconzPublish.pubxml" />
@@ -553,6 +566,7 @@
     <Content Include="Views\Customer\CustomerDetails.cshtml" />
     <Content Include="Views\Home\Locator.cshtml" />
     <Content Include="Views\Roster\Roster.cshtml" />
+    <Content Include="Views\Roster\RosterDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,6 +10,7 @@ namespace QconzLocateDAL.QConzRepositoryModel
     {
         public List<SelectList> GroupList { get; set; }
         public List<SelectList> CompanyList { get; set; }
+        public List<SelectList> UserList { get; set; }
     }
     public class SelectList
     {

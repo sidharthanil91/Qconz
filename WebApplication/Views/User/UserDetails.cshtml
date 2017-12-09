@@ -4,6 +4,9 @@
     ViewBag.SubTitle = "Team Map";
 }
 
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/User/User/menu")
+}
 
 @Styles.Render("~/Styles/Bundle/Elements/Modals")
 @Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
@@ -47,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Group</label>
+                        <label for="exampleInputEmail1">Groups</label>
                         <select id="Groups" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select groups" style="width: 100%;">
                            
                         </select>
@@ -59,7 +62,7 @@
                         <div class="form-group">
                             <label>Start time</label>
                             <div class="input-group">
-                                <input type="text" id="StartTime" tabindex="9" value="@Model.UserDetails.StartTime.ToString("hh:mm")" class="form-control timepicker">
+                                <input type="text" id="StartTime" tabindex="9" value="@Model.UserDetails.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -123,7 +126,7 @@
                         <div class="form-group">
                             <label>End time</label>
                             <div class="input-group">
-                                <input type="text" id="EndTime" tabindex="10" value="@Model.UserDetails.EndTime.ToString("hh:mm")" class="form-control timepicker">
+                                <input type="text" id="EndTime" tabindex="10" value="@Model.UserDetails.EndTime.ToString("hh:mm tt")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -203,11 +206,17 @@
         $('#Groups').select2({
             data: data1
         })
-        @*$("#Groups").val("@Model.UserDetails.CompanyId").trigger("change");*@
+        var array1 = '@Model.UserDetails.UserGroups'.split(',')
+        $('#Groups').select2().val(array1).trigger("change")
+        
         $('#savebtn').click(function(){
+            $('#myModal').modal('hide');
+            var UserGroupsVal=$('#Groups').val()==null?null:$('#Groups').val().toString();
+            var WorkingDaysVal=$('#WorkingDays').val()==null?null:$('#WorkingDays').val().toString();
             var data={ Id : @Model.UserDetails.Id,
                 Cellphone : $('#Cellphone').val(),
                 CompanyId : $('#Company').val(),
+                UserGroups: UserGroupsVal,
                 EmergencyContact : $('#EmergencyContact').val(),
                 EmergencyContactNo : $('#EmergencyContactNo').val(),
                 Email : $('#Email').val(),
@@ -221,7 +230,7 @@
                 UserTeamId : $('#UserTeamId').val(),
                 //UserToken : $('#UserToken').val(),
                 UserType : $('#Type').val(),
-                WorkingDays : $('#WorkingDays').val().toString(),
+                WorkingDays : WorkingDaysVal,
             }
 
             var url='@Url.Action("SaveDetails", "User")';
@@ -231,8 +240,13 @@
                 data: JSON.stringify(data) ,
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                success: function () {
-                    window.location.href= '@Url.Action("UserReport", "User")';
+                success: function (Messeage) {
+                    if(Messeage.Success){
+                        window.location.href= '@Url.Action("UserReport", "User")';
+                    }
+                    else{
+                        alert(Messeage.Message);
+                    }
                 },
                 error: function () {
                     alert("Error while inserting data");

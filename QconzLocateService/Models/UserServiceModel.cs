@@ -13,6 +13,7 @@ namespace QconzLocateService.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public string UserStatus { get; set; }
+        public string UserGroups { get; set; }
         public Nullable<int> UserTeamId { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public string UserToken { get; set; }

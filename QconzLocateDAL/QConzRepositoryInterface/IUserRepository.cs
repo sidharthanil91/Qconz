@@ -11,6 +11,6 @@ namespace QconzLocateDAL.QConzRepositoryInterface
     {
         List<UserModel> GetAllUsers(int CompanyId);
         UserModel GetUserDetails(int Id);
-        void SaveUserDetails(UserModel UserModel);
+        string SaveUserDetails(UserModel UserModel);
     }
 }

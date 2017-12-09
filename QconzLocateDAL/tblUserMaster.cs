@@ -17,7 +17,6 @@ namespace QconzLocateDAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblUserMaster()
         {
-            this.tblRoasters = new HashSet<tblRoaster>();
             this.tblUserLogs = new HashSet<tblUserLog>();
             this.tblUserTeams = new HashSet<tblUserTeam>();
         }
@@ -41,9 +40,6 @@ namespace QconzLocateDAL
         public string EMERGENCYCONTACTNO { get; set; }
     
         public virtual tblOrganization tblOrganization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblRoaster> tblRoasters { get; set; }
-        public virtual tblTeam tblTeam { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLog> tblUserLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

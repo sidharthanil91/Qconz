@@ -67,6 +67,7 @@ namespace QconzLocateService.QconzLocateService
                     Password = c.Password,
                     StartTime = c.StartTime,
                     SurName = c.SurName,
+                    UserGroups=c.UserGroups,
                     UserName = c.UserName,
                     UserStatus = c.UserStatus,
                     UserTeamId = c.UserTeamId,
@@ -81,7 +82,7 @@ namespace QconzLocateService.QconzLocateService
             }
         }
 
-        public void SaveUserDetails(UserServiceModel UserDetails)
+        public string SaveUserDetails(UserServiceModel UserDetails)
         {
 
             var user = new UserModel()
@@ -97,6 +98,7 @@ namespace QconzLocateService.QconzLocateService
                 Password = UserDetails.Password,
                 StartTime = UserDetails.StartTime,
                 SurName = UserDetails.SurName,
+                UserGroups=UserDetails.UserGroups,
                 UserName = UserDetails.UserName,
                 UserStatus = UserDetails.UserStatus,
                 UserTeamId = UserDetails.UserTeamId,
@@ -104,7 +106,7 @@ namespace QconzLocateService.QconzLocateService
                 UserType = UserDetails.UserType,
                 WorkingDays = UserDetails.WorkingDays
             };
-            _IUserRepository.SaveUserDetails(user);
+            return _IUserRepository.SaveUserDetails(user);
         }
     }
 }

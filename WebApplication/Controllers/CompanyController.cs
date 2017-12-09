@@ -10,6 +10,7 @@ using QconzLocateService.Models;
 
 namespace QconzLocate.Controllers
 {
+    [SessionExpireFilter]
     [Authorize(Roles = "SUPER,ADMIN")]
     public class CompanyController : Controller
     {

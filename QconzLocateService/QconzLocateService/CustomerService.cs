@@ -103,5 +103,30 @@ namespace QconzLocateService.QconzLocateService
             };
             _ICustomerRepository.SaveCustomerDetails(customer);
         }
+
+        public void SaveBulkCustomerDetails(List<CustomerServiceModel> CustomerDetails)
+        {
+
+            var customer = CustomerDetails.Select(t=> new CustomerModel()
+            {
+                Id = t.Id,
+                Address1 = t.Address1,
+                Address2 = t.Address2,
+                AddedDate = t.AddedDate,
+                CompanyId = t.CompanyId,
+                CustomerCode = t.CustomerCode,
+                FirstName = t.FirstName,
+                LastName = t.LastName,
+                OfficeName = t.OfficeName,
+                Email = t.Email,
+                Lat = t.Lat,
+                Lng = t.Lng,
+                Phone1 = t.Phone1,
+                Phone2 = t.Phone2,
+                Website = t.Website,
+                ZipCode = t.ZipCode
+            }).ToList();
+            _ICustomerRepository.SaveBulkCustomerDetails(customer);
+        }
     }
 }

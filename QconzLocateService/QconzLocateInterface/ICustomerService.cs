@@ -11,6 +11,7 @@ namespace QconzLocateService.QconzLocateInterface
     {
         List<CustomerServiceModel> GetAllCustomer();
         void SaveCustomerDetails(CustomerServiceModel CustomerModel);
+        void SaveBulkCustomerDetails(List<CustomerServiceModel> CustomerModel);
         CustomerServiceModel GetCustomerDetails(int Id);
     }
 }

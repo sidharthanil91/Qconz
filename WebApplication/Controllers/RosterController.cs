@@ -1,4 +1,5 @@
 ﻿using QconzLocate.Models;
+using QconzLocateService.Models;
 using QconzLocateService.QconzLocateInterface;
 using QconzLocateService.QconzLocateService;
 using System;
@@ -9,12 +10,13 @@ using System.Web.Mvc;
 
 namespace QconzLocate.Controllers
 {
+    [SessionExpireFilter]
     public class RosterController : Controller
     {
         // GET: Roster
         private IRosterService _IRosterService = new RosterService();
         private List<RosterListViewModel> RosterList = new List<RosterListViewModel>();
-      
+        private CommonService _commonservice = new CommonService();
         // GET: Company
         public ActionResult RosterReport()
         {
@@ -34,6 +36,7 @@ namespace QconzLocate.Controllers
 
         public ActionResult RosterDetails(int id)
         {
+            int CompanyId = (int)(Session["CompanyId"]);
             RosterViewModel RosterDetails=new RosterViewModel();
             if (id != 0)
             {
@@ -47,6 +50,12 @@ namespace QconzLocate.Controllers
                     StartTime = c.StartTime,
                     UserId = c.UserId
                 };
+                var y=_commonservice.GetUserSelectList(CompanyId);
+                RosterDetails.UserList = y.UserList.Select(t => new SelectListItems
+                {
+                    id = t.Id,
+                    text = t.Text
+                }).ToList();
                 return View("RosterDetails", RosterDetails);
             }
             else
@@ -55,37 +64,31 @@ namespace QconzLocate.Controllers
                 {
                     Id = 0,
                     EndDate = null,
-                    //FinishTime = ,
-                    //StartDate = null,
-                    //StartTime = c.StartTime,
-                    //UserId = c.UserId
+                    //FinishTime = null,
+                    StartDate = null,
+                    //StartTime = null,
+                    UserId = null
                 };
                 return View("RosterDetails", RosterDetails);
             }
         }
 
-        //[HttpPost]
-        //public JsonResult SaveDetails(RosterListViewModel company)
-        //{
-        //    CompanyServiceModel CompanyModel;
-        //    CompanyModel = new CompanyServiceModel()
-        //    {
-        //        Id = company.Id,
-        //        Address1 = company.Address1,
-        //        Address2 = company.Address2,
-        //        ContactName = company.ContactName,
-        //        Email = company.Email,
-        //        Lat = company.Lat,
-        //        Lng = company.Lng,
-        //        Phone1 = company.Phone1,
-        //        Phone2 = company.Phone2,
-        //        Title = company.Title,
-        //        Website = company.Website,
-        //        ZipCode = company.ZipCode
-        //    };
-        //    _ICompanyService.SaveCompanyDetails(CompanyModel);
-        //    bool success = true;
-        //    return Json(success, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public JsonResult SaveDetails(RosterListViewModel roster)
+        {
+            RosterServiceModel RosterModel;
+            RosterModel = new RosterServiceModel()
+            {
+                Id = roster.Id,
+                StartDate=roster.StartDate,
+                EndDate=roster.EndDate,
+                FinishTime=roster.FinishTime,
+                StartTime=roster.StartTime,
+                UserId=roster.UserId
+            };
+            _IRosterService.SaveRosterDetails(RosterModel);
+            bool success = true;
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
     }
 }

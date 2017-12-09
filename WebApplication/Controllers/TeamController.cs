@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace QconzLocate.Controllers
 {
+    [SessionExpireFilter]
     [Authorize(Roles = "SUPER,ADMIN")]
     public class TeamController : Controller
     {

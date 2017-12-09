@@ -9,12 +9,13 @@ namespace QconzLocate.Models
     {
         public List<RosterListViewModel> RosterList { get; set; }
         public RosterListViewModel Roster { get; set; }
+        public List<SelectListItems> UserList { get; set; }
     }
 
     public class RosterListViewModel
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public System.TimeSpan StartTime { get; set; }

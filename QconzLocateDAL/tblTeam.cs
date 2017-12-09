@@ -17,7 +17,6 @@ namespace QconzLocateDAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblTeam()
         {
-            this.tblUserMasters = new HashSet<tblUserMaster>();
             this.tblUserTeams = new HashSet<tblUserTeam>();
         }
     
@@ -29,8 +28,6 @@ namespace QconzLocateDAL
         public int COMPANYID { get; set; }
     
         public virtual tblOrganization tblOrganization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblUserMaster> tblUserMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserTeam> tblUserTeams { get; set; }
     }

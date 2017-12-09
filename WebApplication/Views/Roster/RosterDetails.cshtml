@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Roster Details";
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/icheck/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
+@Styles.Render("~/Styles/Bundle/Elements/Modals")
+<div class="box box-default">
+    <div class="box-header with-border">
+        @*<h3 class="box-title">Select2</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>*@
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Start Date</label>
+                        <input type="text" class="form-control" id="StartDate" name="StartDate" value="@Model.Roster.StartDate" placeholder="Enter start date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Start Time</label>
+                        <input type="text" class="form-control" id="StartTime" name="StartTime" value="@Model.Roster.StartTime" placeholder="Enter start time">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Users</label>
+                        <select id="Users" class="form-control select2" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">End Date</label>
+                        <input type="text" class="form-control" id="EndDate" name="EndDate" value="@Model.Roster.EndDate" placeholder="Enter end date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">End Time</label>
+                        <input type="text" class="form-control" id="FinishTime" name="FinishTime" value="@Model.Roster.FinishTime" placeholder="Enter finish time">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+    <script type="text/javascript">
+
+        var jsontext = '@Html.Raw(Json.Encode(Model.UserList))';
+        var data = JSON.parse(jsontext);
+        $('#Users').select2({
+            data: data
+        })
+        var array = '@Model.Roster.UserId'.split(',')
+        $('#Users').select2().val(array).trigger("change")
+
+        $('#savebtn').click(function(){
+            var data={ Id : @Model.Roster.Id,
+                StartDate : $('#StartDate').val(),
+                EndDate : $('#EndDate').val(),
+                StartTime: $('#StartTime').val(),
+                FinishTime : $('#FinishTime').val(),
+                UserId : $('#Users').val().toString()
+            }
+            var url='@Url.Action("SaveDetails", "Roster")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    window.location.href= '@Url.Action("RosterReport", "Roster")';
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        });
+
+    </script>
+
+}
+

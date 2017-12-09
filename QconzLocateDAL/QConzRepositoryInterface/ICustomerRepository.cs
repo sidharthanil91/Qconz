@@ -12,5 +12,6 @@ namespace QconzLocateDAL.QConzRepositoryInterface
         List<CustomerModel> GetAllCustomer();
         CustomerModel GetCustomerDetails(int Id);
         void SaveCustomerDetails(CustomerModel CustomerModel);
+        void SaveBulkCustomerDetails(List<CustomerModel> CustomerModel);
     }
 }

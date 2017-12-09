@@ -11,6 +11,6 @@ namespace QconzLocateService.QconzLocateInterface
     {
         List<UserServiceModel> GetAllUsers(int CompanyId);
         UserServiceModel GetUserDetails(int Id);
-        void SaveUserDetails(UserServiceModel UserModel);
+        string SaveUserDetails(UserServiceModel UserModel);
     }
 }

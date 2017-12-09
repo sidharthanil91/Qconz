@@ -18,6 +18,7 @@ namespace QconzLocateDAL.QConzRepositoryModel
         public string UserToken { get; set; }
         public string FirstName { get; set; }
         public string SurName { get; set; }
+        public string UserGroups { get; set; }
         public string Email { get; set; }
         public string Cellphone { get; set; }
         public string WorkingDays { get; set; }
