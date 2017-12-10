@@ -9,7 +9,7 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface ICustomerRepository
     {
-        List<CustomerModel> GetAllCustomer();
+        List<CustomerModel> GetAllCustomer(int CompanyId);
         CustomerModel GetCustomerDetails(int Id);
         void SaveCustomerDetails(CustomerModel CustomerModel);
         void SaveBulkCustomerDetails(List<CustomerModel> CustomerModel);

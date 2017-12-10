@@ -18,6 +18,7 @@ namespace QconzLocateDAL
         public tblOrganization()
         {
             this.tblCustomers = new HashSet<tblCustomer>();
+            this.tblRoasters = new HashSet<tblRoaster>();
             this.tblTeams = new HashSet<tblTeam>();
             this.tblUserMasters = new HashSet<tblUserMaster>();
         }
@@ -39,6 +40,8 @@ namespace QconzLocateDAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomer> tblCustomers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblRoaster> tblRoasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTeam> tblTeams { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

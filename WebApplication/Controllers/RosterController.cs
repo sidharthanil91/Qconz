@@ -11,6 +11,7 @@ using System.Web.Mvc;
 namespace QconzLocate.Controllers
 {
     [SessionExpireFilter]
+    [Authorize(Roles = "SUPER,ADMIN")]
     public class RosterController : Controller
     {
         // GET: Roster
@@ -20,8 +21,9 @@ namespace QconzLocate.Controllers
         // GET: Company
         public ActionResult RosterReport()
         {
+            int CompanyId = (int)(Session["CompanyId"]);
             RosterViewModel rosters = new RosterViewModel();
-            RosterList = _IRosterService.GetAllRoster().Select(c => new RosterListViewModel
+            RosterList = _IRosterService.GetAllRoster(CompanyId).Select(c => new RosterListViewModel
             {
                 Id = c.Id,
                 EndDate = c.EndDate,
@@ -44,42 +46,46 @@ namespace QconzLocate.Controllers
                 RosterDetails.Roster = new RosterListViewModel
                 {
                     Id = c.Id,
-                    EndDate = c.EndDate,
-                    FinishTime = c.FinishTime,
-                    StartDate = c.StartDate,
-                    StartTime = c.StartTime,
+                    EndDate = c.EndDate==null?DateTime.Now:c.EndDate,
+                    FinishTime = c.FinishTime==null?DateTime.Now:c.FinishTime,
+                    StartDate = c.StartDate==null?DateTime.Now:c.StartDate,
+                    StartTime = c.StartTime==null?DateTime.Now:c.StartTime,
                     UserId = c.UserId
                 };
-                var y=_commonservice.GetUserSelectList(CompanyId);
-                RosterDetails.UserList = y.UserList.Select(t => new SelectListItems
-                {
-                    id = t.Id,
-                    text = t.Text
-                }).ToList();
-                return View("RosterDetails", RosterDetails);
+                
+               
             }
             else
             {
                 RosterDetails.Roster = new RosterListViewModel
                 {
                     Id = 0,
-                    EndDate = null,
-                    //FinishTime = null,
-                    StartDate = null,
-                    //StartTime = null,
+                    EndDate = DateTime.Now,
+                    FinishTime = DateTime.Now,
+                    StartDate = DateTime.Now,
+                    StartTime = DateTime.Now,
                     UserId = null
                 };
-                return View("RosterDetails", RosterDetails);
+                
             }
+            var y = _commonservice.GetUserSelectList(CompanyId);
+            RosterDetails.UserList = y.UserList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            return View("RosterDetails", RosterDetails);
         }
 
         [HttpPost]
         public JsonResult SaveDetails(RosterListViewModel roster)
         {
             RosterServiceModel RosterModel;
+            int CompanyId = (int)(Session["CompanyId"]);
             RosterModel = new RosterServiceModel()
             {
                 Id = roster.Id,
+                CompanyId=CompanyId,
                 StartDate=roster.StartDate,
                 EndDate=roster.EndDate,
                 FinishTime=roster.FinishTime,

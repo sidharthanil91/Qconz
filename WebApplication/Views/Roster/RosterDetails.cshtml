@@ -22,36 +22,62 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-6">
+               
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Start Date</label>
-                        <input type="text" class="form-control" id="StartDate" name="StartDate" value="@Model.Roster.StartDate" placeholder="Enter start date">
+                        <div class="input-group">
+                            <input type="text" id="StartDate" tabindex="1" value="@Model.Roster.StartDate.ToString("dd-MM-yyyy")" class="form-control datepicker">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Start Time</label>
-                        <input type="text" class="form-control" id="StartTime" name="StartTime" value="@Model.Roster.StartTime" placeholder="Enter start time">
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>Start time</label>
+                            <div class="input-group">
+                                <input type="text" id="StartTime" tabindex="3" value="@Model.Roster.StartTime.ToString("HH:mm tt")" class="form-control timepicker">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Users</label>
-                        <select id="Users" class="form-control select2" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
+                        <select id="Users" class="form-control select2" tabindex="5" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
+              
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">End Date</label>
-                        <input type="text" class="form-control" id="EndDate" name="EndDate" value="@Model.Roster.EndDate" placeholder="Enter end date">
+                        <div class="input-group">
+                            <input type="text" id="EndDate" tabindex="1" value="@Model.Roster.EndDate.ToString("dd-MM-yyyy")" class="form-control datepicker">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">End Time</label>
-                        <input type="text" class="form-control" id="FinishTime" name="FinishTime" value="@Model.Roster.FinishTime" placeholder="Enter finish time">
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>End time</label>
+                            <div class="input-group">
+                                <input type="text" id="FinishTime" tabindex="4" value="@Model.Roster.FinishTime.ToString("HH:mm tt")" class="form-control timepicker">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,8 +119,16 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+    <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/AdminLTE/plugins/datepicker/js/locales/bootstrap-datepicker*"></script>
     <script type="text/javascript">
-
+        $('.datepicker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+        $(".timepicker").timepicker({
+            showInputs: false
+        });
+        
         var jsontext = '@Html.Raw(Json.Encode(Model.UserList))';
         var data = JSON.parse(jsontext);
         $('#Users').select2({
@@ -104,12 +138,13 @@
         $('#Users').select2().val(array).trigger("change")
 
         $('#savebtn').click(function(){
+            var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
             var data={ Id : @Model.Roster.Id,
                 StartDate : $('#StartDate').val(),
                 EndDate : $('#EndDate').val(),
                 StartTime: $('#StartTime').val(),
                 FinishTime : $('#FinishTime').val(),
-                UserId : $('#Users').val().toString()
+                UserId : UserIdVal
             }
             var url='@Url.Action("SaveDetails", "Roster")';
             $.ajax({

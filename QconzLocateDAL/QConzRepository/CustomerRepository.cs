@@ -12,12 +12,12 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<CustomerModel> GetAllCustomer()
+        public List<CustomerModel> GetAllCustomer(int CompanyId)
         {
             try
             {
                 List<CustomerModel> CustomerList = new List<CustomerModel>();
-                var y = (from t in entity.tblCustomers select t).ToList();
+                var y = (from t in entity.tblCustomers where t.COMPANYID==CompanyId || CompanyId==0 select t).ToList();
                 CustomerList = y.Select(c => new CustomerModel
                 {
                     Id = c.ID,

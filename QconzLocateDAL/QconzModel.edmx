@@ -52,9 +52,10 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="STARTDATE" Type="date" />
           <Property Name="ENDDATE" Type="date" />
-          <Property Name="STARTTIME" Type="time" Precision="7" Nullable="false" />
-          <Property Name="FINISHTIME" Type="time" Precision="7" Nullable="false" />
           <Property Name="USERID" Type="varchar(max)" />
+          <Property Name="STARTTIME" Type="datetime" />
+          <Property Name="FINISHTIME" Type="datetime" />
+          <Property Name="COMPANYID" Type="int" />
         </EntityType>
         <EntityType Name="tblTeams">
           <Key>
@@ -116,6 +117,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblCustomers">
+              <PropertyRef Name="COMPANYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID">
+          <End Role="tblOrganizations" Type="Self.tblOrganizations" Multiplicity="0..1" />
+          <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrganizations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoaster">
               <PropertyRef Name="COMPANYID" />
             </Dependent>
           </ReferentialConstraint>
@@ -192,6 +205,10 @@
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblCustomers" EntitySet="tblCustomers" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
+            <End Role="tblOrganizations" EntitySet="tblOrganizations" />
+            <End Role="tblRoaster" EntitySet="tblRoaster" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblTeams_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblTeams" EntitySet="tblTeams" />
@@ -259,6 +276,7 @@
           <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
           <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="tblCustomers" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblCustomers" />
+          <NavigationProperty Name="tblRoasters" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblRoaster" />
           <NavigationProperty Name="tblTeams" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblTeams" />
           <NavigationProperty Name="tblUserMasters" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblUserMaster" />
         </EntityType>
@@ -269,9 +287,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="STARTDATE" Type="DateTime" Precision="0" />
           <Property Name="ENDDATE" Type="DateTime" Precision="0" />
-          <Property Name="STARTTIME" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="FINISHTIME" Type="Time" Nullable="false" Precision="7" />
           <Property Name="USERID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="STARTTIME" Type="DateTime" Precision="3" />
+          <Property Name="FINISHTIME" Type="DateTime" Precision="3" />
+          <Property Name="COMPANYID" Type="Int32" />
+          <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblRoaster" ToRole="tblOrganizations" />
         </EntityType>
         <EntityType Name="tblTeam">
           <Key>
@@ -341,6 +361,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblCustomers">
+              <PropertyRef Name="COMPANYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID">
+          <End Role="tblOrganizations" Type="Self.tblOrganization" Multiplicity="0..1" />
+          <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrganizations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoaster">
               <PropertyRef Name="COMPANYID" />
             </Dependent>
           </ReferentialConstraint>
@@ -417,6 +449,10 @@
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblCustomers" EntitySet="tblCustomers" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
+            <End Role="tblOrganizations" EntitySet="tblOrganizations" />
+            <End Role="tblRoaster" EntitySet="tblRoasters" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblTeams_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblTeams" EntitySet="tblTeams" />
@@ -492,9 +528,10 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
                 <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
                 <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
                 <ScalarProperty Name="FINISHTIME" ColumnName="FINISHTIME" />
-                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

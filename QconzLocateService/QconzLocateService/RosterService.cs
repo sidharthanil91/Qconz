@@ -15,11 +15,11 @@ namespace QconzLocateService.QconzLocateService
     {
         private IRosterRepository _IRosterRepository = new RosterRepository();
         //Get all companies
-        public List<RosterServiceModel> GetAllRoster()
+        public List<RosterServiceModel> GetAllRoster(int CompanyId)
         {
             try
             {
-                var y = _IRosterRepository.GetAllRoster();
+                var y = _IRosterRepository.GetAllRoster(CompanyId);
                 return y.Select(c => new RosterServiceModel
                 {
                     Id = c.Id,
@@ -66,6 +66,7 @@ namespace QconzLocateService.QconzLocateService
             {
                 Id = RosterDetails.Id,
                 EndDate = RosterDetails.EndDate,
+                CompanyId=RosterDetails.CompanyId,
                 FinishTime = RosterDetails.FinishTime,
                 StartDate = RosterDetails.StartDate,
                 StartTime = RosterDetails.StartTime,

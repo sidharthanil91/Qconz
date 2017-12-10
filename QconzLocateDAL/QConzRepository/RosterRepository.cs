@@ -12,12 +12,12 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<RosterModel> GetAllRoster()
+        public List<RosterModel> GetAllRoster(int CompanyId)
         {
             try
             {
                 List<RosterModel> RosterList = new List<RosterModel>();
-                var y = (from t in entity.tblRoasters select t).ToList();
+                var y = (from t in entity.tblRoasters where t.COMPANYID==CompanyId || CompanyId==0 select t).ToList();
                 RosterList = y.Select(c => new RosterModel
                 {
                     Id = c.ID,
@@ -66,6 +66,7 @@ namespace QconzLocateDAL.QConzRepository
                 var roster = new tblRoaster()
                 {
                     ENDDATE=RosterModel.EndDate,
+                    COMPANYID=RosterModel.CompanyId,
                     STARTTIME=RosterModel.StartTime,
                     STARTDATE=RosterModel.StartDate,
                     FINISHTIME=RosterModel.FinishTime,

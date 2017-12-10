@@ -9,7 +9,7 @@ namespace QconzLocateService.QconzLocateInterface
 {
     public interface ICustomerService
     {
-        List<CustomerServiceModel> GetAllCustomer();
+        List<CustomerServiceModel> GetAllCustomer(int CompanyId);
         void SaveCustomerDetails(CustomerServiceModel CustomerModel);
         void SaveBulkCustomerDetails(List<CustomerServiceModel> CustomerModel);
         CustomerServiceModel GetCustomerDetails(int Id);

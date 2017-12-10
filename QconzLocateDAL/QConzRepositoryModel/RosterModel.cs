@@ -10,9 +10,10 @@ namespace QconzLocateDAL.QConzRepositoryModel
     {
         public int Id { get; set; }
         public string UserId { get; set; }
+        public int CompanyId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public System.TimeSpan StartTime { get; set; }
-        public System.TimeSpan FinishTime { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? FinishTime { get; set; }
     }
 }

@@ -23,8 +23,9 @@ namespace QconzLocate.Controllers
         // GET: Company
         public ActionResult CompanyReport()
         {
+            int CompanyId = (int)(Session["CompanyId"]);
             CompanyListViewModel companies = new CompanyListViewModel();
-            CompanyList = _ICompanyService.GetAllCompany().Select(c => new CompanyViewModel
+            CompanyList = _ICompanyService.GetAllCompany(CompanyId).Select(c => new CompanyViewModel
             {
                 Id = c.Id,
                 Address1 = c.Address1,

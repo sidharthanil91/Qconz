@@ -33,7 +33,8 @@
 
 
                         }
-                    <button style="width:35px"  class="btn btn-block btn-primary pull-right" href="/Customer/DownloadExcel/">
+                    <button style="width:35px"  class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" >
+                        @*<input type="button" style="width:35px" class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" />*@
                         <span class="fa fa-file-excel-o"></span>
                     </button>
                     @*</div>*@

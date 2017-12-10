@@ -14,7 +14,7 @@ using QconzLocateService.Models;
 
 namespace QconzLocate.Controllers
 {
-    [SessionExpireFilter]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

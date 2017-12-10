@@ -17,8 +17,11 @@ namespace QconzLocateDAL
         public int ID { get; set; }
         public Nullable<System.DateTime> STARTDATE { get; set; }
         public Nullable<System.DateTime> ENDDATE { get; set; }
-        public System.TimeSpan STARTTIME { get; set; }
-        public System.TimeSpan FINISHTIME { get; set; }
         public string USERID { get; set; }
+        public Nullable<System.DateTime> STARTTIME { get; set; }
+        public Nullable<System.DateTime> FINISHTIME { get; set; }
+        public Nullable<int> COMPANYID { get; set; }
+    
+        public virtual tblOrganization tblOrganization { get; set; }
     }
 }

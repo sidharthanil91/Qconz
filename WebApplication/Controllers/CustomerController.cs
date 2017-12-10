@@ -22,8 +22,9 @@ namespace QconzLocate.Controllers
         // GET: Customer
         public ActionResult CustomerReport()
         {
+            int CompanyId = (int)(Session["CompanyId"]);
             CustomerViewModel customer = new CustomerViewModel();
-            var customers  = _ICustomerService.GetAllCustomer().Select(c => new CustomerListViewModel
+            var customers  = _ICustomerService.GetAllCustomer(CompanyId).Select(c => new CustomerListViewModel
             {
                 Id = c.Id,
                 Address1 = c.Address1,
