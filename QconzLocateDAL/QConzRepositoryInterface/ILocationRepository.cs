@@ -9,6 +9,6 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface ILocationRepository
     {
-       List<LocationModel> GetCustomerLocation();
+       List<LocationModel> GetCustomerLocation(int CompanyId, string Customer, int GroupId);
     }
 }

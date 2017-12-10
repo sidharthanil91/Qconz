@@ -13,9 +13,9 @@ namespace QconzLocateService.QconzLocateService
     public class LocationService:ILocationService
     {
         private ILocationRepository _ILocationRepository = new LocationRepository();
-        public List<LocationServiceModel> GetCustomerLocation()
+        public List<LocationServiceModel> GetCustomerLocation(int CompanyId,string Customer,int GroupId)
         {
-            var y = _ILocationRepository.GetCustomerLocation();
+            var y = _ILocationRepository.GetCustomerLocation(CompanyId, Customer, GroupId);
             List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
             {
                 Address = t.Address,

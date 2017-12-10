@@ -42,6 +42,7 @@ namespace QconzLocate
             RegisterTeam(bundles);
 
             RegisterRoster(bundles);
+            RegisterLocator(bundles);
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -171,6 +172,17 @@ namespace QconzLocate
 
             bundles.Add(new ScriptBundle("~/Scripts/Bundle/Roster/Roster/menu").Include(
                 "~/Scripts/Roster/Roster-menu.js"));
+
+        }
+
+        private static void RegisterLocator(BundleCollection bundles)
+        {
+
+            //bundles.Add(new ScriptBundle("~/Scripts/Bundle/Team/Data").Include(
+            //    "~/Scripts/Team/Data.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/Locator/Locator/menu").Include(
+                "~/Scripts/Locator/Locator-menu.js"));
 
         }
 
@@ -493,6 +505,9 @@ namespace QconzLocate
             // plugins | raphael
             bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/raphael/js").Include(
                                          "~/AdminLTE/plugins/raphael/js/raphael-min.js"));
+
+            bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/typeahead/js").Include(
+                                       "~/AdminLTE/plugins/typeahead/js/typeahead.js"));
 
             // plugins | select2
             bundles.Add(new ScriptBundle("~/AdminLTE/Bundle/plugins/select2/js").Include(

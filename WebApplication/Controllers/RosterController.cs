@@ -85,12 +85,12 @@ namespace QconzLocate.Controllers
             RosterModel = new RosterServiceModel()
             {
                 Id = roster.Id,
-                CompanyId=CompanyId,
-                StartDate=roster.StartDate,
-                EndDate=roster.EndDate,
-                FinishTime=roster.FinishTime,
+                CompanyId = CompanyId,
+                StartDate = roster.StartDate == null ? DateTime.Now : roster.StartDate,
+                EndDate = roster.EndDate == null ? DateTime.Now : roster.EndDate,
+                FinishTime =roster.FinishTime,
                 StartTime=roster.StartTime,
-                UserId=roster.UserId
+                UserId =roster.UserId
             };
             _IRosterService.SaveRosterDetails(RosterModel);
             bool success = true;

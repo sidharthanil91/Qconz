@@ -138,7 +138,7 @@ namespace QconzLocate.Controllers
 
         public FileResult DownloadExcel()
         {
-            string path = "/Doc/Customer.xlsx";
+            string path = "~/Doc/Customer.xlsx";
             return File(path, "application/vnd.ms-excel", "Customer.xlsx");
         }
 
@@ -162,7 +162,7 @@ namespace QconzLocate.Controllers
                 else
                 {
                     ModelState.AddModelError("File", "This file format is not supported");
-                    return View();
+                    return null;
                 }
                var result = reader.AsDataSet(new ExcelDataSetConfiguration()
                 {
@@ -199,8 +199,29 @@ namespace QconzLocate.Controllers
             {
                 ModelState.AddModelError("File", "Please Upload Your file");
             }
-        
-            return View();
+
+           
+            CustomerViewModel customer = new CustomerViewModel();
+            var customers = _ICustomerService.GetAllCustomer(CompanyId).Select(c => new CustomerListViewModel
+            {
+                Id = c.Id,
+                Address1 = c.Address1,
+                Address2 = c.Address2,
+                AddedDate = c.AddedDate,
+                CompanyId = c.CompanyId,
+                CustomerCode = c.CustomerCode,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                OfficeName = c.OfficeName,
+                Email = c.Email,
+                Lat = c.Lat,
+                Lng = c.Lng,
+                Phone1 = c.Phone1,
+                Phone2 = c.Phone2,
+                Website = c.Website,
+                ZipCode = c.ZipCode
+            }).ToList();
+            return View("Customer", customers);
         }
     }
 }

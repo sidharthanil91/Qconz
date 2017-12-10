@@ -418,10 +418,14 @@
     <Content Include="AdminLTE\plugins\timepicker\css\bootstrap-timepicker.min.css" />
     <Content Include="AdminLTE\plugins\timepicker\js\bootstrap-timepicker.js" />
     <Content Include="AdminLTE\plugins\timepicker\js\bootstrap-timepicker.min.js" />
+    <Content Include="AdminLTE\plugins\typeahead\js\typeahead.js" />
+    <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Account\Login.js" />
     <Content Include="Scripts\Account\Register.js" />
+    <Content Include="Scripts\bloodhound.js" />
+    <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\Calendar\Calendar-menu.js" />
     <Content Include="Scripts\Calendar\Calendar.js" />
     <Content Include="Scripts\Charts\ChartsJs-menu.js" />
@@ -466,6 +470,7 @@
     <Content Include="Scripts\Home\DashboardV1.js" />
     <Content Include="Scripts\Home\DashboardV2-menu.js" />
     <Content Include="Scripts\Home\DashboardV2.js" />
+    <Content Include="Scripts\Locator\Locator-menu.js" />
     <Content Include="Scripts\Mailbox\Compose-menu.js" />
     <Content Include="Scripts\Mailbox\Compose.js" />
     <Content Include="Scripts\Mailbox\Inbox-menu.js" />
@@ -478,6 +483,10 @@
     <Content Include="Scripts\Tables\Simple-menu.js" />
     <Content Include="Scripts\Team\Team-menu.js" />
     <Content Include="Scripts\Team\Data.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
+    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Scripts\User\Advanced.js" />
     <Content Include="Scripts\User\User-menu.js" />
     <Content Include="Scripts\User\UserDetails-menu.js" />

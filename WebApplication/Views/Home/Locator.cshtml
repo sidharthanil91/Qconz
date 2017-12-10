@@ -1,8 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "Locator";
+    ViewBag.SubTitle = "Team Map";
 }
 
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/Locator/Locator/menu")
+
+}
+@*<script src="~/Scripts/typeahead.bundle.js"></script>
+<script src="~/Scripts/typeahead.jquery.js"></script>
+<script src="~/Scripts/bloodhound.js"></script>*@
+@*<link rel="stylesheet" type="text/css" href="~/Content/typeahead.css">*@
 @Styles.Render("~/AdminLTE/Bundle/plugins/morris/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/jvectormap/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/datepicker/css")
@@ -11,21 +20,29 @@
 
 <div class="box-body">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Customer code</label>
+                    @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
+                   
+                    <div class="input-group input-group-sm">
                     <input type="text" class="form-control" id="CustomerCode" name="CustomerCode" value="" placeholder="Enter customer code">
+                        <span class="input-group-btn">
+                            <button type="button" id="savebtn" class="btn btn-primary">Search</button>
+                        </span>
+                    </div>
                 </div>
             </div>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <div class="form-group">
-                    <label>Company</label>
-                    <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*<label>Company</label>
+                    <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>*@
+                  
                 </div>
             </div>
         </div>
@@ -43,22 +60,44 @@
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     <script>
-        var menuItem = $('#left-sidebar-menu-locator');
-        menuItem.addClass('active');
+        var allmarkers=[];
+        $(document).ready(function(){
+      //      var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
 
-        @*function myMap() {
-            var marker =@Model;
-            var mapProp= {
-                center: new google.maps.LatLng(-37.785796,175.276155),
-                zoom:5,
-            };
-            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }*@
 
-        var markers = @Html.Raw(ViewBag.Markers);
-        window.onload = function () {
+
+      //      // Initializing the typeahead
+      //      var cars = new Bloodhound({
+      //          datumTokenizer: Bloodhound.tokenizers.whitespace,
+      //          queryTokenizer: Bloodhound.tokenizers.whitespace,
+      //          local: cars
+      //      });
+
+      //      // Initializing the typeahead
+      //      $('.typeahead').typeahead({
+      //          hint: true,
+      //          highlight: true, /* Enable substring highlighting */
+      //          minLength: 1 /* Specify minimum characters required for showing suggestions */
+      //      },
+      //      {
+      //          name: 'cars',
+      //          source: cars
+      //      });
+      //});
+
+         
+            var markers = @Html.Raw(ViewBag.Markers);
+            InitializeMap(markers);
+
+           
+
+            function InitializeMap (markers) {
+                for (var i = 0; i < allmarkers.length; i++) {
+                    allmarkers[i].setMap(null);
+                }
+                allmarkers = [];
             var mapOptions = {
-                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
                 zoom: 8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -66,11 +105,11 @@
             var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
             for (i = 0; i < markers.length; i++) {
                 var data = markers[i]
-                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var myLatlng = new google.maps.LatLng(data.Lat, data.Lng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     map: map,
-                    title: data.title
+                    title: data.Address
                 });
                 (function (marker, data) {
                     google.maps.event.addListener(marker, "click", function (e) {
@@ -78,19 +117,117 @@
                         infoWindow.open(map, marker);
                     });
                 })(marker, data);
+                allmarkers.push(marker);
             }
         }
+
+        $('#savebtn').click(function(){
+           
+            //var data={
+            
+            //for (i = 0; i < markers.length; i++) {
+            //    markers[i].setMap(null);
+            //}
+            var Customer = $('#CustomerCode').val();
+            //}
+            var url='@Url.Action("Search", "Home")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:JSON.stringify({Customer:Customer}) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    debugger;
+                    InitializeMap(data);
+                    //markers.push(data);
+                    //for (i = 0; i < markers.length; i++) {
+                    //    var data = markers[i]
+                    //    var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                    //    var marker = new google.maps.Marker({
+                    //        position: myLatlng,
+                    //        map: map,
+                    //        title: data.title
+                    //    });
+                    //    (function (marker, data) {
+                    //        google.maps.event.addListener(marker, "click", function (e) {
+                    //            infoWindow.setContent(data.description);
+                    //            infoWindow.open(map, marker);
+                    //        });
+                    //    })(marker, data);
+                    //}
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        });
+        });
+      
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
-    @*@Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
-        @Scripts.Render("~/AdminLTE/plugins/sparkline/js")
-        @Scripts.Render("~/AdminLTE/plugins/jvectormap/js")
-        @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
-        @Scripts.Render("~/AdminLTE/plugins/knob/js")
-        @Scripts.Render("~/AdminLTE/plugins/raphael/js")
-        @Scripts.Render("~/AdminLTE/plugins/morris/js")
-        @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
-        @Scripts.Render("~/Scripts/Home/DashboardV1")*@
+    @*@Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")*@
+        @Scripts.Render("~/AdminLTE/Bundle/plugins/typeahead/js")
+ 
 }
 
+<style type="text/css">
+    .bs-example {
+        font-family: sans-serif;
+        position: relative;
+        margin: 100px;
+    }
+
+    .typeahead, .tt-query, .tt-hint {
+        border: 2px solid #CCCCCC;
+        border-radius: 8px;
+        font-size: 22px; /* Set input font size */
+        height: 30px;
+        line-height: 30px;
+        outline: medium none;
+        padding: 8px 12px;
+        width: 396px;
+    }
+
+    .typeahead {
+        background-color: #FFFFFF;
+    }
+
+        .typeahead:focus {
+            border: 2px solid #0097CF;
+        }
+
+    .tt-query {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    }
+
+    .tt-hint {
+        color: #999999;
+    }
+
+    .tt-menu {
+        background-color: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 12px;
+        padding: 8px 0;
+        width: 422px;
+    }
+
+    .tt-suggestion {
+        font-size: 22px; /* Set suggestion dropdown font size */
+        padding: 3px 20px;
+    }
+
+        .tt-suggestion:hover {
+            cursor: pointer;
+            background-color: #0097CF;
+            color: #FFFFFF;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+</style>

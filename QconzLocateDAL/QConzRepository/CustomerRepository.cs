@@ -127,6 +127,12 @@ namespace QconzLocateDAL.QConzRepository
 
         public void SaveBulkCustomerDetails(List<CustomerModel> CustomerModel)
         {
+            var CompanyId = CustomerModel.Select(t => t.CompanyId).FirstOrDefault();
+            var customers = entity.tblCustomers.Where(c => c.COMPANYID == CompanyId);
+            foreach(var item in customers)
+            {
+                entity.tblCustomers.Remove(item);
+            }
             foreach (var item in CustomerModel)
             {
                 var customer = new tblCustomer()
@@ -134,7 +140,7 @@ namespace QconzLocateDAL.QConzRepository
                     ADDRESS1 = item.Address1,
                     ADDRESS2 = item.Address2,
                     ADDED_DATE = item.AddedDate,
-                    COMPANYID = 1,
+                    COMPANYID = item.CompanyId,
                     CUSTOMERCODE = item.CustomerCode,
                     FIRSTNAME = item.FirstName,
                     LASTNAME = item.LastName,

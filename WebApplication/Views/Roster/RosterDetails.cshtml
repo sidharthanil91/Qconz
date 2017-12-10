@@ -22,12 +22,12 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-6">
-               
+
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Start Date</label>
                         <div class="input-group">
-                            <input type="text" id="StartDate" tabindex="1" value="@Model.Roster.StartDate.ToString("dd-MM-yyyy")" class="form-control datepicker">
+                            <input type="text" id="StartDate" tabindex="1" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label>Start time</label>
                             <div class="input-group">
-                                <input type="text" id="StartTime" tabindex="3" value="@Model.Roster.StartTime.ToString("HH:mm tt")" class="form-control timepicker">
+                                <input type="text" id="StartTime" tabindex="3" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -55,12 +55,12 @@
                 </div>
             </div>
             <div class="col-md-6">
-              
+
                 <div class="form-group">
                     <div class="form-group">
                         <label for="exampleInputEmail1">End Date</label>
                         <div class="input-group">
-                            <input type="text" id="EndDate" tabindex="1" value="@Model.Roster.EndDate.ToString("dd-MM-yyyy")" class="form-control datepicker">
+                            <input type="text" id="EndDate" tabindex="2" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
@@ -72,7 +72,7 @@
                         <div class="form-group">
                             <label>End time</label>
                             <div class="input-group">
-                                <input type="text" id="FinishTime" tabindex="4" value="@Model.Roster.FinishTime.ToString("HH:mm tt")" class="form-control timepicker">
+                                <input type="text" id="FinishTime" tabindex="4" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
@@ -123,12 +123,12 @@
     <script src="~/AdminLTE/plugins/datepicker/js/locales/bootstrap-datepicker*"></script>
     <script type="text/javascript">
         $('.datepicker').datepicker({
-            format: 'dd-mm-yyyy'
+            format: 'dd/MM/yyyy'
         });
         $(".timepicker").timepicker({
             showInputs: false
         });
-        
+
         var jsontext = '@Html.Raw(Json.Encode(Model.UserList))';
         var data = JSON.parse(jsontext);
         $('#Users').select2({
@@ -138,10 +138,12 @@
         $('#Users').select2().val(array).trigger("change")
 
         $('#savebtn').click(function(){
+            var StartDateVal=$('#StartDate').val();
+            var EndDateVal=$('#EndDate').val();
             var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
             var data={ Id : @Model.Roster.Id,
-                StartDate : $('#StartDate').val(),
-                EndDate : $('#EndDate').val(),
+                StartDate :StartDateVal,
+                EndDate : EndDateVal,
                 StartTime: $('#StartTime').val(),
                 FinishTime : $('#FinishTime').val(),
                 UserId : UserIdVal

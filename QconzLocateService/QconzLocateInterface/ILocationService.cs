@@ -10,6 +10,7 @@ namespace QconzLocateService.QconzLocateInterface
 {
     public interface ILocationService
     {
-         List<LocationServiceModel> GetCustomerLocation();
+         List<LocationServiceModel> GetCustomerLocation(int CompanyId, string Customer, int GroupId);
+         
     }
 }
