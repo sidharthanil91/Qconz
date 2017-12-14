@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,12 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiQconzLocateInterface\ILoginService.cs" />
+    <Compile Include="ApiQconzLocateService\LoginService.cs" />
+    <Compile Include="Models\ClientTokenServiceModel.cs" />
     <Compile Include="Models\CommonServiceModel.cs" />
     <Compile Include="Models\CompanyServiceModel.cs" />
     <Compile Include="Models\CustomerServiceModel.cs" />
     <Compile Include="Models\LocationServiceModel.cs" />
+    <Compile Include="Models\LoginServiceModel.cs" />
     <Compile Include="Models\RosterServiceModel.cs" />
     <Compile Include="Models\TeamServiceModel.cs" />
+    <Compile Include="Models\TokenServiceModel.cs" />
     <Compile Include="Models\UserAuthServiceModel.cs" />
     <Compile Include="Models\UserServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +75,7 @@
       <Name>QconzLocateDAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

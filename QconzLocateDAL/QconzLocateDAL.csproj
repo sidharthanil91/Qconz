@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiQconzRepositoryInterface\ILoginRepository.cs" />
+    <Compile Include="ApiQconzRepository\LoginRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QconzModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -77,6 +79,7 @@
     <Compile Include="QConzRepositoryModel\CompanyModel.cs" />
     <Compile Include="QConzRepositoryModel\CustomerModel.cs" />
     <Compile Include="QConzRepositoryModel\LocationModel.cs" />
+    <Compile Include="QConzRepositoryModel\LoginModel.cs" />
     <Compile Include="QConzRepositoryModel\RosterModel.cs" />
     <Compile Include="QConzRepositoryModel\TeamModel.cs" />
     <Compile Include="QConzRepositoryModel\UserAuthRepositoryModel.cs" />
@@ -136,6 +139,7 @@
       <LastGenOutput>QconzModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
