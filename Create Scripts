@@ -1,0 +1,212 @@
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+
+--------Organization Table------------
+CREATE TABLE tblOrganizations(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[TITLE] [varchar](100)  NULL,
+	[CONTACTNAME] [varchar](75)  NULL,
+	[ADDRESS1] [varchar](200)  NULL,
+	[ADDRESS2] [varchar](200)  NULL,
+	[ZIPCODE] [varchar](20)  NULL,
+	[PHONE_1] [varchar](20) NULL,
+	[PHONE_2] [varchar](20)  NULL,
+	[EMAIL] [varchar](75) NULL,
+	[WEBSITE] [varchar](75) NULL,
+	[LAT] [varchar](20) NULL,
+	[LNG] [varchar](20)  NULL,
+	[ADDED_DATE] [datetime]  NULL,
+	[ARCHIVE] [char] NULL,
+	
+	
+ CONSTRAINT [PK_tblOrganizations] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+
+--------Team Table----------
+
+CREATE TABLE tblTeams(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[TEAMNAME] [varchar](100)  NULL,
+	[TEAMDESC] [varchar](max)  NULL,
+	[TEAMCREATED] [datetime]  NULL,
+	[TEAMSTATUS] [char] NOT NULL,
+	[COMPANYID] [int]  NOT NULL,
+	
+ CONSTRAINT [PK_tblTeams] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+ALTER TABLE [tblTeams]  WITH NOCHECK ADD  CONSTRAINT [FK_tblTeams_COMPANYID_tblOrganizations_ID] FOREIGN KEY([COMPANYID])
+REFERENCES tblOrganizations ([ID])
+GO
+
+ALTER TABLE [tblTeams] CHECK CONSTRAINT [FK_tblTeams_COMPANYID_tblOrganizations_ID]
+GO
+
+ALTER TABLE [tblTeams] ADD DEFAULT ('A') FOR [TEAMSTATUS]
+GO
+
+
+--------User Table------------
+
+CREATE TABLE tblUserMaster(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[USERTYPE] [int] NOT NULL,
+	[USERNAME] [varchar](75) NOT NULL,
+	[PASSWORD] [varchar](120) NOT NULL,
+	[USERSTATUS] [char] NOT NULL,
+	[USERTEAMID] [int]  NULL,
+	[COMPANYID] [int] NULL,
+	[USERTOKEN] [varchar](max)  NULL,
+	[FIRSTNAME] [varchar](75) NULL,
+	[SURNAME] [varchar](75) NULL,
+	[EMAIL] [varchar](75) NULL,
+	[CELLPHONE] [varchar](20)  NULL,
+	[WORKINGDAYS] [varchar](20)  NULL,
+	[STARTTIME] [datetime] NULL,
+	[ENDTIME] [datetime]  NULL,
+	[EMERGENCYCONTACT] [varchar](100)  NULL,
+	[EMERGENCYCONTACTNO] [varchar](50) NULL,
+	
+ CONSTRAINT [PK_tblUserMaster] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+
+ALTER TABLE [tblUserMaster]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserMaster_COMPANYID_tblOrganizations_ID] FOREIGN KEY([COMPANYID])
+REFERENCES [tblOrganizations] ([ID])
+GO
+
+ALTER TABLE [tblUserMaster] CHECK CONSTRAINT [FK_tblUserMaster_COMPANYID_tblOrganizations_ID]
+GO
+
+--ALTER TABLE [tblUserMaster]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserMaster_USERTEAMID_tblTeams_ID] FOREIGN KEY([USERTEAMID])
+--REFERENCES [tblTeams] ([ID])
+--GO
+
+--ALTER TABLE [tblUserMaster] CHECK CONSTRAINT [FK_tblUserMaster_USERTEAMID_tblTeams_ID]
+--GO
+
+ALTER TABLE [tblUserMaster] ADD DEFAULT ('A') FOR [USERSTATUS]
+GO
+
+--------User Log Table----------
+
+CREATE TABLE tblUserLog(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[USERID] [int] NOT NULL,
+	[LAT] [varchar](20)  NULL,
+	[LNG] [varchar](20)  NULL,
+	[LOGTIME] [datetime] NOT NULL,
+	
+ CONSTRAINT [PK_tblUserLog] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+
+ALTER TABLE [tblUserLog]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserLog_USERID_tblUserMaster_ID] FOREIGN KEY([USERID])
+REFERENCES [tblUserMaster] ([ID])
+GO
+
+ALTER TABLE [tblUserLog] CHECK CONSTRAINT [FK_tblUserLog_USERID_tblUserMaster_ID]
+GO
+
+--------UserTeam Junction Table----------
+
+CREATE TABLE tblUserTeam(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[USERID] [int] NOT NULL,
+	[TEAMID] [int] NOT NULL,
+	[ARCHIVE] [char] NULL,
+	
+ CONSTRAINT [PK_tblUserTeam] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+
+ALTER TABLE [tblUserTeam]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserTeam_USERID_tblUserMaster_ID] FOREIGN KEY([USERID])
+REFERENCES [tblUserMaster] ([ID])
+GO
+
+ALTER TABLE [tblUserTeam] CHECK CONSTRAINT [FK_tblUserTeam_USERID_tblUserMaster_ID]
+GO
+
+ALTER TABLE [tblUserTeam]  WITH NOCHECK ADD  CONSTRAINT [FK_tblUserTeam_USERID_tblUserTeam_ID] FOREIGN KEY([TEAMID])
+REFERENCES [tblTeams] ([ID])
+GO
+
+ALTER TABLE [tblUserTeam] CHECK CONSTRAINT [FK_tblUserTeam_USERID_tblUserTeam_ID]
+GO
+
+ALTER TABLE [tblUserTeam] ADD DEFAULT ('A') FOR [ARCHIVE]
+GO
+
+--------Roaster Table----------
+
+CREATE TABLE tblRoaster(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[USERID] [varchar] (max) NULL,
+	[STARTDATE] [date]  NULL,
+	[ENDDATE] [date]  NULL,
+	[STARTTIME] [time] NOT NULL,
+	[FINISHTIME] [time] NOT NULL,
+ CONSTRAINT [PK_tblRoaster] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+
+
+
+
+--------Customers Table------------
+CREATE TABLE tblCustomers(
+	[ID] [int] NOT NULL IDENTITY (1,1),
+	[CUSTOMERCODE] [varchar](100)  NULL,
+	[FIRSTNAME] [varchar](75)  NULL,
+	[LASTNAME] [varchar](75)  NULL,
+	[OFFICENAME] [varchar](75)  NULL,
+	[ADDRESS1] [varchar](200)  NULL,
+	[ADDRESS2] [varchar](200)  NULL,
+	[ZIPCODE] [varchar](20)  NULL,
+	[PHONE_1] [varchar](20) NULL,
+	[PHONE_2] [varchar](20)  NULL,
+	[EMAIL] [varchar](75) NULL,
+	[WEBSITE] [varchar](75) NULL,
+	[LAT] [varchar](20) NULL,
+	[LNG] [varchar](20)  NULL,
+	[ADDED_DATE] [datetime]  NULL,
+	[COMPANYID] [int]  NULL,
+	
+	
+ CONSTRAINT [PK_tblCustomers] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 100) )
+
+
+ALTER TABLE [tblCustomers]  WITH NOCHECK ADD  CONSTRAINT [FK_tblCustomers_COMPANYID_tblOrganizations_ID] FOREIGN KEY([COMPANYID])
+REFERENCES tblOrganizations ([ID])
+GO
+
+ALTER TABLE [tblCustomers] CHECK CONSTRAINT [FK_tblCustomers_COMPANYID_tblOrganizations_ID]
+GO
+
+
+
+
