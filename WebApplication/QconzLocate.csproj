@@ -212,6 +212,7 @@
     <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserLocationController.cs" />
     <Compile Include="Controllers\UserWorkController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="DAL\Repository.cs" />
@@ -222,6 +223,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiLoginViewModel.cs" />
+    <Compile Include="Models\ApiUserLocationViewModel.cs" />
     <Compile Include="Models\CompanyListViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />

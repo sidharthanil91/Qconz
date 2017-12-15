@@ -1,6 +1,4 @@
 ﻿using QconzLocate.Models;
-using QconzLocateService.ApiQconzLocateInterface;
-using QconzLocateService.ApiQconzLocateService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +8,8 @@ using System.Web.Http;
 
 namespace QconzLocate.Controllers
 {
-    public class UserWorkController : ApiController
+    public class UserLocationController : ApiController
     {
-        private ILoginService _IloginService =new LoginService();
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
@@ -25,15 +22,10 @@ namespace QconzLocate.Controllers
             return "value";
         }
 
+        [HttpPost]
         // POST api/<controller>
-        public UserWorkViewModel Post(string token)
+        public void Post([FromBody]ApiUserLocationViewModel location)
         {
-           if( _IloginService.ValidateToken(token.Replace(' ', '+')) !=null)
-            {
-
-                return new UserWorkViewModel();
-            }
-            return null;
         }
 
         // PUT api/<controller>/5

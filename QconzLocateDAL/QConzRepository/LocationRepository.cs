@@ -14,8 +14,8 @@ namespace QconzLocateDAL.QConzRepository
         private QCONZEntities entity = new QCONZEntities();
         public  List<LocationModel> GetCustomerLocation(int CompanyId, string Customer, int GroupId)
         {
-             var y = (from t in entity.tblCustomers where ((t.COMPANYID==CompanyId || CompanyId==0) ) select t).Where(x=>x.CUSTOMERCODE.Contains(Customer)||x.OFFICENAME.Contains(Customer)||
-             x.LAT.Contains(Customer)||x.LNG.Contains(Customer)||x.ADDRESS1.Contains(Customer)||(x.ADDRESS2).Contains(Customer));
+            var y = (from t in entity.tblCustomers where ((t.COMPANYID == CompanyId || CompanyId == 0)) select t).Where(x => x.CUSTOMERCODE.Contains(Customer) || x.OFFICENAME.Contains(Customer) ||
+               x.LAT.Contains(Customer) || x.LNG.Contains(Customer) || x.ADDRESS1.Contains(Customer) || (x.ADDRESS2).Contains(Customer) || (Customer == null));
             List<LocationModel> location;
             location = y.Select(c => new LocationModel
             {
