@@ -23,6 +23,7 @@ namespace QconzLocateDAL.QConzRepository
                     Id = c.ID,
                     Cellphone = c.CELLPHONE,
                     CompanyId = c.COMPANYID,
+                    Company=c.tblOrganization.TITLE,
                     EmergencyContact = c.EMERGENCYCONTACT,
                     EmergencyContactNo = c.EMERGENCYCONTACTNO,
                     Email = c.EMAIL,

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiQconzLocateInterface\IUserLocationService.cs" />
     <Compile Include="ApiQconzLocateInterface\ILoginService.cs" />
+    <Compile Include="ApiQconzLocateService\UserLocationService.cs" />
     <Compile Include="ApiQconzLocateService\LoginService.cs" />
     <Compile Include="Models\ClientTokenServiceModel.cs" />
     <Compile Include="Models\CommonServiceModel.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Models\TeamServiceModel.cs" />
     <Compile Include="Models\TokenServiceModel.cs" />
     <Compile Include="Models\UserAuthServiceModel.cs" />
+    <Compile Include="Models\UserLocationServiceModel.cs" />
     <Compile Include="Models\UserServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QconzLocateInterface\ICompanyService.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="QconzLocateInterface\IRosterService.cs" />
     <Compile Include="QconzLocateInterface\ITeamService.cs" />
     <Compile Include="QconzLocateInterface\IUserService.cs" />
+    <Compile Include="ApiQconzLocateInterface\IUserWorkService.cs" />
     <Compile Include="QconzLocateService\CommonService.cs" />
     <Compile Include="QconzLocateService\CompanyService.cs" />
     <Compile Include="QconzLocateService\CustomerService.cs" />
@@ -68,6 +72,7 @@
     <Compile Include="QconzLocateService\RosterService.cs" />
     <Compile Include="QconzLocateService\TeamService.cs" />
     <Compile Include="QconzLocateService\UserService.cs" />
+    <Compile Include="ApiQconzLocateService\UserWorkService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QconzLocateDAL\QconzLocateDAL.csproj">

@@ -19,62 +19,64 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
             </div>*@
     </div>
-    <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
+    <form id="form1" name="form1">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
 
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Start Date</label>
-                        <div class="input-group">
-                            <input type="text" id="StartDate" tabindex="1" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="bootstrap-timepicker">
                         <div class="form-group">
-                            <label>Start time</label>
+                            <label for="exampleInputEmail1">Start Date</label>
                             <div class="input-group">
-                                <input type="text" id="StartTime" tabindex="3" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                <input type="text" id="StartDate" name="StartDate" tabindex="1" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
                                 <div class="input-group-addon">
-                                    <i class="fa fa-clock-o"></i>
+                                    <i class="fa fa-calendar"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Users</label>
-                        <select id="Users" class="form-control select2" tabindex="5" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">End Date</label>
-                        <div class="input-group">
-                            <input type="text" id="EndDate" tabindex="2" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Start time</label>
+                                <div class="input-group">
+                                    <input type="text" id="StartTime" name="StartTime" tabindex="3" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="bootstrap-timepicker">
+                    <div class="form-group">
                         <div class="form-group">
-                            <label>End time</label>
+                            <label for="exampleInputEmail1">Users</label>
+                            <select id="Users" name="Users" class="form-control select2" tabindex="5" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">End Date</label>
                             <div class="input-group">
-                                <input type="text" id="FinishTime" tabindex="4" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                <input type="text" id="EndDate" name="EndDate" tabindex="2" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
                                 <div class="input-group-addon">
-                                    <i class="fa fa-clock-o"></i>
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>End time</label>
+                                <div class="input-group">
+                                    <input type="text" id="FinishTime" name="FinishTime" tabindex="4" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,31 +84,31 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="box-footer">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-    </div>
-    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Launch demo modal
-        </button>*@
+        </form>
+        <div class="box-footer">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+        </div>
+        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Launch demo modal
+            </button>*@
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-                    Save changes?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        Save changes?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 
@@ -119,6 +121,7 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
     <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
     <script src="~/AdminLTE/plugins/datepicker/js/locales/bootstrap-datepicker*"></script>
     <script type="text/javascript">
@@ -136,8 +139,45 @@
         })
         var array = '@Model.Roster.UserId'.split(',')
         $('#Users').select2().val(array).trigger("change")
-
+        $(document).ready(function () {
+            // 1. prepare the validation rules and messages.
+        
+            $("#form1").validate({
+                rules: {
+                    StartDate: {
+                        required: true,
+                       date: true
+                    },
+                    StartTime: {
+                        required: true,
+                       // time: true
+                    },
+                    EndDate: {
+                        required: true,
+                        date: true,
+                       // greaterThan: "#StartDate"
+                    },
+                    FinishTime: {
+                        required: true,
+                       // time: true
+                    },
+                    Users: {
+                        required: true
+                    },
+                },
+                messages: {
+                    StartDate: "Start date is required",
+                    StartTime: "Start time is required",
+                    EndDate: "End date is required",
+                    FinishTime: "End time is required",
+                    Users: "Select at least one user",
+                }
+            });
         $('#savebtn').click(function(){
+            if( !$("#form1").valid())
+            {
+                return
+            }
             var StartDateVal=$('#StartDate').val();
             var EndDateVal=$('#EndDate').val();
             var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
@@ -162,6 +202,7 @@
                     alert("Error while inserting data");
                 }
             })
+        });
         });
 
     </script>

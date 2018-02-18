@@ -81,6 +81,7 @@ namespace QconzLocateService.QconzLocateService
                 Address2 = CompanyDetails.Address2,
                 ContactName = CompanyDetails.ContactName,
                 Email = CompanyDetails.Email,
+                Image=CompanyDetails.Image,
                 Lat = CompanyDetails.Lat,
                 Lng = CompanyDetails.Lng,
                 Phone1 = CompanyDetails.Phone1,

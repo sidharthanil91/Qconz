@@ -24,122 +24,124 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
             </div>*@
     </div>
-    <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
+    <form id="form1" name="form1">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Customer code</label>
-                        <input type="text" class="form-control" id="CustomerCode" tabindex="1" name="CustomerCode" value="@Model.CustomerDetails.CustomerCode" placeholder="Enter customer code">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Customer code</label>
+                            <input type="text" class="form-control" id="CustomerCode" tabindex="1" name="CustomerCode" value="@Model.CustomerDetails.CustomerCode" placeholder="Enter customer code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First name</label>
+                            <input type="text" class="form-control" id="FirstName" tabindex="3" name="FirstName" value="@Model.CustomerDetails.FirstName" placeholder="Enter first name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Address1</label>
+                            <input type="text" class="form-control" id="Address1" tabindex="5" name="Address1" value="@Model.CustomerDetails.Address1" placeholder="Enter address1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Phone 1</label>
+                            <input type="text" class="form-control" id="Phone1" tabindex="7" name="Phone1" value="@Model.CustomerDetails.Phone1" placeholder="Enter phone1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="text" class="form-control" id="Email" tabindex="9" name="Email" value="@Model.CustomerDetails.Email" placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Latitude</label>
+                            <input type="text" class="form-control" id="Lat" tabindex="11" name="Lat" value="@Model.CustomerDetails.Lat" placeholder="Enter latitude">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Zip Code</label>
+                            <input type="text" class="form-control" id="ZipCode" tabindex="13" name="ZipCode" value="@Model.CustomerDetails.ZipCode" placeholder="Enter zipCode">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">First name</label>
-                        <input type="text" class="form-control" id="FirstName" tabindex="3" name="FirstName" value="@Model.CustomerDetails.FirstName" placeholder="Enter first name">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contact Name</label>
+                            <input type="text" class="form-control" id="OfficeName" tabindex="2" name="OfficeName" value="@Model.CustomerDetails.OfficeName" placeholder="Enter office name">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Address1</label>
-                        <input type="text" class="form-control" id="Address1" tabindex="5" name="Address1" value="@Model.CustomerDetails.Address1" placeholder="Enter address1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last name</label>
+                            <input type="text" class="form-control" id="LastName" tabindex="4" name="LastName" value="@Model.CustomerDetails.LastName" placeholder="Enter last name">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Phone 1</label>
-                        <input type="text" class="form-control" id="Phone1" tabindex="7" name="Phone1" value="@Model.CustomerDetails.Phone1" placeholder="Enter phone1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Address2</label>
+                            <input type="text" class="form-control" id="Address2" tabindex="6" name="Address2" value="@Model.CustomerDetails.Address2" placeholder="Enter address2">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" id="Email" tabindex="9" name="Email" value="@Model.CustomerDetails.Email" placeholder="Enter email">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Phone2</label>
+                            <input type="text" class="form-control" id="Phone2" tabindex="8" name="Phone2" value="@Model.CustomerDetails.Phone2" placeholder="Enter phone2">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Latitude</label>
-                        <input type="text" class="form-control" id="Lat" tabindex="11" name="Lat" value="@Model.CustomerDetails.Lat" placeholder="Enter latitude">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Website</label>
+                            <input type="text" class="form-control" id="Website" tabindex="10" name="Website" value="@Model.CustomerDetails.Website" placeholder="Enter website">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Zip Code</label>
-                        <input type="text" class="form-control" id="ZipCode" tabindex="13" name="ZipCode" value="@Model.CustomerDetails.ZipCode" placeholder="Enter zipCode">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Longitude</label>
+                            <input type="text" class="form-control" id="Lng" tabindex="12" name="Lng" value="@Model.CustomerDetails.Lng" placeholder="Enter longitude">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Company</label>
+                            <select id="Company" class="form-control select2" tabindex="14" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Contact Name</label>
-                        <input type="text" class="form-control" id="OfficeName" tabindex="2" name="OfficeName" value="@Model.CustomerDetails.OfficeName" placeholder="Enter office name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Last name</label>
-                        <input type="text" class="form-control" id="LastName" tabindex="4" name="LastName" value="@Model.CustomerDetails.LastName" placeholder="Enter last name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Address2</label>
-                        <input type="text" class="form-control" id="Address2" tabindex="6" name="Address2" value="@Model.CustomerDetails.Address2" placeholder="Enter address2">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Phone2</label>
-                        <input type="text" class="form-control" id="Phone2" tabindex="8" name="Phone2" value="@Model.CustomerDetails.Phone2" placeholder="Enter phone2">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Website</label>
-                        <input type="text" class="form-control" id="Website" tabindex="10" name="Website" value="@Model.CustomerDetails.Website" placeholder="Enter website">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Longitude</label>
-                        <input type="text" class="form-control" id="Lng" tabindex="12" name="Lng" value="@Model.CustomerDetails.Lng" placeholder="Enter longitude">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Company</label>
-                        <select id="Company" class="form-control select2" tabindex="14" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
-                    </div>
-                </div>
-             </div>
         </div>
-    </div>
-    <div class="box-footer">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-    </div>
-    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Launch demo modal
-        </button>*@
+        </form>
+        <div class="box-footer">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+        </div>
+        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Launch demo modal
+            </button>*@
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-                    Save changes?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        Save changes?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 
@@ -152,6 +154,7 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
     <script type="text/javascript">
 
         var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
@@ -160,8 +163,33 @@
             data: data
         })
         $("#Company").val("@Model.CustomerDetails.CompanyId").trigger("change");
-
-        $('#savebtn').click(function(){
+        
+        $(document).ready(function () {
+            // 1. prepare the validation rules and messages.
+        
+            $("#form1").validate({
+                rules: {
+                    CustomerCode: {
+                        required: true
+                    },
+                    Company: {
+                        required: true
+                    },
+                    Email: {
+                        email: true
+                    },
+                },
+                messages: {
+                    CustomerCode: "Customer Code is required",
+                    Company: "Company is required",
+                    Email:"Please enter a valid email address"
+                }
+            });
+            $('#savebtn').click(function(){
+                if( !$("#form1").valid())
+                {
+                    return
+                }
             var data={ Id : @Model.CustomerDetails.Id,
                 Address1 : $('#Address1').val(),
                 Address2 : $('#Address2').val(),
@@ -192,7 +220,7 @@
                 }
             })
         });
-
+        });
     </script>
 
 }

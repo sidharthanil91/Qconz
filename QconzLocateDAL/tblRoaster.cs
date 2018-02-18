@@ -14,6 +14,12 @@ namespace QconzLocateDAL
     
     public partial class tblRoaster
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblRoaster()
+        {
+            this.tblUserRoasters = new HashSet<tblUserRoaster>();
+        }
+    
         public int ID { get; set; }
         public Nullable<System.DateTime> STARTDATE { get; set; }
         public Nullable<System.DateTime> ENDDATE { get; set; }
@@ -23,5 +29,7 @@ namespace QconzLocateDAL
         public Nullable<int> COMPANYID { get; set; }
     
         public virtual tblOrganization tblOrganization { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUserRoaster> tblUserRoasters { get; set; }
     }
 }

@@ -4,20 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fe58af1c6d324545813c83e0676682e3" Name="Diagram1">
+      <Diagram DiagramId="7f5088a6698f4339b2fab2ecb80d0ab7" Name="Diagram1" ZoomLevel="51">
         <EntityTypeShape EntityType="QCONZModel.tblCustomer" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QCONZModel.tblOrganization" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QCONZModel.tblOrganization" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QCONZModel.tblRoaster" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QCONZModel.tblTeam" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="QCONZModel.tblUserLog" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QCONZModel.tblUserMaster" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QCONZModel.tblUserTeam" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QCONZModel.tblTeam" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QCONZModel.tblUserLog" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="QCONZModel.tblUserMaster" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QCONZModel.tblUserRoaster" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QCONZModel.tblUserTeam" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
         <AssociationConnector Association="QCONZModel.FK_tblCustomers_COMPANYID_tblOrganizations_ID" ManuallyRouted="false" />
         <AssociationConnector Association="QCONZModel.FK_tblRoaster_COMPANYID_tblOrganizations_ID" ManuallyRouted="false" />
         <AssociationConnector Association="QCONZModel.FK_tblTeams_COMPANYID_tblOrganizations_ID" ManuallyRouted="false" />
         <AssociationConnector Association="QCONZModel.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="QCONZModel.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" ManuallyRouted="false" />
         <AssociationConnector Association="QCONZModel.FK_tblUserTeam_USERID_tblUserTeam_ID" ManuallyRouted="false" />
         <AssociationConnector Association="QCONZModel.FK_tblUserLog_USERID_tblUserMaster_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="QCONZModel.FK_tblUserRoaster_USERID_tblUserMaster_ID" ManuallyRouted="false" />
         <AssociationConnector Association="QCONZModel.FK_tblUserTeam_USERID_tblUserMaster_ID" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

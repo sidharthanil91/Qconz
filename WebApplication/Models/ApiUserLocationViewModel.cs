@@ -15,5 +15,6 @@ namespace QconzLocate.Models
         public string latitude { get; set; }
         public string longitude { get; set; }
         public DateTime date_time { get; set; }
+        public string token { get; set; }
     }
 }

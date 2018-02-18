@@ -20,63 +20,64 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
             </div>*@
     </div>
-    <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
+    <form id="form1" name="form1">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Team name</label>
-                        <input type="text" class="form-control" id="TeamName" name="TeamName" value="@Model.SingleTeam.TeamName" placeholder="Enter team name">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Team name</label>
+                            <input type="text" class="form-control" id="TeamName" name="TeamName" value="@Model.SingleTeam.TeamName" placeholder="Enter team name">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" rows="3" id="Teamdesc" value="@Model.SingleTeam.Teamdesc" placeholder="Enter description"></textarea>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" rows="3" id="Teamdesc" value="@Model.SingleTeam.Teamdesc" placeholder="Enter description"></textarea>
+                        </div>
                     </div>
-                </div>
-              
-            </div>
-            <div class="col-md-6">
-                @*<div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Company</label>
-                        <input type="text" class="form-control" id="Company" name="Company" value="@Model.CompanyId" placeholder="Enter company">
-                    </div>
-                </div>*@
-                <div class="form-group">
-                    <label>Company</label>
-                    <select id="Company" class="form-control select2" value="@Model.SingleTeam.CompanyId" style="width: 100%;">
-                    </select>
-                </div>
-             
-            </div>
-        </div>
-    </div>
-    <div class="box-footer">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-    </div>
-    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Launch demo modal
-        </button>*@
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
-                <div class="modal-body">
-                    Save changes?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                <div class="col-md-6">
+                    @*<div class="form-group">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Company</label>
+                                <input type="text" class="form-control" id="Company" name="Company" value="@Model.CompanyId" placeholder="Enter company">
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label>Company</label>
+                        <select id="Company" name="Company" class="form-control select2" value="@Model.SingleTeam.CompanyId" style="width: 100%;"></select>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
+        </form>
+        <div class="box-footer">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+        </div>
+        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Launch demo modal
+            </button>*@
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        Save changes?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
 
@@ -89,6 +90,7 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
     <script type="text/javascript">
         $('#Teamdesc').html('@Model.SingleTeam.Teamdesc');
         var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
@@ -97,8 +99,29 @@
             data: data
         })
         $("#Company").val("@Model.SingleTeam.CompanyId").trigger("change");
-
-        $('#savebtn').click(function(){
+        $(document).ready(function () {
+            // 1. prepare the validation rules and messages.
+        
+            $("#form1").validate({
+                rules: {
+                    TeamName: {
+                        required: true
+                    },
+                    Company: {
+                        required: true
+                    },
+                    
+                },
+                messages: {
+                    TeamName: "Team name is required",
+                    Company: "is required",
+                }
+            });
+            $('#savebtn').click(function(){
+                if( !$("#form1").valid())
+                {
+                    return
+                }
             var data={ Id : @Model.SingleTeam.Id,
                 TeamName : $('#TeamName').val(),
                 Teamdesc : $('#Teamdesc').val(),
@@ -119,7 +142,7 @@
                 }
             })
         });
-
+        });
     </script>
 
 }

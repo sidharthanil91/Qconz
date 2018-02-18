@@ -11,5 +11,6 @@ namespace QconzLocateService.Models
         public string Lat { get; set; }
         public string Lng { get; set; }
         public string Address { get; set; }
+        public string Type { get; set; }
     }
 }

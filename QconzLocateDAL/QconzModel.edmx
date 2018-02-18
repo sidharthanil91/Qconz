@@ -100,6 +100,15 @@
           <Property Name="EMERGENCYCONTACT" Type="varchar" MaxLength="100" />
           <Property Name="EMERGENCYCONTACTNO" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tblUserRoaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERID" Type="int" Nullable="false" />
+          <Property Name="ROASTERID" Type="int" Nullable="false" />
+          <Property Name="ARCHIVE" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="tblUserTeam">
           <Key>
             <PropertyRef Name="ID" />
@@ -169,6 +178,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
+          <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="1" />
+          <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblUserRoaster">
+              <PropertyRef Name="ROASTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserRoaster_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblUserRoaster">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUserTeam_USERID_tblUserMaster_ID">
           <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
           <End Role="tblUserTeam" Type="Self.tblUserTeam" Multiplicity="*" />
@@ -200,6 +233,7 @@
           <EntitySet Name="tblTeams" EntityType="Self.tblTeams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserLog" EntityType="Self.tblUserLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserMaster" EntityType="Self.tblUserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserRoaster" EntityType="Self.tblUserRoaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserTeam" EntityType="Self.tblUserTeam" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tblCustomers_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
@@ -220,6 +254,14 @@
           <AssociationSet Name="FK_tblUserMaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblUserMaster" EntitySet="tblUserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID" Association="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
+            <End Role="tblRoaster" EntitySet="tblRoaster" />
+            <End Role="tblUserRoaster" EntitySet="tblUserRoaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserRoaster_USERID_tblUserMaster_ID" Association="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMaster" />
+            <End Role="tblUserRoaster" EntitySet="tblUserRoaster" />
           </AssociationSet>
           <AssociationSet Name="FK_tblUserTeam_USERID_tblUserMaster_ID" Association="Self.FK_tblUserTeam_USERID_tblUserMaster_ID">
             <End Role="tblUserMaster" EntitySet="tblUserMaster" />
@@ -292,6 +334,7 @@
           <Property Name="FINISHTIME" Type="DateTime" Precision="3" />
           <Property Name="COMPANYID" Type="Int32" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblRoaster" ToRole="tblOrganizations" />
+          <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblUserRoaster" />
         </EntityType>
         <EntityType Name="tblTeam">
           <Key>
@@ -340,7 +383,19 @@
           <Property Name="EMERGENCYCONTACTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblUserMaster" ToRole="tblOrganizations" />
           <NavigationProperty Name="tblUserLogs" Relationship="Self.FK_tblUserLog_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserLog" />
+          <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserRoaster" />
           <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserTeam" />
+        </EntityType>
+        <EntityType Name="tblUserRoaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" Nullable="false" />
+          <Property Name="ROASTERID" Type="Int32" Nullable="false" />
+          <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblRoaster" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblUserRoaster" ToRole="tblRoaster" />
+          <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserRoaster" ToRole="tblUserMaster" />
         </EntityType>
         <EntityType Name="tblUserTeam">
           <Key>
@@ -401,6 +456,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
+          <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="1" />
+          <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblUserRoaster">
+              <PropertyRef Name="ROASTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUserTeam_USERID_tblUserTeam_ID">
           <End Role="tblTeams" Type="Self.tblTeam" Multiplicity="1" />
           <End Role="tblUserTeam" Type="Self.tblUserTeam" Multiplicity="*" />
@@ -425,6 +492,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblUserRoaster_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblUserRoaster">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUserTeam_USERID_tblUserMaster_ID">
           <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
           <End Role="tblUserTeam" Type="Self.tblUserTeam" Multiplicity="*" />
@@ -444,6 +523,7 @@
           <EntitySet Name="tblTeams" EntityType="Self.tblTeam" />
           <EntitySet Name="tblUserLogs" EntityType="Self.tblUserLog" />
           <EntitySet Name="tblUserMasters" EntityType="Self.tblUserMaster" />
+          <EntitySet Name="tblUserRoasters" EntityType="Self.tblUserRoaster" />
           <EntitySet Name="tblUserTeams" EntityType="Self.tblUserTeam" />
           <AssociationSet Name="FK_tblCustomers_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
@@ -461,6 +541,10 @@
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblUserMaster" EntitySet="tblUserMasters" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID" Association="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
+            <End Role="tblRoaster" EntitySet="tblRoasters" />
+            <End Role="tblUserRoaster" EntitySet="tblUserRoasters" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblUserTeam_USERID_tblUserTeam_ID" Association="Self.FK_tblUserTeam_USERID_tblUserTeam_ID">
             <End Role="tblTeams" EntitySet="tblTeams" />
             <End Role="tblUserTeam" EntitySet="tblUserTeams" />
@@ -468,6 +552,10 @@
           <AssociationSet Name="FK_tblUserLog_USERID_tblUserMaster_ID" Association="Self.FK_tblUserLog_USERID_tblUserMaster_ID">
             <End Role="tblUserMaster" EntitySet="tblUserMasters" />
             <End Role="tblUserLog" EntitySet="tblUserLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserRoaster_USERID_tblUserMaster_ID" Association="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+            <End Role="tblUserRoaster" EntitySet="tblUserRoasters" />
           </AssociationSet>
           <AssociationSet Name="FK_tblUserTeam_USERID_tblUserMaster_ID" Association="Self.FK_tblUserTeam_USERID_tblUserMaster_ID">
             <End Role="tblUserMaster" EntitySet="tblUserMasters" />
@@ -578,6 +666,16 @@
                 <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
                 <ScalarProperty Name="EMERGENCYCONTACT" ColumnName="EMERGENCYCONTACT" />
                 <ScalarProperty Name="EMERGENCYCONTACTNO" ColumnName="EMERGENCYCONTACTNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserRoasters">
+            <EntityTypeMapping TypeName="QCONZModel.tblUserRoaster">
+              <MappingFragment StoreEntitySet="tblUserRoaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

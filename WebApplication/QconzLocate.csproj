@@ -200,6 +200,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\ElementsController.cs" />
+    <Compile Include="Controllers\EmergencyController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,11 +223,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApiCredentialsViewModel.cs" />
     <Compile Include="Models\ApiLoginViewModel.cs" />
+    <Compile Include="Models\ApiResponseViewModel.cs" />
     <Compile Include="Models\ApiUserLocationViewModel.cs" />
     <Compile Include="Models\CompanyListViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ResponseViewModel.cs" />
@@ -472,6 +476,7 @@
     <Content Include="Scripts\Forms\Editors-menu.js" />
     <Content Include="Scripts\Forms\Editors.js" />
     <Content Include="Scripts\Forms\General-menu.js" />
+    <Content Include="Scripts\History\History-menu.js" />
     <Content Include="Scripts\Home\DashboardV1-menu.js" />
     <Content Include="Scripts\Home\DashboardV1.js" />
     <Content Include="Scripts\Home\DashboardV2-menu.js" />
@@ -582,8 +587,10 @@
     <Content Include="Views\Home\Locator.cshtml" />
     <Content Include="Views\Roster\Roster.cshtml" />
     <Content Include="Views\Roster\RosterDetails.cshtml" />
+    <Content Include="Views\Home\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AdminLTE\images\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

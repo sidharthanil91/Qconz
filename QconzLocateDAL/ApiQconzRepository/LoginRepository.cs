@@ -30,9 +30,9 @@ namespace QconzLocateDAL.ApiQconzRepository
 
         public int ValidateUser(LoginModel Login)
         {
-            if(entity.tblUserMasters.Where(t=>t.USERNAME.ToLower()==Login.UserName.ToLower() && t.PASSWORD==Login.Password).Count()>0)
+            if(entity.tblUserMasters.Where(t=>t.EMAIL.ToLower()==Login.UserName.ToLower() && t.PASSWORD==Login.Password).Count()>0)
             {
-                return entity.tblUserMasters.Where(t=>t.USERNAME==Login.UserName).Select(x=>x.ID).FirstOrDefault();
+                return entity.tblUserMasters.Where(t=>t.EMAIL==Login.UserName).Select(x=>x.ID).FirstOrDefault();
             }
             return 0;
         }

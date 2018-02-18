@@ -20,75 +20,88 @@ namespace QconzLocateService.ApiQconzLocateService
 
         public ClientTokenServiceModel ValidateUser(LoginServiceModel Login)
         {
-            var LoginDetails = new LoginModel()
+            try
             {
-                UserName = Login.UserName,
-                Password = Login.Password
-            };
-            var Status = _ILoginRepository.ValidateUser(LoginDetails);
-            ClientTokenServiceModel ClientToken = new ClientTokenServiceModel();
-            if(Status>0)
-            {
-                var UserData = new TokenServiceModel()
+                var LoginDetails = new LoginModel()
                 {
-                    UserId = Status,
-                    CompanyId = 1
+                    UserName = Login.UserName,
+                    Password = Login.Password
                 };
-                var token = GenerateToken(UserData);
-                _ILoginRepository.SaveToken(token, Status);
-                ClientToken.Token = token;
-                ClientToken.Message = "Success";
-                ClientToken.Status = "1";
-                return ClientToken;
+                var Status = _ILoginRepository.ValidateUser(LoginDetails);
+                ClientTokenServiceModel ClientToken = new ClientTokenServiceModel();
+                if (Status > 0)
+                {
+                    var UserData = new TokenServiceModel()
+                    {
+                        UserId = Status,
+                        CompanyId = 1
+                    };
+                    var token = GenerateToken(UserData);
+                    _ILoginRepository.SaveToken(token, Status);
+                    ClientToken.Token = token;
+                    ClientToken.Message = "Success";
+                    ClientToken.Status = "1";
+                    return ClientToken;
+                }
+                else
+                {
+                    ClientToken.Token = null;
+                    ClientToken.Message = "Failed";
+                    ClientToken.Status = "0";
+                    return ClientToken;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                ClientToken.Token = null;
-                ClientToken.Message = "Failed";
-                ClientToken.Status = "0";
-                return ClientToken;
+                return null;
             }
            
         }
 
         public String GenerateToken(TokenServiceModel UserData)
         {
-            byte[] data;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
+            try
             {
-                bf.Serialize(ms, UserData);
-                data= ms.ToArray();
+                byte[] data;
+                BinaryFormatter bf = new BinaryFormatter();
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bf.Serialize(ms, UserData);
+                    data = ms.ToArray();
+                }
+                var encryptedData = MachineKey.Protect(data, "TokenDataUrl");
+                var token = Convert.ToBase64String(encryptedData);
+                return token;
             }
-            var encryptedData = MachineKey.Protect(data, "TokenDataUrl");
-            var token = Convert.ToBase64String(encryptedData);
-            return token;
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public TokenServiceModel ValidateToken(string token)
         {
-            //byte[] encryptedData = Convert.FromBase64String(token);
-
-            //int mm = token.Replace(" ", "").Length % 4;
-            //if (mm > 0)
-            //{
-            //    //Trailing padding
-            //    token += new string('=', 4 - mm);
-            //}
-            byte[] encryptedData = Convert.FromBase64String(token);
-            var data = MachineKey.Unprotect(encryptedData, "TokenDataUrl");
-            TokenServiceModel content;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream(data))
+            try
             {
-                object obj = bf.Deserialize(ms);
-                content = (TokenServiceModel)obj;
+                byte[] encryptedData = Convert.FromBase64String(token);
+                var data = MachineKey.Unprotect(encryptedData, "TokenDataUrl");
+                TokenServiceModel content;
+                BinaryFormatter bf = new BinaryFormatter();
+                using (var ms = new MemoryStream(data))
+                {
+                    object obj = bf.Deserialize(ms);
+                    content = (TokenServiceModel)obj;
+                }
+                if (_ILoginRepository.ValidateToken(token, content.UserId))
+                {
+                    return content;
+                }
+                return null;
             }
-           if(_ILoginRepository.ValidateToken(token, content.UserId))
+            catch(Exception ex)
             {
-                return content;
+                return null;
             }
-            return null;
         }
     }
 }

@@ -27,16 +27,14 @@ namespace QconzLocate.Controllers
         }
 
         // POST api/<controller>
-        public ApiLoginViewModel Post(string username, string password)
+        public ApiLoginViewModel Post([FromBody]ApiCredentialsViewModel login)
         {
-
-            
             LoginServiceModel LoginDetails = new LoginServiceModel()
             {
-                UserName=username,
-                Password=password
+                UserName = login.username,
+                Password = login.password
             };
-            var y=_ILoginService.ValidateUser(LoginDetails);
+            var y = _ILoginService.ValidateUser(LoginDetails);
             ApiLoginViewModel Login = new ApiLoginViewModel()
             {
                 token = y.Token,

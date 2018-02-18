@@ -213,9 +213,9 @@
                             </ul>
                         </li>*@
                         @Html.Partial("_LoginPartial")
-                        <li>
+                        @*<li>
                             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </nav>
@@ -257,8 +257,8 @@
                             <i class="fa fa-location-arrow"></i> <span>Locator</span>
                         </a>
                     </li>
-                    <li id="left-sidebar-menu-admin-company">
-                        <a href="#">
+                    <li id="left-sidebar-menu-admin-history">
+                        <a href="@Url.Action("History", "Home")">
                             <i class="fa fa-history"></i> <span>History</span>
                         </a>
                     </li>
@@ -268,6 +268,8 @@
                         </a>
                     </li>
 
+@if (User.IsInRole("ADMIN")|| User.IsInRole("SUPER"))
+{
                     <li class="header">ADMIN MENU</li>
                     <li id="left-sidebar-menu-admin-user" >
                         <a href="@Url.Action("UserReport", "User")">
@@ -294,6 +296,7 @@
                             <i class="fa fa-shopping-cart"></i> <span>Customers</span>
                         </a>
                     </li>
+}
                 </ul>
             </section>
         </aside>

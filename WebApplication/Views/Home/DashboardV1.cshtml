@@ -5,30 +5,34 @@
 @section Menu {
     @Scripts.Render("~/Scripts/Bundle/Home/DashboardV1/menu")
 }
-
-@Styles.Render("~/AdminLTE/plugins/morris/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@*@Styles.Render("~/AdminLTE/plugins/morris/css")
 @Styles.Render("~/AdminLTE/plugins/jvectormap/css")
 @Styles.Render("~/AdminLTE/plugins/datepicker/css")
 @Styles.Render("~/AdminLTE/plugins/daterangepicker/css")
-@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")*@
 
 <div class="box-body">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <div class="form-group">
-                    <label>Show name</label>
-                    <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>
+                    <label for="exampleInputEmail1">Show name</label>
+                    @*<div class="input-group input-group-sm">*@
+                        <select id="User" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*</div>*@
                 </div>
             </div>
-          
         </div>
-        <div class="col-md-6">
-          
+        <div class="col-md-4">
             <div class="form-group">
                 <div class="form-group">
-                    <label>Show Group</label>
-                    <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>
+                    <label for="exampleInputEmail1">Show group</label>
+                    @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
+
+                    @*<div class="input-group input-group-sm">*@
+                        <select id="Group" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*</div>*@
                 </div>
             </div>
         </div>
@@ -41,46 +45,135 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-ui/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
-<script>
-function myMap() {
-var mapProp= {
-    center: new google.maps.LatLng(-37.785796,175.276155),
-    zoom:10,
-};
-var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-var bounds = new google.maps.LatLngBounds();
-var mapOptions = {
-    mapTypeId: 'roadmap'
-};
-var markers = [
-  ['London Eye, London', -37.785796, 175.276155],
-  ['Palace of Westminster, London', -38.785796, 176.276155]
-];
-for (i = 0; i < markers.length; i++) {
-    var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-    bounds.extend(position);
-    marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: markers[i][0]
+    <script>
+//function myMap() {
+//var mapProp= {
+//    center: new google.maps.LatLng(-37.785796,175.276155),
+//    zoom:10,
+//};
+//var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+//var bounds = new google.maps.LatLngBounds();
+//var mapOptions = {
+//    center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+//    zoom: 8,
+//    mapTypeId: google.maps.MapTypeId.ROADMAP
+//};
+//var infoWindow = new google.maps.InfoWindow();
+//var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+//var markers = [
+//  ['London Eye, London', -37.785796, 175.276155],
+//  ['Palace of Westminster, London', -38.785796, 176.276155]
+//];
+//for (i = 0; i < markers.length; i++) {
+//    var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+//    bounds.extend(position);
+//    marker = new google.maps.Marker({
+//        position: position,
+//        map: map,
+//        title: markers[i][0]
+//    });
+//}
+
+        //    }
+        $('.select2').select2();
+        var allmarkers=[];
+        var jsontext = '@Html.Raw(Json.Encode(Model.GroupLists))';
+        var data = JSON.parse(jsontext);
+        $('#Group').select2({
+            data: data
+        })
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
+        var data1 = JSON.parse(jsontext1);
+        $('#User').select2({
+            data: data1
+        })
+      
+
+    $(document).ready(function(){
+        var markers = @Html.Raw(ViewBag.UserMarkers);
+        InitializeMap(markers);
+
+
+
+        function InitializeMap (markers) {
+            for (var i = 0; i < allmarkers.length; i++) {
+                allmarkers[i].setMap(null);
+            }
+            allmarkers = [];
+            if(markers.length==0)
+            {
+                markers=[{'Lat':'-41.2865','Lng':'174.7762'}]
+                var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById('googleMap'),
+                   mapOptions);
+                return;
+            }
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.Lat, data.Lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.Address
+                });
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        infoWindow.setContent(data.description);
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+                allmarkers.push(marker);
+            }
+        }
+
+        $('#Group').change(function(){
+            filter();
+        });
+        $('#User').change(function(){
+            filter();
+        });
+
+        function filter(){
+            var Group = $('#Group').val();
+            var User = $('#User').val();
+            var url='@Url.Action("Filter", "Home")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:JSON.stringify({UserId:User,GroupId:Group}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    debugger;
+                    InitializeMap(data);
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        }
     });
-}
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
 
 }
-</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
-    @*@Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
-    @Scripts.Render("~/AdminLTE/plugins/sparkline/js")
-    @Scripts.Render("~/AdminLTE/plugins/jvectormap/js")
-    @Scripts.Render("~/AdminLTE/plugins/daterangepicker/js")
-    @Scripts.Render("~/AdminLTE/plugins/knob/js")
-    @Scripts.Render("~/AdminLTE/plugins/raphael/js")
-    @Scripts.Render("~/AdminLTE/plugins/morris/js")
-    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
-    @Scripts.Render("~/Scripts/Home/DashboardV1")*@
-}
+
+

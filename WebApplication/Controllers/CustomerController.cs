@@ -19,7 +19,7 @@ namespace QconzLocate.Controllers
     {
         private ICustomerService _ICustomerService = new CustomerService();
         private CommonService _commonService = new CommonService();
-        // GET: Customer
+        // GET: Customer list
         public ActionResult CustomerReport()
         {
             int CompanyId = (int)(Session["CompanyId"]);
@@ -46,6 +46,7 @@ namespace QconzLocate.Controllers
             return View("Customer", customers);
         }
 
+        //Get individual customer
         public ActionResult CustomerDetails(int id)
         {
             int CompanyId = (int)(Session["CompanyId"]);
@@ -136,12 +137,14 @@ namespace QconzLocate.Controllers
             return Json(success, JsonRequestBehavior.AllowGet);
         }
 
+        //Download excel template
         public FileResult DownloadExcel()
         {
             string path = "~/Doc/Customer.xlsx";
             return File(path, "application/vnd.ms-excel", "Customer.xlsx");
         }
 
+        //Process the uploaded excel file
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upload)
         {

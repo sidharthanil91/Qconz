@@ -61,6 +61,7 @@ namespace QconzLocateDAL.QConzRepository
 
         public void SaveRosterDetails(RosterModel RosterModel)
         {
+            List<int> UserIds = RosterModel.UserId.Split(',').Select(int.Parse).ToList();
             if (RosterModel.Id == 0)
             {
                 var roster = new tblRoaster()
@@ -73,6 +74,16 @@ namespace QconzLocateDAL.QConzRepository
                     USERID=RosterModel.UserId
                 };
                 entity.tblRoasters.Add(roster);
+                foreach(var item in UserIds)
+                {
+                    var userroster = new tblUserRoaster()
+                    {   
+                        ARCHIVE="A",
+                        ROASTERID = roster.ID,
+                        USERID = item
+                    };
+                    entity.tblUserRoasters.Add(userroster);
+                }
             }
             else
             {
@@ -82,6 +93,24 @@ namespace QconzLocateDAL.QConzRepository
                 y.STARTDATE = RosterModel.StartDate;
                 y.FINISHTIME = RosterModel.FinishTime;
                 y.USERID = RosterModel.UserId;
+                var ExistingUserRoaster = entity.tblUserRoasters.Where(t => t.ROASTERID == y.ID).Select(t1 => t1.USERID).ToList();
+                var NewUserRoaster = UserIds.Except(ExistingUserRoaster);
+                foreach (var item in NewUserRoaster)
+                {
+                    var userroster = new tblUserRoaster()
+                    {
+                        ARCHIVE = "A",
+                        ROASTERID = y.ID,
+                        USERID = item
+                    };
+                    entity.tblUserRoasters.Add(userroster);
+                }
+                var DeleteUserRoaster = ExistingUserRoaster.Except(UserIds);
+                foreach (var item in DeleteUserRoaster)
+                {
+                    var deleteItem = entity.tblUserRoasters.FirstOrDefault(t => t.USERID == item && t.ROASTERID == y.ID);
+                    entity.tblUserRoasters.Remove(deleteItem);
+                }
             }
             entity.SaveChanges();
         }

@@ -1,6 +1,8 @@
 ﻿using QconzLocate.Models;
 using QconzLocateService.ApiQconzLocateInterface;
 using QconzLocateService.ApiQconzLocateService;
+using QconzLocateService.QconzLocateInterface;
+using QconzLocateService.QconzLocateService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace QconzLocate.Controllers
     public class UserWorkController : ApiController
     {
         private ILoginService _IloginService =new LoginService();
+        private IUserWorkService _IUserWorkService = new UserWorkService();
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
@@ -26,14 +29,30 @@ namespace QconzLocate.Controllers
         }
 
         // POST api/<controller>
-        public UserWorkViewModel Post(string token)
+        public UserWorkViewModel Post([FromBody] ApiLoginViewModel tokendata)
         {
-           if( _IloginService.ValidateToken(token.Replace(' ', '+')) !=null)
+            var y = _IloginService.ValidateToken(tokendata.token.Replace(' ', '+'));
+            if(  y!=null)
             {
-
-                return new UserWorkViewModel();
+                var RosterDetails = _IUserWorkService.GetUserWorkRoster(y.UserId,tokendata.date);
+                var strDate = RosterDetails.StartTime.ToString();
+                DateTime dt;
+                DateTime.TryParse(strDate, out dt);
+                var endDate = RosterDetails.FinishTime.ToString();
+                DateTime dt1;
+                DateTime.TryParse(endDate, out dt1);
+                RosterIndividual rosters;
+                if (RosterDetails.Status == "1")
+                {
+                    rosters = new RosterIndividual()
+                    {
+                        startDateTime = dt.ToString("HH:mm:ss"),
+                        endDateTime = dt1.ToString("HH:mm:ss"),
+                    };
+                    return new UserWorkViewModel() { message = "Success", status = "1", roster = rosters };
+                }
             }
-            return null;
+            return new UserWorkViewModel() { message = "Failed", status = "0", roster = null };
         }
 
         // PUT api/<controller>/5

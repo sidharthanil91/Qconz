@@ -42,7 +42,10 @@ namespace QconzLocate
             RegisterTeam(bundles);
 
             RegisterRoster(bundles);
+
             RegisterLocator(bundles);
+
+            RegisterHistory(bundles);
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -183,6 +186,14 @@ namespace QconzLocate
 
             bundles.Add(new ScriptBundle("~/Scripts/Bundle/Locator/Locator/menu").Include(
                 "~/Scripts/Locator/Locator-menu.js"));
+
+        }
+
+        private static void RegisterHistory(BundleCollection bundles)
+        {
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/History/History/menu").Include(
+                "~/Scripts/History/History-menu.js"));
 
         }
 

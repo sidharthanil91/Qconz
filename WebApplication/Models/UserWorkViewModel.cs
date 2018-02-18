@@ -7,7 +7,7 @@ namespace QconzLocate.Models
 {
     public class UserWorkViewModel
     {
-        public List<RosterListViewModel> roster { get; set; }
+        public RosterIndividual roster { get; set; }
         public string status { get; set; }
         public string message { get; set; }
     }

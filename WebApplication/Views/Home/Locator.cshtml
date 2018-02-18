@@ -8,15 +8,13 @@
     @Scripts.Render("~/Scripts/Bundle/Locator/Locator/menu")
 
 }
-@*<script src="~/Scripts/typeahead.bundle.js"></script>
-<script src="~/Scripts/typeahead.jquery.js"></script>
-<script src="~/Scripts/bloodhound.js"></script>*@
-@*<link rel="stylesheet" type="text/css" href="~/Content/typeahead.css">*@
-@Styles.Render("~/AdminLTE/Bundle/plugins/morris/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+
+@*@Styles.Render("~/AdminLTE/Bundle/plugins/morris/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/jvectormap/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/datepicker/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
-@Styles.Render("~/AdminLTE/Bundle/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/bootstrap-wysihtml5/css")*@
 
 <div class="box-body">
     <div class="row">
@@ -37,59 +35,72 @@
 
         </div>
         <div class="col-md-4">
-
             <div class="form-group">
                 <div class="form-group">
-                    @*<label>Company</label>
-                    <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>*@
-                  
+                    <label for="exampleInputEmail1">Show name</label>
+                    @*<div class="input-group input-group-sm">*@
+                    <select id="User" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*</div>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Show group</label>
+                    @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
+
+                    @*<div class="input-group input-group-sm">*@
+                    <select id="Group" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*</div>*@
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="googleMap" style="width:100%;height:400px;"></div>
+<div id="googleMap" style="width:100%;height:500px;"></div>
 
 
 
 
 @section Scripts {
     @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-ui/js")
+@Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     <script>
+
+        $('.select2').select2();
         var allmarkers=[];
+        var jsontext = '@Html.Raw(Json.Encode(Model.GroupLists))';
+        var data = JSON.parse(jsontext);
+        $('#Group').select2({
+            data: data
+        })
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
+        var data1 = JSON.parse(jsontext1);
+        $('#User').select2({
+            data: data1
+        })
+
+        var allmarkers=[];
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+            C: {
+                icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+            },
+            U: {
+                icon: iconBase + 'library_maps.png'
+            }
+        };
         $(document).ready(function(){
-      //      var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
 
-
-
-      //      // Initializing the typeahead
-      //      var cars = new Bloodhound({
-      //          datumTokenizer: Bloodhound.tokenizers.whitespace,
-      //          queryTokenizer: Bloodhound.tokenizers.whitespace,
-      //          local: cars
-      //      });
-
-      //      // Initializing the typeahead
-      //      $('.typeahead').typeahead({
-      //          hint: true,
-      //          highlight: true, /* Enable substring highlighting */
-      //          minLength: 1 /* Specify minimum characters required for showing suggestions */
-      //      },
-      //      {
-      //          name: 'cars',
-      //          source: cars
-      //      });
-      //});
-
-         
             var markers = @Html.Raw(ViewBag.Markers);
             InitializeMap(markers);
 
-           
+          
 
             function InitializeMap (markers) {
                 for (var i = 0; i < allmarkers.length; i++) {
@@ -108,12 +119,13 @@
                 var myLatlng = new google.maps.LatLng(data.Lat, data.Lng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
+                    icon: icons[data.Type].icon,
                     map: map,
                     title: data.Address
                 });
                 (function (marker, data) {
                     google.maps.event.addListener(marker, "click", function (e) {
-                        infoWindow.setContent(data.description);
+                        infoWindow.setContent(data.Address);
                         infoWindow.open(map, marker);
                     });
                 })(marker, data);
@@ -121,47 +133,37 @@
             }
         }
 
+            $('#Group').change(function(){
+                filter();
+            });
+            $('#User').change(function(){
+                filter();
+            });
         $('#savebtn').click(function(){
            
-            //var data={
-            
-            //for (i = 0; i < markers.length; i++) {
-            //    markers[i].setMap(null);
-            //}
+            filter();
+          
+        });
+        function filter(){
+            var Group = $('#Group').val();
+            var User = $('#User').val();
             var Customer = $('#CustomerCode').val();
-            //}
             var url='@Url.Action("Search", "Home")';
             $.ajax({
                 type:"POST",
                 url:url,
-                data:JSON.stringify({Customer:Customer}) ,
+                data:JSON.stringify({Customer:Customer,UserId:User,GroupId:Group}) ,
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     debugger;
                     InitializeMap(data);
-                    //markers.push(data);
-                    //for (i = 0; i < markers.length; i++) {
-                    //    var data = markers[i]
-                    //    var myLatlng = new google.maps.LatLng(data.lat, data.lng);
-                    //    var marker = new google.maps.Marker({
-                    //        position: myLatlng,
-                    //        map: map,
-                    //        title: data.title
-                    //    });
-                    //    (function (marker, data) {
-                    //        google.maps.event.addListener(marker, "click", function (e) {
-                    //            infoWindow.setContent(data.description);
-                    //            infoWindow.open(map, marker);
-                    //        });
-                    //    })(marker, data);
-                    //}
                 },
                 error: function () {
                     alert("Error while inserting data");
                 }
             })
-        });
+        }
         });
       
     </script>
@@ -172,62 +174,3 @@
  
 }
 
-<style type="text/css">
-    .bs-example {
-        font-family: sans-serif;
-        position: relative;
-        margin: 100px;
-    }
-
-    .typeahead, .tt-query, .tt-hint {
-        border: 2px solid #CCCCCC;
-        border-radius: 8px;
-        font-size: 22px; /* Set input font size */
-        height: 30px;
-        line-height: 30px;
-        outline: medium none;
-        padding: 8px 12px;
-        width: 396px;
-    }
-
-    .typeahead {
-        background-color: #FFFFFF;
-    }
-
-        .typeahead:focus {
-            border: 2px solid #0097CF;
-        }
-
-    .tt-query {
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    }
-
-    .tt-hint {
-        color: #999999;
-    }
-
-    .tt-menu {
-        background-color: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        margin-top: 12px;
-        padding: 8px 0;
-        width: 422px;
-    }
-
-    .tt-suggestion {
-        font-size: 22px; /* Set suggestion dropdown font size */
-        padding: 3px 20px;
-    }
-
-        .tt-suggestion:hover {
-            cursor: pointer;
-            background-color: #0097CF;
-            color: #FFFFFF;
-        }
-
-        .tt-suggestion p {
-            margin: 0;
-        }
-</style>

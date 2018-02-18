@@ -25,6 +25,7 @@ namespace QconzLocateService.QconzLocateService
                     Id = c.Id,
                     Cellphone = c.Cellphone,
                     CompanyId = c.CompanyId,
+                    Company=c.Company,
                     EmergencyContact = c.EmergencyContact,
                     EmergencyContactNo=c.EmergencyContactNo,
                     Email = c.Email,

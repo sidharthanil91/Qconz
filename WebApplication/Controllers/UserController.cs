@@ -20,27 +20,43 @@ namespace QconzLocate.Controllers
 
         public UserController()
         {
-            
+
         }
-        // GET: User
+        // GET: All Users
         public ActionResult UserReport()
         {
             try
             {
                 var user = System.Web.HttpContext.Current.User;
                 int CompanyId = (int)(Session["CompanyId"]);
+                if (CompanyId == 0)
+                {
+                    var CompanyLists = _commonservice.GetCompanySelectList(0);
+                    var DefaultItem = new SelectListItems()
+                    {
+                        id = 0,
+                        text = "All"
+                    };
+                    UserList.CompanyList = CompanyLists.CompanyList.Select(t => new SelectListItems
+                    {
+                        id = t.Id,
+                        text = t.Text
+                    }).ToList();
+                    UserList.CompanyList.Insert(0, DefaultItem);
+                }
                 UserListViewModel users1 = new UserListViewModel();
                 Dictionary<int, string> UserRole
                            = new Dictionary<int, string>() {
-                         {2,"Admin User"},
-                         {3,"Dashboard User"},
-                         {4,"App User" } };
+                         {2,"Company Admin"},
+                         {3,"Dashboard and App"},
+                         {4,"App Only" } };
 
                 UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModelList
                 {
                     Id = c.Id,
                     Cellphone = c.Cellphone,
                     CompanyId = c.CompanyId,
+                    Company = c.Company,
                     EmergencyContact = c.EmergencyContact,
                     EmergencyContactNo = c.EmergencyContactNo,
                     Email = c.Email,
@@ -58,14 +74,15 @@ namespace QconzLocate.Controllers
                     WorkingDays = c.WorkingDays
                 }).ToList();
 
-                return View("User", UserList.UserListViewModel);
+                return View("User", UserList);
             }
             catch (Exception ex)
             {
                 return null;
             }
         }
-     
+
+        //Get Individual user
         public ActionResult UserDetails(int id)
         {
             try
@@ -89,7 +106,7 @@ namespace QconzLocate.Controllers
                         StartTime = c.StartTime == null ? DateTime.Now : c.StartTime,
                         SurName = c.SurName,
                         UserName = c.UserName,
-                        UserGroups=c.UserGroups,
+                        UserGroups = c.UserGroups,
                         UserStatus = c.UserStatus,
                         UserTeamId = c.UserTeamId,
                         UserToken = c.UserToken,
@@ -107,16 +124,16 @@ namespace QconzLocate.Controllers
                         EmergencyContact = null,
                         EmergencyContactNo = null,
                         Email = null,
-                        EndTime = DateTime.Now,
+                        EndTime = DateTime.ParseExact("2009-05-08 19:00:00,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
                         FirstName = null,
                         Password = null,
-                        StartTime = DateTime.Now,
+                        StartTime = DateTime.ParseExact("2009-05-08 07:00:00,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
                         SurName = null,
                         UserName = null,
                         UserStatus = null,
                         UserTeamId = 0,
                         UserType = 0,
-                        WorkingDays = null
+                        WorkingDays = "1,2,3,4,5,6,7"
                     };
                 }
                 UserList.UserDetails = UserDetails;
@@ -140,6 +157,7 @@ namespace QconzLocate.Controllers
             }
         }
 
+        //Save User details
         [HttpPost]
         public JsonResult SaveDetails(UserViewModelList user)
         {
@@ -160,31 +178,66 @@ namespace QconzLocate.Controllers
                     StartTime = user.StartTime,
                     SurName = user.SurName,
                     UserName = user.UserName,
-                    UserGroups=user.UserGroups,
+                    UserGroups = user.UserGroups,
                     UserStatus = user.UserStatus,
                     UserTeamId = user.UserTeamId,
                     UserToken = user.UserToken,
                     UserType = user.UserType,
                     WorkingDays = user.WorkingDays
                 };
-                var message=_IUserService.SaveUserDetails(UserModel);
-                bool Status=true;
-                if (message!=null )
+                var message = _IUserService.SaveUserDetails(UserModel);
+                bool Status = true;
+                if (message != null)
                 {
                     Status = false;
                 }
                 ResponseViewModel Messeage = new ResponseViewModel()
                 {
                     Success = Status,
-                    Message=message
+                    Message = message
                 };
-                
+
                 return Json(Messeage, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 return null;
             }
+        }
+
+        [HttpPost]
+        public JsonResult Filter(int CompanyId)
+        {
+
+            Dictionary<int, string> UserRole
+                           = new Dictionary<int, string>() {
+                         {2,"Company Admin"},
+                         {3,"Dashboard and App"},
+                         {4,"App Only" } };
+
+            UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModelList
+            {
+                Id = c.Id,
+                Cellphone = c.Cellphone,
+                CompanyId = c.CompanyId,
+                Company = c.Company,
+                EmergencyContact = c.EmergencyContact,
+                EmergencyContactNo = c.EmergencyContactNo,
+                Email = c.Email,
+                EndTime = c.EndTime,
+                FirstName = c.FirstName,
+                Password = c.Password,
+                StartTime = c.StartTime,
+                SurName = c.SurName,
+                UserName = c.UserName,
+                UserStatus = c.UserStatus,
+                UserTeamId = c.UserTeamId,
+                UserToken = c.UserToken,
+                UserType = c.UserType,
+                UserRole = UserRole[c.UserType],
+                WorkingDays = c.WorkingDays
+            }).ToList();
+            return Json(UserList.UserListViewModel, JsonRequestBehavior.AllowGet);
         }
     }
 }

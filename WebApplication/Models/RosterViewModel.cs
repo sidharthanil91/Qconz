@@ -22,4 +22,10 @@ namespace QconzLocate.Models
         public DateTime? StartTime { get; set; }
         public DateTime? FinishTime { get; set; }
     }
+
+    public class RosterIndividual
+    {
+        public string startDateTime { get; set; }
+        public string endDateTime { get; set; }
+    }
 }
