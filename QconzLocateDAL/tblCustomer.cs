@@ -30,6 +30,7 @@ namespace QconzLocateDAL
         public string LNG { get; set; }
         public Nullable<System.DateTime> ADDED_DATE { get; set; }
         public Nullable<int> COMPANYID { get; set; }
+        public string ARCHIVE { get; set; }
     
         public virtual tblOrganization tblOrganization { get; set; }
     }

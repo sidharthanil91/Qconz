@@ -27,6 +27,9 @@ namespace QconzLocateDAL
         public Nullable<System.DateTime> STARTTIME { get; set; }
         public Nullable<System.DateTime> FINISHTIME { get; set; }
         public Nullable<int> COMPANYID { get; set; }
+        public string ARCHIVE { get; set; }
+        public string OVERRIDE { get; set; }
+        public string OVERIDEDETAIL { get; set; }
     
         public virtual tblOrganization tblOrganization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

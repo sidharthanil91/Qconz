@@ -93,6 +93,13 @@
                                 <input type="text" class="form-control" id="Website" tabindex="8" name="Website" value="@Model.Website" placeholder="Enter website">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="Archive" name="Archive" class="form-control select2" value="@Model.Archive" style="width: 100%;">
+                                <option value="A">Active</option>
+                                <option value="N">Archived</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,7 +147,10 @@
 
     $(document).ready(function () {
         // 1. prepare the validation rules and messages.
-        
+        $('#Archive').select2({
+
+        })
+        $("#Archive").val("@Model.Archive").trigger("change");
         function readURL(input) {
 
             if (input.files && input.files[0]) {
@@ -203,19 +213,20 @@
             data.append("Title",$('#Title').val())
             data.append("Website",$('#Website').val())
             data.append("ZipCode",$('#ZipCode').val())
+            data.append("Archive",$('#Archive').val())
             var url='@Url.Action("SaveDetails", "Company")';
             $.ajax({
                 type:"POST",
                 url:url,
-                data: data ,  
+                data: data ,
                 processData: false,
-                contentType: false,  
-                success: function () {  
+                contentType: false,
+                success: function () {
                     window.location.href= '@Url.Action("CompanyReport", "Company")';
-                },  
-                error: function () {  
-                    alert("Error while inserting data");  
-                }  
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
             })
         });
     });
@@ -243,15 +254,15 @@
         $.ajax({
             type:"POST",
             url:url,
-            data: JSON.stringify(data) ,  
-            dataType: "json",  
-            contentType: "application/json; charset=utf-8",  
-            success: function () {  
+            data: JSON.stringify(data) ,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
                 window.location.href= '@Url.Action("CompanyReport", "Company")';
-            },  
-            error: function () {  
-                alert("Error while inserting data");  
-            }  
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
         })
     });*@
 

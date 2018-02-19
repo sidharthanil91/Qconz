@@ -12,11 +12,11 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<CompanyModel> GetAllCompany(int CompanyId)
+        public List<CompanyModel> GetAllCompany(int CompanyId, string Archive)
         {   try
             {
                 List<CompanyModel> CompanyList = new List<CompanyModel>();
-                var y = (from t in entity.tblOrganizations where t.ID==CompanyId || CompanyId==0 select t).ToList();
+                var y = (from t in entity.tblOrganizations where (t.ID==CompanyId || CompanyId==0)&&t.ARCHIVE==Archive select t).ToList();
                 CompanyList = y.Select(c => new CompanyModel
                 {
                     Id = c.ID,
@@ -57,7 +57,8 @@ namespace QconzLocateDAL.QConzRepository
                   Website=t.WEBSITE,
                   Lat=t.LAT,
                   Lng=t.LNG,
-                  ZipCode=t.ZIPCODE
+                  ZipCode=t.ZIPCODE,
+                  Archive=t.ARCHIVE
                 }).FirstOrDefault();
                 return y;
             }
@@ -83,7 +84,8 @@ namespace QconzLocateDAL.QConzRepository
                     PHONE_2 = CompanyModel.Phone2,
                     TITLE = CompanyModel.Title,
                     WEBSITE = CompanyModel.Website,
-                    ZIPCODE = CompanyModel.ZipCode
+                    ZIPCODE = CompanyModel.ZipCode,
+                    ARCHIVE=CompanyModel.Archive
                 };
                 entity.tblOrganizations.Add(company);
             }
@@ -101,6 +103,7 @@ namespace QconzLocateDAL.QConzRepository
                     y.TITLE = CompanyModel.Title;
                     y.WEBSITE = CompanyModel.Website;
                     y.ZIPCODE = CompanyModel.ZipCode;
+                    y.ARCHIVE = CompanyModel.Archive;
             }
             entity.SaveChanges();
         }

@@ -23,11 +23,13 @@ namespace QconzLocate.Controllers
         {
             int CompanyId = (int)(Session["CompanyId"]);
             RosterViewModel rosters = new RosterViewModel();
-            RosterList = _IRosterService.GetAllRoster(CompanyId).Select(c => new RosterListViewModel
+            RosterList = _IRosterService.GetAllRoster(CompanyId,"A").Select(c => new RosterListViewModel
             {
                 Id = c.Id,
                 EndDate = c.EndDate,
                 FinishTime = c.FinishTime,
+                Override=c.Override,
+                OverrideDetails=c.OverrideDetails,
                 StartDate = c.StartDate,
                 StartTime = c.StartTime,
                 UserId = c.UserId
@@ -46,11 +48,14 @@ namespace QconzLocate.Controllers
                 RosterDetails.Roster = new RosterListViewModel
                 {
                     Id = c.Id,
+                    Override=c.Override,
+                    OverrideDetails=c.OverrideDetails,
                     EndDate = c.EndDate==null?DateTime.Now:c.EndDate,
                     FinishTime = c.FinishTime==null?DateTime.Now:c.FinishTime,
                     StartDate = c.StartDate==null?DateTime.Now:c.StartDate,
                     StartTime = c.StartTime==null?DateTime.Now:c.StartTime,
-                    UserId = c.UserId
+                    UserId = c.UserId,
+                    Status=c.Status
                 };
                 
                
@@ -60,11 +65,14 @@ namespace QconzLocate.Controllers
                 RosterDetails.Roster = new RosterListViewModel
                 {
                     Id = 0,
+                    Override=null,
+                    OverrideDetails=null,
                     EndDate = DateTime.Now,
                     FinishTime = DateTime.Now,
                     StartDate = DateTime.Now,
                     StartTime = DateTime.Now,
-                    UserId = null
+                    UserId = null,
+                    Status="A"
                 };
                 
             }
@@ -86,15 +94,26 @@ namespace QconzLocate.Controllers
             {
                 Id = roster.Id,
                 CompanyId = CompanyId,
+                Override=roster.Override,
+                OverrideDetails=roster.OverrideDetails,
                 StartDate = roster.StartDate == null ? DateTime.Now : roster.StartDate,
                 EndDate = roster.EndDate == null ? DateTime.Now : roster.EndDate,
                 FinishTime =roster.FinishTime,
                 StartTime=roster.StartTime,
-                UserId =roster.UserId
+                UserId =roster.UserId,
+                Status=roster.Status
             };
             _IRosterService.SaveRosterDetails(RosterModel);
             bool success = true;
             return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetRosterReport(string Status)
+        {
+            int CompanyId = (int)(Session["CompanyId"]);
+            var RosterList = _IRosterService.GetAllRoster(CompanyId, Status);
+            return Json(RosterList, JsonRequestBehavior.AllowGet);
         }
     }
 }

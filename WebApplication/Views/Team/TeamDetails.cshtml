@@ -51,6 +51,17 @@
                     </div>
 
                 </div>
+                <div class="col-md-6">
+        
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="Status" name="Status" class="form-control select2" value="@Model.SingleTeam.TeamStatus" style="width: 100%;">
+                            <option value="A">Active</option>
+                            <option value="N">Archived</option>
+                        </select>
+                    </div>
+
+                </div>
             </div>
         </div>
         </form>
@@ -95,13 +106,18 @@
         $('#Teamdesc').html('@Model.SingleTeam.Teamdesc');
         var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
         var data = JSON.parse(jsontext);
+        var statusData = [{id:'1',text:'Active'}, {id:'0',text:'Archived'}];
         $('#Company').select2({
             data: data
         })
+        $('#Status').select2({
+           
+        })
         $("#Company").val("@Model.SingleTeam.CompanyId").trigger("change");
+        $("#Status").val("@Model.SingleTeam.TeamStatus").trigger("change");
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.
-        
+
             $("#form1").validate({
                 rules: {
                     TeamName: {
@@ -110,7 +126,7 @@
                     Company: {
                         required: true
                     },
-                    
+
                 },
                 messages: {
                     TeamName: "Team name is required",
@@ -122,26 +138,27 @@
                 {
                     return
                 }
-            var data={ Id : @Model.SingleTeam.Id,
-                TeamName : $('#TeamName').val(),
-                Teamdesc : $('#Teamdesc').val(),
-                CompanyId : $('#Company').val()
+                var data={ Id : @Model.SingleTeam.Id,
+                    TeamName : $('#TeamName').val(),
+                    Teamdesc : $('#Teamdesc').val(),
+                    CompanyId : $('#Company').val(),
+                    TeamStatus: $('#Status').val()
                 }
-            var url='@Url.Action("SaveDetails", "Team")';
-            $.ajax({
-                type:"POST",
-                url:url,
-                data: JSON.stringify(data) ,
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function () {
-                    window.location.href= '@Url.Action("TeamReport", "Team")';
-                },
-                error: function () {
-                    alert("Error while inserting data");
-                }
-            })
-        });
+                var url='@Url.Action("SaveDetails", "Team")';
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    data: JSON.stringify(data) ,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        window.location.href= '@Url.Action("TeamReport", "Team")';
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                })
+            });
         });
     </script>
 

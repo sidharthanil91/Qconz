@@ -28,7 +28,7 @@ namespace QconzLocate.Controllers
             {
                 int CompanyId = (int)(Session["CompanyId"]);
                 CompanyListViewModel companies = new CompanyListViewModel();
-                CompanyList = _ICompanyService.GetAllCompany(CompanyId).Select(c => new CompanyViewModel
+                CompanyList = _ICompanyService.GetAllCompany(CompanyId,"A").Select(c => new CompanyViewModel
                 {
                     Id = c.Id,
                     Address1 = c.Address1,
@@ -73,7 +73,8 @@ namespace QconzLocate.Controllers
                         Phone2 = y.Phone2,
                         Title = y.Title,
                         Website = y.Website,
-                        ZipCode = y.ZipCode
+                        ZipCode = y.ZipCode,
+                        Archive=y.Archive
                     };
                     return View("CompanyDetails", CompanyDetails);
                 }
@@ -92,7 +93,8 @@ namespace QconzLocate.Controllers
                         Phone2 = null,
                         Title = null,
                         Website = null,
-                        ZipCode = null
+                        ZipCode = null,
+                        Archive="A"
                     };
                     return View("CompanyDetails", CompanyDetails);
                 }
@@ -110,11 +112,13 @@ namespace QconzLocate.Controllers
             {
                 var pic = System.Web.HttpContext.Current.Request.Files["file"];
                 var pic2 = System.Web.HttpContext.Current.Request.Params["company"];
-                byte[] imgData;
-
-                using (var reader = new BinaryReader(pic.InputStream))
+                byte[] imgData = null;
+                if (pic != null)
                 {
-                    imgData = reader.ReadBytes(pic.ContentLength);
+                    using (var reader = new BinaryReader(pic.InputStream))
+                    {
+                        imgData = reader.ReadBytes(pic.ContentLength);
+                    }
                 }
                 CompanyServiceModel CompanyModel;
                 CompanyModel = new CompanyServiceModel()
@@ -131,7 +135,8 @@ namespace QconzLocate.Controllers
                     Image = imgData,
                     Title = data["Title"],
                     Website = data["Website"],
-                    ZipCode = data["ZipCode"]
+                    ZipCode = data["ZipCode"],
+                    Archive=data["Archive"]
                 };
                 _ICompanyService.SaveCompanyDetails(CompanyModel);
                 bool success = true;
@@ -141,6 +146,14 @@ namespace QconzLocate.Controllers
             {
                 return null;
             }
+        }
+
+        [HttpPost]
+        public JsonResult GetCompanyReport(string Status)
+        {
+            int CompanyId = (int)(Session["CompanyId"]);
+            var CompanyList = _ICompanyService.GetAllCompany(CompanyId, Status);
+            return Json(CompanyList, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface IRosterRepository
     {
-        List<RosterModel> GetAllRoster(int CompanyId);
+        List<RosterModel> GetAllRoster(int CompanyId,string Status);
         RosterModel GetRosterDetails(int Id);
         void SaveRosterDetails(RosterModel RosterModel);
     }

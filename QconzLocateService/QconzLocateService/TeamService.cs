@@ -15,11 +15,11 @@ namespace QconzLocateService.QconzLocateService
     {
         private ITeamRepository _ITeamRepository = new TeamRepository();
         //Get all companies
-        public List<TeamServiceModel> GetAllTeam(int CompanyId)
+        public List<TeamServiceModel> GetAllTeam(int CompanyId,string Status)
         {
             try
             {
-                var y = _ITeamRepository.GetAllTeam(CompanyId);
+                var y = _ITeamRepository.GetAllTeam(CompanyId, Status);
                 return y.Select(c => new TeamServiceModel
                 {
                     Id = c.Id,

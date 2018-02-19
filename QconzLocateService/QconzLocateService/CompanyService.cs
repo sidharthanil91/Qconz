@@ -15,11 +15,11 @@ namespace QconzLocateService.QconzLocateService
     {
         private ICompanyRepository _ICompanyRepository = new CompanyRepository();
         //Get all companies
-        public List<CompanyServiceModel> GetAllCompany(int CompanyId)
+        public List<CompanyServiceModel> GetAllCompany(int CompanyId,string Archive)
         {
             try
             {
-                var y = _ICompanyRepository.GetAllCompany(CompanyId);
+                var y = _ICompanyRepository.GetAllCompany(CompanyId, Archive);
                 return y.Select(c => new CompanyServiceModel
                 {
                     Id = c.Id,
@@ -62,7 +62,9 @@ namespace QconzLocateService.QconzLocateService
                     Phone2 = y.Phone2,
                     Title = y.Title,
                     Website = y.Website,
-                    ZipCode = y.ZipCode
+                    ZipCode = y.ZipCode,
+                    Archive=y.Archive
+                
                 };
             }
             catch
@@ -88,7 +90,8 @@ namespace QconzLocateService.QconzLocateService
                 Phone2 = CompanyDetails.Phone2,
                 Title = CompanyDetails.Title,
                 Website = CompanyDetails.Website,
-                ZipCode = CompanyDetails.ZipCode
+                ZipCode = CompanyDetails.ZipCode,
+                Archive=CompanyDetails.Archive
             };
             _ICompanyRepository.SaveCompanyDetails(company);
         }

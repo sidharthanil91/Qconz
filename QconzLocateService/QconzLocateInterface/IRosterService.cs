@@ -9,7 +9,7 @@ namespace QconzLocateService.QconzLocateInterface
 {
     public interface IRosterService
     {
-        List<RosterServiceModel> GetAllRoster(int CompanyId);
+        List<RosterServiceModel> GetAllRoster(int CompanyId, string Status);
         void SaveRosterDetails(RosterServiceModel RosterModel);
         RosterServiceModel GetRosterDetails(int Id);
     }

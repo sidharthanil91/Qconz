@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Roster Details";
+    ViewBag.Title = "Override Details";
 }
 
 @Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
@@ -13,8 +13,8 @@
 @Styles.Render("~/Styles/Bundle/Elements/Modals")
 <div class="box box-default">
     <div class="box-header with-border">
-        @*<h3 class="box-title">Select2</h3>
-            <div class="box-tools pull-right">
+        <h2 class="box-title">*Rosters will override the usual hours setting for people selected and track their phones during the dates and hours below.</h2>
+            @*<div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
             </div>*@
@@ -23,12 +23,21 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-6">
+                    <div class="form-group">
 
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Override</label>
+                           
+                                <input type="text" class="form-control" id="Override" tabindex="1" name="Override" value="@Model.Roster.Override" placeholder="Enter override ">
+                                
+                           
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Start Date</label>
                             <div class="input-group">
-                                <input type="text" id="StartDate" name="StartDate" tabindex="1" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
+                                <input type="text" id="StartDate" name="StartDate" tabindex="3" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -40,7 +49,7 @@
                             <div class="form-group">
                                 <label>Start time</label>
                                 <div class="input-group">
-                                    <input type="text" id="StartTime" name="StartTime" tabindex="3" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <input type="text" id="StartTime" name="StartTime" tabindex="5" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
                                     <div class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -51,17 +60,32 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Users</label>
-                            <select id="Users" name="Users" class="form-control select2" tabindex="5" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
+                            <select id="Users" name="Users" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="Status" name="Status" class="form-control select2" value="@Model.Roster.Status" style="width: 100%;">
+                            <option value="A">Active</option>
+                            <option value="N">Archived</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
-
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Override Details</label>
+                           
+                                <input type="text" class="form-control" id="OverrideDetails" tabindex="2" name="OverrideDetails" value="@Model.Roster.OverrideDetails" placeholder="Enter override details">
+                                
+                            
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">End Date</label>
                             <div class="input-group">
-                                <input type="text" id="EndDate" name="EndDate" tabindex="2" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
+                                <input type="text" id="EndDate" name="EndDate" tabindex="4" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -73,7 +97,7 @@
                             <div class="form-group">
                                 <label>End time</label>
                                 <div class="input-group">
-                                    <input type="text" id="FinishTime" name="FinishTime" tabindex="4" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <input type="text" id="FinishTime" name="FinishTime" tabindex="6" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
                                     <div class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -137,11 +161,15 @@
         $('#Users').select2({
             data: data
         })
+        $('#Status').select2({
+
+        })
         var array = '@Model.Roster.UserId'.split(',')
         $('#Users').select2().val(array).trigger("change")
+        $("#Status").val("@Model.Roster.Status").trigger("change");
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.
-        
+
             $("#form1").validate({
                 rules: {
                     StartDate: {
@@ -186,7 +214,10 @@
                 EndDate : EndDateVal,
                 StartTime: $('#StartTime').val(),
                 FinishTime : $('#FinishTime').val(),
-                UserId : UserIdVal
+                OverrideDetails:$('#OverrideDetails').val(),
+                Override:$('#Override').val(),
+                UserId : UserIdVal,
+                Status:$('#Status').val()
             }
             var url='@Url.Action("SaveDetails", "Roster")';
             $.ajax({

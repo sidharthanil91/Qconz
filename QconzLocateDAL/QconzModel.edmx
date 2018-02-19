@@ -25,6 +25,7 @@
           <Property Name="LNG" Type="varchar" MaxLength="20" />
           <Property Name="ADDED_DATE" Type="datetime" />
           <Property Name="COMPANYID" Type="int" />
+          <Property Name="ARCHIVE" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="tblOrganizations">
           <Key>
@@ -56,6 +57,9 @@
           <Property Name="STARTTIME" Type="datetime" />
           <Property Name="FINISHTIME" Type="datetime" />
           <Property Name="COMPANYID" Type="int" />
+          <Property Name="ARCHIVE" Type="varchar" MaxLength="1" />
+          <Property Name="OVERRIDE" Type="varchar" MaxLength="200" />
+          <Property Name="OVERIDEDETAIL" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tblTeams">
           <Key>
@@ -297,6 +301,7 @@
           <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
           <Property Name="COMPANYID" Type="Int32" />
+          <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblCustomers" ToRole="tblOrganizations" />
         </EntityType>
         <EntityType Name="tblOrganization">
@@ -333,6 +338,9 @@
           <Property Name="STARTTIME" Type="DateTime" Precision="3" />
           <Property Name="FINISHTIME" Type="DateTime" Precision="3" />
           <Property Name="COMPANYID" Type="Int32" />
+          <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="OVERRIDE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OVERIDEDETAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblRoaster" ToRole="tblOrganizations" />
           <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblUserRoaster" />
         </EntityType>
@@ -587,6 +595,7 @@
                 <ScalarProperty Name="LNG" ColumnName="LNG" />
                 <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
                 <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -620,6 +629,9 @@
                 <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
                 <ScalarProperty Name="FINISHTIME" ColumnName="FINISHTIME" />
                 <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="OVERRIDE" ColumnName="OVERRIDE" />
+                <ScalarProperty Name="OVERIDEDETAIL" ColumnName="OVERIDEDETAIL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,12 +12,12 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<RosterModel> GetAllRoster(int CompanyId)
+        public List<RosterModel> GetAllRoster(int CompanyId,string Status)
         {
             try
             {
                 List<RosterModel> RosterList = new List<RosterModel>();
-                var y = (from t in entity.tblRoasters where t.COMPANYID==CompanyId || CompanyId==0 select t).ToList();
+                var y = (from t in entity.tblRoasters where (t.COMPANYID==CompanyId || CompanyId==0)&&t.ARCHIVE==Status select t).ToList();
                 RosterList = y.Select(c => new RosterModel
                 {
                     Id = c.ID,
@@ -25,6 +25,9 @@ namespace QconzLocateDAL.QConzRepository
                     FinishTime=c.FINISHTIME,
                     StartDate=c.STARTDATE,
                     StartTime=c.STARTTIME,
+                    Override=c.OVERRIDE,
+                    OverrideDetails=c.OVERIDEDETAIL,
+                    Status=c.ARCHIVE,
                     UserId=c.USERID
                 }
                 ).ToList();
@@ -45,11 +48,14 @@ namespace QconzLocateDAL.QConzRepository
                          select new RosterModel
                          {
                              Id = c.ID,
+                             Override = c.OVERRIDE,
+                             OverrideDetails = c.OVERIDEDETAIL,
                              EndDate = c.ENDDATE,
                              FinishTime = c.FINISHTIME,
                              StartDate = c.STARTDATE,
                              StartTime = c.STARTTIME,
-                             UserId = c.USERID
+                             UserId = c.USERID,
+                             Status=c.ARCHIVE
                          }).FirstOrDefault();
                 return y;
             }
@@ -68,10 +74,13 @@ namespace QconzLocateDAL.QConzRepository
                 {
                     ENDDATE=RosterModel.EndDate,
                     COMPANYID=RosterModel.CompanyId,
+                    OVERIDEDETAIL=RosterModel.OverrideDetails,
+                    OVERRIDE=RosterModel.Override,
                     STARTTIME=RosterModel.StartTime,
                     STARTDATE=RosterModel.StartDate,
                     FINISHTIME=RosterModel.FinishTime,
-                    USERID=RosterModel.UserId
+                    USERID=RosterModel.UserId,
+                    ARCHIVE=RosterModel.Status
                 };
                 entity.tblRoasters.Add(roster);
                 foreach(var item in UserIds)
@@ -92,7 +101,10 @@ namespace QconzLocateDAL.QConzRepository
                 y.STARTTIME = RosterModel.StartTime;
                 y.STARTDATE = RosterModel.StartDate;
                 y.FINISHTIME = RosterModel.FinishTime;
+                y.OVERIDEDETAIL = RosterModel.OverrideDetails;
+                y.OVERRIDE = RosterModel.Override;
                 y.USERID = RosterModel.UserId;
+                y.ARCHIVE = RosterModel.Status;
                 var ExistingUserRoaster = entity.tblUserRoasters.Where(t => t.ROASTERID == y.ID).Select(t1 => t1.USERID).ToList();
                 var NewUserRoaster = UserIds.Except(ExistingUserRoaster);
                 foreach (var item in NewUserRoaster)

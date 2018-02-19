@@ -22,7 +22,7 @@ namespace QconzLocate.Controllers
         public ActionResult TeamReport()
         {
             int CompanyId = (int)(Session["CompanyId"]);
-            var TeamList = _ITeamService.GetAllTeam(CompanyId).Select(c => new TeamViewModelList
+            var TeamList = _ITeamService.GetAllTeam(CompanyId,"A").Select(c => new TeamViewModelList
             {
                 Id = c.Id,
                 CompanyId = c.CompanyId,
@@ -30,6 +30,7 @@ namespace QconzLocate.Controllers
                 Teamdesc = c.Teamdesc,
                 TeamName = c.TeamName,
                 TeamStatus = c.TeamStatus,
+                TeamStatusId=c.TeamStatus=="A"?"A":"N",
                 CompanyName=c.CompanyName
             }).ToList();
             return View("Team", TeamList);
@@ -51,7 +52,8 @@ namespace QconzLocate.Controllers
                     TeamCreatedDate = c.TeamCreatedDate,
                     Teamdesc = c.Teamdesc,
                     TeamName = c.TeamName,
-                    TeamStatus = c.TeamStatus
+                    TeamStatus = c.TeamStatus,
+                    //TeamStatusId = c.TeamStatus == "A" ? "1" : "0",
                 };
                
             }
@@ -64,9 +66,9 @@ namespace QconzLocate.Controllers
                     TeamCreatedDate = DateTime.Now,
                     Teamdesc = null,
                     TeamName = null,
-                    TeamStatus = null
+                    TeamStatus = "A",
+                    TeamStatusId = "1"
                 };
-              //  return View("TeamDetails", TeamDetails);
             }
             TeamViewModel.SingleTeam = TeamDetails;
             var y = _commonService.GetCompanySelectList(CompanyId);
@@ -95,6 +97,14 @@ namespace QconzLocate.Controllers
             _ITeamService.SaveTeamDetails(TeamModel);
             bool success = true;
             return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetTeamReport(string Status)
+        {
+            int CompanyId = (int)(Session["CompanyId"]);
+            var TeamList = _ITeamService.GetAllTeam(CompanyId, Status);
+            return Json(TeamList, JsonRequestBehavior.AllowGet);
         }
     }
 }

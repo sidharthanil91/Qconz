@@ -15,17 +15,19 @@ namespace QconzLocateService.QconzLocateService
     {
         private IRosterRepository _IRosterRepository = new RosterRepository();
         //Get all companies
-        public List<RosterServiceModel> GetAllRoster(int CompanyId)
+        public List<RosterServiceModel> GetAllRoster(int CompanyId,string Status)
         {
             try
             {
-                var y = _IRosterRepository.GetAllRoster(CompanyId);
+                var y = _IRosterRepository.GetAllRoster(CompanyId,Status);
                 return y.Select(c => new RosterServiceModel
                 {
                     Id = c.Id,
                     EndDate=c.EndDate,
                     FinishTime=c.FinishTime,
                     StartDate=c.StartDate,
+                    Override=c.Override,
+                    OverrideDetails=c.OverrideDetails,
                     StartTime=c.StartTime,
                     UserId=c.UserId
                 }).ToList();
@@ -46,11 +48,14 @@ namespace QconzLocateService.QconzLocateService
                 return new RosterServiceModel
                 {
                     Id = c.Id,
+                    Override = c.Override,
+                    OverrideDetails = c.OverrideDetails,
                     EndDate = c.EndDate,
                     FinishTime = c.FinishTime,
                     StartDate = c.StartDate,
                     StartTime = c.StartTime,
-                    UserId = c.UserId
+                    UserId = c.UserId,
+                    Status=c.Status
                 };
             }
             catch
@@ -66,11 +71,14 @@ namespace QconzLocateService.QconzLocateService
             {
                 Id = RosterDetails.Id,
                 EndDate = RosterDetails.EndDate,
+                Override=RosterDetails.Override,
+                OverrideDetails=RosterDetails.OverrideDetails,
                 CompanyId=RosterDetails.CompanyId,
                 FinishTime = RosterDetails.FinishTime,
                 StartDate = RosterDetails.StartDate,
                 StartTime = RosterDetails.StartTime,
-                UserId = RosterDetails.UserId
+                UserId = RosterDetails.UserId,
+                Status=RosterDetails.Status
             };
             _IRosterRepository.SaveRosterDetails(roster);
         }

@@ -12,13 +12,13 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<TeamModel> GetAllTeam(int CompanyId)
+        public List<TeamModel> GetAllTeam(int CompanyId,string Status)
         {
             try
             {
                 List<TeamModel> TeamList = new List<TeamModel>();
                 // var y = (from t in entity.tblTeams select t).ToList();
-                var y = entity.tblTeams.Select(t1=>t1).Where(t => t.COMPANYID == CompanyId || CompanyId == 0).ToList();
+                var y = entity.tblTeams.Select(t1=>t1).Where(t => (t.COMPANYID == CompanyId || CompanyId == 0)&& t.TEAMSTATUS==Status).ToList();
                 TeamList = y.Select(c => new TeamModel
                 {
                     Id = c.ID,
@@ -81,7 +81,7 @@ namespace QconzLocateDAL.QConzRepository
                 y.TEAMCREATED = DateTime.Now;
                 y.TEAMDESC = TeamModel.Teamdesc;
                 y.TEAMNAME = TeamModel.TeamName;
-                y.TEAMSTATUS = "A";
+                y.TEAMSTATUS = TeamModel.TeamStatus;
             }
             entity.SaveChanges();
         }

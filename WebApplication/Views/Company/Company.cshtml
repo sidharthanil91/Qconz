@@ -15,10 +15,14 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Company List</h3>
+                <h3 class="box-title">Active Company List</h3>
             </div>
             <div class="box-body">
+                @if (User.IsInRole("SUPER"))
+                {
+                <button id="btn" style="width:95px" onclick="clickevent()" type="button" class="btn btn-block btn-primary">Show Archive</button>
                 <button style="width:35px" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                }
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -71,7 +75,55 @@
         </div>
     </div>
 </div>
+<script>
+    var i = 'N'
+    function clickevent() {
+        if (i == 'N') {
+            $('#btn').text('Show Active');
+            $('h3.box-title').text('Archived Company List')
+            GetData(i);
+            i = 'A';
+        }
+        else {
+            $('#btn').text('Show Archive');
+            $('h3.box-title').text('Active Company List')
+            GetData(i);
+            i = 'N';
+        }
+    }
 
+    function GetData(status) {
+        var url = '@Url.Action("GetCompanyReport", "Company")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify({ Status: status }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (json) {
+                var table = $('#example1').dataTable();
+                table.fnClearTable(this);
+                table.fnDestroy();
+                var content = '';
+                for (var i = 0; i < json.length; i++) {
+                    content += '<tr>';
+                    content += '<td>' + json[i].Title + '</td>';
+                    content += '<td>' + json[i].ContactName + '</td>';
+                    content += '<td>' + json[i].Phone1 + '</td>';
+                    content += '<td>' + json[i].Email + '</td>';
+                    content += '<td >  <button type="button" onclick="window.location.href=\'/Company/CompanyDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                    content += '</tr>';
+                }
+
+                $('#example1 tbody').html(content);
+                $("#example1").DataTable();
+            },
+            error: function () {
+                // alert("Error while inserting data");
+            }
+        })
+    }
+</script>
 @section Scripts {
     @*@Scripts.Render("~/AdminLTE/Bundle/plugins/datatables/js")*@
     <script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>

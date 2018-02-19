@@ -9,7 +9,7 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface ICompanyRepository
     {
-         List<CompanyModel> GetAllCompany(int CompanyId);
+         List<CompanyModel> GetAllCompany(int CompanyId, string Archive);
          CompanyModel GetCompanyDetails(int Id);
          void SaveCompanyDetails(CompanyModel CompanyModel);
     }
