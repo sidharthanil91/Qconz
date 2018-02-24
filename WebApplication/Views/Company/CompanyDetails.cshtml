@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <div class="form-group">
 
-                            <img style="width: 125px;height:125px  ;border:solid; object-fit: contain" id="blah" src="#" alt="your image"  />
+                            <img style="width: 125px;height:125px  ;border:solid; object-fit: contain" id="blah" src="@Model.Image" alt="your image"  />
                         </div>
                         <label for="exampleInputEmail1">Company logo</label>
                         <input type='file' id="imgInp" />
@@ -219,6 +219,7 @@
                 data.append("Address2",$('#Address2').val())
                 data.append("ContactName",$('#ContactName').val())
                 data.append("Email",$('#Email').val())
+                data.append("Image",$('#blah').attr('src'))
                 data.append("City",$('#City').val())
                 data.append("Lat",$('#Lat').val())
                 data.append("Lng",$('#Lng').val())

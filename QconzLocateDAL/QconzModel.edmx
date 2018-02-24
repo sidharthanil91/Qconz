@@ -28,6 +28,16 @@
           <Property Name="ARCHIVE" Type="varchar" MaxLength="1" />
           <Property Name="CITY" Type="varchar" MaxLength="75" />
         </EntityType>
+        <EntityType Name="tblEmergency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERID" Type="int" Nullable="false" />
+          <Property Name="LAT" Type="varchar" MaxLength="20" />
+          <Property Name="LNG" Type="varchar" MaxLength="20" />
+          <Property Name="LOGTIME" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblOrganizations">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,6 +57,7 @@
           <Property Name="ADDED_DATE" Type="datetime" />
           <Property Name="ARCHIVE" Type="char" MaxLength="1" />
           <Property Name="CITY" Type="varchar" MaxLength="75" />
+          <Property Name="IMAGE" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblRoaster">
           <Key>
@@ -142,6 +153,18 @@
             </Principal>
             <Dependent Role="tblCustomers">
               <PropertyRef Name="COMPANYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmergency_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblEmergency" Type="Self.tblEmergency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblEmergency">
+              <PropertyRef Name="USERID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -267,6 +290,7 @@
         </Association>
         <EntityContainer Name="QCONZModelStoreContainer">
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmergency" EntityType="Self.tblEmergency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrganizations" EntityType="Self.tblOrganizations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoaster" EntityType="Self.tblRoaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTeamRoaster" EntityType="Self.tblTeamRoaster" Schema="dbo" store:Type="Tables" />
@@ -278,6 +302,10 @@
           <AssociationSet Name="FK_tblCustomers_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblCustomers" EntitySet="tblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="Self.FK_tblEmergency_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMaster" />
+            <End Role="tblEmergency" EntitySet="tblEmergency" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
@@ -371,6 +399,7 @@
           <NavigationProperty Name="tblTeams" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblTeams" />
           <NavigationProperty Name="tblUserMasters" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblUserMaster" />
           <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IMAGE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblRoaster">
           <Key>
@@ -440,6 +469,7 @@
           <NavigationProperty Name="tblUserLogs" Relationship="Self.FK_tblUserLog_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserLog" />
           <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserRoaster" />
           <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserTeam" />
+          <NavigationProperty Name="tblEmergencies" Relationship="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblEmergency" />
         </EntityType>
         <EntityType Name="tblUserRoaster">
           <Key>
@@ -625,6 +655,11 @@
             <End Role="tblTeam" EntitySet="tblTeams" />
             <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
           </AssociationSet>
+          <EntitySet Name="tblEmergencies" EntityType="QCONZModel.tblEmergency" />
+          <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+            <End Role="tblEmergency" EntitySet="tblEmergencies" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tblTeamRoaster">
           <Key>
@@ -661,6 +696,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblEmergency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" Nullable="false" />
+          <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblUserMaster" Relationship="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblEmergency" ToRole="tblUserMaster" />
+        </EntityType>
+        <Association Name="FK_tblEmergency_USERID_tblUserMaster_ID">
+          <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="1" />
+          <End Type="QCONZModel.tblEmergency" Role="tblEmergency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblEmergency">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -694,6 +752,7 @@
           <EntitySetMapping Name="tblOrganizations">
             <EntityTypeMapping TypeName="QCONZModel.tblOrganization">
               <MappingFragment StoreEntitySet="tblOrganizations">
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
                 <ScalarProperty Name="CITY" ColumnName="CITY" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
@@ -800,6 +859,17 @@
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
                 <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
                 <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmergencies">
+            <EntityTypeMapping TypeName="QCONZModel.tblEmergency">
+              <MappingFragment StoreEntitySet="tblEmergency">
+                <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
+                <ScalarProperty Name="LNG" ColumnName="LNG" />
+                <ScalarProperty Name="LAT" ColumnName="LAT" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

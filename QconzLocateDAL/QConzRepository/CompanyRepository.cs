@@ -23,6 +23,7 @@ namespace QconzLocateDAL.QConzRepository
                     Id = c.ID,
                     Address1 = c.ADDRESS1,
                     Address2 = c.ADDRESS2,
+                    Image=c.IMAGE,
                     ContactName = c.CONTACTNAME,
                     City = c.CITY,
                     Email = c.EMAIL,
@@ -54,6 +55,7 @@ namespace QconzLocateDAL.QConzRepository
                              Id = t.ID,
                              Address1 = t.ADDRESS1,
                              Address2 = t.ADDRESS2,
+                             Image=t.IMAGE,
                              City = t.CITY,
                              ContactName = t.CONTACTNAME,
                              Email = t.EMAIL,
@@ -85,6 +87,7 @@ namespace QconzLocateDAL.QConzRepository
                         ADDRESS1 = CompanyModel.Address1,
                         ADDRESS2 = CompanyModel.Address2,
                         CONTACTNAME = CompanyModel.ContactName,
+                        IMAGE=CompanyModel.Image,
                         EMAIL = CompanyModel.Email,
                         CITY = CompanyModel.City,
                         LAT = CompanyModel.Lat,
@@ -106,6 +109,7 @@ namespace QconzLocateDAL.QConzRepository
                     y.CITY = CompanyModel.City;
                     y.CONTACTNAME = CompanyModel.ContactName;
                     y.EMAIL = CompanyModel.Email;
+                    y.IMAGE = CompanyModel.Image;
                     y.LAT = CompanyModel.Lat;
                     y.LNG = CompanyModel.Lng;
                     y.PHONE_1 = CompanyModel.Phone1;

@@ -15,7 +15,7 @@ namespace QconzLocateDAL.QConzRepository
         {
             CommonModel CommonModel = new CommonModel();
             List<SelectList> CompanySelectList = new List<SelectList>();
-            var y = (from t in entity.tblOrganizations where t.ID == CompanyId || CompanyId == 0 select new { t.ID, t.TITLE }).ToList();
+            var y = (from t in entity.tblOrganizations where (t.ID == CompanyId || CompanyId == 0)&& t.ARCHIVE=="Y" select new { t.ID, t.TITLE }).ToList();
             CompanySelectList = y.Select(c => new SelectList
             {
                 Id = c.ID,
@@ -30,7 +30,7 @@ namespace QconzLocateDAL.QConzRepository
         {
             CommonModel CommonModel = new CommonModel();
             List<SelectList> GroupSelectList = new List<SelectList>();
-            var y = (from t in entity.tblTeams where t.COMPANYID == CompanyId || CompanyId == 0 select new { t.ID, t.TEAMNAME }).ToList();
+            var y = (from t in entity.tblTeams where (t.COMPANYID == CompanyId || CompanyId == 0)&& t.TEAMSTATUS=="A" select new { t.ID, t.TEAMNAME }).ToList();
             GroupSelectList = y.Select(c => new SelectList
             {
                 Id = c.ID,
@@ -44,7 +44,7 @@ namespace QconzLocateDAL.QConzRepository
         {
             CommonModel CommonModel = new CommonModel();
             List<SelectList> UserSelectList = new List<SelectList>();
-            var y = (from t in entity.tblUserMasters where t.COMPANYID == CompanyId || CompanyId == 0 select new { t.ID, t.FIRSTNAME,t.SURNAME}).ToList();
+            var y = (from t in entity.tblUserMasters where (t.COMPANYID == CompanyId || CompanyId == 0)&&(t.USERSTATUS=="A" && t.USERTYPE>1) select new { t.ID, t.FIRSTNAME,t.SURNAME}).ToList();
             UserSelectList = y.Select(c => new SelectList
             {
                 Id = c.ID,

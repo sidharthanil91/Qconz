@@ -56,6 +56,7 @@ namespace QconzLocateService.QconzLocateService
                     Address1 = y.Address1,
                     Address2 = y.Address2,
                     City=y.City,
+                    Image=y.Image,
                     ContactName = y.ContactName,
                     Email = y.Email,
                     Lat = y.Lat,

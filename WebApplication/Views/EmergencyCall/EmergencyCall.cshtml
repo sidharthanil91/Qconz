@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Emergency Call";
+    ViewBag.SubTitle = "Team Map";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/EmergencyCall/EmergencyCall/menu")
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Emergency Call List</h3>
+            </div>
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.EmergencyCalls)
+                        {
+
+                            <tr>
+                                <td>
+                                    @item.DateTime
+                                </td>
+                                <td>
+                                    @item.User
+                                </td>
+                                <td>
+                                    @item.Latitude
+                                </td>
+                                <td>
+                                    @item.Longitude
+                                </td>
+                                
+                                @*<td width="5%">
+                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>*@
+                            </tr>
+
+                        }
+                    </tbody>
+                    @*<tfoot>
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                        </tfoot>*@
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+ 
+</script>
+@section Scripts {
+    @*@Scripts.Render("~/AdminLTE/Bundle/plugins/datatables/js")*@
+    <script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/Bundle/EmergencyCall/Data")
+}
+
+
+

@@ -69,6 +69,7 @@ namespace QconzLocate.Controllers
                         ContactName = y.ContactName,
                         City=y.City,
                         Email = y.Email,
+                        Image=y.Image,
                         Lat = y.Lat,
                         Lng = y.Lng,
                         Phone1 = y.Phone1,
@@ -90,6 +91,7 @@ namespace QconzLocate.Controllers
                         ContactName = null,
                         City=null,
                         Email = null,
+                        Image=null,
                         Lat = null,
                         Lng = null,
                         Phone1 = null,
@@ -113,13 +115,19 @@ namespace QconzLocate.Controllers
         {
             try
             {
+                string path = null;
                 var pic = System.Web.HttpContext.Current.Request.Files["file"];
-                var ext = Path.GetExtension(pic.FileName);
-                var fileName = Path.GetFileName(pic.FileName);
-                string name = Path.GetFileNameWithoutExtension(fileName);
-                string myfile = name + "_" + DateTime.Now.ToString("dd_mm_yyyy") + ext; 
-                var path = Path.Combine(Server.MapPath("~/Image"), myfile);
-                pic.SaveAs(path);
+                var allowedExtensions = new[] {".Jpg", ".png", ".jpg", "jpeg"};
+                if (pic != null)
+                {
+                    var ext = Path.GetExtension(pic.FileName);
+                    var fileName = Path.GetFileName(pic.FileName);
+                    string name = Path.GetFileNameWithoutExtension(fileName);
+                    string myfile = name + "_" + DateTime.Now.ToString("dd_mm_yyyy") + ext;
+                    var savepath = Path.Combine(Server.MapPath("~/Image"), myfile);
+                    pic.SaveAs(savepath);
+                    path = "/Image/" + myfile;
+                }
                 // byte[] imgData = null;
                 //if (pic != null)
                 //{
@@ -141,7 +149,7 @@ namespace QconzLocate.Controllers
                     Lng = data["Lng"],
                     Phone1 = data["Phone1"],
                     Phone2 = data["Phone2"],
-                    Image = path,
+                    Image = path==null?data["Image"]:path,
                     Title = data["Title"],
                     Website = data["Website"],
                     ZipCode = data["ZipCode"],

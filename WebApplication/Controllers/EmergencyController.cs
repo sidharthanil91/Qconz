@@ -1,6 +1,7 @@
 ﻿using QconzLocate.Models;
 using QconzLocateService.ApiQconzLocateInterface;
 using QconzLocateService.ApiQconzLocateService;
+using QconzLocateService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +27,23 @@ namespace QconzLocate.Controllers
         }
 
         // POST: api/Emergency
-        public ApiResponseViewModel Post([FromBody] ApiLoginViewModel tokendata)
+        public ApiResponseViewModel Post([FromBody]ApiUserLocationViewModel location)
         {
-            var y = _ILoginService.ValidateToken(tokendata.token.Replace(' ', '+'));
+            var y = _ILoginService.ValidateToken(location.token.Replace(' ', '+'));
             if (y != null)
             {
+                var UserLog = new List<UserLocationServiceModel>();
+                UserLog = location.locations.Select(c => new UserLocationServiceModel()
+                {
+                    DateTime = c.date_time,
+                    Latitude = c.latitude,
+                    Longitude = c.longitude,
+                    UserId = y.UserId
+                }).ToList();
+                _IUserLocationService.SaveUserLocation(UserLog);
                 return new ApiResponseViewModel() { message = "Success", status = "1" };
             }
-            return new ApiResponseViewModel() { message = "Failed", status = "0" };
+            return new ApiResponseViewModel() { message = "Failed", status = "0" }; ;
         }
 
         // PUT: api/Emergency/5

@@ -46,6 +46,7 @@ namespace QconzLocate
             RegisterLocator(bundles);
 
             RegisterHistory(bundles);
+            RegisterEmergency(bundles);
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -143,6 +144,18 @@ namespace QconzLocate
 
             bundles.Add(new ScriptBundle("~/Scripts/Bundle/Company/Advanced").Include(
                "~/Scripts/Company/Advanved.js"));
+        }
+
+        private static void RegisterEmergency(BundleCollection bundles)
+        {
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/EmergencyCall/Data").Include(
+                "~/Scripts/EmergencyCall/Data.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Bundle/EmergencyCall/EmergencyCall/menu").Include(
+                "~/Scripts/EmergencyCall/Emergency-menu.js"));
+
+          
         }
 
         private static void RegisterCustomer(BundleCollection bundles)

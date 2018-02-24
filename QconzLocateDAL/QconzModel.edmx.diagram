@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="QCONZModel.tblTeamRoaster" Width="1.5" PointX="5.25" PointY="8.5" />
         <AssociationConnector Association="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" />
         <AssociationConnector Association="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" />
+        <EntityTypeShape EntityType="QCONZModel.tblEmergency" Width="1.5" PointX="5.25" PointY="19" />
+        <AssociationConnector Association="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
