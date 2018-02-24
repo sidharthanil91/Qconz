@@ -37,6 +37,7 @@ namespace QconzLocateDAL
         public string LNG { get; set; }
         public Nullable<System.DateTime> ADDED_DATE { get; set; }
         public string ARCHIVE { get; set; }
+        public string CITY { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomer> tblCustomers { get; set; }

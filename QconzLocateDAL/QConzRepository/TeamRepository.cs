@@ -52,6 +52,9 @@ namespace QconzLocateDAL.QConzRepository
                              TeamName = c.TEAMNAME,
                              TeamStatus = c.TEAMSTATUS
                          }).FirstOrDefault();
+                var users = entity.tblUserTeams.Where(t => t.TEAMID == Id).Select(t1 => t1.USERID).ToList();
+                if(users!=null)
+                y.UserId = string.Join(",", users.Select(t=>t.ToString()));
                 return y;
             }
             catch (Exception ex)
@@ -62,6 +65,7 @@ namespace QconzLocateDAL.QConzRepository
 
         public void SaveTeamDetails(TeamModel TeamModel)
         {
+            List<int> UserIds = TeamModel.UserId.Split(',').Select(int.Parse).ToList();
             if (TeamModel.Id == 0)
             {
                 var team = new tblTeam()
@@ -73,6 +77,16 @@ namespace QconzLocateDAL.QConzRepository
                     TEAMSTATUS="A"
                 };
                 entity.tblTeams.Add(team);
+                foreach (var item in UserIds)
+                {
+                    var userteam = new tblUserTeam()
+                    {
+                        ARCHIVE = "A",
+                        TEAMID = team.ID,
+                        USERID = item
+                    };
+                    entity.tblUserTeams.Add(userteam);
+                }
             }
             else
             {
@@ -82,6 +96,24 @@ namespace QconzLocateDAL.QConzRepository
                 y.TEAMDESC = TeamModel.Teamdesc;
                 y.TEAMNAME = TeamModel.TeamName;
                 y.TEAMSTATUS = TeamModel.TeamStatus;
+                var ExistingUserTeam = entity.tblUserTeams.Where(t => t.TEAMID == y.ID).Select(t1 => t1.USERID).ToList();
+                var NewUserTeam = UserIds.Except(ExistingUserTeam);
+                foreach (var item in NewUserTeam)
+                {
+                    var userteam = new tblUserTeam()
+                    {
+                        ARCHIVE = "A",
+                        TEAMID = y.ID,
+                        USERID = item
+                    };
+                    entity.tblUserTeams.Add(userteam);
+                }
+                var DeleteUserTeam = ExistingUserTeam.Except(UserIds);
+                foreach (var item in DeleteUserTeam)
+                {
+                    var deleteItem = entity.tblUserTeams.FirstOrDefault(t => t.USERID == item && t.TEAMID == y.ID);
+                    entity.tblUserTeams.Remove(deleteItem);
+                }
             }
             entity.SaveChanges();
         }

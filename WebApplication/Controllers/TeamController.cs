@@ -54,7 +54,7 @@ namespace QconzLocate.Controllers
                     Teamdesc = c.Teamdesc,
                     TeamName = c.TeamName,
                     TeamStatus = c.TeamStatus,
-                    //TeamStatusId = c.TeamStatus == "A" ? "1" : "0",
+                    UserId=c.UserId
                 };
                
             }
@@ -97,10 +97,12 @@ namespace QconzLocate.Controllers
             {
                 Id = team.Id,
                 CompanyId = team.CompanyId,
+                UserId=team.UserId,
                 TeamCreatedDate = team.TeamCreatedDate,
                 Teamdesc = team.Teamdesc,
                 TeamName = team.TeamName,
-                TeamStatus = team.TeamStatus
+                TeamStatus = team.TeamStatus,
+                
             };
             _ITeamService.SaveTeamDetails(TeamModel);
             bool success = true;

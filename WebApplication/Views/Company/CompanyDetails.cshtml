@@ -21,114 +21,127 @@
 <div class="box box-default">
     <div class="box-header with-border">
         @*<h3 class="box-title">Select2</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-        </div>*@
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>*@
     </div>
     <form id="form1" name="form1">
         <div class="box-body">
-            <div class="row" style=" width: 15%;height:15%">
-                <input type='file' id="imgInp" />
-                
-                    <img style=" width: 100%; object-fit: contain" id="blah" src="#" alt="your image" />
-               
-               
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+            <div class="row" style=" width: 25%;height:15%">
+                <div class="col-md-6">
+                    <div class="form-group">
                         <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Title</label>
-                                <input type="text" class="form-control required" id="Title" tabindex="1" name="Title" value="@Model.Title" placeholder="Enter title">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Address1</label>
-                                <input type="text" class="form-control" id="Address1" name="Address1" tabindex="3" value="@Model.Address1" placeholder="Enter address1">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Phone 1</label>
-                                <input type="text" class="form-control" id="Phone1" name="Phone1" tabindex="5" value="@Model.Phone1" placeholder="Enter phone1">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email</label>
-                                <input type="text" class="form-control" id="Email" name="Email" tabindex="7" value="@Model.Email" placeholder="Enter email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Zip Code</label>
-                                <input type="text" class="form-control" id="ZipCode" name="ZipCode" tabindex="9" value="@Model.ZipCode" placeholder="Enter zipCode">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Contact Name</label>
-                                <input type="text" class="form-control" id="ContactName" tabindex="2" name="ContactName" value="@Model.ContactName" placeholder="Enter contact name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Address2</label>
-                                <input type="text" class="form-control" id="Address2" tabindex="4" name="Address2" value="@Model.Address2" placeholder="Enter address2">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Phone2</label>
-                                <input type="text" class="form-control" id="Phone2" tabindex="6" name="Phone2" value="@Model.Phone2" placeholder="Enter phone2">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Website</label>
-                                <input type="text" class="form-control" id="Website" tabindex="8" name="Website" value="@Model.Website" placeholder="Enter website">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select id="Archive" name="Archive" class="form-control select2" value="@Model.Archive" style="width: 100%;">
-                                <option value="A">Active</option>
-                                <option value="N">Archived</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </form>
-        <div class="box-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-        </div>
-        
-        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                Launch demo modal
-            </button>*@
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-                        Save changes?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                            <img style="width: 125px;height:125px  ;border:solid; object-fit: contain" id="blah" src="#" alt="your image"  />
+                        </div>
+                        <label for="exampleInputEmail1">Company logo</label>
+                        <input type='file' id="imgInp" />
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Company</label>
+                            <input type="text" class="form-control required" id="Title" tabindex="1" name="Title" value="@Model.Title" placeholder="Enter company">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Address1</label>
+                            <input type="text" class="form-control" id="Address1" name="Address1" tabindex="3" value="@Model.Address1" placeholder="Enter address1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">City</label>
+                            <input type="text" class="form-control" id="City" name="City" tabindex="5" value="@Model.City" placeholder="Enter city">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Landline phone number</label>
+                            <input type="text" class="form-control" id="Phone1" name="Phone1" tabindex="7" value="@Model.Phone1" placeholder="Enter landline phone number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="text" class="form-control" id="Email" name="Email" tabindex="9" value="@Model.Email" placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="Archive" name="Archive" class="form-control select2" value="@Model.Archive" style="width: 100%;">
+                            <option value="A">Active</option>
+                            <option value="N">Archived</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contact Name</label>
+                            <input type="text" class="form-control" id="ContactName" tabindex="2" name="ContactName" value="@Model.ContactName" placeholder="Enter contact name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Address2</label>
+                            <input type="text" class="form-control" id="Address2" tabindex="4" name="Address2" value="@Model.Address2" placeholder="Enter address2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Zip/Postcode</label>
+                            <input type="text" class="form-control" id="ZipCode" name="ZipCode" tabindex="6" value="@Model.ZipCode" placeholder="Enter zipCode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Default cellphone company contact</label>
+                            <input type="text" class="form-control" id="Phone2" tabindex="8" name="Phone2" value="@Model.Phone2" placeholder="Enter company contact number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Website</label>
+                            <input type="text" class="form-control" id="Website" tabindex="10" name="Website" value="@Model.Website" placeholder="Enter website">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+    </form>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -141,99 +154,100 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
-<script type="text/javascript">
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    <script type="text/javascript">
 
 
-    $(document).ready(function () {
-        // 1. prepare the validation rules and messages.
-        $('#Archive').select2({
+        $(document).ready(function () {
+            // 1. prepare the validation rules and messages.
+            $('#Archive').select2({
 
-        })
-        $("#Archive").val("@Model.Archive").trigger("change");
-        function readURL(input) {
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#blah').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#imgInp").change(function() {
-            readURL(this);
-        });
-
-        $("#form1").validate({
-            rules: {
-                Title: {
-                    required: true
-                },
-                Email: {
-                    email: true
-                },
-            },
-            messages: {
-                Title: "Title is required",
-                Email:"Please enter a valid email address"
-            }
-        });
-        // 3. Set the click event to do the validation
-        $('#savebtn').click(function(){
-            if( !$("#form1").valid())
-            {
-                return
-            }
-            var fileList = document.getElementById("imgInp").files;
-            var fileReader = new FileReader();
-            if (fileReader && fileList && fileList.length) {
-                fileReader.readAsArrayBuffer(fileList[0]);
-                fileReader.onload = function () {
-                    var imageData = fileReader.result;
-                };
-            }
-            var data = new FormData();
-            var files = $("#imgInp").get(0).files;
-            if (files.length > 0) {
-                data.append("file", files[0]);
-            }
-            data.append("Id",@Model.Id)
-            data.append("Address1",$('#Address1').val())
-            data.append("Address2",$('#Address2').val())
-            data.append("ContactName",$('#ContactName').val())
-            data.append("Email",$('#Email').val())
-            data.append("Lat",$('#Lat').val())
-            data.append("Lng",$('#Lng').val())
-            data.append("Phone1",$('#Phone1').val())
-            data.append("Phone2",$('#Phone2').val())
-            data.append("Title",$('#Title').val())
-            data.append("Website",$('#Website').val())
-            data.append("ZipCode",$('#ZipCode').val())
-            data.append("Archive",$('#Archive').val())
-            var url='@Url.Action("SaveDetails", "Company")';
-            $.ajax({
-                type:"POST",
-                url:url,
-                data: data ,
-                processData: false,
-                contentType: false,
-                success: function () {
-                    window.location.href= '@Url.Action("CompanyReport", "Company")';
-                },
-                error: function () {
-                    alert("Error while inserting data");
-                }
             })
+            $("#Archive").val("@Model.Archive").trigger("change");
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#imgInp").change(function() {
+                readURL(this);
+            });
+
+            $("#form1").validate({
+                rules: {
+                    Title: {
+                        required: true
+                    },
+                    Email: {
+                        email: true
+                    },
+                },
+                messages: {
+                    Title: "Title is required",
+                    Email:"Please enter a valid email address"
+                }
+            });
+            // 3. Set the click event to do the validation
+            $('#savebtn').click(function(){
+                if( !$("#form1").valid())
+                {
+                    return
+                }
+                var fileList = document.getElementById("imgInp").files;
+                var fileReader = new FileReader();
+                if (fileReader && fileList && fileList.length) {
+                    fileReader.readAsArrayBuffer(fileList[0]);
+                    fileReader.onload = function () {
+                        var imageData = fileReader.result;
+                    };
+                }
+                var data = new FormData();
+                var files = $("#imgInp").get(0).files;
+                if (files.length > 0) {
+                    data.append("file", files[0]);
+                }
+                data.append("Id",@Model.Id)
+                data.append("Address1",$('#Address1').val())
+                data.append("Address2",$('#Address2').val())
+                data.append("ContactName",$('#ContactName').val())
+                data.append("Email",$('#Email').val())
+                data.append("City",$('#City').val())
+                data.append("Lat",$('#Lat').val())
+                data.append("Lng",$('#Lng').val())
+                data.append("Phone1",$('#Phone1').val())
+                data.append("Phone2",$('#Phone2').val())
+                data.append("Title",$('#Title').val())
+                data.append("Website",$('#Website').val())
+                data.append("ZipCode",$('#ZipCode').val())
+                data.append("Archive",$('#Archive').val())
+                var url='@Url.Action("SaveDetails", "Company")';
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    data: data ,
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                        window.location.href= '@Url.Action("CompanyReport", "Company")';
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                })
+            });
         });
-    });
 
 
 
-    @*$('#savebtn').click(function(){
+        @*$('#savebtn').click(function(){
         if( $("#form1").valid()==false)
         {
             return
@@ -267,7 +281,7 @@
     });*@
 
     </script>
-    
+
 }
 
 

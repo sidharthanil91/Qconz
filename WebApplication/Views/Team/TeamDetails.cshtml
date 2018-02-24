@@ -153,10 +153,12 @@
                 {
                     return
                 }
+                var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
                 var data={ Id : @Model.SingleTeam.Id,
                     TeamName : $('#TeamName').val(),
                     Teamdesc : $('#Teamdesc').val(),
                     CompanyId : $('#Company').val(),
+                    UserId : UserIdVal,
                     TeamStatus: $('#Status').val()
                 }
                 var url='@Url.Action("SaveDetails", "Team")';

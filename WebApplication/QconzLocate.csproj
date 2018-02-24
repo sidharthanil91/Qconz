@@ -592,6 +592,7 @@
   <ItemGroup>
     <Folder Include="AdminLTE\images\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

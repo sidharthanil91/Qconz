@@ -33,6 +33,7 @@ namespace QconzLocate.Controllers
                     Id = c.Id,
                     Address1 = c.Address1,
                     Address2 = c.Address2,
+                    City=c.City,
                     ContactName = c.ContactName,
                     Email = c.Email,
                     Lat = c.Lat,
@@ -66,6 +67,7 @@ namespace QconzLocate.Controllers
                         Address1 = y.Address1,
                         Address2 = y.Address2,
                         ContactName = y.ContactName,
+                        City=y.City,
                         Email = y.Email,
                         Lat = y.Lat,
                         Lng = y.Lng,
@@ -86,6 +88,7 @@ namespace QconzLocate.Controllers
                         Address1 = null,
                         Address2 = null,
                         ContactName = null,
+                        City=null,
                         Email = null,
                         Lat = null,
                         Lng = null,
@@ -111,15 +114,20 @@ namespace QconzLocate.Controllers
             try
             {
                 var pic = System.Web.HttpContext.Current.Request.Files["file"];
-                var pic2 = System.Web.HttpContext.Current.Request.Params["company"];
-                byte[] imgData = null;
-                if (pic != null)
-                {
-                    using (var reader = new BinaryReader(pic.InputStream))
-                    {
-                        imgData = reader.ReadBytes(pic.ContentLength);
-                    }
-                }
+                var ext = Path.GetExtension(pic.FileName);
+                var fileName = Path.GetFileName(pic.FileName);
+                string name = Path.GetFileNameWithoutExtension(fileName);
+                string myfile = name + "_" + DateTime.Now.ToString("dd_mm_yyyy") + ext; 
+                var path = Path.Combine(Server.MapPath("~/Image"), myfile);
+                pic.SaveAs(path);
+                // byte[] imgData = null;
+                //if (pic != null)
+                //{
+                //    using (var reader = new BinaryReader(pic.InputStream))
+                //    {
+                //        imgData = reader.ReadBytes(pic.ContentLength);
+                //    }
+                //}
                 CompanyServiceModel CompanyModel;
                 CompanyModel = new CompanyServiceModel()
                 {
@@ -127,12 +135,13 @@ namespace QconzLocate.Controllers
                     Address1 = data["Address1"],
                     Address2 = data["Address2"],
                     ContactName = data["ContactName"],
+                    City =data["City"],
                     Email = data["Email"],
                     Lat = data["Lat"],
                     Lng = data["Lng"],
                     Phone1 = data["Phone1"],
                     Phone2 = data["Phone2"],
-                    Image = imgData,
+                    Image = path,
                     Title = data["Title"],
                     Website = data["Website"],
                     ZipCode = data["ZipCode"],

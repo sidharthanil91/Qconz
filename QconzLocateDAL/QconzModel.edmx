@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QCONZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QCONZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblCustomers">
           <Key>
             <PropertyRef Name="ID" />
@@ -46,6 +46,7 @@
           <Property Name="LNG" Type="varchar" MaxLength="20" />
           <Property Name="ADDED_DATE" Type="datetime" />
           <Property Name="ARCHIVE" Type="char" MaxLength="1" />
+          <Property Name="CITY" Type="varchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="tblRoaster">
           <Key>
@@ -61,6 +62,15 @@
           <Property Name="ARCHIVE" Type="varchar" MaxLength="1" />
           <Property Name="OVERRIDE" Type="varchar" MaxLength="200" />
           <Property Name="OVERIDEDETAIL" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblTeamRoaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TEAMID" Type="int" Nullable="false" />
+          <Property Name="ROASTERID" Type="int" Nullable="false" />
+          <Property Name="ARCHIVE" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="tblTeams">
           <Key>
@@ -144,6 +154,30 @@
             </Principal>
             <Dependent Role="tblRoaster">
               <PropertyRef Name="COMPANYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+          <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="1" />
+          <End Role="tblTeamRoaster" Type="Self.tblTeamRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTeamRoaster">
+              <PropertyRef Name="ROASTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+          <End Role="tblTeams" Type="Self.tblTeams" Multiplicity="1" />
+          <End Role="tblTeamRoaster" Type="Self.tblTeamRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTeamRoaster">
+              <PropertyRef Name="TEAMID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -235,6 +269,7 @@
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrganizations" EntityType="Self.tblOrganizations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoaster" EntityType="Self.tblRoaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTeamRoaster" EntityType="Self.tblTeamRoaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTeams" EntityType="Self.tblTeams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserLog" EntityType="Self.tblUserLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserMaster" EntityType="Self.tblUserMaster" Schema="dbo" store:Type="Tables" />
@@ -247,6 +282,14 @@
           <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblRoaster" EntitySet="tblRoaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" Association="Self.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+            <End Role="tblRoaster" EntitySet="tblRoaster" />
+            <End Role="tblTeamRoaster" EntitySet="tblTeamRoaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID" Association="Self.FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+            <End Role="tblTeams" EntitySet="tblTeams" />
+            <End Role="tblTeamRoaster" EntitySet="tblTeamRoaster" />
           </AssociationSet>
           <AssociationSet Name="FK_tblTeams_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
@@ -277,8 +320,7 @@
             <End Role="tblUserTeam" EntitySet="tblUserTeam" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QCONZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -328,6 +370,7 @@
           <NavigationProperty Name="tblRoasters" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblRoaster" />
           <NavigationProperty Name="tblTeams" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblTeams" />
           <NavigationProperty Name="tblUserMasters" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblUserMaster" />
+          <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblRoaster">
           <Key>
@@ -345,6 +388,7 @@
           <Property Name="OVERIDEDETAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblRoaster" ToRole="tblOrganizations" />
           <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblUserRoaster" />
+          <NavigationProperty Name="tblTeamRoasters" Relationship="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblTeamRoaster" />
         </EntityType>
         <EntityType Name="tblTeam">
           <Key>
@@ -358,6 +402,7 @@
           <Property Name="COMPANYID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblTeams" ToRole="tblOrganizations" />
           <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserTeam_ID" FromRole="tblTeams" ToRole="tblUserTeam" />
+          <NavigationProperty Name="tblTeamRoasters" Relationship="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeam" ToRole="tblTeamRoaster" />
         </EntityType>
         <EntityType Name="tblUserLog">
           <Key>
@@ -571,7 +616,51 @@
             <End Role="tblUserMaster" EntitySet="tblUserMasters" />
             <End Role="tblUserTeam" EntitySet="tblUserTeams" />
           </AssociationSet>
+          <EntitySet Name="tblTeamRoasters" EntityType="QCONZModel.tblTeamRoaster" />
+          <AssociationSet Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" Association="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+            <End Role="tblRoaster" EntitySet="tblRoasters" />
+            <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID" Association="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+            <End Role="tblTeam" EntitySet="tblTeams" />
+            <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tblTeamRoaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TEAMID" Type="Int32" Nullable="false" />
+          <Property Name="ROASTERID" Type="Int32" Nullable="false" />
+          <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblRoaster" Relationship="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblTeamRoaster" ToRole="tblRoaster" />
+          <NavigationProperty Name="tblTeam" Relationship="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeamRoaster" ToRole="tblTeam" />
+        </EntityType>
+        <Association Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+          <End Type="QCONZModel.tblRoaster" Role="tblRoaster" Multiplicity="1" />
+          <End Type="QCONZModel.tblTeamRoaster" Role="tblTeamRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTeamRoaster">
+              <PropertyRef Name="ROASTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+          <End Type="QCONZModel.tblTeam" Role="tblTeam" Multiplicity="1" />
+          <End Type="QCONZModel.tblTeamRoaster" Role="tblTeamRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeam">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTeamRoaster">
+              <PropertyRef Name="TEAMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -605,6 +694,7 @@
           <EntitySetMapping Name="tblOrganizations">
             <EntityTypeMapping TypeName="QCONZModel.tblOrganization">
               <MappingFragment StoreEntitySet="tblOrganizations">
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
                 <ScalarProperty Name="CONTACTNAME" ColumnName="CONTACTNAME" />
@@ -701,6 +791,16 @@
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
                 <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTeamRoasters">
+            <EntityTypeMapping TypeName="QCONZModel.tblTeamRoaster">
+              <MappingFragment StoreEntitySet="tblTeamRoaster">
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
+                <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

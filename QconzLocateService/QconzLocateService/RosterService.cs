@@ -29,7 +29,8 @@ namespace QconzLocateService.QconzLocateService
                     Override=c.Override,
                     OverrideDetails=c.OverrideDetails,
                     StartTime=c.StartTime,
-                    UserId=c.UserId
+                    UserId=c.UserId,
+                    TeamId=c.TeamId
                 }).ToList();
             }
             catch (Exception ex)
@@ -55,6 +56,7 @@ namespace QconzLocateService.QconzLocateService
                     StartDate = c.StartDate,
                     StartTime = c.StartTime,
                     UserId = c.UserId,
+                    TeamId=c.TeamId,
                     Status=c.Status
                 };
             }
@@ -78,6 +80,7 @@ namespace QconzLocateService.QconzLocateService
                 StartDate = RosterDetails.StartDate,
                 StartTime = RosterDetails.StartTime,
                 UserId = RosterDetails.UserId,
+                TeamId=RosterDetails.TeamId,
                 Status=RosterDetails.Status
             };
             _IRosterRepository.SaveRosterDetails(roster);

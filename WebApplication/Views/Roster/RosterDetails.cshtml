@@ -176,9 +176,9 @@
 
         })
         var array = '@Model.Roster.UserId'.split(',')
-        var array1 = '@Model.Roster.UserId'.split(',')
+        var array1 = '@Model.Roster.TeamId'.split(',')
         $('#Users').select2().val(array).trigger("change")
-        $('#Groups').select2().val(array).trigger("change")
+        $('#Groups').select2().val(array1).trigger("change")
         $("#Status").val("@Model.Roster.Status").trigger("change");
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.
@@ -222,6 +222,7 @@
             var StartDateVal=$('#StartDate').val();
             var EndDateVal=$('#EndDate').val();
             var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
+            var TeamIdVal=$('#Groups').val()==null?null: $('#Groups').val().toString()
             var data={ Id : @Model.Roster.Id,
                 StartDate :StartDateVal,
                 EndDate : EndDateVal,
@@ -230,6 +231,7 @@
                 OverrideDetails:$('#OverrideDetails').val(),
                 Override:$('#Override').val(),
                 UserId : UserIdVal,
+                TeamId : TeamIdVal,
                 Status:$('#Status').val()
             }
             var url='@Url.Action("SaveDetails", "Roster")';

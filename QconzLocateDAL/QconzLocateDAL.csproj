@@ -108,6 +108,9 @@
     <Compile Include="tblTeam.cs">
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblTeamRoaster.cs">
+      <DependentUpon>QconzModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblUserLog.cs">
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>

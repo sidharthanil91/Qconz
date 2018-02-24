@@ -11,6 +11,7 @@ namespace QconzLocateService.Models
         public int Id { get; set; }
         public int CompanyId { get; set; }
         public string UserId { get; set; }
+        public string TeamId { get; set; }
         public string Status { get; set; }
         public string Override { get; set; }
         public string OverrideDetails { get; set; }

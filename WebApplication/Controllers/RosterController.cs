@@ -32,7 +32,8 @@ namespace QconzLocate.Controllers
                 OverrideDetails=c.OverrideDetails,
                 StartDate = c.StartDate,
                 StartTime = c.StartTime,
-                UserId = c.UserId
+                UserId = c.UserId,
+                TeamId=c.TeamId
             }).ToList();
             rosters.RosterList = RosterList;
             return View("Roster", rosters);
@@ -55,6 +56,7 @@ namespace QconzLocate.Controllers
                     StartDate = c.StartDate==null?DateTime.Now:c.StartDate,
                     StartTime = c.StartTime==null?DateTime.Now:c.StartTime,
                     UserId = c.UserId,
+                    TeamId=c.TeamId,
                     Status=c.Status
                 };
                 
@@ -72,6 +74,7 @@ namespace QconzLocate.Controllers
                     StartDate = DateTime.Now,
                     StartTime = DateTime.Now,
                     UserId = null,
+                    TeamId=null,
                     Status="A"
                 };
                 
@@ -107,6 +110,7 @@ namespace QconzLocate.Controllers
                 FinishTime =roster.FinishTime,
                 StartTime=roster.StartTime,
                 UserId =roster.UserId,
+                TeamId=roster.TeamId,
                 Status=roster.Status
             };
             _IRosterService.SaveRosterDetails(RosterModel);

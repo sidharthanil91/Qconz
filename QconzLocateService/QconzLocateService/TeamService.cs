@@ -51,7 +51,8 @@ namespace QconzLocateService.QconzLocateService
                     TeamCreatedDate = c.TeamCreatedDate,
                     Teamdesc = c.Teamdesc,
                     TeamName = c.TeamName,
-                    TeamStatus = c.TeamStatus
+                    TeamStatus = c.TeamStatus,
+                    UserId=c.UserId
                 };
             }
             catch
@@ -67,6 +68,7 @@ namespace QconzLocateService.QconzLocateService
             {
                 Id = TeamDetails.Id,
                 CompanyId = TeamDetails.CompanyId,
+                UserId=TeamDetails.UserId,
                 TeamCreatedDate = TeamDetails.TeamCreatedDate,
                 Teamdesc = TeamDetails.Teamdesc,
                 TeamName = TeamDetails.TeamName,
