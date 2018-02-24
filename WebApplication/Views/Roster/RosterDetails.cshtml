@@ -105,6 +105,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Groups</label>
+                            <select id="Groups" name="Groups" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select groups" style="width: 100%;"></select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,11 +167,18 @@
         $('#Users').select2({
             data: data
         })
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.GroupList))';
+        var data1 = JSON.parse(jsontext1);
+        $('#Groups').select2({
+            data: data1
+        })
         $('#Status').select2({
 
         })
         var array = '@Model.Roster.UserId'.split(',')
+        var array1 = '@Model.Roster.UserId'.split(',')
         $('#Users').select2().val(array).trigger("change")
+        $('#Groups').select2().val(array).trigger("change")
         $("#Status").val("@Model.Roster.Status").trigger("change");
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.

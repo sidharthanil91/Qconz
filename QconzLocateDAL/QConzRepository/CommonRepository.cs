@@ -64,7 +64,7 @@ namespace QconzLocateDAL.QConzRepository
                          {3,"DASHBOARD"},
                          {4,"APP" } };
             var y= entity.tblUserMasters.Where(u => u.EMAIL.ToLower() == user.Email.ToLower() &&
-                u.PASSWORD == user.Password && u.USERTYPE!=4).FirstOrDefault();
+                u.PASSWORD == user.Password && u.USERTYPE!=4 && u.USERSTATUS=="A").FirstOrDefault();
             if (y==null)
             {
                 return null;

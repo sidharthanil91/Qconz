@@ -26,6 +26,7 @@
           <Property Name="ADDED_DATE" Type="datetime" />
           <Property Name="COMPANYID" Type="int" />
           <Property Name="ARCHIVE" Type="varchar" MaxLength="1" />
+          <Property Name="CITY" Type="varchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="tblOrganizations">
           <Key>
@@ -302,6 +303,7 @@
           <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
           <Property Name="COMPANYID" Type="Int32" />
           <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblCustomers" ToRole="tblOrganizations" />
         </EntityType>
         <EntityType Name="tblOrganization">
@@ -596,6 +598,7 @@
                 <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
                 <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

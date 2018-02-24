@@ -48,28 +48,29 @@
                     </div>
                     <div class="form-group">
                         <div class="form-group">
+                            <label for="exampleInputEmail1">City</label>
+                            <input type="text" class="form-control" id="City" tabindex="7" name="City" value="@Model.CustomerDetails.City" placeholder="Enter city">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Landline</label>
-                            <input type="text" class="form-control" id="Phone1" tabindex="7" name="Phone1" value="@Model.CustomerDetails.Phone1" placeholder="Enter phone1">
+                            <input type="text" class="form-control" id="Phone1" tabindex="9" name="Phone1" value="@Model.CustomerDetails.Phone1" placeholder="Enter phone1">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input type="text" class="form-control" id="Email" tabindex="9" name="Email" value="@Model.CustomerDetails.Email" placeholder="Enter email">
+                            <input type="text" class="form-control" id="Email" tabindex="11" name="Email" value="@Model.CustomerDetails.Email" placeholder="Enter email">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Latitude</label>
-                            <input type="text" class="form-control" id="Lat" tabindex="11" name="Lat" value="@Model.CustomerDetails.Lat" placeholder="Enter latitude">
+                            <input type="text" class="form-control" id="Lat" tabindex="13" name="Lat" value="@Model.CustomerDetails.Lat" placeholder="Enter latitude">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Zip/PostCode</label>
-                            <input type="text" class="form-control" id="ZipCode" tabindex="13" name="ZipCode" value="@Model.CustomerDetails.ZipCode" placeholder="Enter zipCode">
-                        </div>
-                    </div>
+                   
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -80,8 +81,8 @@
                     </div>
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Last name</label>
-                            <input type="text" class="form-control" id="LastName" tabindex="4" name="LastName" value="@Model.CustomerDetails.LastName" placeholder="Enter last name">
+                            <label>Company</label>
+                            <select id="Company" class="form-control select2" tabindex="4" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -92,28 +93,29 @@
                     </div>
                     <div class="form-group">
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Zip/PostCode</label>
+                            <input type="text" class="form-control" id="ZipCode" tabindex="8" name="ZipCode" value="@Model.CustomerDetails.ZipCode" placeholder="Enter zipCode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Cellphone</label>
-                            <input type="text" class="form-control" id="Phone2" tabindex="8" name="Phone2" value="@Model.CustomerDetails.Phone2" placeholder="Enter phone2">
+                            <input type="text" class="form-control" id="Phone2" tabindex="10" name="Phone2" value="@Model.CustomerDetails.Phone2" placeholder="Enter phone2">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Website</label>
-                            <input type="text" class="form-control" id="Website" tabindex="10" name="Website" value="@Model.CustomerDetails.Website" placeholder="Enter website">
+                            <input type="text" class="form-control" id="Website" tabindex="12" name="Website" value="@Model.CustomerDetails.Website" placeholder="Enter website">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Longitude</label>
-                            <input type="text" class="form-control" id="Lng" tabindex="12" name="Lng" value="@Model.CustomerDetails.Lng" placeholder="Enter longitude">
+                            <input type="text" class="form-control" id="Lng" tabindex="14" name="Lng" value="@Model.CustomerDetails.Lng" placeholder="Enter longitude">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label>Company</label>
-                            <select id="Company" class="form-control select2" tabindex="14" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
-                        </div>
-                    </div>
+                 
                 </div>
             </div>
         </div>
@@ -198,6 +200,7 @@
                 LastName : $('#LastName').val(),
                 CompanyId:$('#Company').val(),
                 Email : $('#Email').val(),
+                City : $('#City').val(),
                 Lat : $('#Lat').val(),
                 Lng : $('#Lng').val(),
                 Phone1 : $('#Phone1').val(),

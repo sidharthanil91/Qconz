@@ -11,14 +11,15 @@ namespace QconzLocate.Models
         public TeamViewModelList SingleTeam { get; set; }
         public List<SelectListItems> GroupList { get; set; }
         public List<SelectListItems> CompanyList { get; set; }
-      
-       
+        public List<SelectListItems> UserList { get; set; }
+
     }
     public class TeamViewModelList
     {
         public int Id { get; set; }
         public string TeamName { get; set; }
         public string Teamdesc { get; set; }
+        public string UserId { get; set; }
         public DateTime? TeamCreatedDate { get; set; }
         public string TeamStatus { get; set; }
         public string TeamStatusId { get; set; }

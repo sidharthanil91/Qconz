@@ -10,6 +10,7 @@ namespace QconzLocate.Models
         public List<RosterListViewModel> RosterList { get; set; }
         public RosterListViewModel Roster { get; set; }
         public List<SelectListItems> UserList { get; set; }
+        public List<SelectListItems> GroupList { get; set; }
     }
 
     public class RosterListViewModel

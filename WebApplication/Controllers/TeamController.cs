@@ -41,6 +41,7 @@ namespace QconzLocate.Controllers
             int CompanyId = (int)(Session["CompanyId"]);
             TeamViewModel TeamViewModel = new TeamViewModel();
             List<SelectListItems> companyselect = new List<SelectListItems>();
+            List<SelectListItems> userselect = new List<SelectListItems>();
             TeamViewModelList TeamDetails;
             if (id != 0)
             {
@@ -78,6 +79,13 @@ namespace QconzLocate.Controllers
                 text = t.Text
             }).ToList();
             TeamViewModel.CompanyList = companyselect;
+            var y1 = _commonService.GetUserSelectList(CompanyId);
+            userselect = y1.UserList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            TeamViewModel.UserList = userselect;
             return View("TeamDetails", TeamViewModel);
         }
 

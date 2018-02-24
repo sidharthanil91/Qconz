@@ -82,6 +82,12 @@ namespace QconzLocate.Controllers
                 id = t.Id,
                 text = t.Text
             }).ToList();
+            var grp = _commonservice.GetGroupSelectList(CompanyId);
+            RosterDetails.GroupList = grp.GroupList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
             return View("RosterDetails", RosterDetails);
         }
 
