@@ -28,14 +28,14 @@
                                 <input type="submit" value="Upload" class="btn btn-default" />
                             </div>
                             <div class="form-group pull-right">
-                                <input type="file" id="dataFile" name="upload" />
+                                <input class="form-control" type="file" id="dataFile" name="upload" />
                             </div>
 
 
                         }
-                    <button style="width:35px"  class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" >
+                    <button class="btn btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" >
                         @*<input type="button" style="width:35px" class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" />*@
-                        <span class="fa fa-file-excel-o"></span>
+                        <span style="padding-right:10px;" class="fa fa-file-excel-o"> </span>Download Template
                     </button>
                     @*</div>*@
                     <button style="width:35px" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>

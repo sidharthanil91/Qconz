@@ -15,11 +15,11 @@ namespace QconzLocateService.QconzLocateService
     {
         private IUserRepository _IUserRepository = new UserRepository();
         //Get all companies
-        public List<UserServiceModel> GetAllUsers(int CompanyId)
+        public List<UserServiceModel> GetAllUsers(int CompanyId,string Status)
         {
             try
             {
-                var y = _IUserRepository.GetAllUsers(CompanyId);
+                var y = _IUserRepository.GetAllUsers(CompanyId, Status);
                 return y.Select(c => new UserServiceModel
                 {
                     Id = c.Id,

@@ -18,49 +18,51 @@
                 <h3 class="box-title">Active Group List</h3>
             </div>
             <div class="box-body">
-                <button id="btn"style="width:95px" onclick="clickevent()" type="button" class="btn btn-block btn-primary">Show Archive</button>
-                <button style="width:35px" onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Group name</th>
-                            <th>Company</th>
-                            <th></th>
-                            @*<th></th>*@
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-
+                <div style="padding-bottom:10px;">
+                    <button id="btn"  onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                    <button  onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
                             <tr>
-                                <td>
-                                    @item.TeamName
-                                </td>
-                                <td>
-                                    @item.CompanyName
-                                </td>
-                                <td width="5%">
-                                    <button type="button" onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
-                                </td>
-                                @*<td width="5%">
-                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </td>*@
+                                <th>Group name</th>
+                                <th>Company</th>
+                                <th></th>
+                                @*<th></th>*@
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
 
-                        }
-                    </tbody>
-                    @*<tfoot>
-                            <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
-                            </tr>
-                        </tfoot>*@
-                </table>
-            </div>
+                                <tr>
+                                    <td>
+                                        @item.TeamName
+                                    </td>
+                                    <td>
+                                        @item.CompanyName
+                                    </td>
+                                    <td width="5%">
+                                        <button type="button" onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                    </td>
+                                    @*<td width="5%">
+                                <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>*@
+                                </tr>
+
+                            }
+                        </tbody>
+                        @*<tfoot>
+                    <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                    </tr>
+                </tfoot>*@
+                    </table>
+                </div>
         </div>
     </div>
 </div>
@@ -102,7 +104,7 @@
                     content += '<tr>';
                     content += '<td>' + json[i].TeamName + '</td>';
                     content += '<td>' + json[i].CompanyName + '</td>';
-                    content += '<td >  <button type="button" onclick="window.location.href=\'/Team/TeamDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                    content += '<td >  <button type="button" onclick="window.location.href=\'../Team/TeamDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
                     content += '</tr>';
                 }
                 $('#example1 tbody').html(content);

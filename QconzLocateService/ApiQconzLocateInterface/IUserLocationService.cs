@@ -10,5 +10,6 @@ namespace QconzLocateService.ApiQconzLocateInterface
     public interface IUserLocationService
     {
         void SaveUserLocation(List<UserLocationServiceModel> UserLocation);
+        void SaveEmergencyLocation(List<UserLocationServiceModel> UserLocation);
     }
 }

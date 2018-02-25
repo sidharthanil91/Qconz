@@ -13,6 +13,7 @@ namespace QconzLocate.Controllers
 {
     public class EmergencyController : ApiController
     {
+        private IUserLocationService _IUserLocationService = new UserLocationService();
         private ILoginService _ILoginService = new LoginService();
         // GET: api/Emergency
         public IEnumerable<string> Get()
@@ -26,21 +27,22 @@ namespace QconzLocate.Controllers
             return "value";
         }
 
+        [HttpPost]
         // POST: api/Emergency
-        public ApiResponseViewModel Post([FromBody]ApiUserLocationViewModel location)
+        public ApiResponseViewModel Post(UserLocation location)
         {
             var y = _ILoginService.ValidateToken(location.token.Replace(' ', '+'));
             if (y != null)
             {
                 var UserLog = new List<UserLocationServiceModel>();
-                UserLog = location.locations.Select(c => new UserLocationServiceModel()
+                UserLog.Add(new UserLocationServiceModel()
                 {
-                    DateTime = c.date_time,
-                    Latitude = c.latitude,
-                    Longitude = c.longitude,
+                    DateTime = location.date_time,
+                    Latitude = location.latitude,
+                    Longitude = location.longitude,
                     UserId = y.UserId
-                }).ToList();
-                _IUserLocationService.SaveUserLocation(UserLog);
+                });
+                _IUserLocationService.SaveEmergencyLocation(UserLog);
                 return new ApiResponseViewModel() { message = "Success", status = "1" };
             }
             return new ApiResponseViewModel() { message = "Failed", status = "0" }; ;

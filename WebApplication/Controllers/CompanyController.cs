@@ -115,12 +115,19 @@ namespace QconzLocate.Controllers
         {
             try
             {
+                bool success = true;
+        
                 string path = null;
                 var pic = System.Web.HttpContext.Current.Request.Files["file"];
                 var allowedExtensions = new[] {".Jpg", ".png", ".jpg", "jpeg"};
                 if (pic != null)
                 {
                     var ext = Path.GetExtension(pic.FileName);
+                    if(allowedExtensions.Any(t=>t!=ext)&& pic.ContentLength > (100 * 1024))
+                    {
+                        success = false;
+                        return Json(success, JsonRequestBehavior.AllowGet);
+                    }
                     var fileName = Path.GetFileName(pic.FileName);
                     string name = Path.GetFileNameWithoutExtension(fileName);
                     string myfile = name + "_" + DateTime.Now.ToString("dd_mm_yyyy") + ext;
@@ -156,7 +163,7 @@ namespace QconzLocate.Controllers
                     Archive=data["Archive"]
                 };
                 _ICompanyService.SaveCompanyDetails(CompanyModel);
-                bool success = true;
+               // bool success = true;
                 return Json(success, JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)

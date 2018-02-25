@@ -4,14 +4,16 @@
     {
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="~/AdminLTE/dist/img/user.svg" class="user-image" alt="User Image">
-            <span class="hidden-xs">@User.Identity.GetUserNameIdentifier()</span>
+            @*<span class="hidden-xs">@User.Identity.GetUserNameIdentifier()</span>*@
+            <span class="hidden-xs">@HttpContext.Current.Session["User"].ToString()</span>
         </a>
         <ul class="dropdown-menu">
             @*<li class="user-header">*@
                 @*<img src="~/AdminLTE/dist/img/user.svg" class="img-circle" alt="User Image">*@
                 <p>
-                    <small>@User.Identity.GetUserEmail()</small>
-                </p>
+                   <small>@User.Identity.GetUserEmail()</small>
+                   
+</p>
             @*</li>*@
             <li class="user-body">
                 <div class="row">

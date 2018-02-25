@@ -125,7 +125,7 @@
                 });
                 (function (marker, data) {
                     google.maps.event.addListener(marker, "click", function (e) {
-                        infoWindow.setContent(data.Address);
+                        infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
                         infoWindow.open(map, marker);
                     });
                 })(marker, data);

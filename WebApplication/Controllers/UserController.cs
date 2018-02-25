@@ -51,7 +51,7 @@ namespace QconzLocate.Controllers
                          {3,"Dashboard and App"},
                          {4,"App Only" } };
 
-                UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModelList
+                UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId,"A").Select(c => new UserViewModelList
                 {
                     Id = c.Id,
                     Cellphone = c.Cellphone,
@@ -124,16 +124,16 @@ namespace QconzLocate.Controllers
                         EmergencyContact = null,
                         EmergencyContactNo = null,
                         Email = null,
-                        EndTime = DateTime.ParseExact("2009-05-08 19:00:00,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
+                        EndTime = DateTime.ParseExact("2009-05-08 17:00:00,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
                         FirstName = null,
                         Password = null,
-                        StartTime = DateTime.ParseExact("2009-05-08 07:00:00,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
+                        StartTime = DateTime.ParseExact("2009-05-08 08:00:00,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
                         SurName = null,
                         UserName = null,
-                        UserStatus = null,
+                        UserStatus = "A",
                         UserTeamId = 0,
                         UserType = 0,
-                        WorkingDays = "1,2,3,4,5,6,7"
+                        WorkingDays = "1,2,3,4,5"
                     };
                 }
                 UserList.UserDetails = UserDetails;
@@ -206,7 +206,7 @@ namespace QconzLocate.Controllers
         }
 
         [HttpPost]
-        public JsonResult Filter(int CompanyId)
+        public JsonResult Filter(int CompanyId,string Status)
         {
 
             Dictionary<int, string> UserRole
@@ -215,7 +215,7 @@ namespace QconzLocate.Controllers
                          {3,"Dashboard and App"},
                          {4,"App Only" } };
 
-            UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId).Select(c => new UserViewModelList
+            UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId, Status).Select(c => new UserViewModelList
             {
                 Id = c.Id,
                 Cellphone = c.Cellphone,

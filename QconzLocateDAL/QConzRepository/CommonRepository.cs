@@ -15,7 +15,7 @@ namespace QconzLocateDAL.QConzRepository
         {
             CommonModel CommonModel = new CommonModel();
             List<SelectList> CompanySelectList = new List<SelectList>();
-            var y = (from t in entity.tblOrganizations where (t.ID == CompanyId || CompanyId == 0)&& t.ARCHIVE=="Y" select new { t.ID, t.TITLE }).ToList();
+            var y = (from t in entity.tblOrganizations where (t.ID == CompanyId || CompanyId == 0)&& t.ARCHIVE=="A" select new { t.ID, t.TITLE }).ToList();
             CompanySelectList = y.Select(c => new SelectList
             {
                 Id = c.ID,

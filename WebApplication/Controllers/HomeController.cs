@@ -105,7 +105,9 @@ namespace QconzLocate.Controllers
                 id = t.Id,
                 text = t.Text
             }).ToList();
-            var y = _ILocationService.GetHistoryLocation(CompanyId,User.UserList.FirstOrDefault().Id,null).ToArray();
+            var history = _ILocationService.GetHistoryLocation(CompanyId, User.UserList.FirstOrDefault().Id, null);
+            items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
+             var y=history.ToArray();
 
             string markers = "[";
 

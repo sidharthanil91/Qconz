@@ -65,7 +65,11 @@ namespace QconzLocateDAL.QConzRepository
 
         public void SaveTeamDetails(TeamModel TeamModel)
         {
-            List<int> UserIds = TeamModel.UserId.Split(',').Select(int.Parse).ToList();
+            List<int> UserIds = new List<int>();
+            if (TeamModel.UserId != null)
+            {
+                UserIds=TeamModel.UserId.Split(',').Select(int.Parse).ToList();
+            }
             if (TeamModel.Id == 0)
             {
                 var team = new tblTeam()

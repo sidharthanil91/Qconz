@@ -83,9 +83,9 @@
         $('.select2').select2();
         var allmarkers=[];
         var jsontext = '@Html.Raw(Json.Encode(Model.GroupLists))';
-        var data = JSON.parse(jsontext);
+        var datas = JSON.parse(jsontext);
         $('#Group').select2({
-            data: data
+            data: datas
         })
         var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
         var data1 = JSON.parse(jsontext1);
@@ -134,7 +134,7 @@
                 });
                 (function (marker, data) {
                     google.maps.event.addListener(marker, "click", function (e) {
-                        infoWindow.setContent(data.description);
+                        infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
                         infoWindow.open(map, marker);
                     });
                 })(marker, data);

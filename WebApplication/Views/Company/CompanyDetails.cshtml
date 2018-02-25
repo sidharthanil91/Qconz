@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <div class="form-group">
 
-                            <img style="width: 125px;height:125px  ;border:solid; object-fit: contain" id="blah" src="@Model.Image" alt="your image"  />
+                            <img style="width: 125px;height:125px;display:block  ;border:solid; object-fit: contain" id="blah" src="@Model.Image" alt="Upload image"  />
                         </div>
                         <label for="exampleInputEmail1">Company logo</label>
                         <input type='file' id="imgInp" />
@@ -236,8 +236,15 @@
                     data: data ,
                     processData: false,
                     contentType: false,
-                    success: function () {
-                        window.location.href= '@Url.Action("CompanyReport", "Company")';
+                    success: function (success) {
+                        if(!success)
+                        {
+                            alert('Incorrect file uploaded..');
+                            return;
+                        }
+                            else{
+                                window.location.href= '@Url.Action("CompanyReport", "Company")';
+                            }
                     },
                     error: function () {
                         alert("Error while inserting data");

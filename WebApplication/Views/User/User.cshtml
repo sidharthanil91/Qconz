@@ -9,7 +9,7 @@
 }
 
 @Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
-
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -17,20 +17,20 @@
                 <h3 class="box-title">User List</h3>
             </div>
             <div class="box-body">
-               
+                <div class="row">
+                    
                     
                     @if (User.IsInRole("SUPER"))
                     {
                         <div>
-                            <div class="col-md-4">
-                                <button style="width:35px" onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                            <div class="col-md-6">
+                                <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                                <button onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                             </div>
-                            <div class="col-md-5">
-
-                            </div>
-
-                            <div class="col-md-3" >
-                                @*<div class="form-group">*@
+                            <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                    @*<div class="form-group">*@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Select company</label>
                                         @*<div class="input-group input-group-sm">*@
@@ -38,70 +38,73 @@
                                         @*</div>*@
                                     </div>
                                 </div>
-                            @*</div>*@
-                        </div>
+                                @*</div>*@
+                            </div>
                     }
                     else
                     {
-                            <button style="width:35px" onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        <div class="col-md-6">
+                            <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                            <button onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    }
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Surname</th>
+                                <th>Type</th>
+                                <th>Email</th>
+                                <th>Cellphone</th>
+                                <th>Company</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.UserListViewModel)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+                                    <td>
+                                        @item.SurName
+                                    </td>
+                                    <td>
+                                        @item.UserRole
+                                    </td>
+                                    <td>
+                                        @item.Email
+                                    </td>
+                                    <td>
+                                        @item.Cellphone
+                                    </td>
+                                    <td>
+                                        @item.Company
+                                    </td>
+                                    <td width="5%">
+                                        <button type="button" onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                    </td>
+                                    @*<td width="5%">
+                                <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>*@
+                                </tr>
+
                             }
-                       
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Surname</th>
-                            <th>Type</th>
-                            <th>Email</th>
-                            <th>Cellphone</th>
-                            <th>Company</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.UserListViewModel)
-                        {
-
-                            <tr>
-                                <td>
-                                    @item.FirstName
-                                </td>
-                                <td>
-                                    @item.SurName
-                                </td>
-                                <td>
-                                    @item.UserRole
-                                </td>
-                                <td>
-                                    @item.Email
-                                </td>
-                                <td>
-                                    @item.Cellphone
-                                </td>
-                                <td>
-                                    @item.Company
-                                </td>
-                                <td width="5%">
-                                    <button type="button" onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
-                                </td>
-                                @*<td width="5%">
-                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </td>*@
-                            </tr>
-
-                        }
-                    </tbody>
-                    @*<tfoot>
-                            <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
-                            </tr>
-                        </tfoot>*@
-                </table>
-            </div>
+                        </tbody>
+                        @*<tfoot>
+                    <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                    </tr>
+                </tfoot>*@
+                    </table>
+                </div>
         </div>
     </div>
 </div>
@@ -124,13 +127,33 @@
         filter();
     });
 
+    var i = 'N'
+    function clickevent() {
+        if (i == 'N') {
+            $('#btn').text('Show Active');
+            $('h3.box-title').text('Archived Override List')
+            filter();
+            i = 'A';
+        }
+        else {
+            $('#btn').text('Show Archive');
+            $('h3.box-title').text('Active Override List')
+            filter();
+            i = 'N';
+        }
+    }
+
     function filter() {
-        var Company = $('#Company').val();
+        var Company=null;
+        if ($('#Company').val())
+            Company = $('#Company').val();
+        else
+            Company=@HttpContext.Current.Session["CompanyId"].ToString()
         var url = '@Url.Action("Filter", "User")';
         $.ajax({
             type: "POST",
             url: url,
-            data: JSON.stringify({ CompanyId: Company }),
+            data: JSON.stringify({ CompanyId: Company ,Status:i}),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (json) {
@@ -149,7 +172,7 @@
                         content += '<td>' + json[i].Email + '</td>';
                         content += '<td>' + json[i].Cellphone + '</td>';
                         content += '<td>' + json[i].Company + '</td>';
-                        content += '<td >  <button type="button" onclick="window.location.href=\'/User/UserDetails/'+json[i].Id+'\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                        content += '<td >  <button type="button" onclick="window.location.href=\'../User/UserDetails/'+json[i].Id+'\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
                         content += '</tr>';
                     }
                     // content += '</tbody>';-- **superfluous**

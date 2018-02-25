@@ -12,12 +12,12 @@ namespace QconzLocateDAL.QConzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public List<UserModel> GetAllUsers(int CompanyId)
+        public List<UserModel> GetAllUsers(int CompanyId,string Status)
         {
             try
             {
                 List<UserModel> UserList = new List<UserModel>();
-                var y = (from t in entity.tblUserMasters where t.USERTYPE > 1 && (t.COMPANYID == CompanyId || CompanyId == 0) select t).ToList();
+                var y = (from t in entity.tblUserMasters where t.USERTYPE > 1 && (t.COMPANYID == CompanyId || CompanyId == 0)&& t.USERSTATUS==Status select t).ToList();
                 UserList = y.Select(c => new UserModel
                 {
                     Id = c.ID,
@@ -148,7 +148,7 @@ namespace QconzLocateDAL.QConzRepository
                     y.PASSWORD = UserModel.Password;
                     y.SURNAME = UserModel.SurName;
                     y.USERNAME = UserModel.UserName;
-                    y.USERSTATUS = "A";
+                    y.USERSTATUS = UserModel.UserStatus;
                     //y.USERTEAMID = 1;
                     y.USERTYPE = UserModel.UserType;
                     y.WORKINGDAYS = UserModel.WorkingDays;

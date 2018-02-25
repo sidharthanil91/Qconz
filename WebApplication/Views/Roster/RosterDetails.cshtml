@@ -38,7 +38,7 @@
                             <label for="exampleInputEmail1">Start Date</label>
                             <div class="input-group">
                                 <input type="text" id="StartDate" name="StartDate" tabindex="3" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
-                                <div class="input-group-addon">
+                                <div id="StartDateC" class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <label>Start time</label>
                                 <div class="input-group">
                                     <input type="text" id="StartTime" name="StartTime" tabindex="5" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
-                                    <div class="input-group-addon">
+                                    <div id="startclock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                             <label for="exampleInputEmail1">End Date</label>
                             <div class="input-group">
                                 <input type="text" id="EndDate" name="EndDate" tabindex="4" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
-                                <div class="input-group-addon">
+                                <div id="EndDateC" class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                                 <label>End time</label>
                                 <div class="input-group">
                                     <input type="text" id="FinishTime" name="FinishTime" tabindex="6" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
-                                    <div class="input-group-addon">
+                                    <div id="FinishTimeClock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
                                 </div>
@@ -154,6 +154,30 @@
 @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
     <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
     <script src="~/AdminLTE/plugins/datepicker/js/locales/bootstrap-datepicker*"></script>
+<script type="text/javascript">
+
+    $('#startclock').click(function(){
+       $(document).ready(function(){
+           $("#StartTime").timepicker().focus();
+       });
+    });
+    $('#FinishTimeClock').click(function(){
+        $(document).ready(function(){
+            $("#FinishTime").timepicker().focus();
+        });
+    });
+    $('#StartDateC').click(function(){
+        $(document).ready(function(){
+            $("#StartDate").datepicker().focus();
+        });
+    });
+    $('#EndDateC').click(function(){
+        $(document).ready(function(){
+            $("#EndDate").datepicker().focus();
+        });
+    });
+
+</script>
     <script type="text/javascript">
         $('.datepicker').datepicker({
             format: 'dd/MM/yyyy'

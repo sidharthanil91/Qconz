@@ -10,5 +10,6 @@ namespace QconzLocateDAL.ApiQconzRepositoryInterface
     public interface IUserLocationRepository
     {
         void SaveUserLocation(List<UserLocationModel> UserLocation);
+        void SaveUserEmergencyLocation(List<UserLocationModel> UserLocation);
     }
 }

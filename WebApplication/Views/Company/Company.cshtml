@@ -20,58 +20,60 @@
             <div class="box-body">
                 @if (User.IsInRole("SUPER"))
                 {
-                <button id="btn" style="width:95px" onclick="clickevent()" type="button" class="btn btn-block btn-primary">Show Archive</button>
-                <button style="width:35px" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                }
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Company</th>
-                            <th>Contact Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th ></th>
-                            @*<th></th>*@
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Companies)
-                        {
+                    <div style="padding-bottom:10px;">
+                        <button id="btn"  onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                        <button  onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                        }
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Contact Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                    @*<th></th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Companies)
+                                {
 
-                            <tr>
-                                <td>
-                                    @item.Title
-                                </td>
-                                <td>
-                                    @item.ContactName
-                                </td>
-                                <td>
-                                    @item.Phone1
-                                </td>
-                                <td>
-                                    @item.Email
-                                </td>
-                                <td width="5%">
-                                    <button type="button" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
-                                </td>
-                                @*<td width="5%">
-                                    <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
-                                </td>*@
-                            </tr>
+                                    <tr>
+                                        <td>
+                                            @item.Title
+                                        </td>
+                                        <td>
+                                            @item.ContactName
+                                        </td>
+                                        <td>
+                                            @item.Phone1
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td width="5%">
+                                            <button type="button" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                        </td>
+                                        @*<td width="5%">
+                                                <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                                            </td>*@
+                                    </tr>
 
-                        }  
-                    </tbody>
-                    @*<tfoot>
-                        <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
-                        </tr>
-                    </tfoot>*@
-                </table>
-            </div>
+                                }
+                            </tbody>
+                            @*<tfoot>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                </tfoot>*@
+                        </table>
+                    </div>
         </div>
     </div>
 </div>
@@ -111,7 +113,7 @@
                     content += '<td>' + json[i].ContactName + '</td>';
                     content += '<td>' + json[i].Phone1 + '</td>';
                     content += '<td>' + json[i].Email + '</td>';
-                    content += '<td >  <button type="button" onclick="window.location.href=\'/Company/CompanyDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                    content += '<td >  <button type="button" onclick="window.location.href=\'../Company/CompanyDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
                     content += '</tr>';
                 }
 
