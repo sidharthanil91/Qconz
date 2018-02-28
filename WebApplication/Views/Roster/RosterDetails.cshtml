@@ -11,10 +11,13 @@
 @Styles.Render("~/AdminLTE/Bundle/dist/css")
 @Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
 @Styles.Render("~/Styles/Bundle/Elements/Modals")
+<link rel="stylesheet" href="~/AdminLTE/plugins/clock/css/clockface.css">
+
+
 <div class="box box-default">
     <div class="box-header with-border">
         <h2 class="box-title">*Rosters will override the usual hours setting for people selected and track their phones during the dates and hours below.</h2>
-            @*<div class="box-tools pull-right">
+        @*<div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
             </div>*@
@@ -27,17 +30,17 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Override</label>
-                           
-                                <input type="text" class="form-control" id="Override" tabindex="1" name="Override" value="@Model.Roster.Override" placeholder="Enter override ">
-                                
-                           
+
+                            <input type="text" class="form-control" id="Override" tabindex="1" name="Override" value="@Model.Roster.Override" placeholder="Enter override ">
+
+
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Start Date</label>
                             <div class="input-group">
-                                <input type="text" id="StartDate" name="StartDate" tabindex="3" value="@Model.Roster.StartDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
+                                <input type="text" id="StartDate" name="StartDate" tabindex="3" value="@Model.Roster.StartDate.ToString("dd/MM/yyyy")" class="form-control datepicker">
                                 <div id="StartDateC" class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -49,7 +52,7 @@
                             <div class="form-group">
                                 <label>Start time</label>
                                 <div class="input-group">
-                                    <input type="text" id="StartTime" name="StartTime" tabindex="5" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <input type="text" id="StartTime" name="StartTime" data-format="hh:mm A" tabindex="5" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
                                     <div id="startclock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -75,17 +78,17 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Override Details</label>
-                           
-                                <input type="text" class="form-control" id="OverrideDetails" tabindex="2" name="OverrideDetails" value="@Model.Roster.OverrideDetails" placeholder="Enter override details">
-                                
-                            
+
+                            <input type="text" class="form-control" id="OverrideDetails" tabindex="2" name="OverrideDetails" value="@Model.Roster.OverrideDetails" placeholder="Enter override details">
+
+
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">End Date</label>
                             <div class="input-group">
-                                <input type="text" id="EndDate" name="EndDate" tabindex="4" value="@Model.Roster.EndDate.ToString("dd/MMMM/yyyy")" class="form-control datepicker">
+                                <input type="text" id="EndDate" name="EndDate" tabindex="4" value="@Model.Roster.EndDate.ToString("dd/MM/yyyy")" class="form-control datepicker">
                                 <div id="EndDateC" class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -97,7 +100,7 @@
                             <div class="form-group">
                                 <label>End time</label>
                                 <div class="input-group">
-                                    <input type="text" id="FinishTime" name="FinishTime" tabindex="6" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <input type="text" id="FinishTime" name="FinishTime" data-format="hh:mm A" tabindex="6" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
                                     <div id="FinishTimeClock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -114,31 +117,31 @@
                 </div>
             </div>
         </div>
-        </form>
-        <div class="box-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-        </div>
-        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                Launch demo modal
-            </button>*@
+    </form>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-                        Save changes?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
-                    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 
@@ -151,20 +154,25 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    <script src="~/AdminLTE/plugins/clock/js/clockface.js"></script>
     <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
     <script src="~/AdminLTE/plugins/datepicker/js/locales/bootstrap-datepicker*"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $('#startclock').click(function(){
-       $(document).ready(function(){
-           $("#StartTime").timepicker().focus();
-       });
+    $('#startclock').click(function(e){
+       //$(document).ready(function(){
+        //  $("#StartTime").timepicker().focus();
+        e.stopPropagation();
+
+           $('#StartTime').clockface('toggle');
+       //});
     });
-    $('#FinishTimeClock').click(function(){
-        $(document).ready(function(){
-            $("#FinishTime").timepicker().focus();
-        });
+    $('#FinishTimeClock').click(function(e){
+        //$(document).ready(function(){
+        e.stopPropagation();
+        $("#FinishTime").clockface('toggle');
+       // });
     });
     $('#StartDateC').click(function(){
         $(document).ready(function(){
@@ -177,14 +185,27 @@
         });
     });
 
-</script>
+    </script>
     <script type="text/javascript">
         $('.datepicker').datepicker({
-            format: 'dd/MM/yyyy'
+            format: 'dd/mm/yyyy'
         });
-        $(".timepicker").timepicker({
-            showInputs: false
+        //$(".timepicker").timepicker({
+        //    showInputs: false
+        //});
+        $('#StartTime').clockface();
+        $('#StartTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
         });
+
+        $('#FinishTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+
 
         var jsontext = '@Html.Raw(Json.Encode(Model.UserList))';
         var data = JSON.parse(jsontext);
@@ -211,7 +232,7 @@
                 rules: {
                     StartDate: {
                         required: true,
-                       date: true
+                       //date: true
                     },
                     StartTime: {
                         required: true,
@@ -219,7 +240,7 @@
                     },
                     EndDate: {
                         required: true,
-                        date: true,
+                       // date: true,
                        // greaterThan: "#StartDate"
                     },
                     FinishTime: {
@@ -243,13 +264,19 @@
             {
                 return
             }
+	    var from = $("#StartDate").val().split("/");
+
+var f = new Date(from[2], from[1] - 1, from[0]);
+	    var to= $("#EndDate").val().split("/");
+
+var t= new Date(to[2], to[1] - 1, to[0]);
             var StartDateVal=$('#StartDate').val();
             var EndDateVal=$('#EndDate').val();
             var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
             var TeamIdVal=$('#Groups').val()==null?null: $('#Groups').val().toString()
             var data={ Id : @Model.Roster.Id,
-                StartDate :StartDateVal,
-                EndDate : EndDateVal,
+                StartDate :f,
+                EndDate : t,
                 StartTime: $('#StartTime').val(),
                 FinishTime : $('#FinishTime').val(),
                 OverrideDetails:$('#OverrideDetails').val(),

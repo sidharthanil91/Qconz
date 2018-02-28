@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <div class="form-group">
 
-                            <img style="width: 125px;height:125px;display:block  ;border:solid; object-fit: contain" id="blah" src="@Model.Image" alt="Upload image"  />
+                            <img style="width: 125px;height:125px;display:block; background: url(../../Image/imageadd.jpg)  ;border:solid; object-fit: contain" id="blah" src="@Model.Image"   />
                         </div>
                         <label for="exampleInputEmail1">Company logo</label>
                         <input type='file' id="imgInp" />
@@ -239,7 +239,7 @@
                     success: function (success) {
                         if(!success)
                         {
-                            alert('Incorrect file uploaded..');
+                            alert("Image should be 500*500 and a supported file type");
                             return;
                         }
                             else{

@@ -50,6 +50,32 @@ namespace QconzLocateDAL.ApiQconzRepository
         }
         public RosterModel GetOverRideDetails(int UserId, DateTime Date)
         {
+            //var RosterG = (from t in entity.tblTeamRoasters where t.tblTeam.tblUserTeams.USE == UserId select t.tblRoaster).FirstOrDefault();
+            //RosterModel RosterGDetails;
+            //if (RosterG == null)
+            //{
+            //    RosterGDetails = new RosterModel()
+            //    {
+            //        Status = "0"
+            //    };
+            //    return RosterGDetails;
+            //}
+            //if (RosterG.STARTDATE <= Date && RosterG.ENDDATE >= Date)
+            //{
+            //    RosterGDetails = new RosterModel()
+            //    {
+            //        StartTime = RosterG.STARTTIME,
+            //        FinishTime = RosterG.FINISHTIME,
+            //        Status = "1"
+            //    };
+            //}
+            //else
+            //{
+            //    RosterGDetails = new RosterModel()
+            //    {
+            //        Status = "0"
+            //    };
+            //}
             var Roster = (from t in entity.tblUserRoasters where t.USERID == UserId select t.tblRoaster).FirstOrDefault();
             RosterModel RosterDetails;
             if (Roster == null)

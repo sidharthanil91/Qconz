@@ -10,6 +10,7 @@
 
 @Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
 
+
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -34,7 +35,7 @@
 
                             <tr>
                                 <td>
-                                    @item.DateTime
+                                    @item.DateTime.ToString("dd/MM/yyyy hh:mm tt")
                                 </td>
                                 <td>
                                     @item.User

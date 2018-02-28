@@ -119,21 +119,33 @@ namespace QconzLocate.Controllers
         
                 string path = null;
                 var pic = System.Web.HttpContext.Current.Request.Files["file"];
-                var allowedExtensions = new[] {".Jpg", ".png", ".jpg", "jpeg"};
+                var allowedExtensions = new[] {".Jpg", ".png", ".jpg", ".jpeg"};
                 if (pic != null)
                 {
                     var ext = Path.GetExtension(pic.FileName);
-                    if(allowedExtensions.Any(t=>t!=ext)&& pic.ContentLength > (100 * 1024))
+                    if (allowedExtensions.Any(t => t == ext))
+                    {
+                        using (System.Drawing.Image myImage =
+                        System.Drawing.Image.FromStream(pic.InputStream))
+                        {
+                            if(myImage.Height!=500 & myImage.Width!=500)
+                            {
+                                success = false;
+                                return Json(success, JsonRequestBehavior.AllowGet);
+                            }
+                        }
+                        var fileName = Path.GetFileName(pic.FileName);
+                        string name = Path.GetFileNameWithoutExtension(fileName);
+                        string myfile = name + "_" + DateTime.Now.ToString("dd_MM_yyyy_hh_mm_ss_t") + ext;
+                        var savepath = Path.Combine(Server.MapPath("~/Image"), myfile);
+                        pic.SaveAs(savepath);
+                        path = "../../Image/" + myfile;
+                    }
+                    else
                     {
                         success = false;
                         return Json(success, JsonRequestBehavior.AllowGet);
                     }
-                    var fileName = Path.GetFileName(pic.FileName);
-                    string name = Path.GetFileNameWithoutExtension(fileName);
-                    string myfile = name + "_" + DateTime.Now.ToString("dd_mm_yyyy") + ext;
-                    var savepath = Path.Combine(Server.MapPath("~/Image"), myfile);
-                    pic.SaveAs(savepath);
-                    path = "/Image/" + myfile;
                 }
                 // byte[] imgData = null;
                 //if (pic != null)

@@ -305,6 +305,8 @@
     <Content Include="AdminLTE\plugins\chartjs\js\chart.js" />
     <Content Include="AdminLTE\plugins\chartjs\js\chart.min.js" />
     <Content Include="AdminLTE\plugins\ckeditor\js\ckeditor.js" />
+    <Content Include="AdminLTE\plugins\clock\css\clockface.css" />
+    <Content Include="AdminLTE\plugins\clock\js\clockface.js" />
     <Content Include="AdminLTE\plugins\colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="AdminLTE\plugins\colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="AdminLTE\plugins\colorpicker\img\alpha-horizontal.png" />
@@ -434,7 +436,7 @@
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Image\IMG-20170304-WA0015_25_08_2018.jpg" />
+    <Content Include="Image\imageadd.jpg" />
     <Content Include="Scripts\Account\Login.js" />
     <Content Include="Scripts\Account\Register.js" />
     <Content Include="Scripts\bloodhound.js" />

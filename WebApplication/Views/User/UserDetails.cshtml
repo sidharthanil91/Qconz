@@ -16,7 +16,7 @@
 @Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
 @Styles.Render("~/AdminLTE/Bundle/dist/css")
 @Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
-
+<link rel="stylesheet" href="~/AdminLTE/plugins/clock/css/clockface.css">
 
 <div class="box box-default">
     <div class="box-header with-border">
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label>Start time</label>
                                 <div class="input-group">
-                                    <input type="text" id="StartTime" tabindex="9" value="@Model.UserDetails.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <input type="text" id="StartTime" data-format="hh:mm A" tabindex="9" value="@Model.UserDetails.StartTime.ToString("hh:mm tt")" class="form-control ">
                                     <div id="startclock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -132,7 +132,7 @@
                             <div class="form-group">
                                 <label>End time</label>
                                 <div class="input-group">
-                                    <input type="text" id="EndTime" tabindex="10" value="@Model.UserDetails.EndTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <input type="text" id="EndTime" tabindex="10" data-format="hh:mm A" value="@Model.UserDetails.EndTime.ToString("hh:mm tt")" class="form-control ">
                                     <div id="EndTimeClock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -196,21 +196,39 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/User/Advanced")
 @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+<script src="~/AdminLTE/plugins/clock/js/clockface.js"></script>
 <script type="text/javascript">
 
-    $('#startclock').click(function(){
-       $(document).ready(function(){
-           $("#StartTime").timepicker().focus();
-       });
+  
+    $('#startclock').click(function(e){
+        //$(document).ready(function(){
+        //  $("#StartTime").timepicker().focus();
+        e.stopPropagation();
+
+        $('#StartTime').clockface('toggle');
+        //});
     });
-    $('#EndTimeClock').click(function(){
-        $(document).ready(function(){
-            $("#EndTime").timepicker().focus();
-        });
+    $('#EndTimeClock').click(function(e){
+        //$(document).ready(function(){
+        e.stopPropagation();
+        $("#EndTime").clockface('toggle');
+        // });
     });
     
 </script>
     <script type="text/javascript">
+        $('#StartTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+       
+        $('#EndTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+
         $("#Type").val("@Model.UserDetails.UserType").trigger("change");
         //$('#WorkingDays').select2();
         //$('#WorkingDays').val("[1,2,4]").trigger("change");

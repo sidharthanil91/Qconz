@@ -133,7 +133,7 @@
                     title: data.Address
                 });
                 (function (marker, data) {
-                    google.maps.event.addListener(marker, "click", function (e) {
+                    google.maps.event.addListener(marker, "mouseover", function (e) {
                         infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
                         infoWindow.open(map, marker);
                     });

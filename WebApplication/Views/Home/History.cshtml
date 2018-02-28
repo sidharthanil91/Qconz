@@ -105,8 +105,9 @@
         });
        
         $('.datepicker').datepicker({
-            format: 'dd-MM-yyyy'
+            format: 'dd-mm-yyyy'
         });
+        
         $('.select2').select2();
         var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
         var data1 = JSON.parse(jsontext1);
@@ -158,7 +159,7 @@
                              title: data.Address
                          });
                          (function (marker, data) {
-                             google.maps.event.addListener(marker, "click", function (e) {
+                             google.maps.event.addListener(marker, "mouseover", function (e) {
                                  infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
                                  infoWindow.open(map, marker);
                              });

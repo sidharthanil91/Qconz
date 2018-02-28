@@ -2,6 +2,8 @@
 using QconzLocateDAL.QConzRepositoryModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,19 @@ namespace QconzLocateDAL.QConzRepository
         {
             try
             {
-                List<RosterModel> RosterList = new List<RosterModel>();
+                var currentdate = DateTime.Now;
+                var updatelist = (from t in entity.tblRoasters
+                                  let time = DbFunctions.CreateTime(t.FINISHTIME.Value.Hour,
+                                                     t.FINISHTIME.Value.Minute,
+                                                     t.FINISHTIME.Value.Second)
+                                  where (t.ENDDATE < currentdate.Date||(t.ENDDATE==currentdate.Date && time<currentdate.TimeOfDay))  
+                                  && t.ARCHIVE=="A" select t).ToList();
+                foreach(var item in updatelist)
+                {
+                    item.ARCHIVE = "N";
+                }
+                entity.SaveChanges();
+                List < RosterModel > RosterList = new List<RosterModel>();
                 var y = (from t in entity.tblRoasters where (t.COMPANYID == CompanyId || CompanyId == 0) && t.ARCHIVE == Status select t).ToList();
                 RosterList = y.Select(c => new RosterModel
                 {
@@ -72,8 +86,12 @@ namespace QconzLocateDAL.QConzRepository
         {
             try
             {
-                List<int> UserIds = RosterModel.UserId.Split(',').Select(int.Parse).ToList();
-                List<int> TeamIds = RosterModel.TeamId.Split(',').Select(int.Parse).ToList();
+                List<int> UserIds = new List<int>();
+                List<int> TeamIds = new List<int>();
+                if (RosterModel.UserId!=null)
+                 UserIds = RosterModel.UserId.Split(',').Select(int.Parse).ToList();
+                if (RosterModel.TeamId != null)
+                    TeamIds = RosterModel.TeamId.Split(',').Select(int.Parse).ToList();
                 if (RosterModel.Id == 0)
                 {
                     var roster = new tblRoaster()
