@@ -20,4 +20,18 @@ namespace QconzLocateDAL.QConzRepositoryModel
         public DateTime? StartTime { get; set; }
         public DateTime? FinishTime { get; set; }
     }
+    public class OverRideFullModel
+    {
+        public List<string> Days { get; set; }
+        public List<OverRideModel> OverRides { get; set; }
+        public string StartTime { get; set; }
+        public string FinishTime { get; set; }
+    }
+    public class OverRideModel
+    {
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string StartTime { get; set; }
+        public string FinishTime { get; set; }
+    }
 }

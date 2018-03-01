@@ -35,24 +35,11 @@ namespace QconzLocate.Controllers
             if(  y!=null)
             {
                 var RosterDetails = _IUserWorkService.GetUserWorkRoster(y.UserId,tokendata.date);
-                var strDate = RosterDetails.StartTime.ToString();
-                DateTime dt;
-                DateTime.TryParse(strDate, out dt);
-                var endDate = RosterDetails.FinishTime.ToString();
-                DateTime dt1;
-                DateTime.TryParse(endDate, out dt1);
-                RosterIndividual rosters;
-                if (RosterDetails.Status == "1")
-                {
-                    rosters = new RosterIndividual()
-                    {
-                        startDateTime = dt.ToString("HH:mm:ss"),
-                        endDateTime = dt1.ToString("HH:mm:ss"),
-                    };
-                    return new UserWorkViewModel() { message = "Success", status = "1", roster = rosters };
-                }
+         
+                return new UserWorkViewModel() {days=RosterDetails.Days,overrides=RosterDetails.OverRides.Select(t=>new OverRideViewModel {start_date=t.StartDate,end_date=t.EndDate,start_time=t.StartTime,end_time=t.FinishTime }).ToList(), start_time = RosterDetails.StartTime,end_time=RosterDetails.FinishTime , message = "Success", status = "1", };
+               
             }
-            return new UserWorkViewModel() { message = "Failed", status = "0", roster = null };
+            return new UserWorkViewModel() { message = "Failed", status = "0"};
         }
 
         // PUT api/<controller>/5

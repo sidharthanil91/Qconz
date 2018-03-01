@@ -44,7 +44,7 @@ namespace QconzLocateDAL.QConzRepository
                                                  join t1 in entity.tblUserMasters on t.USERID equals t1.ID
                                                  where (CompanyId==0 ||t1.COMPANYID == CompanyId) && (GroupId==0 || t1.tblUserTeams.Select(t2=>t2.TEAMID).Contains(GroupId)) &&(UserId==0 || t.USERID==UserId)
                                                  select new LocationModel
-                                                 { Address = t1.FIRSTNAME + " " + t1.SURNAME+":"+t.LOGTIME , Lat = t.LAT, Lng = t.LNG ,Type="U"}).ToList();
+                                                 {UserId=t1.ID, Address = t1.FIRSTNAME + " " + t1.SURNAME+":"+t.LOGTIME , Lat = t.LAT, Lng = t.LNG ,Type="U"}).ToList();
 
             return SelectedUsers;
         }

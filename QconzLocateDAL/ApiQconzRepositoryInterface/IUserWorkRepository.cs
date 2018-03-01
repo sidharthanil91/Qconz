@@ -9,6 +9,6 @@ namespace QconzLocateDAL.ApiQconzRepositoryInterface
 {
     public interface IUserWorkRepository
     {
-        RosterModel GetUserWorkRoster(int UserId,DateTime Date);
+        OverRideFullModel GetUserWorkRoster(int UserId,DateTime Date);
     }
 }

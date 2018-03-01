@@ -92,6 +92,7 @@
         });
     </script>
     <script>
+        var defaultUser=0
         $(function () {
             $('#example1').DataTable();
             $('#example2').DataTable({
@@ -114,7 +115,14 @@
         $('#User').select2({
             data: data1
         })
-
+        
+        if(defaultUser>0)
+        {
+            $('#User').value=defaultUser;
+        }
+        else{
+            $('#User').value=1;
+        }
         var allmarkers=[];
         
         $(document).ready(function(){

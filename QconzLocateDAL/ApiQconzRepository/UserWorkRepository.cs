@@ -5,104 +5,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QconzLocateDAL.QConzRepositoryModel;
+using System.Data.Entity;
 
 namespace QconzLocateDAL.ApiQconzRepository
 {
     public class UserWorkRepository : IUserWorkRepository
     {
         QCONZEntities entity = new QCONZEntities();
-        public RosterModel GetUserWorkRoster(int UserId, DateTime Date)
+        enum Days { monday=1, tuesday, wednesday, thursday, friday, saturday, sunday };
+        public OverRideFullModel GetUserWorkRoster(int UserId, DateTime Date)
         {
-            RosterModel RosterDetails;
-            var Roster = GetOverRideDetails(UserId, Date);
-            if (Roster.Status == "1")
+            OverRideFullModel RosterDetails = new OverRideFullModel();
+            List<int> days = new List<int>();
+            var userDetails = (from t in entity.tblUserMasters where t.ID == UserId select t).FirstOrDefault();
+            days = userDetails.WORKINGDAYS.Split(',').Select(int.Parse).ToList();
+            RosterDetails.Days = new List<string>();
+            foreach (var item in days)
             {
-                return Roster;
+                 string day= (Enum.GetName(typeof(Days),item));
+                 RosterDetails.Days.Add(day);
             }
-            else
-            {
-                var day = (Int32)Date.DayOfWeek;
-                var userDetails = (from t in entity.tblUserMasters where t.ID == UserId select t).FirstOrDefault();
-                List<int> days = new List<int>();
-                if (userDetails.WORKINGDAYS != null)
-                {
-                    days = userDetails.WORKINGDAYS.Split(',').Select(int.Parse).ToList();
+            RosterDetails.StartTime = userDetails.STARTTIME.Value.ToShortTimeString();
+            RosterDetails.FinishTime = userDetails.ENDTIME.Value.ToShortTimeString();
+            var UserRoaster = (from t in entity.tblUserRoasters where t.USERID == UserId && t.tblRoaster.ARCHIVE == "A" && t.tblRoaster.ENDDATE >= Date select t.tblRoaster).ToList();
+            var TeamRoaster = (from ut in entity.tblUserTeams
+                               join t1 in entity.tblTeams on new { X1 = ut.TEAMID, X2 = ut.USERID } equals new { X1 = t1.ID, X2 = UserId }
+                               join tr in entity.tblTeamRoasters on t1.ID equals tr.TEAMID
+                               join r in entity.tblRoasters on tr.ROASTERID equals r.ID
+                               where r.ARCHIVE == "A"
+                               select r).ToList();
 
-                    if (days.Any(t => t == day))
-                    {
-                        RosterDetails = new RosterModel()
-                        {
-                            StartTime = userDetails.STARTTIME,
-                            FinishTime = userDetails.ENDTIME,
-                            Status = "1"
-                        };
-                        return RosterDetails;
-                    }
-                }
-
-                RosterDetails = new RosterModel()
-                {
-                    Status = "0"
-                };
-
-                return RosterDetails;
-            }
-        }
-        public RosterModel GetOverRideDetails(int UserId, DateTime Date)
-        {
-            //var RosterG = (from t in entity.tblTeamRoasters where t.tblTeam.tblUserTeams.USE == UserId select t.tblRoaster).FirstOrDefault();
-            //RosterModel RosterGDetails;
-            //if (RosterG == null)
-            //{
-            //    RosterGDetails = new RosterModel()
-            //    {
-            //        Status = "0"
-            //    };
-            //    return RosterGDetails;
-            //}
-            //if (RosterG.STARTDATE <= Date && RosterG.ENDDATE >= Date)
-            //{
-            //    RosterGDetails = new RosterModel()
-            //    {
-            //        StartTime = RosterG.STARTTIME,
-            //        FinishTime = RosterG.FINISHTIME,
-            //        Status = "1"
-            //    };
-            //}
-            //else
-            //{
-            //    RosterGDetails = new RosterModel()
-            //    {
-            //        Status = "0"
-            //    };
-            //}
-            var Roster = (from t in entity.tblUserRoasters where t.USERID == UserId select t.tblRoaster).FirstOrDefault();
-            RosterModel RosterDetails;
-            if (Roster == null)
+            RosterDetails.OverRides = (UserRoaster.Select(t => new OverRideModel
             {
-                RosterDetails = new RosterModel()
-                {
-                    Status = "0"
-                };
-                return RosterDetails;
-            }
-            if (Roster.STARTDATE <= Date && Roster.ENDDATE >= Date)
+                StartDate = t.STARTDATE.Value.ToShortDateString(),
+                EndDate = t.ENDDATE.Value.ToShortDateString(),
+                StartTime = t.STARTTIME.Value.ToShortTimeString(),
+                FinishTime = t.FINISHTIME.Value.ToShortTimeString()
+            }).ToList());
+            RosterDetails.OverRides.AddRange((TeamRoaster.Select(t => new OverRideModel
             {
-                RosterDetails = new RosterModel()
-                {
-                    StartTime = Roster.STARTTIME,
-                    FinishTime = Roster.FINISHTIME,
-                    Status = "1"
-                };
-            }
-            else
-            {
-                RosterDetails = new RosterModel()
-                {
-                    Status = "0"
-                };
-            }
+                StartDate = t.STARTDATE.Value.ToShortDateString(),
+                EndDate = t.ENDDATE.Value.ToShortDateString(),
+                StartTime = t.STARTTIME.Value.ToShortTimeString(),
+                FinishTime = t.FINISHTIME.Value.ToShortTimeString()
+            }).ToList()));
             return RosterDetails;
-        }
+        }      
     }
 }

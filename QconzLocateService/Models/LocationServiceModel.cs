@@ -8,6 +8,7 @@ namespace QconzLocateService.Models
 {
     public class LocationServiceModel
     {
+        public int UserId { get; set; }
         public string Lat { get; set; }
         public string Lng { get; set; }
         public string Address { get; set; }

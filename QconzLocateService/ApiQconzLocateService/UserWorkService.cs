@@ -13,15 +13,22 @@ namespace QconzLocateService.QconzLocateService
     public class UserWorkService : IUserWorkService
     {
         private IUserWorkRepository _IUserWorkRepository = new UserWorkRepository();
-        public RosterServiceModel GetUserWorkRoster(int UserId,DateTime Date)
+        public OverRideFullServiceModel GetUserWorkRoster(int UserId,DateTime Date)
         {
             var y=_IUserWorkRepository.GetUserWorkRoster(UserId,Date);
 
-            return new RosterServiceModel()
+            return new OverRideFullServiceModel()
             {
-                StartTime=y.StartTime,
-                FinishTime=y.FinishTime,
-                Status=y.Status
+                StartTime = y.StartTime,
+                FinishTime = y.FinishTime,
+                Days = y.Days,
+                OverRides = y.OverRides.Select(t => new OverRideServiceModel
+                {
+                    EndDate=t.EndDate,
+                    FinishTime=t.FinishTime,
+                    StartDate=t.StartDate,
+                    StartTime=t.StartTime
+                }).ToList()
             };
         }
     }

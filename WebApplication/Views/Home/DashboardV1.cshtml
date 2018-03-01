@@ -92,7 +92,7 @@
         $('#User').select2({
             data: data1
         })
-      
+
 
     $(document).ready(function(){
         var markers = @Html.Raw(ViewBag.UserMarkers);
@@ -136,6 +136,9 @@
                     google.maps.event.addListener(marker, "mouseover", function (e) {
                         infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
                         infoWindow.open(map, marker);
+                    });
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        window.location.href= '@Url.Action("History", "Home", new { id = "ID" })'.replace("ID",data.UserId);
                     });
                 })(marker, data);
                 allmarkers.push(marker);

@@ -31,6 +31,7 @@ namespace QconzLocateService.QconzLocateService
             var y = _ILocationRepository.GetUserLocation(CompanyId, UserId, GroupId);
             List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
             {
+                UserId=t.UserId,
                 Address = t.Address,
                 Lat = t.Lat,
                 Lng = t.Lng

@@ -9,6 +9,6 @@ namespace QconzLocateService.QconzLocateInterface
 {
     public interface IUserWorkService
     {
-        RosterServiceModel GetUserWorkRoster(int UserId,DateTime Date);
+        OverRideFullServiceModel GetUserWorkRoster(int UserId,DateTime Date);
     }
 }

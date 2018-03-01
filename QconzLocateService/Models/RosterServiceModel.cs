@@ -20,4 +20,18 @@ namespace QconzLocateService.Models
         public DateTime? StartTime { get; set; }
         public DateTime? FinishTime { get; set; }
     }
+    public class OverRideFullServiceModel
+    {
+        public List<string> Days { get; set; }
+        public List<OverRideServiceModel> OverRides { get; set; }
+        public string StartTime { get; set; }
+        public string FinishTime { get; set; }
+    }
+    public class OverRideServiceModel
+    {
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string StartTime { get; set; }
+        public string FinishTime { get; set; }
+    }
 }

@@ -22,6 +22,7 @@ namespace QconzLocate.Controllers
             foreach (var item in y)
             {
                 markers += "{";
+                markers += string.Format("'UserId': '{0}',", item.UserId);
                 markers += string.Format("'Address': '{0}',", item.Address);
                 markers += string.Format("'Lat': '{0}',", item.Lat);
                 markers += string.Format("'Lng': '{0}',", item.Lng);
@@ -95,7 +96,7 @@ namespace QconzLocate.Controllers
             items.GroupLists.Insert(0, DefaultItem);
             return View(items);
         }
-        public ActionResult History()
+        public ActionResult History(int Id=0)
         {
             int CompanyId = (int)(Session["CompanyId"]);
             var User = _commonservice.GetUserSelectList(CompanyId);
@@ -105,7 +106,12 @@ namespace QconzLocate.Controllers
                 id = t.Id,
                 text = t.Text
             }).ToList();
-            var history = _ILocationService.GetHistoryLocation(CompanyId, User.UserList.FirstOrDefault().Id, null);
+            int UserId = User.UserList.FirstOrDefault().Id;
+            if (Id > 0)
+            {
+                UserId = Id;
+            }
+            var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, null);
             items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
              var y=history.ToArray();
 
