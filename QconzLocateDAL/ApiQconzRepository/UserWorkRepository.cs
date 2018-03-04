@@ -25,8 +25,8 @@ namespace QconzLocateDAL.ApiQconzRepository
                  string day= (Enum.GetName(typeof(Days),item));
                  RosterDetails.Days.Add(day);
             }
-            RosterDetails.StartTime = userDetails.STARTTIME.Value.ToShortTimeString();
-            RosterDetails.FinishTime = userDetails.ENDTIME.Value.ToShortTimeString();
+            RosterDetails.StartTime = userDetails.STARTTIME.Value.ToString("HH:mm:ss");
+            RosterDetails.FinishTime = userDetails.ENDTIME.Value.ToString("HH:mm:ss");
             var UserRoaster = (from t in entity.tblUserRoasters where t.USERID == UserId && t.tblRoaster.ARCHIVE == "A" && t.tblRoaster.ENDDATE >= Date select t.tblRoaster).ToList();
             var TeamRoaster = (from ut in entity.tblUserTeams
                                join t1 in entity.tblTeams on new { X1 = ut.TEAMID, X2 = ut.USERID } equals new { X1 = t1.ID, X2 = UserId }
@@ -37,17 +37,17 @@ namespace QconzLocateDAL.ApiQconzRepository
 
             RosterDetails.OverRides = (UserRoaster.Select(t => new OverRideModel
             {
-                StartDate = t.STARTDATE.Value.ToShortDateString(),
-                EndDate = t.ENDDATE.Value.ToShortDateString(),
-                StartTime = t.STARTTIME.Value.ToShortTimeString(),
-                FinishTime = t.FINISHTIME.Value.ToShortTimeString()
+                StartDate = t.STARTDATE.Value.ToString("yyyy-MM-dd"),
+                EndDate = t.ENDDATE.Value.ToString("yyyy-MM-dd"),
+                StartTime = t.STARTTIME.Value.ToString("HH:mm:ss"),
+                FinishTime = t.FINISHTIME.Value.ToString("HH:mm:ss")
             }).ToList());
             RosterDetails.OverRides.AddRange((TeamRoaster.Select(t => new OverRideModel
             {
-                StartDate = t.STARTDATE.Value.ToShortDateString(),
-                EndDate = t.ENDDATE.Value.ToShortDateString(),
-                StartTime = t.STARTTIME.Value.ToShortTimeString(),
-                FinishTime = t.FINISHTIME.Value.ToShortTimeString()
+                StartDate = t.STARTDATE.Value.ToString("yyyy-MM-dd"),
+                EndDate = t.ENDDATE.Value.ToString("yyyy-MM-dd"),
+                StartTime = t.STARTTIME.Value.ToString("HH:mm:ss"),
+                FinishTime = t.FINISHTIME.Value.ToString("HH:mm:ss")
             }).ToList()));
             return RosterDetails;
         }      

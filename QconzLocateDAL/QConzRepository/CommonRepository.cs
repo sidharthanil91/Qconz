@@ -40,6 +40,21 @@ namespace QconzLocateDAL.QConzRepository
             CommonModel.GroupList = GroupSelectList;
             return CommonModel;
         }
+
+        public CommonModel GetCustomerSelectList(int CompanyId)
+        {
+            CommonModel CommonModel = new CommonModel();
+            List<SelectList> CustomerSelectList = new List<SelectList>();
+            var y = (from t in entity.tblCustomers where (t.COMPANYID == CompanyId || CompanyId == 0)  select new { t.ID, t.OFFICENAME,t.CUSTOMERCODE }).ToList();
+            CustomerSelectList = y.Select(c => new SelectList
+            {
+                Id = c.ID,
+                Text =c.CUSTOMERCODE+" - " + c.OFFICENAME,
+            }
+             ).ToList();
+            CommonModel.GroupList = CustomerSelectList;
+            return CommonModel;
+        }
         public CommonModel GetUserSelectList(int CompanyId)
         {
             CommonModel CommonModel = new CommonModel();

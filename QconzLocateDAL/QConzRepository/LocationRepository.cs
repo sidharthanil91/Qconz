@@ -15,14 +15,18 @@ namespace QconzLocateDAL.QConzRepository
         private QCONZEntities entity = new QCONZEntities();
         public  List<LocationModel> GetCustomerLocation(int CompanyId, string Customer,int UserId, int GroupId)
         {
-            var y = (from t in entity.tblCustomers where ((t.COMPANYID == CompanyId || CompanyId == 0)) select t).Where(x => x.CUSTOMERCODE.Contains(Customer) || x.OFFICENAME.Contains(Customer) ||
-               x.LAT.Contains(Customer) || x.LNG.Contains(Customer) || x.ADDRESS1.Contains(Customer) || (x.ADDRESS2).Contains(Customer) || (Customer == null));
+            List<int> CustomerIds = new List<int>();
+            if(Customer!=null)
+                CustomerIds= Customer.Split(',').Select(int.Parse).ToList();
+            var y = (from t in entity.tblCustomers where ((t.COMPANYID == CompanyId || CompanyId == 0)) select t).Where(x => CustomerIds.Contains(x.ID));
             List<LocationModel> location;
             location = y.Select(c => new LocationModel
             {
+               UserId=c.ID,
+               Name=c.OFFICENAME,
                Lat=c.LAT,
                Lng=c.LNG,
-               Address=c.ADDRESS1+" "+c.ADDRESS2,
+               Address=c.FIRSTNAME+" "+c.PHONE_1,
                Type="C"
             }
              ).ToList();
@@ -44,19 +48,21 @@ namespace QconzLocateDAL.QConzRepository
                                                  join t1 in entity.tblUserMasters on t.USERID equals t1.ID
                                                  where (CompanyId==0 ||t1.COMPANYID == CompanyId) && (GroupId==0 || t1.tblUserTeams.Select(t2=>t2.TEAMID).Contains(GroupId)) &&(UserId==0 || t.USERID==UserId)
                                                  select new LocationModel
-                                                 {UserId=t1.ID, Address = t1.FIRSTNAME + " " + t1.SURNAME+":"+t.LOGTIME , Lat = t.LAT, Lng = t.LNG ,Type="U"}).ToList();
+                                                 {UserId=t1.ID, Name = t1.FIRSTNAME + " " + t1.SURNAME, Address = t.LOGTIME.ToString("dd/MM/yyyy   hh:mm:ss tt") , Lat = t.LAT, Lng = t.LNG ,Type="U"}).ToList();
 
             return SelectedUsers;
         }
 
         public List<LocationModel> GetHistoryLocation(int CompanyId, int UserId, DateTime? Date)
         {
-            List<LocationModel> UserHistory= (from t in entity.tblUserLogs
+            List<tblUserLog> users = entity.tblUserLogs.GroupBy(x => x.USERID).Select(t => t.OrderByDescending(c => c.ID).Where(t1 => t1.LAT.ToLower() != "unknown" && t1.LNG.ToLower() != "unknown")).ToList();
+            users.RemoveAll(item => item == null);
+            List<LocationModel> UserHistory= (from t in users
                                               join t1 in entity.tblUserMasters on t.USERID equals t1.ID
-                                              where (CompanyId == 0 || t1.COMPANYID == CompanyId)  && (UserId == 0 || t.USERID == UserId) &&(t.LAT.ToLower() != "unknown") && (t.LNG.ToLower() != "unknown") && (Date==null || DbFunctions.TruncateTime(t.LOGTIME)==Date)
-                                              orderby t.LOGTIME
+                                              where (CompanyId == 0 || t1.COMPANYID == CompanyId)  && (UserId == 0 || t.USERID == UserId)
+                                              orderby t.LOGTIME descending
                                               select new LocationModel
-                                              { Address = t1.FIRSTNAME + " " + t1.SURNAME + ":" + t.LOGTIME, Lat = t.LAT, Lng = t.LNG, Type = "U" }).ToList();
+                                              { Name = t1.FIRSTNAME + " " + t1.SURNAME ,Address = t.LOGTIME.ToString("dd/MM/yyyy   hh:mm:ss tt"), Lat = t.LAT, Lng = t.LNG, Type = "U" }).ToList();
             return UserHistory;
         }
     }

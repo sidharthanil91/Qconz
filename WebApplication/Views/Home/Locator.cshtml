@@ -15,21 +15,26 @@
 @Styles.Render("~/AdminLTE/Bundle/plugins/datepicker/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/bootstrap-wysihtml5/css")*@
-
+<style>
+    hr {
+        margin: 0.1em auto;
+    }
+</style>
 <div class="box-body">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Customer code</label>
+                    <label for="exampleInputEmail1">Customer search</label>
                     @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
                    
-                    <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" id="CustomerCode" name="CustomerCode" value="" placeholder="Enter customer code">
-                        <span class="input-group-btn">
+                    @*<div class="input-group input-group-sm">*@
+                    @*<input type="text" class="form-control" id="CustomerCode" name="CustomerCode" value="" placeholder="Enter customer code">*@
+                        <select id="Customers" name="Customers" class="form-control select2" tabindex="10" multiple="multiple" data-placeholder="Select customers" style="width: 80%;"></select>
+                        @*<span class="input-group-btn">*@
                             <button type="button" id="savebtn" class="btn btn-primary">Search</button>
-                        </span>
-                    </div>
+                        @*</span>*@
+                    @*</div>*@
                 </div>
             </div>
 
@@ -85,6 +90,12 @@
             data: data1
         })
 
+        var jsontext2 = '@Html.Raw(Json.Encode(Model.CustomerLists))';
+        var data2 = JSON.parse(jsontext2);
+        $('#Customers').select2({
+            data: data2
+        })
+
         var allmarkers=[];
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icons = {
@@ -92,7 +103,7 @@
                 icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
             },
             U: {
-                icon: iconBase + 'library_maps.png'
+                icon:''// iconBase + 'library_maps.png'
             }
         };
         $(document).ready(function(){
@@ -100,7 +111,7 @@
             var markers = @Html.Raw(ViewBag.Markers);
             InitializeMap(markers);
 
-          
+
 
             function InitializeMap (markers) {
                 for (var i = 0; i < allmarkers.length; i++) {
@@ -125,8 +136,14 @@
                 });
                 (function (marker, data) {
                     google.maps.event.addListener(marker, "mouseover", function (e) {
-                        infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
+                        infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
                         infoWindow.open(map, marker);
+                    });
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        if(data.Type=='U')
+                            window.location.href= '@Url.Action("History", "Home", new { id = "ID" })'.replace("ID",data.UserId);
+                        else
+                            window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = "ID" })'.replace("ID",data.UserId);
                     });
                 })(marker, data);
                 allmarkers.push(marker);
@@ -140,14 +157,14 @@
                 filter();
             });
         $('#savebtn').click(function(){
-           
+
             filter();
-          
+
         });
         function filter(){
             var Group = $('#Group').val();
             var User = $('#User').val();
-            var Customer = $('#CustomerCode').val();
+            var Customer=$('#Customers').val()==null?null: $('#Customers').val().toString()
             var url='@Url.Action("Search", "Home")';
             $.ajax({
                 type:"POST",
@@ -165,7 +182,7 @@
             })
         }
         });
-      
+
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>

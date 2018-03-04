@@ -23,6 +23,7 @@ namespace QconzLocate.Controllers
             {
                 markers += "{";
                 markers += string.Format("'UserId': '{0}',", item.UserId);
+                markers += string.Format("'Name': '{0}',", item.Name);
                 markers += string.Format("'Address': '{0}',", item.Address);
                 markers += string.Format("'Lat': '{0}',", item.Lat);
                 markers += string.Format("'Lng': '{0}',", item.Lng);
@@ -64,7 +65,9 @@ namespace QconzLocate.Controllers
             foreach (var item in y)
             {
                 markers += "{";
+                markers += string.Format("'UserId': '{0}',", item.UserId);
                 markers += string.Format("'Address': '{0}',", item.Address);
+                markers += string.Format("'Name': '{0}',", item.Name);
                 markers += string.Format("'Lat': '{0}',", item.Lat);
                 markers += string.Format("'Lng': '{0}',", item.Lng);
                 markers += string.Format("'Type': '{0}',", item.Type);
@@ -73,6 +76,7 @@ namespace QconzLocate.Controllers
 
             markers += "];";
             ViewBag.Markers = markers;
+            var Customer = _commonservice.GetCustomerSelectList(CompanyId);
             var Group = _commonservice.GetGroupSelectList(CompanyId);
             var User = _commonservice.GetUserSelectList(CompanyId);
             var DefaultItem = new SelectListItems()
@@ -88,6 +92,11 @@ namespace QconzLocate.Controllers
                 text = t.Text
             }).ToList();
             items.UserLists = User.UserList.Select(t => new SelectListItems
+            {
+                id = t.Id,
+                text = t.Text
+            }).ToList();
+            items.CustomerLists = Customer.CustomerList.Select(t => new SelectListItems
             {
                 id = t.Id,
                 text = t.Text
@@ -112,7 +121,7 @@ namespace QconzLocate.Controllers
                 UserId = Id;
             }
             var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, null);
-            items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
+            items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Name,Date=t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
              var y=history.ToArray();
 
             string markers = "[";
@@ -120,6 +129,7 @@ namespace QconzLocate.Controllers
             foreach (var item in y)
             {
                 markers += "{";
+                markers += string.Format("'Name': '{0}',", item.Name);
                 markers += string.Format("'Address': '{0}',", item.Address);
                 markers += string.Format("'Lat': '{0}',", item.Lat);
                 markers += string.Format("'Lng': '{0}',", item.Lng);

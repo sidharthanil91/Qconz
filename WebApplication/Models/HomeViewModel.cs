@@ -10,6 +10,7 @@ namespace QconzLocate.Models
         public List<HistoryGridModel>HistoryGrid { get; set; }
         public List<SelectListItems> UserLists { get; set; }
         public List<SelectListItems> GroupLists { get; set; }
+        public List<SelectListItems> CustomerLists { get; set; }
     }
     public class HistoryGridModel
     {
@@ -18,5 +19,6 @@ namespace QconzLocate.Models
         public DateTime DateTime { get; set; }
         public int UserId { get; set; }
         public string User { get; set; }
+        public string Date { get; set; }
     }
 }

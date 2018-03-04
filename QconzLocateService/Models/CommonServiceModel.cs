@@ -11,7 +11,9 @@ namespace QconzLocateService.Models
         public List<SelectLists> GroupList { get; set; }
         public List<SelectLists> CompanyList { get; set; }
         public List<SelectLists> UserList { get; set; }
+        public List<SelectLists> CustomerList { get; set; }
     }
+
     public class SelectLists
     {
         public int Id { get; set; }

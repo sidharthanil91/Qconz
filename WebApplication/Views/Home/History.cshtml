@@ -9,7 +9,11 @@
 }
 @Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
-
+<style>
+    hr {
+        margin: 0.1em auto;
+    }
+</style>
 <div class="box-body">
     <div class="row">
        
@@ -40,7 +44,8 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Details</th>
+                    <th>Name</th>
+                    <th>Date</th>
                     <th>Latitude</th>
                     <th>Longitude</th>
                 </tr>
@@ -52,6 +57,9 @@
                     <tr>
                         <td>
                             @item.User
+                        </td>
+                        <td>
+                            @item.Date
                         </td>
                         <td>
                             @item.Latitude
@@ -94,7 +102,9 @@
     <script>
         var defaultUser=0
         $(function () {
-            $('#example1').DataTable();
+            $('#example1').DataTable({
+                "searching": false
+            });
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
@@ -168,7 +178,7 @@
                          });
                          (function (marker, data) {
                              google.maps.event.addListener(marker, "mouseover", function (e) {
-                                 infoWindow.setContent('<h5><strong>'+data.Address+'</strong></h5>');
+                                 infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
                                  infoWindow.open(map, marker);
                              });
                          })(marker, data);
