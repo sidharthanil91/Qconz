@@ -11,6 +11,6 @@ namespace QconzLocateDAL.QConzRepositoryInterface
     {
        List<LocationModel> GetCustomerLocation(int CompanyId, string Customer, int UserId, int GroupId);
        List<LocationModel> GetUserLocation(int CompanyId, int UserId, int GroupId);
-        List<LocationModel> GetHistoryLocation(int CompanyId, int UserId,DateTime? Date);
+        List<LocationModel> GetHistoryLocation(int CompanyId, int UserId, DateTime? StartDate, DateTime? EndDate, string Mode);
     }
 }

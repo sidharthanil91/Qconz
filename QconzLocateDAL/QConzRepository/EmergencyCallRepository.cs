@@ -16,7 +16,7 @@ namespace QconzLocateDAL.QConzRepository
             List<EmergencyCallModel> EmergencyCallList = (from t in entity.tblEmergencies
                                                           where (t.tblUserMaster.ID == UserId || UserId == 0) && (t.tblUserMaster.tblOrganization.ID == CompanyId || CompanyId == 0)
                                                           select new EmergencyCallModel
-            { DateTime = t.LOGTIME, Latitude = t.LAT, Longitude = t.LNG, User = t.tblUserMaster.FIRSTNAME + " " + t.tblUserMaster.SURNAME }).ToList();
+            {UserId=t.ID, DateTime = t.LOGTIME, Latitude = t.LAT, Longitude = t.LNG, User = t.tblUserMaster.FIRSTNAME + " " + t.tblUserMaster.SURNAME }).ToList();
             return EmergencyCallList;
         }
     }

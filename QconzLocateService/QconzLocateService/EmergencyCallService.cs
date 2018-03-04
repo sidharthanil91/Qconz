@@ -18,6 +18,7 @@ namespace QconzLocateService.QconzLocateService
             var y = _IEmergencyCallRepository.GetEmergencyCall(CompanyId, UserId);
             List<EmergencyCallServiceModel> Emergency = y.Select(t => new EmergencyCallServiceModel
             {
+                UserId=t.UserId,
                 DateTime = t.DateTime,
                 Latitude = t.Latitude,
                 Longitude = t.Longitude,

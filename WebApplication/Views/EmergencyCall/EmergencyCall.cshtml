@@ -47,8 +47,8 @@
                                 </td>
                                 
                                 <td width="10%">
-                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-map-marker"></span></button>
-                                    </td>
+                                        <button type="button" onclick="window.location.href= '@Url.Action("History", "Home", new { Id = item.UserId,Mode='E' })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-map-marker"></span></button>
+                                 </td>
                             </tr>
 
                         }

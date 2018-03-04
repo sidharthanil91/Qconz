@@ -42,9 +42,9 @@ namespace QconzLocateService.QconzLocateService
             return locations;
         }
 
-        public List<LocationServiceModel> GetHistoryLocation(int CompanyId, int UserId,DateTime? Date)
+        public List<LocationServiceModel> GetHistoryLocation(int CompanyId, int UserId,DateTime? StartDate, DateTime? EndDate,string Mode)
         {
-            var y = _ILocationRepository.GetHistoryLocation(CompanyId, UserId, Date);
+            var y = _ILocationRepository.GetHistoryLocation(CompanyId, UserId, StartDate, EndDate,Mode);
             List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
             {
                 Name=t.Name,

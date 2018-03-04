@@ -30,6 +30,7 @@ namespace QconzLocate.Controllers
                 EmergencyCallViewModel companies = new EmergencyCallViewModel();
                 EmergencyList.EmergencyCalls = _IEmergencyCallService.GetEmergencyList(CompanyId, 0).Select(c => new EmergencyCallList
                 {
+                    UserId=c.UserId,
                     DateTime=c.DateTime,
                     Latitude=c.Latitude,
                     Longitude=c.Longitude,

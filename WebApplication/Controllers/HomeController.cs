@@ -105,7 +105,7 @@ namespace QconzLocate.Controllers
             items.GroupLists.Insert(0, DefaultItem);
             return View(items);
         }
-        public ActionResult History(int Id=0)
+        public ActionResult History(int Id=0,string Mode=null)
         {
             int CompanyId = (int)(Session["CompanyId"]);
             var User = _commonservice.GetUserSelectList(CompanyId);
@@ -120,7 +120,7 @@ namespace QconzLocate.Controllers
             {
                 UserId = Id;
             }
-            var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, null);
+            var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, null,null,Mode);
             items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Name,Date=t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
              var y=history.ToArray();
 
@@ -162,10 +162,10 @@ namespace QconzLocate.Controllers
         }
 
         [HttpPost]
-        public JsonResult HistoryFilter(int UserId,DateTime? Date)
+        public JsonResult HistoryFilter(int UserId,DateTime? StartDate, DateTime? EndDate)
         {
             int CompanyId = (int)(Session["CompanyId"]);
-            var y = _ILocationService.GetHistoryLocation(CompanyId,UserId,Date).ToArray();
+            var y = _ILocationService.GetHistoryLocation(CompanyId,UserId, StartDate,EndDate,null).ToArray();
             return Json(y, JsonRequestBehavior.AllowGet);
 
         }

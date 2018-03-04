@@ -12,6 +12,6 @@ namespace QconzLocateService.QconzLocateInterface
     {
          List<LocationServiceModel> GetCustomerLocation(int CompanyId, string Customer, int UserId, int GroupId);
          List<LocationServiceModel> GetUserLocation(int CompanyId, int  UserId, int GroupId);
-        List<LocationServiceModel> GetHistoryLocation(int CompanyId, int UserId, DateTime? Date);
+        List<LocationServiceModel> GetHistoryLocation(int CompanyId, int UserId, DateTime? StartDate, DateTime? EndDate,string Mode);
     }
 }
