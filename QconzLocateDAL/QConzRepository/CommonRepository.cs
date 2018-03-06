@@ -87,6 +87,12 @@ namespace QconzLocateDAL.QConzRepository
             UserDetails.Roles = UserRole[y.USERTYPE];
             UserDetails.Email = y.EMAIL;
             UserDetails.CompanyId = y.COMPANYID;
+            if (y.COMPANYID != null)
+                UserDetails.Image = (from t in entity.tblOrganizations where t.ID == y.COMPANYID.Value select t.IMAGE).FirstOrDefault();
+            if (UserDetails.Image != null)
+                UserDetails.Image = UserDetails.Image.Substring(6);
+            else
+                UserDetails.Image = "";
             return UserDetails;
 
         }

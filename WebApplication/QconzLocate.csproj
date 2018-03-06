@@ -437,6 +437,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Image\imageadd.jpg" />
+    <Content Include="Image\QCONZ.jpg" />
     <Content Include="Scripts\Account\Login.js" />
     <Content Include="Scripts\Account\Register.js" />
     <Content Include="Scripts\bloodhound.js" />

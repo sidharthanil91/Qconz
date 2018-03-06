@@ -47,6 +47,7 @@ namespace QconzLocateService.QconzLocateService
             var y = _ILocationRepository.GetHistoryLocation(CompanyId, UserId, StartDate, EndDate,Mode);
             List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
             {
+                UserId=t.UserId,
                 Name=t.Name,
                 Address = t.Address,
                 Lat = t.Lat,

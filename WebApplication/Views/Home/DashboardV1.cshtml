@@ -98,6 +98,7 @@
         //    }
         $('.select2').select2();
         var allmarkers=[];
+        var infoWindows=[];
         var jsontext = '@Html.Raw(Json.Encode(Model.GroupLists))';
         var datas = JSON.parse(jsontext);
         $('#Group').select2({
@@ -148,14 +149,23 @@
                     map: map,
                     title: data.Address
                 });
+                
+                if($('#ShowDetail').prop('checked')==true)
+                {
+                    var infowindow1 = new google.maps.InfoWindow();
+                    infowindow1.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
+                    infowindow1.open(map, marker);
+                    infoWindows.push(infowindow1); 
+                }
                 (function (marker, data) {
-                    google.maps.event.addListener(marker, "mouseover", function (e) {
-                        if($('#ShowDetail').prop('checked')==true)
+                    
+                        google.maps.event.addListener(marker, "mouseover", function (e) {
                             infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
-                        else
-                            infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5>');
-                        infoWindow.open(map, marker);
-                    });
+                            //else
+                            //    infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5>');
+                            infoWindow.open(map, marker);
+                        });
+                    
                     google.maps.event.addListener(marker, "click", function (e) {
                         window.location.href= '@Url.Action("History", "Home", new { id = "ID" })'.replace("ID",data.UserId);
                     });
@@ -163,7 +173,17 @@
                 allmarkers.push(marker);
             }
         }
-
+        $('#ShowDetail').change(function(){
+            if($('#ShowDetail').prop('checked')==false)
+            {
+                for (var i=0;i<infoWindows.length;i++) {
+                    infoWindows[i].close();
+                }
+            }
+            else{
+                filter();
+        }
+        });
         $('#Group').change(function(){
             filter();
         });

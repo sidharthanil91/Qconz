@@ -84,6 +84,7 @@ namespace QconzLocate.Controllers
                 var authTicket = new FormsAuthenticationTicket(1, user.Email, System.DateTime.Now, DateTime.Now.AddMinutes(20), false, user.Roles);
                 Session["CompanyId"] = user.CompanyId==null?0:user.CompanyId;
                 Session["User"] = user.Email;
+                Session["Image"] =  Request.Url.GetLeftPart(UriPartial.Authority)+ "/QconzLocate/" + user.Image;
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);

@@ -120,9 +120,9 @@
                     var endDate = new Date(parseInt(json[i].EndDate.replace(/\/Date\((\d+)\)\//g, "$1")))
                     var startTime = new Date(parseInt(json[i].StartTime.replace(/\/Date\((\d+)\)\//g, "$1")))
                     var endTime = new Date(parseInt(json[i].FinishTime.replace(/\/Date\((\d+)\)\//g, "$1")))
-                    content += '<td>' + moment(startDate).format('DD/MM/YYYY');  + '</td>';
+                    content += '<td>' + moment.parseZone(startDate).format('DD/MM/YYYY');  + '</td>';
                     content += '<td>' + startTime.toLocaleTimeString(); + '</td>';
-                    content += '<td>' + moment(endDate).format('DD/MM/YYYY');  + '</td>';
+                    content += '<td>' + moment.parseZone(endDate).format('DD/MM/YYYY'); + '</td>';
                     content += '<td>' + endTime.toLocaleTimeString(); + '</td>';
                     content += '<td >  <button type="button" onclick="window.location.href=\'../Roster/RosterDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
                     content += '</tr>';

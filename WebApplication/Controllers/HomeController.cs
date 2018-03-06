@@ -122,7 +122,9 @@ namespace QconzLocate.Controllers
             }
             var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, null,null,Mode);
             items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Name,Date=t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
-             var y=history.ToArray();
+           
+            items.UserId = UserId;
+            var y=history.ToArray();
 
             string markers = "[";
 

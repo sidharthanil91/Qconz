@@ -302,7 +302,17 @@
                 
                    
                 </ul>
-                <img style="width: 125px;height:125px;display:block; background: url(../../Image/imageadd.jpg)  ;border:solid; object-fit: contain" id="blah" src="@Model.Image" />      
+@if (!User.IsInRole("SUPER"))
+{
+                <img style="padding: 10px;
+background: url(Image/imageadd.jpg)
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    display: inline-block;
+    object-fit: contain;" id="blah2"  src="@HttpContext.Current.Session["Image"].ToString()" />  
+}
+                @*<img style="padding-left:20px; width: 225px;height:125px;display:block; background: url(../../Image/imageadd.jpg)  ;border:solid; object-fit: contain" id="blah2" src="@HttpContext.Current.Session["Image"].ToString()" />*@      
             </section>
         </aside>
         <div class="content-wrapper">
@@ -321,10 +331,19 @@
             </section>
         </div>
         <footer class="main-footer">
-            <div class="pull-right hidden-xs">
+            @*<div class="pull-right hidden-xs">
                 <b>Version</b> 2.3.2
+            </div>*@
+            <div class="row">
+                <div class="col-md-9">
+                    <img class="img-responsive pull-right" style="max-width: 130px;padding: 10px 0px;" src="http://qconz.co.nz/wp-content/uploads/2017/02/QCONZ_logo_no_country_SMALL_200.jpg" alt="logo-Qconz">
+                </div>
+                <div class="col-md-3"><p style="padding-top: 30px;" class="text-right"><small>Powered and developed by:</small></p></div>
+                <div class="clearfix"></div>
+                <div class="col-md-12">
+                    <p class="text-right" style="font-weight: bold;font-size:14px;">QCONZ NEW ZEALAND  |  Ph: +64 7 854 9142  |  Email: <a href="mailto:qconz@qconz.co.nz" target="_top">qconz@qconz.co.nz</a></p>
+                </div>
             </div>
-           
         </footer>
         <aside class="control-sidebar control-sidebar-dark">
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -476,7 +495,9 @@
         </aside>
         <div class="control-sidebar-bg"></div>
     </div>
-
+    <script>
+        //document.body.style.zoom = "90%"
+    </script>
     @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery/js")
     @RenderSection("menu", required: false)
     @Scripts.Render("~/AdminLTE/Bundle/bootstrap/js")

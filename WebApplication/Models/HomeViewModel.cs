@@ -7,6 +7,7 @@ namespace QconzLocate.Models
 {
     public class HomeViewModel
     {
+        public int UserId { get; set; }
         public List<HistoryGridModel>HistoryGrid { get; set; }
         public List<SelectListItems> UserLists { get; set; }
         public List<SelectListItems> GroupLists { get; set; }

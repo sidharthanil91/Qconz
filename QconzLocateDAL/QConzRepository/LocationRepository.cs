@@ -64,7 +64,7 @@ namespace QconzLocateDAL.QConzRepository
                                                    join t1 in entity.tblUserMasters on t.USERID equals t1.ID
                                                    orderby t.LOGTIME descending
                                                    select new LocationModel
-                                                   { Name = t1.FIRSTNAME + " " + t1.SURNAME, Address = t.LOGTIME.ToString("dd/MM/yyyy   hh:mm:ss tt"), Lat = t.LAT, Lng = t.LNG, Type = "U" }).ToList();
+                                                   {UserId=t1.ID, Name = t1.FIRSTNAME + " " + t1.SURNAME, Address = t.LOGTIME.ToString("dd/MM/yyyy   hh:mm:ss tt"), Lat = t.LAT, Lng = t.LNG, Type = "U" }).ToList();
                 return UserHistory;
             }
             else
@@ -76,7 +76,7 @@ namespace QconzLocateDAL.QConzRepository
                                                    join t1 in entity.tblUserMasters on t.USERID equals t1.ID
                                                    orderby t.LOGTIME descending
                                                    select new LocationModel
-                                                   { Name = t1.FIRSTNAME + " " + t1.SURNAME, Address = t.LOGTIME.ToString("dd/MM/yyyy   hh:mm:ss tt"), Lat = t.LAT, Lng = t.LNG, Type = "U" }).ToList();
+                                                   {UserId=t1.ID, Name = t1.FIRSTNAME + " " + t1.SURNAME, Address = t.LOGTIME.ToString("dd/MM/yyyy   hh:mm:ss tt"), Lat = t.LAT, Lng = t.LNG, Type = "U" }).ToList();
                 return UserHistory;
             }
 

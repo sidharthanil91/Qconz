@@ -78,6 +78,7 @@ namespace QconzLocateService.QconzLocateService
             UserAuthDetails.Email = y.Email;
             UserAuthDetails.CompanyId = y.CompanyId;
             UserAuthDetails.Roles = y.Roles;
+            UserAuthDetails.Image = y.Image == null ? "" : y.Image;
             return UserAuthDetails;
             
         }
