@@ -111,6 +111,7 @@
                 $("#reservation").daterangepicker().focus();
             });
         });
+        $("#reservation").val(moment(new Date()).format("DD/MM/YYYY")+'-'+moment(new Date()).format("DD/MM/YYYY"))
     </script>
     <script>
         var defaultUser=0
@@ -133,7 +134,10 @@
 
         });
         $('.datepicker').datepicker({
-            format: 'dd-mm-yyyy'
+            
+            format: 'dd-mm-yyyy',
+            startDate: '2013-01-01',
+            endDate: '2013-12-31'
         });
 
         $('.select2').select2();
@@ -235,11 +239,17 @@
                 var User = $('#User').val();
                 var startDate = $('#reservation').val().slice(0,10);
                 var endDate = $('#reservation').val().slice(13,23)
+                var from = startDate.split("-");
+
+                var f = new Date(from[2], from[1] - 1, from[0]);
+                var to= endDate.split("-");
+
+                var t= new Date(to[2], to[1] - 1, to[0]);
                 var url='@Url.Action("HistoryFilter", "Home")';
                 $.ajax({
                     type:"POST",
                     url:url,
-                    data:JSON.stringify({UserId:User,StartDate:startDate,EndDate:endDate}) ,
+                    data:JSON.stringify({UserId:User,StartDate:f,EndDate:t}) ,
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {

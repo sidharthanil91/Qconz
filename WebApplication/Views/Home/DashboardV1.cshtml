@@ -126,8 +126,9 @@
             {
                 markers=[{'Lat':'-41.2865','Lng':'174.7762'}]
                 var mapOptions = {
-                    zoom: 8,
-                    center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+                    zoom: 6,
+                    //center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+                    center: new google.maps.LatLng(-39.9006,174.8860),
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
                 var map = new google.maps.Map(document.getElementById('googleMap'),
@@ -135,8 +136,8 @@
                 return;
             }
             var mapOptions = {
-                center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
-                zoom: 8,
+                center: new google.maps.LatLng(-38.9006,174.8860),
+                zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var infoWindow = new google.maps.InfoWindow();

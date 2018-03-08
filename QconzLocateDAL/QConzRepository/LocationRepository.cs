@@ -26,7 +26,7 @@ namespace QconzLocateDAL.QConzRepository
                 Name = c.OFFICENAME,
                 Lat = c.LAT,
                 Lng = c.LNG,
-                Address = c.FIRSTNAME + " " + c.PHONE_1,
+                Address = c.FIRSTNAME + (c.PHONE_1==null?"":(" - Ph:"+c.PHONE_1)),
                 Type = "C"
             }
              ).ToList();
@@ -58,7 +58,7 @@ namespace QconzLocateDAL.QConzRepository
             if (Mode == null)
             {
                 var y = (from t in entity.tblUserLogs
-                         where t.USERID == UserId && t.LAT.ToLower() != "unknown" && t.LNG.ToLower() != "unknown" && (t.LOGTIME >= StartDate || StartDate == null) && (t.LOGTIME <= EndDate || EndDate == null)
+                         where t.USERID == UserId && t.LAT.ToLower() != "unknown" && t.LNG.ToLower() != "unknown" && (t.LOGTIME >= StartDate || StartDate == null) && (t.LOGTIME < EndDate || EndDate == null)
                          select t).ToList();
                 List<LocationModel> UserHistory = (from t in y
                                                    join t1 in entity.tblUserMasters on t.USERID equals t1.ID

@@ -70,7 +70,7 @@
                             <input type="text" class="form-control" id="Lat" tabindex="13" name="Lat" value="@Model.CustomerDetails.Lat" placeholder="Enter latitude">
                         </div>
                     </div>
-                   
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -79,12 +79,24 @@
                             <input type="text" class="form-control" id="OfficeName" tabindex="2" name="OfficeName" value="@Model.CustomerDetails.OfficeName" placeholder="Enter office name">
                         </div>
                     </div>
-                    <div class="form-group">
+                    @if (User.IsInRole("SUPER"))
+                    {
                         <div class="form-group">
-                            <label>Company</label>
-                            <select id="Company" class="form-control select2" tabindex="4" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select id="Company" class="form-control select2" tabindex="4" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select id="Company" class="form-control select2" disabled tabindex="4" value="@Model.CustomerDetails.CompanyId" style="width: 100%;"></select>
+                            </div>
+                        </div>
+                    }
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Address2</label>
@@ -115,35 +127,35 @@
                             <input type="text" class="form-control" id="Lng" tabindex="14" name="Lng" value="@Model.CustomerDetails.Lng" placeholder="Enter longitude">
                         </div>
                     </div>
-                 
-                </div>
-            </div>
-        </div>
-        </form>
-        <div class="box-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-        </div>
-        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                Launch demo modal
-            </button>*@
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-                        Save changes?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
-                    </div>
                 </div>
             </div>
         </div>
+    </form>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -156,7 +168,7 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
     <script type="text/javascript">
 
         var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
@@ -165,10 +177,10 @@
             data: data
         })
         $("#Company").val("@Model.CustomerDetails.CompanyId").trigger("change");
-        
+
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.
-        
+
             $("#form1").validate({
                 rules: {
                     CustomerCode: {
@@ -192,37 +204,37 @@
                 {
                     return
                 }
-            var data={ Id : @Model.CustomerDetails.Id,
-                Address1 : $('#Address1').val(),
-                Address2 : $('#Address2').val(),
-                CustomerCode: $('#CustomerCode').val(),
-                FirstName : $('#FirstName').val(),
-                LastName : $('#LastName').val(),
-                CompanyId:$('#Company').val(),
-                Email : $('#Email').val(),
-                City : $('#City').val(),
-                Lat : $('#Lat').val(),
-                Lng : $('#Lng').val(),
-                Phone1 : $('#Phone1').val(),
-                Phone2 : $('#Phone2').val(),
-                OfficeName : $('#OfficeName').val(),
-                Website : $('#Website').val(),
-                ZipCode : $('#ZipCode').val()}
-            var url='@Url.Action("SaveDetails", "Customer")';
-            $.ajax({
-                type:"POST",
-                url:url,
-                data: JSON.stringify(data) ,
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function () {
-                    window.location.href= '@Url.Action("CustomerReport", "Customer")';
-                },
-                error: function () {
-                    alert("Error while inserting data");
-                }
-            })
-        });
+                var data={ Id : @Model.CustomerDetails.Id,
+                    Address1 : $('#Address1').val(),
+                    Address2 : $('#Address2').val(),
+                    CustomerCode: $('#CustomerCode').val(),
+                    FirstName : $('#FirstName').val(),
+                    LastName : $('#LastName').val(),
+                    CompanyId:$('#Company').val(),
+                    Email : $('#Email').val(),
+                    City : $('#City').val(),
+                    Lat : $('#Lat').val(),
+                    Lng : $('#Lng').val(),
+                    Phone1 : $('#Phone1').val(),
+                    Phone2 : $('#Phone2').val(),
+                    OfficeName : $('#OfficeName').val(),
+                    Website : $('#Website').val(),
+                    ZipCode : $('#ZipCode').val()}
+                var url='@Url.Action("SaveDetails", "Customer")';
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    data: JSON.stringify(data) ,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        window.location.href= '@Url.Action("CustomerReport", "Customer")';
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                })
+            });
         });
     </script>
 

@@ -42,13 +42,24 @@
                             <input type="text" class="form-control" id="Email" tabindex="3" name="Email" value="@Model.UserDetails.Email" placeholder="Enter email">
                         </div>
                     </div>
-
-                    <div class="form-group">
+                    @if (User.IsInRole("SUPER"))
+                    {
                         <div class="form-group">
-                            <label>Company</label>
-                            <select id="Company" class="form-control select2" name="Company" tabindex="5" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select id="Company" class="form-control select2" name="Company" tabindex="5" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select id="Company" class="form-control select2" disabled name="Company" tabindex="5" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
+                            </div>
+                        </div>
+                    }
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Groups</label>
@@ -156,31 +167,31 @@
                 </div>
             </div>
         </div>
-        </form>
-        <div class="box-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
-        </div>
-        @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                Launch demo modal
-            </button>*@
+    </form>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-                        Save changes?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="savebtn" class="btn btn-primary">Save</button>
-                    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 
@@ -195,34 +206,34 @@
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/User/Advanced")
-@Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
-<script src="~/AdminLTE/plugins/clock/js/clockface.js"></script>
-<script type="text/javascript">
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    <script src="~/AdminLTE/plugins/clock/js/clockface.js"></script>
+    <script type="text/javascript">
 
-  
-    $('#startclock').click(function(e){
-        //$(document).ready(function(){
-        //  $("#StartTime").timepicker().focus();
-        e.stopPropagation();
 
-        $('#StartTime').clockface('toggle');
-        //});
-    });
-    $('#EndTimeClock').click(function(e){
-        //$(document).ready(function(){
-        e.stopPropagation();
-        $("#EndTime").clockface('toggle');
-        // });
-    });
-    
-</script>
+        $('#startclock').click(function(e){
+            //$(document).ready(function(){
+            //  $("#StartTime").timepicker().focus();
+            e.stopPropagation();
+
+            $('#StartTime').clockface('toggle');
+            //});
+        });
+        $('#EndTimeClock').click(function(e){
+            //$(document).ready(function(){
+            e.stopPropagation();
+            $("#EndTime").clockface('toggle');
+            // });
+        });
+
+    </script>
     <script type="text/javascript">
         $('#StartTime').clockface({
             format: 'H:mm tt',
             trigger: 'manual'
 
         });
-       
+
         $('#EndTime').clockface({
             format: 'H:mm tt',
             trigger: 'manual'
@@ -254,7 +265,7 @@
         $("#Status").val("@Model.UserDetails.UserStatus").trigger("change");
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.
-        
+
             $("#form1").validate({
                 rules: {
                     FirstName: {
@@ -286,49 +297,49 @@
                 {
                     return
                 }
-            $('#myModal').modal('hide');
-            var UserGroupsVal=$('#Groups').val()==null?null:$('#Groups').val().toString();
-            var WorkingDaysVal=$('#WorkingDays').val()==null?null:$('#WorkingDays').val().toString();
-            var data={ Id : @Model.UserDetails.Id,
-                Cellphone : $('#Cellphone').val(),
-                CompanyId : $('#Company').val(),
-                UserGroups: UserGroupsVal,
-                EmergencyContact : $('#EmergencyContact').val(),
-                EmergencyContactNo : $('#EmergencyContactNo').val(),
-                Email : $('#Email').val(),
-                EndTime : $('#EndTime').val(),
-                FirstName : $('#FirstName').val(),
-                Password : $('#Password').val(),
-                StartTime : $('#StartTime').val(),
-                SurName : $('#SurName').val(),
-                UserName : $('#UserName').val(),
-                UserStatus : $('#Status').val(),
-                UserTeamId : $('#UserTeamId').val(),
-                //UserToken : $('#UserToken').val(),
-                UserType : $('#Type').val(),
-                WorkingDays : WorkingDaysVal,
-            }
-
-            var url='@Url.Action("SaveDetails", "User")';
-            $.ajax({
-                type:"POST",
-                url:url,
-                data: JSON.stringify(data) ,
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (Messeage) {
-                    if(Messeage.Success){
-                        window.location.href= '@Url.Action("UserReport", "User")';
-                    }
-                    else{
-                        alert(Messeage.Message);
-                    }
-                },
-                error: function () {
-                    alert("Error while inserting data");
+                $('#myModal').modal('hide');
+                var UserGroupsVal=$('#Groups').val()==null?null:$('#Groups').val().toString();
+                var WorkingDaysVal=$('#WorkingDays').val()==null?null:$('#WorkingDays').val().toString();
+                var data={ Id : @Model.UserDetails.Id,
+                    Cellphone : $('#Cellphone').val(),
+                    CompanyId : $('#Company').val(),
+                    UserGroups: UserGroupsVal,
+                    EmergencyContact : $('#EmergencyContact').val(),
+                    EmergencyContactNo : $('#EmergencyContactNo').val(),
+                    Email : $('#Email').val(),
+                    EndTime : $('#EndTime').val(),
+                    FirstName : $('#FirstName').val(),
+                    Password : $('#Password').val(),
+                    StartTime : $('#StartTime').val(),
+                    SurName : $('#SurName').val(),
+                    UserName : $('#UserName').val(),
+                    UserStatus : $('#Status').val(),
+                    UserTeamId : $('#UserTeamId').val(),
+                    //UserToken : $('#UserToken').val(),
+                    UserType : $('#Type').val(),
+                    WorkingDays : WorkingDaysVal,
                 }
-            })
-        });
+
+                var url='@Url.Action("SaveDetails", "User")';
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    data: JSON.stringify(data) ,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (Messeage) {
+                        if(Messeage.Success){
+                            window.location.href= '@Url.Action("UserReport", "User")';
+                        }
+                        else{
+                            alert(Messeage.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                })
+            });
         });
     </script>
 

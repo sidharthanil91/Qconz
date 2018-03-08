@@ -2,6 +2,7 @@
 using QconzLocateService.QconzLocateInterface;
 using QconzLocateService.QconzLocateService;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -110,6 +111,20 @@ namespace QconzLocate.Controllers
             int CompanyId = (int)(Session["CompanyId"]);
             var User = _commonservice.GetUserSelectList(CompanyId);
             var items = new HomeViewModel();
+            DateTime? StartDate = null;
+            DateTime? EndDate = null;
+            if (Mode == null)
+            {
+                var nzTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("New Zealand Standard Time");
+                var utcNow = DateTime.UtcNow;
+                var nzNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, nzTimeZoneInfo);
+                var outputNz = nzNow.ToString("F", CultureInfo.GetCultureInfo("en-NZ"));
+                //StartDate = DateTime.UtcNow.Date;
+                //EndDate = DateTime.UtcNow.Date.AddDays(1);
+                StartDate = Convert.ToDateTime(outputNz).Date;
+                EndDate = Convert.ToDateTime(outputNz).Date;
+                EndDate = EndDate.Value.AddDays(1);
+            }
             items.UserLists = User.UserList.Select(t => new SelectListItems
             {
                 id = t.Id,
@@ -120,7 +135,7 @@ namespace QconzLocate.Controllers
             {
                 UserId = Id;
             }
-            var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, null,null,Mode);
+            var history = _ILocationService.GetHistoryLocation(CompanyId,UserId, StartDate,EndDate,Mode);
             items.HistoryGrid = history.Select(t => new HistoryGridModel { User = t.Name,Date=t.Address,Latitude=t.Lat,Longitude=t.Lng }).ToList();
            
             items.UserId = UserId;
@@ -167,6 +182,8 @@ namespace QconzLocate.Controllers
         public JsonResult HistoryFilter(int UserId,DateTime? StartDate, DateTime? EndDate)
         {
             int CompanyId = (int)(Session["CompanyId"]);
+            if (EndDate != null)
+                EndDate = EndDate.Value.AddDays(1);
             var y = _ILocationService.GetHistoryLocation(CompanyId,UserId, StartDate,EndDate,null).ToArray();
             return Json(y, JsonRequestBehavior.AllowGet);
 
