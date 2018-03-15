@@ -182,8 +182,13 @@ namespace QconzLocate.Controllers
         public JsonResult HistoryFilter(int UserId,DateTime? StartDate, DateTime? EndDate)
         {
             int CompanyId = (int)(Session["CompanyId"]);
+            if (StartDate != null)
+                StartDate = StartDate.Value.Date;
             if (EndDate != null)
+            {
+                EndDate = EndDate.Value.Date;
                 EndDate = EndDate.Value.AddDays(1);
+            }
             var y = _ILocationService.GetHistoryLocation(CompanyId,UserId, StartDate,EndDate,null).ToArray();
             return Json(y, JsonRequestBehavior.AllowGet);
 

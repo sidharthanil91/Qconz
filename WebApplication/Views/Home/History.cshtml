@@ -106,12 +106,8 @@
 
     <script>
         $.widget.bridge('uibutton', $.ui.button);
-        $('#DateC').click(function(){
-            $(document).ready(function(){
-                $("#reservation").daterangepicker().focus();
-            });
-        });
-        $("#reservation").val(moment(new Date()).format("DD/MM/YYYY")+'-'+moment(new Date()).format("DD/MM/YYYY"))
+       
+        $("#reservation").val(moment(new Date()).format("DD-MM-YYYY")+' - '+moment(new Date()).format("DD-MM-YYYY"))
     </script>
     <script>
         var defaultUser=0
@@ -128,10 +124,13 @@
                 "autoWidth": false
             });
         });
-        $('#reservation').daterangepicker({
+        var y=$('#reservation').daterangepicker({
 
             format: 'DD-MM-YYYY'
 
+        });
+        $('#DateC').click(function(){
+            $('#reservation').click()
         });
         $('.datepicker').datepicker({
             
