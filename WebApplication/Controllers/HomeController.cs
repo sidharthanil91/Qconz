@@ -130,7 +130,7 @@ namespace QconzLocate.Controllers
                 id = t.Id,
                 text = t.Text
             }).ToList();
-            int UserId = User.UserList.FirstOrDefault().Id;
+            int UserId = 0;//User.UserList.FirstOrDefault().Id;
             if (Id > 0)
             {
                 UserId = Id;

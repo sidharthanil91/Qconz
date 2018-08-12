@@ -25,6 +25,6 @@ namespace QconzLocateDAL.QConzRepositoryModel
         public string Lng { get; set; }
         public DateTime? AddedDate { get; set; }
         public int? CompanyId { get; set; }
-
+        public string Archive { get; set; }
     }
 }

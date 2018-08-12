@@ -10,14 +10,17 @@
 }
 
 @Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
-@Styles.Render("~/AdminLTE/Bundle/plugins/icheck/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
 @Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
 @Styles.Render("~/AdminLTE/Bundle/dist/css")
 @Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
 @Styles.Render("~/Styles/Bundle/Elements/Modals")
-
+<style>
+    .error {
+  color: red
+}
+</style>
 <div class="box box-default">
     <div class="box-header with-border">
         @*<h3 class="box-title">Select2</h3>
@@ -28,7 +31,7 @@
     </div>
     <form id="form1" name="form1">
         <div class="box-body">
-            <div class="row" style=" width: 25%;height:15%">
+            <div class="row" style="  width: 25%;height:15%" hidden>
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="form-group">
@@ -73,11 +76,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Status</label>
-                        <select id="Archive" name="Archive" class="form-control select2" value="@Model.Archive" style="width: 100%;">
-                            <option value="A">Active</option>
-                            <option value="N">Archived</option>
-                        </select>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Default radius (km)</label>
+                            <input type="text" class="form-control" id="Lat" name="Lat" tabindex="11" value="@Model.Lat" placeholder="Enter default radius">
+                        </div>
                     </div>
 
                 </div>
@@ -96,8 +98,8 @@
                     </div>
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Zip/Postcode</label>
-                            <input type="text" class="form-control" id="ZipCode" name="ZipCode" tabindex="6" value="@Model.ZipCode" placeholder="Enter zipCode">
+                            <label for="exampleInputEmail1">Postcode/Zip</label>
+                            <input type="text" class="form-control" id="ZipCode" name="ZipCode" tabindex="6" value="@Model.ZipCode" placeholder="Enter Postcode/Zip">
                         </div>
                     </div>
                     <div class="form-group">
@@ -112,13 +114,21 @@
                             <input type="text" class="form-control" id="Website" tabindex="10" name="Website" value="@Model.Website" placeholder="Enter website">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="Archive" name="Archive" class="form-control select2" value="@Model.Archive" style="width: 100%;">
+                            <option value="A">Active</option>
+                            <option value="N">Archived</option>
+                        </select>
+                    </div>
 
                 </div>
             </div>
         </div>
     </form>
     <div class="box-footer">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+        <button id="First" class="btn btn-primary">Save</button>
+        <button id="Second" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
     </div>
 
     @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -147,18 +157,28 @@
 
 @section Scripts {
     @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
-    @Scripts.Render("~/AdminLTE/Bundle/plugins/input-mask/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
-    @Scripts.Render("~/AdminLTE/Bundle/plugins/daterangepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
     @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
     @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
     <script type="text/javascript">
-
+        $('#First').click(function(){
+            if( !$("#form1").valid())
+            {   
+                return
+            }
+            else{
+                $('#Second').click()
+            }
+        })
 
         $(document).ready(function () {
+
+
+           
+            $('#Second').hide();
             // 1. prepare the validation rules and messages.
             $('#Archive').select2({
 

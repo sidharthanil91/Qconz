@@ -24,7 +24,7 @@ namespace QconzLocate.Controllers
         {
             int CompanyId = (int)(Session["CompanyId"]);
             CustomerViewModel customer = new CustomerViewModel();
-            var customers  = _ICustomerService.GetAllCustomer(CompanyId).Select(c => new CustomerListViewModel
+            var customers  = _ICustomerService.GetAllCustomer(CompanyId,"A").Select(c => new CustomerListViewModel
             {
                 Id = c.Id,
                 Address1 = c.Address1,
@@ -74,7 +74,8 @@ namespace QconzLocate.Controllers
                     Phone1 = c.Phone1,
                     Phone2 = c.Phone2,
                     Website = c.Website,
-                    ZipCode = c.ZipCode
+                    ZipCode = c.ZipCode,
+                    Archive=c.Archive
                 };
                 
             }
@@ -98,7 +99,8 @@ namespace QconzLocate.Controllers
                     Phone1 = null,
                     Phone2 = null,
                     Website = null,
-                    ZipCode = null
+                    ZipCode = null,
+                    Archive = "A"
                 };
             }
             CustomerViewModel.CustomerDetails = CustomerDetails;
@@ -134,7 +136,8 @@ namespace QconzLocate.Controllers
                 Phone1 = customer.Phone1,
                 Phone2 = customer.Phone2,
                 Website = customer.Website,
-                ZipCode = customer.ZipCode
+                ZipCode = customer.ZipCode,
+                Archive=customer.Archive
             };
             _ICustomerService.SaveCustomerDetails(CustomerModel);
             bool success = true;
@@ -198,7 +201,8 @@ namespace QconzLocate.Controllers
                    Phone1 = r["Phone1"].ToString(),
                    Phone2 = r["Phone2"].ToString(),
                    Website = r["Website"].ToString(),
-                   ZipCode = r["ZipCode"].ToString()
+                   ZipCode = r["ZipCode"].ToString(),
+                   Archive="A"
                 }).ToList();
                 _ICustomerService.SaveBulkCustomerDetails(CustomerBulk);
                 
@@ -210,7 +214,7 @@ namespace QconzLocate.Controllers
 
            
             CustomerViewModel customer = new CustomerViewModel();
-            var customers = _ICustomerService.GetAllCustomer(CompanyId).Select(c => new CustomerListViewModel
+            var customers = _ICustomerService.GetAllCustomer(CompanyId,"A").Select(c => new CustomerListViewModel
             {
                 Id = c.Id,
                 Address1 = c.Address1,
@@ -231,6 +235,14 @@ namespace QconzLocate.Controllers
                 ZipCode = c.ZipCode
             }).ToList();
             return View("Customer", customers);
+        }
+
+        [HttpPost]
+        public JsonResult GetCustomerReport(string Status)
+        {
+            int CompanyId = (int)(Session["CompanyId"]);
+            var CompanyList = _ICustomerService.GetAllCustomer(CompanyId, Status);
+            return Json(CompanyList, JsonRequestBehavior.AllowGet);
         }
     }
 }

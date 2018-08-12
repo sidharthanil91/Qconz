@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -54,10 +53,6 @@
     </Reference>
     <Reference Include="ExcelDataReader.DataSet, Version=3.3.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.DataSet.3.3.0\lib\net45\ExcelDataReader.DataSet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -193,29 +188,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\DocumentationController.cs" />
-    <Compile Include="Controllers\ElementsController.cs" />
     <Compile Include="Controllers\EmergencyCallController.cs" />
     <Compile Include="Controllers\EmergencyController.cs" />
-    <Compile Include="Controllers\ExamplesController.cs" />
-    <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MailboxController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Controllers\SessionExpireFilterAttribute.cs" />
-    <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserLocationController.cs" />
     <Compile Include="Controllers\UserWorkController.cs" />
-    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\User.cs" />
     <Compile Include="Extensions\ClaimsExtensions.cs" />
@@ -538,47 +523,9 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Calendar\Index.cshtml" />
-    <Content Include="Views\Charts\ChartJs.cshtml" />
-    <Content Include="Views\Charts\Flot.cshtml" />
-    <Content Include="Views\Charts\Inline.cshtml" />
-    <Content Include="Views\Charts\Morris.cshtml" />
-    <Content Include="Views\Documentation\Index.cshtml" />
-    <Content Include="Views\Elements\Buttons.cshtml" />
-    <Content Include="Views\Elements\General.cshtml" />
-    <Content Include="Views\Elements\Icons.cshtml" />
-    <Content Include="Views\Elements\Modals.cshtml" />
-    <Content Include="Views\Elements\Sliders.cshtml" />
-    <Content Include="Views\Elements\Timeline.cshtml" />
-    <Content Include="Views\Examples\Blank.cshtml" />
-    <Content Include="Views\Examples\Invoice.cshtml" />
-    <Content Include="Views\Examples\InvoicePrint.cshtml" />
-    <Content Include="Views\Examples\Lockscreen.cshtml" />
-    <Content Include="Views\Examples\Login.cshtml" />
-    <Content Include="Views\Examples\P404.cshtml" />
-    <Content Include="Views\Examples\P500.cshtml" />
-    <Content Include="Views\Examples\Pace.cshtml" />
-    <Content Include="Views\Examples\ProfileEx.cshtml" />
-    <Content Include="Views\Examples\Register.cshtml" />
-    <Content Include="Views\Forms\Advanced.cshtml" />
-    <Content Include="Views\Forms\Editors.cshtml" />
-    <Content Include="Views\Forms\General.cshtml" />
-    <Content Include="Views\Mailbox\Compose.cshtml" />
-    <Content Include="Views\Mailbox\Inbox.cshtml" />
-    <Content Include="Views\Mailbox\Read.cshtml" />
-    <Content Include="Views\Tables\Data.cshtml" />
-    <Content Include="Views\Tables\Simple.cshtml" />
-    <Content Include="Views\Widgets\Index.cshtml" />
     <Content Include="Views\Home\DashboardV1.cshtml" />
-    <Content Include="Views\Home\DashboardV2.cshtml" />
     <Content Include="Views\Company\Company.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
     <Content Include="Views\User\User.cshtml" />
@@ -664,7 +611,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

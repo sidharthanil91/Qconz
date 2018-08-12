@@ -24,7 +24,7 @@
                         <button id="btn"  onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
                         <button  onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                         </div>
-                        }
+
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -73,6 +73,58 @@
                                     </tr>
                                 </tfoot>*@
                         </table>
+                }
+                else{ 
+                <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Contact Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th></th>
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Companies)
+                        {
+
+                            <tr>
+                                <td>
+                                    @item.Title
+                                </td>
+                                <td>
+                                    @item.ContactName
+                                </td>
+                                <td>
+                                    @item.Phone1
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td width="5%">
+                                    <button type="button" onclick="window.location.href= '@Url.Action("CompanyDetails", "Company", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                </td>
+                                @*<td width="5%">
+                            <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                        </td>*@
+                            </tr>
+
+                        }
+                    </tbody>
+                    @*<tfoot>
+                <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                </tr>
+            </tfoot>*@
+                </table>
+
+                }
                     </div>
         </div>
     </div>
