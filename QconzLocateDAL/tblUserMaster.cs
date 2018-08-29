@@ -21,6 +21,7 @@ namespace QconzLocateDAL
             this.tblUserRoasters = new HashSet<tblUserRoaster>();
             this.tblUserTeams = new HashSet<tblUserTeam>();
             this.tblEmergencies = new HashSet<tblEmergency>();
+            this.tblStopTrackings = new HashSet<tblStopTracking>();
         }
     
         public int ID { get; set; }
@@ -40,6 +41,12 @@ namespace QconzLocateDAL
         public Nullable<System.DateTime> ENDTIME { get; set; }
         public string EMERGENCYCONTACT { get; set; }
         public string EMERGENCYCONTACTNO { get; set; }
+        public Nullable<int> ONLINESTATUS { get; set; }
+        public Nullable<System.DateTime> ONLINESTATUSCHANGETIME { get; set; }
+        public string ISCONTRACTOR { get; set; }
+        public string BASE_LATITUDE { get; set; }
+        public string BASE_LONGITUDE { get; set; }
+        public Nullable<int> DEFAULT_GROUP { get; set; }
     
         public virtual tblOrganization tblOrganization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -50,5 +57,8 @@ namespace QconzLocateDAL
         public virtual ICollection<tblUserTeam> tblUserTeams { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblEmergency> tblEmergencies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblStopTracking> tblStopTrackings { get; set; }
+        public virtual tblTeam tblTeam { get; set; }
     }
 }

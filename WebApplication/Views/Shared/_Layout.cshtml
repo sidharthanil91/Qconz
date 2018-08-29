@@ -252,21 +252,17 @@
                             <li id="left-sidebar-menu-dashboard-dashboardV2"><a href="@Url.Action("DashboardV2", "Home")"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                         </ul>*@
                     </li>
-                    <li id="left-sidebar-menu-admin-locator">
+                    @*<li id="left-sidebar-menu-admin-locator">
                         <a href="@Url.Action("Locator", "Home")">
                             <i class="fa fa-location-arrow"></i> <span>Locator</span>
                         </a>
                     </li>
-                    <li id="left-sidebar-menu-admin-history">
-                        <a href="@Url.Action("History", "Home")">
-                            <i class="fa fa-history"></i> <span>History</span>
-                        </a>
-                    </li>
+                    
                     <li id="left-sidebar-menu-admin-emergency">
                         <a href="@Url.Action("EmergencyCall", "EmergencyCall")">
                             <i class="fa fa-bell"></i> <span>Emergency Calls</span>
                         </a>
-                    </li>
+                    </li>*@
 
 @if (User.IsInRole("ADMIN")|| User.IsInRole("SUPER"))
 {
@@ -279,6 +275,11 @@
                     <li id="left-sidebar-menu-admin-roster">
                         <a href="@Url.Action("RosterReport", "Roster")">
                             <i class="fa fa-calendar"></i> <span>Override</span>
+                        </a>
+                    </li>
+                    <li id="left-sidebar-menu-admin-history">
+                        <a href="@Url.Action("History", "Home")">
+                            <i class="fa fa-history"></i> <span>History</span>
                         </a>
                     </li>
                     <li id="left-sidebar-menu-admin-team">
@@ -294,6 +295,11 @@
                     <li id="left-sidebar-menu-admin-customer">
                         <a href="@Url.Action("CustomerReport", "Customer")">
                             <i class="fa fa-shopping-cart"></i> <span>Customers</span>
+                        </a>
+                    </li>
+                    <li id="left-sidebar-menu-admin-emergency">
+                        <a href="@Url.Action("StopTracking", "StopTracking")">
+                            <i class="fa fa-bell"></i> <span>Stop Tracking</span>
                         </a>
                     </li>
 }

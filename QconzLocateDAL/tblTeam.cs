@@ -19,6 +19,7 @@ namespace QconzLocateDAL
         {
             this.tblUserTeams = new HashSet<tblUserTeam>();
             this.tblTeamRoasters = new HashSet<tblTeamRoaster>();
+            this.tblUserMasters = new HashSet<tblUserMaster>();
         }
     
         public int ID { get; set; }
@@ -33,5 +34,7 @@ namespace QconzLocateDAL
         public virtual ICollection<tblUserTeam> tblUserTeams { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTeamRoaster> tblTeamRoasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUserMaster> tblUserMasters { get; set; }
     }
 }

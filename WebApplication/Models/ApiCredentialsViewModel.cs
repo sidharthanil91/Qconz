@@ -7,7 +7,9 @@ namespace QconzLocate.Models
 {
     public class ApiCredentialsViewModel
     {
-        public string username { get; set; }
+        public string email { get; set; }
         public string password { get; set; }
+        public string deviceType { get; set; }
+        public string deviceId { get; set; }
     }
 }

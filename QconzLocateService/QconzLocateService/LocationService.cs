@@ -13,9 +13,26 @@ namespace QconzLocateService.QconzLocateService
     public class LocationService:ILocationService
     {
         private ILocationRepository _ILocationRepository = new LocationRepository();
-        public List<LocationServiceModel> GetCustomerLocation(int CompanyId,string Customer,int UserId,int GroupId)
+        public List<LocationServiceModel> GetCustomerLocation(int CompanyId,int Customer,int GroupId, int[] ShowMap, int[] ShowPin, int[] ShowBase)
         {
-            var y = _ILocationRepository.GetCustomerLocation(CompanyId, Customer,UserId, GroupId);
+            var y = _ILocationRepository.GetCustomerLocation(CompanyId, Customer, GroupId, ShowMap,  ShowPin,ShowBase);
+            List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
+            {
+                UserId=t.UserId,
+                Address = t.Address,
+                Contact=t.Contact,
+                Name=t.Name,
+                Lat = t.Lat,
+                Lng = t.Lng,
+                Type=t.Type,
+                ShowPin = t.ShowPin
+            }).ToList();
+            return locations;
+        }
+
+        public List<LocationServiceModel> GetUserLocation(int CompanyId, int UserId, int GroupId, int[] ShowMap, int[] ShowPin, int[] ShowBase)
+        {
+            var y = _ILocationRepository.GetUserLocation(CompanyId, UserId, GroupId,ShowMap,ShowPin,ShowBase);
             List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
             {
                 UserId=t.UserId,
@@ -23,21 +40,7 @@ namespace QconzLocateService.QconzLocateService
                 Name=t.Name,
                 Lat = t.Lat,
                 Lng = t.Lng,
-                Type=t.Type
-            }).ToList();
-            return locations;
-        }
-
-        public List<LocationServiceModel> GetUserLocation(int CompanyId, int UserId, int GroupId)
-        {
-            var y = _ILocationRepository.GetUserLocation(CompanyId, UserId, GroupId);
-            List<LocationServiceModel> locations = y.Select(t => new LocationServiceModel
-            {
-                UserId=t.UserId,
-                Address = t.Address,
-                Name=t.Name,
-                Lat = t.Lat,
-                Lng = t.Lng
+                ShowPin=t.ShowPin
             }).ToList();
             return locations;
         }

@@ -37,7 +37,11 @@ namespace QconzLocateDAL.QConzRepository
                     UserTeamId = c.USERTEAMID,
                     UserToken = c.USERTOKEN,
                     UserType = c.USERTYPE,
-                    WorkingDays = c.WORKINGDAYS
+                    WorkingDays = c.WORKINGDAYS,
+                    BaseLatitude = c.BASE_LATITUDE,
+                    BaseLongitude = c.BASE_LONGITUDE,
+                    DefaultGroup = c.DEFAULT_GROUP,
+                    IsContractor = c.ISCONTRACTOR
                 }
                 ).ToList();
                 return UserList;
@@ -72,7 +76,11 @@ namespace QconzLocateDAL.QConzRepository
                              UserTeamId = c.USERTEAMID,
                              UserToken = c.USERTOKEN,
                              UserType = c.USERTYPE,
-                             WorkingDays = c.WORKINGDAYS
+                             WorkingDays = c.WORKINGDAYS,
+                             BaseLatitude = c.BASE_LATITUDE,
+                             BaseLongitude = c.BASE_LONGITUDE,
+                             DefaultGroup = c.DEFAULT_GROUP,
+                             IsContractor = c.ISCONTRACTOR
                          }).FirstOrDefault();
                 y.UserGroups = string.Join(",", ((from t in entity.tblUserTeams where t.USERID == y.Id select t.TEAMID).ToArray()));
                                  
@@ -116,8 +124,12 @@ namespace QconzLocateDAL.QConzRepository
                         USERTEAMID = UserModel.UserTeamId,
                         USERTOKEN = UserModel.UserToken,
                         USERTYPE = UserModel.UserType,
-                        WORKINGDAYS = UserModel.WorkingDays
-                    };
+                        WORKINGDAYS = UserModel.WorkingDays,
+                        BASE_LATITUDE = UserModel.BaseLatitude,
+                        BASE_LONGITUDE = UserModel.BaseLongitude,
+                        ISCONTRACTOR = UserModel.IsContractor,
+                        DEFAULT_GROUP = UserModel.DefaultGroup
+                       };
                     entity.tblUserMasters.Add(user);
                     if(GroupIds != null)
                     {
@@ -147,11 +159,15 @@ namespace QconzLocateDAL.QConzRepository
                     y.FIRSTNAME = UserModel.FirstName;
                     y.PASSWORD = UserModel.Password;
                     y.SURNAME = UserModel.SurName;
-                    y.USERNAME = UserModel.UserName;
+                    y.USERNAME = " ";
                     y.USERSTATUS = UserModel.UserStatus;
                     //y.USERTEAMID = 1;
                     y.USERTYPE = UserModel.UserType;
                     y.WORKINGDAYS = UserModel.WorkingDays;
+                    y.BASE_LATITUDE = UserModel.BaseLatitude;
+                    y.BASE_LONGITUDE = UserModel.BaseLongitude;
+                    y.ISCONTRACTOR = UserModel.IsContractor;
+                    y.DEFAULT_GROUP = UserModel.DefaultGroup;
                     if (GroupIds != null)
                     {
                         var UserTeam = y.tblUserTeams.ToList();

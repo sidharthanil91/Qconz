@@ -5,6 +5,7 @@
 @section Menu {
     @Scripts.Render("~/Scripts/Bundle/Home/DashboardV1/menu")
 }
+@model QconzLocate.Models.HomeViewModel
 @Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
 
 @*@Styles.Render("~/AdminLTE/plugins/morris/css")
@@ -16,45 +17,123 @@
     hr { margin: 0.1em auto; }
 </style>
 <div class="box-body">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
+    <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-3">
+            <div class="form-group" style="padding-top:35px">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Show name</label>
+                    <label for="exampleInputEmail1">Customer search</label>
                     @*<div class="input-group input-group-sm">*@
-                        <select id="User" class="form-control select2" value="" style="width: 100%;"></select>
+                        <select id="User" class="form-control select2" value="" style="width: 100%;">
+                            <option></option>
+                        </select>
                     @*</div>*@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-1">
+            <div class="form-group" style="padding-top:35px">
+                    <label for="exampleInputEmail1">Show details</label>                   
+                    <div class="input-group input-group-sm">
+                        <input type="checkbox" class="minimal" id="ShowDetail" style="width:20px;height:20px" name="ShowDetail" checked>                        
+                    </div>
+            </div>
+            </div>
+        <div class="col-md-6" style="border: 1px solid #ccc;padding-top: 10px;border-radius: 25px;">
+            <div class="row">
+                <form class="form-inline">
+                    <h4 style="padding:0px 15px">Customer Search Details</h4>
+                    <div class="col-md-6">                        
+                        <div class="form-group" style="padding-bottom:10px;width:350px;">
+                                <label style="min-width: 60px;" for="exampleInputEmail1">Name</label>
+                                <input style="height: 26px; min-width: 275px;" type="text" class="form-control" id="CustomerName" name="TeamName" value="" readonly >
+                       </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group" style="padding-bottom:10px;width:350px;">
+                                <label style="min-width: 60px;" for="exampleInputEmail1">Contact</label>
+                                <input style="height: 26px;min-width: 275px;" type="text" class="form-control" id="CustomerContact" name="TeamName" value="" readonly >
+                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="padding-bottom:10px;width:350px;">
+                                <label style="min-width: 60px;" for="">Address</label>
+                                <textarea class="form-control" readonly style="min-height:62px;min-width: 270px;" id="CustomerAddress" value="" ></textarea>
+                           
+                        </div>
+                    </div>
+                </form>
+            </div>
+</div>
+        </div>
+
+    <div id="test" style="width:100%;">
+        <div class="col-md-9" id="googleMap" style="float:left;min-height:515px;"></div>
+        <div class="col-md-3" id="right" style="float:right; min-height:515px;">
+            <h4 class="text-center"><b><u>TEAM MEMBERS</u></b></h4>
             <div class="form-group">
-                <div class="form-group">
                     <label for="exampleInputEmail1">Show group</label>
                     @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
 
                     @*<div class="input-group input-group-sm">*@
-                        <select id="Group" class="form-control select2" value="" style="width: 100%;"></select>
+                    <select id="Group" class="form-control select2" value="" style="width: 100%;"></select>
                     @*</div>*@
-                </div>
             </div>
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th></th>
+                        <th><i class="fa fa-lg fa-map-marker" style="color:#9ACD32" aria-hidden="true"></i></th>
+                        <th><i class="fa fa-lg fa-info-circle" aria-hidden="true"></i></th>
+                        <th><i class="fa fa-lg fa-home" style="color:red" aria-hidden="true"></i></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TeamDetails)
+                    {
+
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                <i class="fa fa-lg fa-ban" style="color:red" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                               @Html.CheckBoxFor(model => item.ShowOnMap, new { @class = "ShowOnMap" })
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(model => item.ShowPin, new { @class = "ShowPin" })
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(model => item.BaseDetail, new { @class = "ShowBase" })
+                            </td>
+                            <td>
+                                @Html.Hidden("UserId", item.UserId, new { @class = "UserId" })
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+                <tfoot style="border-top:2px solid #808080">
+                    <tr>
+                        <th>SELECT ALL</th>
+                        <th></th>
+                        <th><input id="ShowOnMapSA" type="checkbox" name="ShowOnMapSA" class="ShowOnMapSA"></th>
+                        <th><input id="ShowPinSA" type="checkbox" name="ShowPinSA" class="ShowPinSA"></th>
+                        <th><input id="ShowBaseSA" type="checkbox" name="ShowBaseSA" class="ShowBaseSA"></i></th>
+                    </tr>
+                </tfoot> 
+
+            </table> 
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Show details</label>
-                   
-                    <div class="input-group input-group-sm">
-                        <input type="checkbox" class="minimal" id="ShowDetail" style="width:20px;height:20px" name="ShowDetail" checked>
-                        
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
+    </div> 
 </div>
 
-    <div id="googleMap" style="width:100%;height:575px;"></div>
+
+
+            @*<div id="googleMap" style="width:70%;height:575px;"></div>*@
+
 
     
 
@@ -98,16 +177,31 @@
         //    }
         $('.select2').select2();
         var allmarkers=[];
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+            C: {
+                icon: ''
+            },
+            U: {
+                icon:'http://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=%7c00FF00%7c000000&.png'// iconBase + 'library_maps.png'
+            },
+            B:{
+                icon:'https://png.icons8.com/flat_round/50/000000/home.png'
+            }
+        };
         var infoWindows=[];
         var jsontext = '@Html.Raw(Json.Encode(Model.GroupLists))';
         var datas = JSON.parse(jsontext);
         $('#Group').select2({
             data: datas
+            
         })
-        var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.CustomerLists))';
         var data1 = JSON.parse(jsontext1);
         $('#User').select2({
-            data: data1
+            data: data1,
+            placeholder:"Search.."
+            
         })
 
 
@@ -116,6 +210,9 @@
         deleteCookie("myMapCookie")
         InitializeMap(markers);
 
+        var showOnMap = new Array();
+        var showPin = new Array();
+        var showBase= new Array();
         function InitializeMap (markers) {
             for (var i = 0; i < allmarkers.length; i++) {
                 allmarkers[i].setMap(null);
@@ -158,11 +255,13 @@
                 var myLatlng = new google.maps.LatLng(data.Lat, data.Lng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
+                    icon: icons[data.Type].icon,
                     map: map,
                     title: data.Address
                 });
                 
-                if($('#ShowDetail').prop('checked')==true)
+                //if($('#ShowDetail').prop('checked')==true)
+                if(data.ShowPin==true||($('#ShowDetail').prop('checked')==true )&& data.Type=="C")
                 {
                     var infowindow1 = new google.maps.InfoWindow();
                     infowindow1.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
@@ -186,13 +285,13 @@
             }
         }
         $('#ShowDetail').change(function(){
-            if($('#ShowDetail').prop('checked')==false)
-            {
-                for (var i=0;i<infoWindows.length;i++) {
-                    infoWindows[i].close();
-                }
-            }
-            else{
+            //if($('#ShowDetail').prop('checked')==false)
+            //{
+            //    for (var i=0;i<infoWindows.length;i++) {
+            //        infoWindows[i].close();
+            //    }
+            //}
+            //else{
                 var mapZoom=x.getZoom(); 
                 var mapCentre=x.getCenter(); 
                 var mapLat=mapCentre.lat(); 
@@ -200,10 +299,11 @@
                 var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom; 
                 setCookie("myMapCookie",cookiestring, 30); 
                 filter();
-        }
+        //}
         });
         $('#Group').change(function(){
-            filter();
+            GroupChange();
+            //filter();
         });
         $('#User').change(function(){
             filter();
@@ -211,20 +311,68 @@
 
         function filter(){
             var Group = $('#Group').val();
-            var User = $('#User').val();
+            var User = $('#User').val()==""?0:$('#User').val();
             var url='@Url.Action("Filter", "Home")';
             $.ajax({
                 type:"POST",
                 url:url,
-                data:JSON.stringify({UserId:User,GroupId:Group}),
+                data:JSON.stringify({Customer:User,GroupId:Group,ShowMap:showOnMap,ShowPin:showPin,ShowBase:showBase}),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     debugger;
+                    $.each(data, function(i, v) {
+                        if (v.Type== "C") {
+                            $('#CustomerName').val(v.Name)
+                            $('#CustomerAddress').val(v.Address)
+                            $('#CustomerContact').val(v.Contact)
+                        }
+                    });
                     InitializeMap(data);
                 },
                 error: function () {
                     alert("Error while inserting data");
+                }
+            })
+        }
+
+        function GroupChange()
+        {
+            var url = '@Url.Action("GroupChange", "Home")';
+            var Group = $('#Group').val();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify({ GroupId: Group }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (json) {
+                    var table = $('#example1').dataTable();
+                    table.fnClearTable(this);
+                    table.fnDestroy();
+                    var content = '';
+                    for (var i = 0; i < json.length; i++) {
+                        content += '<tr>';
+                        content += '<td>' + json[i].Name + '</td>';
+                        content += '<td><i class="fa fa-lg fa-ban" style="color:red" aria-hidden="true"></i></td>';
+                        content += '<td><input class="ShowOnMap" data-val="true" data-val-required="The ShowOnMap field is required." id="item_ShowOnMap" name="item.ShowOnMap" type="checkbox" value="true"><input name="item.ShowOnMap" type="hidden" value="false"></td>';
+                        content += '<td><input class="ShowPin" data-val="true" data-val-required="The ShowPin field is required." id="item_ShowPin" name="item.ShowPin" type="checkbox" value="true"></td>';
+                        content += '<td><input class="ShowBase" data-val="true" data-val-required="The BaseDetail field is required." id="item_BaseDetail" name="item.BaseDetail" type="checkbox" value="true"></td>';
+                        content += '<td><input class="UserId" data-val="true" data-val-number="The field UserId must be a number." data-val-required="The UserId field is required." id="UserId" name="UserId" type="hidden" value="'+json[i].UserId+'"></td>';
+                        content += '</tr>';
+                    }
+                    $('#example1 tbody').html(content);
+                    $("#example1").DataTable({
+                        "paging": false,
+                        "lengthChange": false,
+                        "searching": false,
+                        "ordering": false,
+                        "info": false,
+                        "autoWidth": false
+                    });
+                },
+                error: function () {
+                    // alert("Error while inserting data");
                 }
             })
         }
@@ -256,10 +404,85 @@
             window.document.cookie = cname+"="+"; "+expires;//Set the cookie with name and the expiration date
  
         }
+       
+        $(document).on('change', "input[type='checkbox'].ShowOnMap", function() {
+            loadData()
+        });
+        $(document).on('change', "input[type='checkbox'].ShowPin", function() {
+            loadData()
+        });
+        $(document).on('change', "input[type='checkbox'].ShowBase", function() {
+            loadData()
+        });
+       
+   
+        $("input[type='checkbox'].ShowOnMapSA").change(function() {
+            if($('#ShowOnMapSA').is(':checked'))
+            {
+                $(".ShowOnMap").prop('checked', true);
+            }
+            else
+            {
+                $(".ShowOnMap").prop('checked', false);
+            }
+            loadData()
+        });
+        $("input[type='checkbox'].ShowPinSA").change(function() {
+            if($('#ShowPinSA').is(':checked'))
+            {
+                $(".ShowPin").prop('checked', true);
+            }
+            else
+            {
+                $(".ShowPin").prop('checked', false);
+            }
+            loadData()
+        });
+        $("input[type='checkbox'].ShowBaseSA").change(function() {
+            if($('#ShowBaseSA').is(':checked'))
+            {
+                $(".ShowBase").prop('checked', true);
+            }
+            else
+            {
+                $(".ShowBase").prop('checked', false);
+            }
+            loadData()
+        });
+        function loadData(){
+            var mapZoom=x.getZoom(); 
+            var mapCentre=x.getCenter(); 
+            var mapLat=mapCentre.lat(); 
+            var mapLng=mapCentre.lng(); 
+            var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom; 
+            setCookie("myMapCookie",cookiestring, 30); 
+            showOnMap=[]
+            showPin=[]
+            showBase=[]
+            $("#example1 input:checkbox[class=ShowOnMap]:checked").each(function () {  
+                showOnMap.push($(this).closest('tr').find('.UserId').val());
+            });
+            $("#example1 input:checkbox[class=ShowPin]:checked").each(function () {  
+                showPin.push($(this).closest('tr').find('.UserId').val());
+            });
+            $("#example1 input:checkbox[class=ShowBase]:checked").each(function () {  
+                showBase.push($(this).closest('tr').find('.UserId').val());
+            });
+            filter();
+        }
     });
     </script>
-
+<script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
+    <script>$('#example1').DataTable({
+    "paging": false,
+    "lengthChange": false,
+    "searching": false,
+    "ordering": false,
+    "info": false,
+    "autoWidth": false
+});</script>
 
 }
 

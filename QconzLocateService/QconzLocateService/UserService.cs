@@ -39,7 +39,11 @@ namespace QconzLocateService.QconzLocateService
                     UserTeamId = c.UserTeamId,
                     UserToken = c.UserToken,
                     UserType = c.UserType,
-                    WorkingDays = c.WorkingDays
+                    WorkingDays = c.WorkingDays,
+                    BaseLatitude = c.BaseLatitude,
+                    BaseLongitude = c.BaseLongitude,
+                    DefaultGroup = c.DefaultGroup,
+                    IsContractor = c.IsContractor
                 }).ToList();
             }
             catch (Exception ex)
@@ -74,7 +78,11 @@ namespace QconzLocateService.QconzLocateService
                     UserTeamId = c.UserTeamId,
                     UserToken = c.UserToken,
                     UserType = c.UserType,
-                    WorkingDays = c.WorkingDays
+                    WorkingDays = c.WorkingDays,
+                    BaseLatitude = c.BaseLatitude,
+                    BaseLongitude = c.BaseLongitude,
+                    DefaultGroup = c.DefaultGroup,
+                    IsContractor = c.IsContractor
                 };
             }
             catch
@@ -105,7 +113,11 @@ namespace QconzLocateService.QconzLocateService
                 UserTeamId = UserDetails.UserTeamId,
                 UserToken = UserDetails.UserToken,
                 UserType = UserDetails.UserType,
-                WorkingDays = UserDetails.WorkingDays
+                WorkingDays = UserDetails.WorkingDays,
+                BaseLatitude = UserDetails.BaseLatitude,
+                BaseLongitude = UserDetails.BaseLongitude,
+                DefaultGroup = UserDetails.DefaultGroup,
+                IsContractor = UserDetails.IsContractor
             };
             return _IUserRepository.SaveUserDetails(user);
         }

@@ -31,16 +31,20 @@ namespace QconzLocate.Controllers
         {
             LoginServiceModel LoginDetails = new LoginServiceModel()
             {
-                UserName = login.username,
-                Password = login.password
+                UserName = login.email,
+                Password = login.password,
+                DeviceId=login.deviceId,
+                DeviceType=login.deviceType
             };
             var y = _ILoginService.ValidateUser(LoginDetails);
             ApiLoginViewModel Login = new ApiLoginViewModel()
             {
-                token = y.Token,
+                status = y.Status,
                 message = y.Message,
-                status = y.Status
+                //onlineStatus=y.
+
             };
+            System.Web.HttpContext.Current.Response.Headers.Add("authToken", y.Token);
             return Login;
         }
 

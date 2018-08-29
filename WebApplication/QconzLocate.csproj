@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Controllers\SessionExpireFilterAttribute.cs" />
+    <Compile Include="Controllers\StopTrackingController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserLocationController.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ResponseViewModel.cs" />
     <Compile Include="Models\RosterViewModel.cs" />
+    <Compile Include="Models\StopTrackingViewModel.cs" />
     <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -543,6 +545,7 @@
     <Content Include="Views\Roster\RosterDetails.cshtml" />
     <Content Include="Views\Home\History.cshtml" />
     <Content Include="Views\EmergencyCall\EmergencyCall.cshtml" />
+    <Content Include="Views\StopTracking\StopTracking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminLTE\images\" />

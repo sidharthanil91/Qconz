@@ -53,6 +53,7 @@
     <Compile Include="Models\LocationServiceModel.cs" />
     <Compile Include="Models\LoginServiceModel.cs" />
     <Compile Include="Models\RosterServiceModel.cs" />
+    <Compile Include="Models\StopTrackingServiceModel.cs" />
     <Compile Include="Models\TeamServiceModel.cs" />
     <Compile Include="Models\TokenServiceModel.cs" />
     <Compile Include="Models\UserAuthServiceModel.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="QconzLocateInterface\IEmergencyCallService.cs" />
     <Compile Include="QconzLocateInterface\ILocationService.cs" />
     <Compile Include="QconzLocateInterface\IRosterService.cs" />
+    <Compile Include="QconzLocateInterface\IStopTrackingService.cs" />
     <Compile Include="QconzLocateInterface\ITeamService.cs" />
     <Compile Include="QconzLocateInterface\IUserService.cs" />
     <Compile Include="ApiQconzLocateInterface\IUserWorkService.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="QconzLocateService\EmergencyCallService.cs" />
     <Compile Include="QconzLocateService\LocationService.cs" />
     <Compile Include="QconzLocateService\RosterService.cs" />
+    <Compile Include="QconzLocateService\StopTrackingService.cs" />
     <Compile Include="QconzLocateService\TeamService.cs" />
     <Compile Include="QconzLocateService\UserService.cs" />
     <Compile Include="ApiQconzLocateService\UserWorkService.cs" />

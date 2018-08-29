@@ -35,5 +35,6 @@ namespace QconzLocateDAL
         public virtual DbSet<tblUserTeam> tblUserTeams { get; set; }
         public virtual DbSet<tblTeamRoaster> tblTeamRoasters { get; set; }
         public virtual DbSet<tblEmergency> tblEmergencies { get; set; }
+        public virtual DbSet<tblStopTracking> tblStopTrackings { get; set; }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="QConzRepositoryInterface\IEmergencyCallRepository.cs" />
     <Compile Include="QConzRepositoryInterface\ILocationRepository.cs" />
     <Compile Include="QConzRepositoryInterface\IRosterRepository.cs" />
+    <Compile Include="QConzRepositoryInterface\IStopTrackingRepository.cs" />
     <Compile Include="QConzRepositoryInterface\ITeamRepository.cs" />
     <Compile Include="QConzRepositoryInterface\IUserRepository.cs" />
     <Compile Include="QConzRepositoryModel\CommonModel.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="QConzRepositoryModel\LocationModel.cs" />
     <Compile Include="QConzRepositoryModel\LoginModel.cs" />
     <Compile Include="QConzRepositoryModel\RosterModel.cs" />
+    <Compile Include="QConzRepositoryModel\StopTrackingModel.cs" />
     <Compile Include="QConzRepositoryModel\TeamModel.cs" />
     <Compile Include="QConzRepositoryModel\UserAuthRepositoryModel.cs" />
     <Compile Include="QConzRepositoryModel\UserLocationModel.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="QConzRepository\EmergencyCallRepository.cs" />
     <Compile Include="QConzRepository\LocationRepository.cs" />
     <Compile Include="QConzRepository\RosterRepository.cs" />
+    <Compile Include="QConzRepository\StopTrackingRepository.cs" />
     <Compile Include="QConzRepository\TeamRepository.cs" />
     <Compile Include="QConzRepository\UserRepository.cs" />
     <Compile Include="tblCustomer.cs">
@@ -109,6 +112,9 @@
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblRoaster.cs">
+      <DependentUpon>QconzModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStopTracking.cs">
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblTeam.cs">

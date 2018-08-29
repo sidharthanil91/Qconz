@@ -17,9 +17,12 @@
                 <h3 class="box-title">Active Customer List</h3>
             </div>
           
-                <div class="box-body">
-                    @*<div class="pull-right">*@
-                       
+            <div class="box-body">
+                @*<div class="pull-right">*@
+                <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
+
+                    <div class=" pull-right" style="position: relative;contain: content;padding-left:15px;padding-right:15px;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                    margin-bottom: 10px;padding-top: 15px;background-color: #ddd;">
                         @using (Html.BeginForm("Upload", "Customer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
 
@@ -33,15 +36,17 @@
 
 
                         }
-                    <button class="btn btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" >
-                        @*<input type="button" style="width:35px" class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" />*@
-                        <span style="padding-right:10px;" class="fa fa-file-excel-o"> </span>Download Template
-                    </button>
-                    @*</div>*@
-                    <div style="padding-bottom:10px;">
-                        <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
-                        <button style="width:35px" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = 0 })'" type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button class="btn btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'">
+                            @*<input type="button" style="width:35px" class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" />*@
+                            <span style="padding-right:10px;" class="fa fa-file-excel-o"> </span>Download Template
+                        </button>
                     </div>
+                    <div class=" pull-left" style="padding-bottom: 15px;margin-bottom: 10px;padding-top: 15px;">
+                        <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                        <button style="width:35px" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+                       
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -78,25 +83,25 @@
                                             <button type="button" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
                                         </td>
                                         @*<td width="5%">
-                                <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
-                            </td>*@
+                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>*@
                                     </tr>
 
                                 }
                             </tbody>
                             @*<tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                </tfoot>*@
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                        </tfoot>*@
                         </table>
                     </div>
-</div>
-    </div>
+                </div>
+            </div>
 </div>
 <script>
     var i='N'

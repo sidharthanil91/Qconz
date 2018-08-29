@@ -67,11 +67,20 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="form-group" >
+                            <label for="exampleInputEmail1">Contractor</label>
+                            <div class="input-group input-group-sm">
+                                <input id="IsContractor" type="checkbox" @(Model.UserDetails.IsContractor=="Y" ? "checked" : "") class="minimal" tabindex="9" id="IsContractor" style="width:20px;height:20px" name="ShowDetail" >
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="form-group">
                         <div class="bootstrap-timepicker">
                             <div class="form-group">
                                 <label>Start time</label>
                                 <div class="input-group">
-                                    <input type="text" id="StartTime" data-format="hh:mm A" tabindex="9" value="@Model.UserDetails.StartTime.ToString("hh:mm tt")" class="form-control ">
+                                    <input type="text" id="StartTime" data-format="hh:mm A" tabindex="11" value="@Model.UserDetails.StartTime.ToString("hh:mm tt")" class="form-control ">
                                     <div id="startclock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -82,14 +91,14 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Emergency contact name</label>
-                            <input type="text" class="form-control" tabindex="11" id="EmergencyContact" name="EmergencyContact" value="@Model.UserDetails.EmergencyContact" placeholder="Enter emergency contact name">
+                            <input type="text" class="form-control" tabindex="13" id="EmergencyContact" name="EmergencyContact" value="@Model.UserDetails.EmergencyContact" placeholder="Enter emergency contact name">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">User name</label>
-                            <input type="text" class="form-control" tabindex="13" id="UserName" name="UserName" value="@Model.UserDetails.UserName" placeholder="Enter user name">
+                            <label for="exampleInputEmail1">Base/Office latitude</label>
+                            <input type="text" class="form-control" tabindex="15" id="BaseLatitude" name="UserName" value="@Model.UserDetails.BaseLatitude" placeholder="Enter Base/Office latitude">
                         </div>
                     </div>
                     <div class="form-group">
@@ -120,12 +129,20 @@
                             <option value="2">Company Admin</option>
                             <option value="3">Dashboard and App</option>
                             <option value="4">App Only</option>
+                            <option value="5">Web Only</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Default group</label>
+                            <select id="DefaultGroup" class="form-control select2" tabindex="8" value="@Model.UserDetails.DefaultGroup" data-placeholder="Select default group" style="width: 100%;"></select>
+                            @*<input type="text" class="form-control" id="Email" name="Group" value="@Model.UserDetails.UserTeamId" placeholder="Enter group">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
                             <label>Working days</label>
-                            <select id="WorkingDays" class="form-control select2" tabindex="8" multiple="multiple" data-placeholder="Select working days" style="width: 100%;">
+                            <select id="WorkingDays" class="form-control select2" tabindex="10" multiple="multiple" data-placeholder="Select working days" style="width: 100%;">
                                 <option value="1">Mon</option>
                                 <option value="2">Tue</option>
                                 <option value="3">Wed</option>
@@ -142,7 +159,7 @@
                             <div class="form-group">
                                 <label>End time</label>
                                 <div class="input-group">
-                                    <input type="text" id="EndTime" tabindex="10" data-format="hh:mm A" value="@Model.UserDetails.EndTime.ToString("hh:mm tt")" class="form-control ">
+                                    <input type="text" id="EndTime" tabindex="12" data-format="hh:mm A" value="@Model.UserDetails.EndTime.ToString("hh:mm tt")" class="form-control ">
                                     <div id="EndTimeClock" class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
@@ -154,13 +171,19 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Emergency contact cellphone</label>
-                            <input type="text" class="form-control" tabindex="12" id="EmergencyContactNo" name="EmergencyContactNo" value="@Model.UserDetails.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
+                            <input type="text" class="form-control" tabindex="14" id="EmergencyContactNo" name="EmergencyContactNo" value="@Model.UserDetails.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Base/Office longitude</label>
+                            <input type="text" class="form-control" tabindex="16" id="BaseLongitude" name="UserName" value="@Model.UserDetails.BaseLongitude" placeholder="Enter Base/Office longitude">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input type="password" class="form-control" tabindex="14" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
+                            <input type="password" class="form-control" tabindex="18" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
                         </div>
                     </div>
                 </div>
@@ -254,6 +277,9 @@
         $('#Groups').select2({
             data: data1
         })
+        $('#DefaultGroup').select2({
+            data: data1
+        })
         var array1 = '@Model.UserDetails.UserGroups'.split(',')
         $('#Groups').select2().val(array1).trigger("change")
         $('#Status').select2({
@@ -312,9 +338,12 @@
                     UserName : $('#UserName').val(),
                     UserStatus : $('#Status').val(),
                     UserTeamId : $('#UserTeamId').val(),
-                    //UserToken : $('#UserToken').val(),
                     UserType : $('#Type').val(),
                     WorkingDays : WorkingDaysVal,
+                    BaseLatitude : $('#BaseLatitude').val(),
+                    BaseLongitude : $('#BaseLongitude').val(),
+                    DefaultGroup : $('#DefaultGroup').val(),
+                    IsContractor : $('#IsContractor').is(':checked')?"Y":"N",
                 }
 
                 var url='@Url.Action("SaveDetails", "User")';

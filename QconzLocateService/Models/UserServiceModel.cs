@@ -27,5 +27,9 @@ namespace QconzLocateService.Models
         public Nullable<System.DateTime> EndTime { get; set; }
         public string EmergencyContact { get; set; }
         public string EmergencyContactNo { get; set; }
+        public string BaseLatitude { get; set; }
+        public string BaseLongitude { get; set; }
+        public string IsContractor { get; set; }
+        public int? DefaultGroup { get; set; }
     }
 }

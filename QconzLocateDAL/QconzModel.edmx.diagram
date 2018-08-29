@@ -27,6 +27,9 @@
         <AssociationConnector Association="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" />
         <EntityTypeShape EntityType="QCONZModel.tblEmergency" Width="1.5" PointX="5.25" PointY="19" />
         <AssociationConnector Association="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" />
+        <EntityTypeShape EntityType="QCONZModel.tblStopTracking" Width="1.5" PointX="5.25" PointY="22.375" />
+        <AssociationConnector Association="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID" />
+        <AssociationConnector Association="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

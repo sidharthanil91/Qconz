@@ -49,7 +49,8 @@ namespace QconzLocate.Controllers
                            = new Dictionary<int, string>() {
                          {2,"Company Admin"},
                          {3,"Dashboard and App"},
-                         {4,"App Only" } };
+                         {4,"App Only" },
+                           {5,"Web Only" }};
 
                 UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId,"A").Select(c => new UserViewModelList
                 {
@@ -71,7 +72,11 @@ namespace QconzLocate.Controllers
                     UserToken = c.UserToken,
                     UserType = c.UserType,
                     UserRole = UserRole[c.UserType],
-                    WorkingDays = c.WorkingDays
+                    WorkingDays = c.WorkingDays,
+                    BaseLatitude=c.BaseLatitude,
+                    BaseLongitude=c.BaseLongitude,
+                    DefaultGroup=c.DefaultGroup,
+                    IsContractor=c.IsContractor
                 }).ToList();
 
                 return View("User", UserList);
@@ -111,7 +116,11 @@ namespace QconzLocate.Controllers
                         UserTeamId = c.UserTeamId,
                         UserToken = c.UserToken,
                         UserType = c.UserType,
-                        WorkingDays = c.WorkingDays
+                        WorkingDays = c.WorkingDays,
+                        BaseLatitude = c.BaseLatitude,
+                        BaseLongitude = c.BaseLongitude,
+                        DefaultGroup = c.DefaultGroup,
+                        IsContractor = c.IsContractor
                     };
                 }
                 else
@@ -133,7 +142,11 @@ namespace QconzLocate.Controllers
                         UserStatus = "A",
                         UserTeamId = 0,
                         UserType = 0,
-                        WorkingDays = "1,2,3,4,5"
+                        WorkingDays = "1,2,3,4,5",
+                        BaseLatitude = null,
+                        BaseLongitude = null,
+                        DefaultGroup = null,
+                        IsContractor = "N"
                     };
                 }
                 UserList.UserDetails = UserDetails;
@@ -183,7 +196,11 @@ namespace QconzLocate.Controllers
                     UserTeamId = user.UserTeamId,
                     UserToken = user.UserToken,
                     UserType = user.UserType,
-                    WorkingDays = user.WorkingDays
+                    WorkingDays = user.WorkingDays,
+                    BaseLatitude = user.BaseLatitude,
+                    BaseLongitude = user.BaseLongitude,
+                    DefaultGroup = user.DefaultGroup,
+                    IsContractor = user.IsContractor
                 };
                 var message = _IUserService.SaveUserDetails(UserModel);
                 bool Status = true;
@@ -213,7 +230,7 @@ namespace QconzLocate.Controllers
                            = new Dictionary<int, string>() {
                          {2,"Company Admin"},
                          {3,"Dashboard and App"},
-                         {4,"App Only" } };
+                         {4,"App Only" } ,{5,"Web Only" }};
 
             UserList.UserListViewModel = _IUserService.GetAllUsers(CompanyId, Status).Select(c => new UserViewModelList
             {

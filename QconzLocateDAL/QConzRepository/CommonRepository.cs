@@ -45,7 +45,7 @@ namespace QconzLocateDAL.QConzRepository
         {
             CommonModel CommonModel = new CommonModel();
             List<SelectList> CustomerSelectList = new List<SelectList>();
-            var y = (from t in entity.tblCustomers where (t.COMPANYID == CompanyId || CompanyId == 0)  select new { t.ID, t.OFFICENAME,t.CUSTOMERCODE }).ToList();
+            var y = (from t in entity.tblCustomers where (t.COMPANYID == CompanyId || CompanyId == 0)&& t.ARCHIVE=="A"  select new { t.ID, t.OFFICENAME,t.CUSTOMERCODE }).ToList();
             CustomerSelectList = y.Select(c => new SelectList
             {
                 Id = c.ID,
@@ -64,6 +64,21 @@ namespace QconzLocateDAL.QConzRepository
             {
                 Id = c.ID,
                 Text = c.FIRSTNAME+" "+c.SURNAME,
+            }
+             ).ToList();
+            CommonModel.UserList = UserSelectList;
+            return CommonModel;
+        }
+        public CommonModel GetMapUserSelectList(int CompanyId,int GroupId)
+        {
+            CommonModel CommonModel = new CommonModel();
+            List<SelectList> UserSelectList = new List<SelectList>();
+            var y = (from t in entity.tblUserMasters where (t.COMPANYID == CompanyId || CompanyId == 0) && (t.USERSTATUS == "A" && t.USERTYPE > 1 && t.USERTYPE!=5
+                     && (GroupId==0 || t.tblUserTeams.Select(t2 => t2.TEAMID).Contains(GroupId))) select new { t.ID, t.FIRSTNAME, t.SURNAME }).ToList();
+            UserSelectList = y.Select(c => new SelectList
+            {
+                Id = c.ID,
+                Text = c.FIRSTNAME + " " + c.SURNAME,
             }
              ).ToList();
             CommonModel.UserList = UserSelectList;
