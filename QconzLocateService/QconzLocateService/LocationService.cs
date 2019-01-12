@@ -58,5 +58,12 @@ namespace QconzLocateService.QconzLocateService
             }).ToList();
             return locations;
         }
+        public string GetUserLastLocationTime(int UserId)
+        {
+            
+            var y = _ILocationRepository.GetUserLastLocationTime(UserId);
+            return y;
+
+        }
     }
 }

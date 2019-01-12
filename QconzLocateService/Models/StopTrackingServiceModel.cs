@@ -8,6 +8,7 @@ namespace QconzLocateService.Models
 {
     public class StopTrackingServiceModel
     {
+        public int Id { get; set; }
         public int? Hours { get; set; }
         public DateTime DateTime { get; set; }
         public int UserId { get; set; }

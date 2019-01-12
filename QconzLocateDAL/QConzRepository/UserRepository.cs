@@ -82,6 +82,7 @@ namespace QconzLocateDAL.QConzRepository
                              DefaultGroup = c.DEFAULT_GROUP,
                              IsContractor = c.ISCONTRACTOR
                          }).FirstOrDefault();
+
                 y.UserGroups = string.Join(",", ((from t in entity.tblUserTeams where t.USERID == y.Id select t.TEAMID).ToArray()));
                                  
                 return y;
@@ -101,7 +102,7 @@ namespace QconzLocateDAL.QConzRepository
                     return ("Email already exists");
                 }
                 List<int> GroupIds = new List<int>();
-                if (UserModel.UserGroups != null)
+                if (UserModel.UserGroups != null && UserModel.UserGroups!="")
                 {
                    GroupIds = UserModel.UserGroups.Split(',').Select(int.Parse).ToList();
                 }
@@ -119,7 +120,7 @@ namespace QconzLocateDAL.QConzRepository
                         FIRSTNAME = UserModel.FirstName,
                         PASSWORD = UserModel.Password,
                         SURNAME = UserModel.SurName,
-                        USERNAME = UserModel.UserName,
+                        USERNAME = " ",
                         USERSTATUS = "A",
                         USERTEAMID = UserModel.UserTeamId,
                         USERTOKEN = UserModel.UserToken,
@@ -128,7 +129,9 @@ namespace QconzLocateDAL.QConzRepository
                         BASE_LATITUDE = UserModel.BaseLatitude,
                         BASE_LONGITUDE = UserModel.BaseLongitude,
                         ISCONTRACTOR = UserModel.IsContractor,
-                        DEFAULT_GROUP = UserModel.DefaultGroup
+                        DEFAULT_GROUP = UserModel.DefaultGroup,
+                        ONLINESTATUS=UserModel.OnlineStatus,
+                        ONLINESTATUSCHANGETIME=UserModel.OnlineStatusChangeTime
                        };
                     entity.tblUserMasters.Add(user);
                     if(GroupIds != null)
@@ -168,6 +171,8 @@ namespace QconzLocateDAL.QConzRepository
                     y.BASE_LONGITUDE = UserModel.BaseLongitude;
                     y.ISCONTRACTOR = UserModel.IsContractor;
                     y.DEFAULT_GROUP = UserModel.DefaultGroup;
+                    y.ONLINESTATUS = UserModel.OnlineStatus;
+                    y.ONLINESTATUSCHANGETIME = UserModel.OnlineStatusChangeTime;
                     if (GroupIds != null)
                     {
                         var UserTeam = y.tblUserTeams.ToList();
@@ -211,6 +216,49 @@ namespace QconzLocateDAL.QConzRepository
             catch (Exception ex)
             {
                 return "Error";
+            }
+        }
+
+        public UserModel GetUserDetailsByName(string username,string password)
+        {
+            try
+            {
+                var y = (from c in entity.tblUserMasters
+                         where c.EMAIL == username && c.PASSWORD==password
+                         select new UserModel
+                         {
+                             Id = c.ID,
+                             Cellphone = c.CELLPHONE,
+                             CompanyId = c.COMPANYID,
+                             EmergencyContact = c.EMERGENCYCONTACT,
+                             EmergencyContactNo = c.EMERGENCYCONTACTNO,
+                             Email = c.EMAIL,
+                             EndTime = c.ENDTIME,
+                             FirstName = c.FIRSTNAME,
+                             Password = c.PASSWORD,
+                             StartTime = c.STARTTIME,
+                             SurName = c.SURNAME,
+                             UserName = c.USERNAME,
+                             UserStatus = c.USERSTATUS,
+                             UserTeamId = c.USERTEAMID,
+                             UserToken = c.USERTOKEN,
+                             UserType = c.USERTYPE,
+                             WorkingDays = c.WORKINGDAYS,
+                             BaseLatitude = c.BASE_LATITUDE,
+                             BaseLongitude = c.BASE_LONGITUDE,
+                             DefaultGroup = c.DEFAULT_GROUP,
+                             IsContractor = c.ISCONTRACTOR,
+                             OnlineStatus=c.ONLINESTATUS,
+                             OnlineStatusChangeTime=c.ONLINESTATUSCHANGETIME
+                         }).FirstOrDefault();
+
+                y.UserGroups = string.Join(",", ((from t in entity.tblUserTeams where t.USERID == y.Id select t.TEAMID).ToArray()));
+
+                return y;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     }

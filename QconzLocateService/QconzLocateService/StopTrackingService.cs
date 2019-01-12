@@ -1,5 +1,6 @@
 ﻿using QconzLocateDAL.QConzRepository;
 using QconzLocateDAL.QConzRepositoryInterface;
+using QconzLocateDAL.QConzRepositoryModel;
 using QconzLocateService.Models;
 using QconzLocateService.QconzLocateInterface;
 using System;
@@ -13,6 +14,7 @@ namespace QconzLocateService.QconzLocateService
     public class StopTrackingService : IStopTrackingService
     {
         private IStopTrackingRepository _IStopTrackingRepository = new StopTrackingRepository();
+
         public List<StopTrackingServiceModel> GetStopTrackingList(int companyId)
         {
 
@@ -27,6 +29,22 @@ namespace QconzLocateService.QconzLocateService
             }).ToList();
             return StopTracking;
 
+        }
+
+        public string SaveStopTrackingDetails(StopTrackingServiceModel StopTrackingDetails)
+        {
+
+            var stoptracking = new StopTrackingModel()
+            {
+                Id = StopTrackingDetails.Id,                
+                UserId = StopTrackingDetails.UserId,
+                Hours = StopTrackingDetails.Hours,
+                Status = StopTrackingDetails.Status,
+                DateTime = StopTrackingDetails.DateTime,
+                User= StopTrackingDetails.User
+            };
+            //IStopTrackingService.SaveStopTrackingDetails(stoptracking);
+            return _IStopTrackingRepository.SaveStopTrackingDetails(stoptracking);
         }
     }
 }

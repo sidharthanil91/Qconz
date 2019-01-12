@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "User";
+    ViewBag.SubTitle = "Team Map";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/User/User/menu")
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">User List</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    
+                    
+                    @if (User.IsInRole("SUPER"))
+                    {
+                        <div>
+                            <div class="col-md-6">
+                                <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                                <button onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                    @*<div class="form-group">*@
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Select company</label>
+                                        @*<div class="input-group input-group-sm">*@
+                                        <select id="Company" class="form-control select2" value="" style="width: 100%;"></select>
+                                        @*</div>*@
+                                    </div>
+                                </div>
+                                @*</div>*@
+                            </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                            <button onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    }
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Surname</th>
+                                <th>Type</th>
+                                <th>Email</th>
+                                <th>Cellphone</th>
+                                <th>Company</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.UserListViewModel)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+                                    <td>
+                                        @item.SurName
+                                    </td>
+                                    <td>
+                                        @item.UserRole
+                                    </td>
+                                    <td>
+                                        @item.Email
+                                    </td>
+                                    <td>
+                                        @item.Cellphone
+                                    </td>
+                                    <td>
+                                        @item.Company
+                                    </td>
+                                    <td width="5%">
+                                        <button type="button" onclick="window.location.href= '@Url.Action("UserDetails", "User", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                    </td>
+                                    @*<td width="5%">
+                                <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>*@
+                                </tr>
+
+                            }
+                        </tbody>
+                        @*<tfoot>
+                    <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                    </tr>
+                </tfoot>*@
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/Bundle/User/Data")
+@Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+<script>
+    $('.select2').select2();
+    var allmarkers = [];
+    var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
+    var data = JSON.parse(jsontext);
+    $('#Company').select2({
+        data: data
+    })
+
+    $('#Company').change(function () {
+        filter();
+    });
+
+    var i = 'A'
+    function clickevent() {
+        if (i == 'N') {
+            $('#btn').text('Show Active');
+            $('h3.box-title').text('Archived Override List')
+            filter();
+            i = 'A';
+        }
+        else {
+            $('#btn').text('Show Archive');
+            $('h3.box-title').text('Active Override List')
+            filter();
+            i = 'N';
+        }
+    }
+
+    function filter() {
+        var Company=null;
+        if ($('#Company').val())
+            Company = $('#Company').val();
+        else
+            Company=@HttpContext.Current.Session["CompanyId"].ToString()
+        var url = '@Url.Action("Filter", "User")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify({ CompanyId: Company ,Status:i}),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (json) {
+                var table = $('#example1').dataTable();
+                oSettings = table.fnSettings();
+
+                table.fnClearTable(this);
+                table.fnDestroy();
+                    var content = '';
+                    //content += '<tbody>'; -- **superfluous**
+                    for (var i = 0; i < json.length; i++) {
+                        content += '<tr>';
+                        content += '<td>' + json[i].FirstName + '</td>';
+                        content += '<td>' + json[i].SurName + '</td>';
+                        content += '<td>' + json[i].UserRole + '</td>';
+                        content += '<td>' + json[i].Email + '</td>';
+                        content += '<td>' + json[i].Cellphone + '</td>';
+                        content += '<td>' + json[i].Company + '</td>';
+                        content += '<td >  <button type="button" onclick="window.location.href=\'../User/UserDetails/'+json[i].Id+'\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                        content += '</tr>';
+                    }
+                    // content += '</tbody>';-- **superfluous**
+                    //$('table tbody').replaceWith(content);  **incorrect..**
+                    $('#example1 tbody').html(content);
+                    $("#example1").DataTable();
+            },
+            error: function () {
+               // alert("Error while inserting data");
+            }
+        })
+    }
+    </script>
+}
+
+
+
+
+
+

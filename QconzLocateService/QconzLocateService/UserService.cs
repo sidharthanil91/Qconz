@@ -117,9 +117,50 @@ namespace QconzLocateService.QconzLocateService
                 BaseLatitude = UserDetails.BaseLatitude,
                 BaseLongitude = UserDetails.BaseLongitude,
                 DefaultGroup = UserDetails.DefaultGroup,
-                IsContractor = UserDetails.IsContractor
+                IsContractor = UserDetails.IsContractor,
+                OnlineStatus=UserDetails.OnlineStatus,
+                OnlineStatusChangeTime=UserDetails.OnlineStatusChangeTime
             };
             return _IUserRepository.SaveUserDetails(user);
+        }
+
+        public UserServiceModel GetUserDetailsByName(string username,string password)
+        {
+            try
+            {
+                var c = _IUserRepository.GetUserDetailsByName(username, password);
+                return new UserServiceModel
+                {
+                    Id = c.Id,
+                    Cellphone = c.Cellphone,
+                    CompanyId = c.CompanyId,
+                    EmergencyContact = c.EmergencyContact,
+                    EmergencyContactNo = c.EmergencyContactNo,
+                    Email = c.Email,
+                    EndTime = c.EndTime,
+                    FirstName = c.FirstName,
+                    Password = c.Password,
+                    StartTime = c.StartTime,
+                    SurName = c.SurName,
+                    UserGroups = c.UserGroups,
+                    UserName = c.UserName,
+                    UserStatus = c.UserStatus,
+                    UserTeamId = c.UserTeamId,
+                    UserToken = c.UserToken,
+                    UserType = c.UserType,
+                    WorkingDays = c.WorkingDays,
+                    BaseLatitude = c.BaseLatitude,
+                    BaseLongitude = c.BaseLongitude,
+                    DefaultGroup = c.DefaultGroup,
+                    IsContractor = c.IsContractor,
+                    OnlineStatus=c.OnlineStatus,
+                    OnlineStatusChangeTime=c.OnlineStatusChangeTime
+                };
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

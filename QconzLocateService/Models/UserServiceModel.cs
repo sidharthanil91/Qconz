@@ -31,5 +31,7 @@ namespace QconzLocateService.Models
         public string BaseLongitude { get; set; }
         public string IsContractor { get; set; }
         public int? DefaultGroup { get; set; }
+        public int? OnlineStatus { get; set; }
+        public Nullable<System.DateTime> OnlineStatusChangeTime { get; set; }
     }
 }

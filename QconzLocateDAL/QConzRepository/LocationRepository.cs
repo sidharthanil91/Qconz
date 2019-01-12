@@ -4,6 +4,7 @@ using QconzLocateDAL.QConzRepositoryModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,6 +100,29 @@ namespace QconzLocateDAL.QConzRepository
                 return UserHistory;
             }
 
+        }
+
+        public string GetUserLastLocationTime(int UserId)
+        {
+            try
+            {
+                var lastlocationtime = "";
+                var y = (from t in entity.tblUserLogs where t.USERID == UserId orderby t.LOGTIME descending select t).ToList();
+                
+                var lastlocation = y.First();
+                DateTime LastLocationTime = lastlocation.LOGTIME;
+                //lastlocationtime = Convert.ToString(lastlocation.LOGTIME);
+
+                lastlocationtime = LastLocationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'sss'Z'", DateTimeFormatInfo.InvariantInfo);
+                //lastlocationtime = LastLocationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'", DateTimeFormatInfo.InvariantInfo);
+                
+
+                return lastlocationtime;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

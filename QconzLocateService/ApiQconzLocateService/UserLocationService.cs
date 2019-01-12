@@ -40,5 +40,18 @@ namespace QconzLocateService.ApiQconzLocateService
             }).ToList();
             _IUserLocationRepository.SaveUserLocation(UserLog);
         }
+
+        public string SaveUserLocationDetails(UserLocationServiceModel UserLocationDetails)
+        {
+            var UserLog = new UserLocationModel()
+            {
+                DateTime = UserLocationDetails.DateTime,
+                Longitude = UserLocationDetails.Longitude,
+                Latitude = UserLocationDetails.Latitude,
+                UserId = UserLocationDetails.UserId
+            };
+            return _IUserLocationRepository.SaveUserLocationDetails(UserLog);
+
+        }
     }
 }

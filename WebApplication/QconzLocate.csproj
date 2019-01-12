@@ -28,6 +28,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -188,17 +189,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChangeLocationStatusController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmergencyCallController.cs" />
     <Compile Include="Controllers\EmergencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomePageSearchController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Controllers\SessionExpireFilterAttribute.cs" />
     <Compile Include="Controllers\StopTrackingController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\UpdateLocationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserLocationController.cs" />
     <Compile Include="Controllers\UserWorkController.cs" />
@@ -210,6 +214,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApiCredentialsViewModel.cs" />
+    <Compile Include="Models\ApiHomePageSearchViewModel.cs" />
     <Compile Include="Models\ApiLoginViewModel.cs" />
     <Compile Include="Models\ApiResponseViewModel.cs" />
     <Compile Include="Models\ApiUserLocationViewModel.cs" />
@@ -532,9 +537,15 @@
     <Content Include="Views\Company\CompanyDetails.cshtml" />
     <Content Include="Views\User\User.cshtml" />
     <Content Include="Doc\Customer.xlsx" />
-    <None Include="Properties\PublishProfiles\Custompro.pubxml" />
-    <None Include="Properties\PublishProfiles\Qconz.pubxml" />
-    <None Include="Properties\PublishProfiles\QconzPublish.pubxml" />
+    <None Include="Properties\PublishProfiles\Custompro.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Qconz.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\QconzPublish.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Views\User\UserDetails.cshtml" />
     <Content Include="Views\Customer\Customer.cshtml" />
     <Content Include="Views\Team\Team.cshtml" />

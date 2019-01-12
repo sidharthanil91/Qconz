@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QCONZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCustomer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CUSTOMERCODE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FIRSTNAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="LASTNAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="OFFICENAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="ADDRESS1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ADDRESS2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ZIPCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PHONE_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PHONE_2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="WEBSITE" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
+    <Property Name="COMPANYID" Type="Int32" />
+    <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblCustomers" ToRole="tblOrganizations" />
+  </EntityType>
+  <EntityType Name="tblOrganization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TITLE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CONTACTNAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="ADDRESS1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ADDRESS2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ZIPCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PHONE_1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PHONE_2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="WEBSITE" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
+    <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="tblCustomers" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblCustomers" />
+    <NavigationProperty Name="tblRoasters" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblRoaster" />
+    <NavigationProperty Name="tblTeams" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblTeams" />
+    <NavigationProperty Name="tblUserMasters" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblUserMaster" />
+    <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblRoaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STARTDATE" Type="DateTime" Precision="0" />
+    <Property Name="ENDDATE" Type="DateTime" Precision="0" />
+    <Property Name="USERID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="STARTTIME" Type="DateTime" Precision="3" />
+    <Property Name="FINISHTIME" Type="DateTime" Precision="3" />
+    <Property Name="COMPANYID" Type="Int32" />
+    <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="OVERRIDE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="OVERIDEDETAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblRoaster" ToRole="tblOrganizations" />
+    <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblUserRoaster" />
+    <NavigationProperty Name="tblTeamRoasters" Relationship="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblTeamRoaster" />
+  </EntityType>
+  <EntityType Name="tblTeam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TEAMNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TEAMDESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TEAMCREATED" Type="DateTime" Precision="3" />
+    <Property Name="TEAMSTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="COMPANYID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblTeams" ToRole="tblOrganizations" />
+    <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserTeam_ID" FromRole="tblTeams" ToRole="tblUserTeam" />
+    <NavigationProperty Name="tblTeamRoasters" Relationship="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeam" ToRole="tblTeamRoaster" />
+    <NavigationProperty Name="tblUserMasters" Relationship="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" FromRole="tblTeam" ToRole="tblUserMaster" />
+  </EntityType>
+  <EntityType Name="tblUserLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblUserLog_USERID_tblUserMaster_ID" FromRole="tblUserLog" ToRole="tblUserMaster" />
+  </EntityType>
+  <EntityType Name="tblUserMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERTYPE" Type="Int32" Nullable="false" />
+    <Property Name="USERNAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USERSTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="USERTEAMID" Type="Int32" />
+    <Property Name="COMPANYID" Type="Int32" />
+    <Property Name="USERTOKEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FIRSTNAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="CELLPHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="WORKINGDAYS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="STARTTIME" Type="DateTime" Precision="3" />
+    <Property Name="ENDTIME" Type="DateTime" Precision="3" />
+    <Property Name="EMERGENCYCONTACT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EMERGENCYCONTACTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblUserMaster" ToRole="tblOrganizations" />
+    <NavigationProperty Name="tblUserLogs" Relationship="Self.FK_tblUserLog_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserLog" />
+    <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserRoaster" />
+    <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserTeam" />
+    <NavigationProperty Name="tblEmergencies" Relationship="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblEmergency" />
+    <Property Name="ONLINESTATUS" Type="Int32" />
+    <Property Name="ONLINESTATUSCHANGETIME" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblStopTrackings" Relationship="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblStopTracking" />
+    <Property Name="ISCONTRACTOR" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="BASE_LATITUDE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BASE_LONGITUDE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DEFAULT_GROUP" Type="Int32" />
+    <NavigationProperty Name="tblTeam" Relationship="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" FromRole="tblUserMaster" ToRole="tblTeam" />
+  </EntityType>
+  <EntityType Name="tblUserRoaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <Property Name="ROASTERID" Type="Int32" Nullable="false" />
+    <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="tblRoaster" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblUserRoaster" ToRole="tblRoaster" />
+    <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserRoaster" ToRole="tblUserMaster" />
+  </EntityType>
+  <EntityType Name="tblUserTeam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <Property Name="TEAMID" Type="Int32" Nullable="false" />
+    <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="tblTeam" Relationship="Self.FK_tblUserTeam_USERID_tblUserTeam_ID" FromRole="tblUserTeam" ToRole="tblTeams" />
+    <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblUserTeam_USERID_tblUserMaster_ID" FromRole="tblUserTeam" ToRole="tblUserMaster" />
+  </EntityType>
+  <Association Name="FK_tblCustomers_COMPANYID_tblOrganizations_ID">
+    <End Role="tblOrganizations" Type="Self.tblOrganization" Multiplicity="0..1" />
+    <End Role="tblCustomers" Type="Self.tblCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrganizations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCustomers">
+        <PropertyRef Name="COMPANYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID">
+    <End Role="tblOrganizations" Type="Self.tblOrganization" Multiplicity="0..1" />
+    <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrganizations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblRoaster">
+        <PropertyRef Name="COMPANYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTeams_COMPANYID_tblOrganizations_ID">
+    <End Role="tblOrganizations" Type="Self.tblOrganization" Multiplicity="1" />
+    <End Role="tblTeams" Type="Self.tblTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrganizations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblTeams">
+        <PropertyRef Name="COMPANYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserMaster_COMPANYID_tblOrganizations_ID">
+    <End Role="tblOrganizations" Type="Self.tblOrganization" Multiplicity="0..1" />
+    <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrganizations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserMaster">
+        <PropertyRef Name="COMPANYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
+    <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="1" />
+    <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRoaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserRoaster">
+        <PropertyRef Name="ROASTERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserTeam_USERID_tblUserTeam_ID">
+    <End Role="tblTeams" Type="Self.tblTeam" Multiplicity="1" />
+    <End Role="tblUserTeam" Type="Self.tblUserTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTeams">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserTeam">
+        <PropertyRef Name="TEAMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserLog_USERID_tblUserMaster_ID">
+    <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+    <End Role="tblUserLog" Type="Self.tblUserLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserLog">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserRoaster_USERID_tblUserMaster_ID">
+    <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+    <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserRoaster">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserTeam_USERID_tblUserMaster_ID">
+    <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+    <End Role="tblUserTeam" Type="Self.tblUserTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserTeam">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QCONZEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+    <EntitySet Name="tblOrganizations" EntityType="Self.tblOrganization" />
+    <EntitySet Name="tblRoasters" EntityType="Self.tblRoaster" />
+    <EntitySet Name="tblTeams" EntityType="Self.tblTeam" />
+    <EntitySet Name="tblUserLogs" EntityType="Self.tblUserLog" />
+    <EntitySet Name="tblUserMasters" EntityType="Self.tblUserMaster" />
+    <EntitySet Name="tblUserRoasters" EntityType="Self.tblUserRoaster" />
+    <EntitySet Name="tblUserTeams" EntityType="Self.tblUserTeam" />
+    <AssociationSet Name="FK_tblCustomers_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID">
+      <End Role="tblOrganizations" EntitySet="tblOrganizations" />
+      <End Role="tblCustomers" EntitySet="tblCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
+      <End Role="tblOrganizations" EntitySet="tblOrganizations" />
+      <End Role="tblRoaster" EntitySet="tblRoasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTeams_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID">
+      <End Role="tblOrganizations" EntitySet="tblOrganizations" />
+      <End Role="tblTeams" EntitySet="tblTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserMaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID">
+      <End Role="tblOrganizations" EntitySet="tblOrganizations" />
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID" Association="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
+      <End Role="tblRoaster" EntitySet="tblRoasters" />
+      <End Role="tblUserRoaster" EntitySet="tblUserRoasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserTeam_USERID_tblUserTeam_ID" Association="Self.FK_tblUserTeam_USERID_tblUserTeam_ID">
+      <End Role="tblTeams" EntitySet="tblTeams" />
+      <End Role="tblUserTeam" EntitySet="tblUserTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserLog_USERID_tblUserMaster_ID" Association="Self.FK_tblUserLog_USERID_tblUserMaster_ID">
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+      <End Role="tblUserLog" EntitySet="tblUserLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserRoaster_USERID_tblUserMaster_ID" Association="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID">
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+      <End Role="tblUserRoaster" EntitySet="tblUserRoasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserTeam_USERID_tblUserMaster_ID" Association="Self.FK_tblUserTeam_USERID_tblUserMaster_ID">
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+      <End Role="tblUserTeam" EntitySet="tblUserTeams" />
+    </AssociationSet>
+    <EntitySet Name="tblTeamRoasters" EntityType="QCONZModel.tblTeamRoaster" />
+    <AssociationSet Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" Association="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+      <End Role="tblRoaster" EntitySet="tblRoasters" />
+      <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID" Association="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+      <End Role="tblTeam" EntitySet="tblTeams" />
+      <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
+    </AssociationSet>
+    <EntitySet Name="tblEmergencies" EntityType="QCONZModel.tblEmergency" />
+    <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID">
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+      <End Role="tblEmergency" EntitySet="tblEmergencies" />
+    </AssociationSet>
+    <EntitySet Name="tblStopTrackings" EntityType="QCONZModel.tblStopTracking" />
+    <AssociationSet Name="FK_tblStopTracking_USERID_tblUserMaster_ID" Association="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID">
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+      <End Role="tblStopTracking" EntitySet="tblStopTrackings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" Association="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID">
+      <End Role="tblTeam" EntitySet="tblTeams" />
+      <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblTeamRoaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TEAMID" Type="Int32" Nullable="false" />
+    <Property Name="ROASTERID" Type="Int32" Nullable="false" />
+    <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="tblRoaster" Relationship="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblTeamRoaster" ToRole="tblRoaster" />
+    <NavigationProperty Name="tblTeam" Relationship="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeamRoaster" ToRole="tblTeam" />
+  </EntityType>
+  <Association Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+    <End Type="QCONZModel.tblRoaster" Role="tblRoaster" Multiplicity="1" />
+    <End Type="QCONZModel.tblTeamRoaster" Role="tblTeamRoaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRoaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblTeamRoaster">
+        <PropertyRef Name="ROASTERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+    <End Type="QCONZModel.tblTeam" Role="tblTeam" Multiplicity="1" />
+    <End Type="QCONZModel.tblTeamRoaster" Role="tblTeamRoaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTeam">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblTeamRoaster">
+        <PropertyRef Name="TEAMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblEmergency">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="tblUserMaster" Relationship="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblEmergency" ToRole="tblUserMaster" />
+  </EntityType>
+  <Association Name="FK_tblEmergency_USERID_tblUserMaster_ID">
+    <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="1" />
+    <End Type="QCONZModel.tblEmergency" Role="tblEmergency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblEmergency">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblStopTracking">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <Property Name="HOURS" Type="Int32" />
+    <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="tblUserMaster" Relationship="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID" FromRole="tblStopTracking" ToRole="tblUserMaster" />
+  </EntityType>
+  <Association Name="FK_tblStopTracking_USERID_tblUserMaster_ID">
+    <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="1" />
+    <End Type="QCONZModel.tblStopTracking" Role="tblStopTracking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblStopTracking">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID">
+    <End Type="QCONZModel.tblTeam" Role="tblTeam" Multiplicity="0..1" />
+    <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTeam">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUserMaster">
+        <PropertyRef Name="DEFAULT_GROUP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

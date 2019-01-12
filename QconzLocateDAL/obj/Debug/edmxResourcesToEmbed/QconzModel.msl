@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QCONZModelStoreContainer" CdmEntityContainer="QCONZEntities">
+    <EntitySetMapping Name="tblCustomers">
+      <EntityTypeMapping TypeName="QCONZModel.tblCustomer">
+        <MappingFragment StoreEntitySet="tblCustomers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CUSTOMERCODE" ColumnName="CUSTOMERCODE" />
+          <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="OFFICENAME" ColumnName="OFFICENAME" />
+          <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
+          <ScalarProperty Name="ADDRESS2" ColumnName="ADDRESS2" />
+          <ScalarProperty Name="ZIPCODE" ColumnName="ZIPCODE" />
+          <ScalarProperty Name="PHONE_1" ColumnName="PHONE_1" />
+          <ScalarProperty Name="PHONE_2" ColumnName="PHONE_2" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="WEBSITE" ColumnName="WEBSITE" />
+          <ScalarProperty Name="LAT" ColumnName="LAT" />
+          <ScalarProperty Name="LNG" ColumnName="LNG" />
+          <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
+          <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrganizations">
+      <EntityTypeMapping TypeName="QCONZModel.tblOrganization">
+        <MappingFragment StoreEntitySet="tblOrganizations">
+          <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="CONTACTNAME" ColumnName="CONTACTNAME" />
+          <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
+          <ScalarProperty Name="ADDRESS2" ColumnName="ADDRESS2" />
+          <ScalarProperty Name="ZIPCODE" ColumnName="ZIPCODE" />
+          <ScalarProperty Name="PHONE_1" ColumnName="PHONE_1" />
+          <ScalarProperty Name="PHONE_2" ColumnName="PHONE_2" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="WEBSITE" ColumnName="WEBSITE" />
+          <ScalarProperty Name="LAT" ColumnName="LAT" />
+          <ScalarProperty Name="LNG" ColumnName="LNG" />
+          <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRoasters">
+      <EntityTypeMapping TypeName="QCONZModel.tblRoaster">
+        <MappingFragment StoreEntitySet="tblRoaster">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+          <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
+          <ScalarProperty Name="FINISHTIME" ColumnName="FINISHTIME" />
+          <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+          <ScalarProperty Name="OVERRIDE" ColumnName="OVERRIDE" />
+          <ScalarProperty Name="OVERIDEDETAIL" ColumnName="OVERIDEDETAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTeams">
+      <EntityTypeMapping TypeName="QCONZModel.tblTeam">
+        <MappingFragment StoreEntitySet="tblTeams">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEAMNAME" ColumnName="TEAMNAME" />
+          <ScalarProperty Name="TEAMDESC" ColumnName="TEAMDESC" />
+          <ScalarProperty Name="TEAMCREATED" ColumnName="TEAMCREATED" />
+          <ScalarProperty Name="TEAMSTATUS" ColumnName="TEAMSTATUS" />
+          <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserLogs">
+      <EntityTypeMapping TypeName="QCONZModel.tblUserLog">
+        <MappingFragment StoreEntitySet="tblUserLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="LAT" ColumnName="LAT" />
+          <ScalarProperty Name="LNG" ColumnName="LNG" />
+          <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserMasters">
+      <EntityTypeMapping TypeName="QCONZModel.tblUserMaster">
+        <MappingFragment StoreEntitySet="tblUserMaster">
+          <ScalarProperty Name="DEFAULT_GROUP" ColumnName="DEFAULT_GROUP" />
+          <ScalarProperty Name="BASE_LONGITUDE" ColumnName="BASE_LONGITUDE" />
+          <ScalarProperty Name="BASE_LATITUDE" ColumnName="BASE_LATITUDE" />
+          <ScalarProperty Name="ISCONTRACTOR" ColumnName="ISCONTRACTOR" />
+          <ScalarProperty Name="ONLINESTATUSCHANGETIME" ColumnName="ONLINESTATUSCHANGETIME" />
+          <ScalarProperty Name="ONLINESTATUS" ColumnName="ONLINESTATUS" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USERTYPE" ColumnName="USERTYPE" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+          <ScalarProperty Name="USERTEAMID" ColumnName="USERTEAMID" />
+          <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+          <ScalarProperty Name="USERTOKEN" ColumnName="USERTOKEN" />
+          <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="CELLPHONE" ColumnName="CELLPHONE" />
+          <ScalarProperty Name="WORKINGDAYS" ColumnName="WORKINGDAYS" />
+          <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
+          <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
+          <ScalarProperty Name="EMERGENCYCONTACT" ColumnName="EMERGENCYCONTACT" />
+          <ScalarProperty Name="EMERGENCYCONTACTNO" ColumnName="EMERGENCYCONTACTNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserRoasters">
+      <EntityTypeMapping TypeName="QCONZModel.tblUserRoaster">
+        <MappingFragment StoreEntitySet="tblUserRoaster">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserTeams">
+      <EntityTypeMapping TypeName="QCONZModel.tblUserTeam">
+        <MappingFragment StoreEntitySet="tblUserTeam">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTeamRoasters">
+      <EntityTypeMapping TypeName="QCONZModel.tblTeamRoaster">
+        <MappingFragment StoreEntitySet="tblTeamRoaster">
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+          <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
+          <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmergencies">
+      <EntityTypeMapping TypeName="QCONZModel.tblEmergency">
+        <MappingFragment StoreEntitySet="tblEmergency">
+          <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
+          <ScalarProperty Name="LNG" ColumnName="LNG" />
+          <ScalarProperty Name="LAT" ColumnName="LAT" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStopTrackings">
+      <EntityTypeMapping TypeName="QCONZModel.tblStopTracking">
+        <MappingFragment StoreEntitySet="tblStopTracking">
+          <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="HOURS" ColumnName="HOURS" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

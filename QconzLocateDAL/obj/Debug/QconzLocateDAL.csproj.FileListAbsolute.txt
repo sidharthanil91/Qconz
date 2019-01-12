@@ -1,0 +1,56 @@
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll.config
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\QconzLocateDAL.pdb
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\EntityFramework.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\EntityFramework.xml
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.pdb
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll.config
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\QconzLocateDAL.pdb
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\EntityFramework.dll
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\EntityFramework.xml
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojAssemblyReference.cache
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.csproj.CoreCompileInputs.cache
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.csproj.CopyComplete
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.dll
+E:\SathishProjects\Qconz\C#\QconzLocateDAL\obj\Debug\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll.config
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\EntityFramework.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\EntityFramework.xml
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojAssemblyReference.cache
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\obj\Debug\QconzLocateDAL.csproj.CoreCompileInputs.cache
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\obj\Debug\QconzLocateDAL.csproj.CopyComplete
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\obj\Debug\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateDAL\obj\Debug\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll.config
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.xml
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojAssemblyReference.cache
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.csproj.CoreCompileInputs.cache
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.csproj.CopyComplete
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll.config
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.pdb

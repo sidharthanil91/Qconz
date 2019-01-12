@@ -43,5 +43,37 @@ namespace QconzLocateDAL.ApiQconzRepository
             }
             entity.SaveChanges();
         }
+
+        public string SaveUserLocationDetails(UserLocationModel UserLocationDetails)
+        {
+            try
+            {
+                //if (UserLocationDetails.Id == 0)
+                //{
+                    var userlocationdetails = new tblUserLog()
+                    {
+                        LAT = UserLocationDetails.Latitude,
+                        LNG = UserLocationDetails.Longitude,
+                        LOGTIME = UserLocationDetails.DateTime,
+                        USERID = UserLocationDetails.UserId
+                    };
+                    entity.tblUserLogs.Add(userlocationdetails);
+                //}
+                //else
+                //{
+                //    var y = entity.tblStopTrackings.FirstOrDefault(t => t.ID == StopTrackingModel.Id);
+                //    y.USERID = StopTrackingModel.UserId;
+                //    y.HOURS = StopTrackingModel.Hours;
+                //    y.STATUS = StopTrackingModel.Status;
+                //    y.LOGTIME = StopTrackingModel.DateTime;
+                //}
+                entity.SaveChanges();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return "Error";
+            }
+        }
     }
 }

@@ -1,0 +1,354 @@
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocate.dll.config
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocate.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocate.pdb
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Antlr3.Runtime.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\EntityFramework.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\ExcelDataReader.DataSet.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\ExcelDataReader.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Newtonsoft.Json.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Owin.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocateService.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Net.Http.Formatting.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Helpers.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Http.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Http.WebHost.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Mvc.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Optimization.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Razor.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.WebPages.Deployment.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.WebPages.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\WebGrease.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocateDAL.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocateService.pdb
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\ExcelDataReader.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\ExcelDataReader.DataSet.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Net.Http.Formatting.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Http.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Http.WebHost.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Helpers.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Mvc.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Optimization.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.Razor.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.WebPages.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.WebPages.Deployment.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Antlr3.Runtime.pdb
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Newtonsoft.Json.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\EntityFramework.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\MyPc\Downloads\C#\WebApplication\bin\QconzLocateDAL.pdb
+C:\Users\MyPc\Downloads\C#\WebApplication\obj\Debug\QconzLocate.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Downloads\C#\WebApplication\obj\Debug\QconzLocate.dll
+C:\Users\MyPc\Downloads\C#\WebApplication\obj\Debug\QconzLocate.pdb
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocate.dll.config
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocate.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocate.pdb
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Antlr3.Runtime.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\EntityFramework.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\EntityFramework.SqlServer.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\ExcelDataReader.DataSet.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\ExcelDataReader.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.AspNet.Identity.Core.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Cookies.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Facebook.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Google.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.OAuth.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Twitter.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Web.Infrastructure.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Newtonsoft.Json.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Owin.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocateService.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Net.Http.Formatting.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Helpers.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Http.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Http.WebHost.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Mvc.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Optimization.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Razor.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.WebPages.Deployment.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.WebPages.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.WebPages.Razor.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\WebGrease.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocateDAL.dll
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocateService.pdb
+E:\SathishProjects\Qconz\C#\WebApplication\bin\ExcelDataReader.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\ExcelDataReader.DataSet.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Net.Http.Formatting.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Http.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Http.WebHost.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Helpers.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Mvc.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Optimization.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.Razor.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.WebPages.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.WebPages.Deployment.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\System.Web.WebPages.Razor.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Antlr3.Runtime.pdb
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Newtonsoft.Json.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\EntityFramework.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\EntityFramework.SqlServer.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.AspNet.Identity.Core.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Facebook.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Cookies.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.OAuth.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Google.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.Twitter.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocateDAL.pdb
+E:\SathishProjects\Qconz\C#\WebApplication\bin\QconzLocateDAL.dll.config
+E:\SathishProjects\Qconz\C#\WebApplication\obj\Debug\QconzLocate.csprojAssemblyReference.cache
+E:\SathishProjects\Qconz\C#\WebApplication\obj\Debug\QconzLocate.csproj.CoreCompileInputs.cache
+E:\SathishProjects\Qconz\C#\WebApplication\obj\Debug\QconzLocate.csproj.CopyComplete
+E:\SathishProjects\Qconz\C#\WebApplication\obj\Debug\QconzLocate.dll
+E:\SathishProjects\Qconz\C#\WebApplication\obj\Debug\QconzLocate.pdb
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocate.dll.config
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocate.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocate.pdb
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Antlr3.Runtime.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\EntityFramework.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\EntityFramework.SqlServer.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\ExcelDataReader.DataSet.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\ExcelDataReader.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.AspNet.Identity.Core.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.AspNet.Identity.Owin.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Cookies.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Facebook.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Google.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.OAuth.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Twitter.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Web.Infrastructure.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Newtonsoft.Json.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Owin.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocateService.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Net.Http.Formatting.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Helpers.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Http.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Http.WebHost.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Mvc.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Optimization.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Razor.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.WebPages.Deployment.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.WebPages.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.WebPages.Razor.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\WebGrease.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocateService.pdb
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\ExcelDataReader.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\ExcelDataReader.DataSet.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Net.Http.Formatting.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Http.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Http.WebHost.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Helpers.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Mvc.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Optimization.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.Razor.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.WebPages.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.WebPages.Deployment.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\System.Web.WebPages.Razor.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Antlr3.Runtime.pdb
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Newtonsoft.Json.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\EntityFramework.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\EntityFramework.SqlServer.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.AspNet.Identity.Core.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Facebook.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Cookies.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.OAuth.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Google.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.Twitter.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\Qconz\WebApplication\bin\QconzLocateDAL.dll.config
+F:\Prasanth\Qloctae\Qconz\WebApplication\obj\Debug\QconzLocate.csprojAssemblyReference.cache
+F:\Prasanth\Qloctae\Qconz\WebApplication\obj\Debug\QconzLocate.csproj.CoreCompileInputs.cache
+F:\Prasanth\Qloctae\Qconz\WebApplication\obj\Debug\QconzLocate.csproj.CopyComplete
+F:\Prasanth\Qloctae\Qconz\WebApplication\obj\Debug\QconzLocate.dll
+F:\Prasanth\Qloctae\Qconz\WebApplication\obj\Debug\QconzLocate.pdb
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocate.dll.config
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocate.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocate.pdb
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Antlr3.Runtime.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\EntityFramework.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\EntityFramework.SqlServer.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\ExcelDataReader.DataSet.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\ExcelDataReader.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Core.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Owin.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Cookies.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Facebook.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Google.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.OAuth.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Twitter.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Web.Infrastructure.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Newtonsoft.Json.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Owin.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocateService.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Net.Http.Formatting.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Helpers.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Http.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Http.WebHost.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Mvc.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Optimization.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Razor.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.WebPages.Deployment.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.WebPages.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.WebPages.Razor.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\WebGrease.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocateService.pdb
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\ExcelDataReader.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\ExcelDataReader.DataSet.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Net.Http.Formatting.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Http.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Http.WebHost.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Helpers.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Mvc.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Optimization.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.Razor.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.WebPages.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.WebPages.Deployment.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\System.Web.WebPages.Razor.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Antlr3.Runtime.pdb
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Newtonsoft.Json.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\EntityFramework.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\EntityFramework.SqlServer.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Core.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Facebook.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Cookies.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.OAuth.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Google.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Twitter.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\QconzApi\WebApplication\bin\QconzLocateDAL.dll.config
+F:\Prasanth\Qloctae\QconzApi\WebApplication\obj\Debug\QconzLocate.csprojAssemblyReference.cache
+F:\Prasanth\Qloctae\QconzApi\WebApplication\obj\Debug\QconzLocate.csproj.CoreCompileInputs.cache
+F:\Prasanth\Qloctae\QconzApi\WebApplication\obj\Debug\QconzLocate.csproj.CopyComplete
+F:\Prasanth\Qloctae\QconzApi\WebApplication\obj\Debug\QconzLocate.dll
+F:\Prasanth\Qloctae\QconzApi\WebApplication\obj\Debug\QconzLocate.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocate.dll.config
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocate.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocate.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Antlr3.Runtime.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\EntityFramework.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\ExcelDataReader.DataSet.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\ExcelDataReader.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Newtonsoft.Json.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Owin.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocateService.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Net.Http.Formatting.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Helpers.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Http.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Http.WebHost.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Mvc.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Optimization.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Razor.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.WebPages.Deployment.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.WebPages.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.WebPages.Razor.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\WebGrease.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocateService.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\ExcelDataReader.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\ExcelDataReader.DataSet.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Net.Http.Formatting.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Http.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Http.WebHost.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Helpers.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Mvc.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Optimization.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.Razor.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.WebPages.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.WebPages.Deployment.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Antlr3.Runtime.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Newtonsoft.Json.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\EntityFramework.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\bin\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\obj\Debug\QconzLocate.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\obj\Debug\QconzLocate.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\WebApplication\obj\Debug\QconzLocate.pdb

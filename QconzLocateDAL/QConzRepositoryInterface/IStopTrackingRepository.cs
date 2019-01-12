@@ -9,6 +9,7 @@ namespace QconzLocateDAL.QConzRepositoryInterface
 {
     public interface IStopTrackingRepository
     {
-         List<StopTrackingModel> StopTracking(int CompanyId);
+        List<StopTrackingModel> StopTracking(int CompanyId);
+        string SaveStopTrackingDetails(StopTrackingModel StopTrackingModel);
     }
 }

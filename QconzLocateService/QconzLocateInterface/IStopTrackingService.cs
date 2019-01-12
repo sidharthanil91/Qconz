@@ -10,5 +10,6 @@ namespace QconzLocateService.QconzLocateInterface
     public interface IStopTrackingService
     {
          List<StopTrackingServiceModel> GetStopTrackingList(int companyId);
+        string SaveStopTrackingDetails(StopTrackingServiceModel StopTrackingModel);
     }
 }

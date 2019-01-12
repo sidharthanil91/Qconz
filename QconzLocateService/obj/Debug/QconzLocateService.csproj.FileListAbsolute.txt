@@ -1,0 +1,54 @@
+C:\Users\MyPc\Downloads\C#\QconzLocateService\bin\Debug\QconzLocateService.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateService\bin\Debug\QconzLocateService.pdb
+C:\Users\MyPc\Downloads\C#\QconzLocateService\bin\Debug\QconzLocateDAL.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateService\bin\Debug\EntityFramework.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateService\bin\Debug\QconzLocateDAL.pdb
+C:\Users\MyPc\Downloads\C#\QconzLocateService\bin\Debug\EntityFramework.xml
+C:\Users\MyPc\Downloads\C#\QconzLocateService\obj\Debug\QconzLocateService.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Downloads\C#\QconzLocateService\obj\Debug\QconzLocateService.dll
+C:\Users\MyPc\Downloads\C#\QconzLocateService\obj\Debug\QconzLocateService.pdb
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\QconzLocateService.dll
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\QconzLocateService.pdb
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\QconzLocateDAL.dll
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\EntityFramework.dll
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\QconzLocateDAL.pdb
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\QconzLocateDAL.dll.config
+E:\SathishProjects\Qconz\C#\QconzLocateService\bin\Debug\EntityFramework.xml
+E:\SathishProjects\Qconz\C#\QconzLocateService\obj\Debug\QconzLocateService.csprojAssemblyReference.cache
+E:\SathishProjects\Qconz\C#\QconzLocateService\obj\Debug\QconzLocateService.csproj.CoreCompileInputs.cache
+E:\SathishProjects\Qconz\C#\QconzLocateService\obj\Debug\QconzLocateService.csproj.CopyComplete
+E:\SathishProjects\Qconz\C#\QconzLocateService\obj\Debug\QconzLocateService.dll
+E:\SathishProjects\Qconz\C#\QconzLocateService\obj\Debug\QconzLocateService.pdb
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\QconzLocateService.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\QconzLocateService.pdb
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\EntityFramework.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\QconzLocateDAL.dll.config
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\bin\Debug\EntityFramework.xml
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\obj\Debug\QconzLocateService.csprojAssemblyReference.cache
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\obj\Debug\QconzLocateService.csproj.CoreCompileInputs.cache
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\obj\Debug\QconzLocateService.csproj.CopyComplete
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\obj\Debug\QconzLocateService.dll
+F:\Prasanth\Qloctae\Qconz\QconzLocateService\obj\Debug\QconzLocateService.pdb
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\QconzLocateService.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\QconzLocateService.pdb
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\QconzLocateDAL.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\EntityFramework.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\QconzLocateDAL.pdb
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\QconzLocateDAL.dll.config
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\bin\Debug\EntityFramework.xml
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.csprojAssemblyReference.cache
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.csproj.CoreCompileInputs.cache
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.csproj.CopyComplete
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.dll
+F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Debug\QconzLocateService.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Debug\QconzLocateService.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Debug\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Debug\EntityFramework.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Debug\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Debug\EntityFramework.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\obj\Debug\QconzLocateService.pdb
