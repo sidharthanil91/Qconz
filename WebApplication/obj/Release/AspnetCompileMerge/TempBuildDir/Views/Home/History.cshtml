@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewBag.Title = "History";
+    ViewBag.SubTitle = "Team Map";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/History/History/menu")
+}
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+<style>
+    hr {
+        margin: 0.1em auto;
+    }
+</style>
+<div class="box-body">
+    <div class="row">
+       
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Show name</label>
+                    <select id="User" class="form-control select2" value="@Model.UserId" style="width: 100%;"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            @*<div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Date</label>
+                    <div class="input-group">
+                        <input type="text" id="Date"  value="" class="form-control datepicker">
+                        <div id="DateC" class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <div class="form-group">
+                <label>Date range:</label>
+                <div class="input-group">
+                    <div id="DateC" class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" id="reservation">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="googleMap" style="width:100%;height:575px;"></div>
+    <div style="padding-top:15px;">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.HistoryGrid)
+                {
+
+                    <tr>
+                        <td>
+                            @item.User
+                        </td>
+                        <td>
+                            @item.Date
+                        </td>
+                        <td>
+                            @item.Latitude
+                        </td>
+                        <td>
+                            @item.Longitude
+                        </td>
+
+
+                    </tr>
+
+                }
+            </tbody>
+         
+        </table>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-ui/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+<script src="~/AdminLTE/plugins/daterangepicker/js/moment.js"></script>
+<script src="~/AdminLTE/plugins/daterangepicker/js/moment.min.js"></script>
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<script src="~/AdminLTE/plugins/daterangepicker/js/daterangepicker.js"></script>
+
+
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+       
+        $("#reservation").val(moment(new Date()).format("DD-MM-YYYY")+' - '+moment(new Date()).format("DD-MM-YYYY"))
+    </script>
+    <script>
+        var defaultUser=0
+        $(function () {
+            $('#example1').DataTable({
+                "searching": false
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+        var y=$('#reservation').daterangepicker({
+
+            format: 'DD-MM-YYYY'
+
+        });
+        $('#DateC').click(function(){
+            $('#reservation').click()
+        });
+        $('.datepicker').datepicker({
+            
+            format: 'dd-mm-yyyy',
+            startDate: '2013-01-01',
+            endDate: '2013-12-31'
+        });
+
+        $('.select2').select2();
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
+        var data1 = JSON.parse(jsontext1);
+        $('#User').select2({
+            data: data1
+        })
+
+        if(defaultUser>0)
+        {
+            $('#User').value=defaultUser;
+        }
+        else{
+            $("#User").val("@Model.UserId").trigger("change");
+            //$('#User').value= @Model.UserId;
+        }
+        var allmarkers=[];
+
+        $(document).ready(function(){
+
+            var markers = @Html.Raw(ViewBag.Markers);
+            InitializeMap(markers);
+
+            function InitializeMap (markers) {
+                for (var i = 0; i < allmarkers.length; i++) {
+                    allmarkers[i].setMap(null);
+                }
+                allmarkers = [];
+
+                var infoWindow = new google.maps.InfoWindow();
+                if(markers.length==0)
+                {
+                    markers=[{'Lat':'-41.2865','Lng':'174.7762'}]
+                    var mapOptions = {
+                        zoom: 8,
+                        center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById('googleMap'),
+                       mapOptions);
+                    return;
+                }
+
+                var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById('googleMap'),
+                   mapOptions);
+
+                for (i = 0; i < markers.length; i++) {
+                    var data = markers[i]
+                    var myLatlng = new google.maps.LatLng(data.Lat, data.Lng);
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: data.Address
+                    });
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "mouseover", function (e) {
+                            infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, data);
+                    allmarkers.push(marker);
+                }
+
+                var flightPlanCoordinates =  markers.map(function (item) {
+                    return new google.maps.LatLng(item.Lat, item.Lng);
+                });
+                var flightPath = new google.maps.Polyline({
+                    path: flightPlanCoordinates,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+                flightPath.setMap(null);
+                flightPath.setMap(map);
+
+
+            }
+
+
+            $('#User').change(function(){
+                filter();
+            });
+            $('#reservation').change(function(){
+                filter();
+            });
+            $('#savebtn').click(function(){
+
+                filter();
+
+            });
+            function filter(){
+                var User = $('#User').val();
+                var startDate = $('#reservation').val().slice(0,10);
+                var endDate = $('#reservation').val().slice(13,23)
+                var from = startDate.split("-");
+
+                var f = new Date(from[2], from[1] - 1, from[0]);
+                var to= endDate.split("-");
+
+                var t= new Date(to[2], to[1] - 1, to[0]);
+                var url='@Url.Action("HistoryFilter", "Home")';
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    data:JSON.stringify({UserId:User,StartDate:f,EndDate:t}) ,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        debugger;
+                        InitializeMap(data);
+                        var table = $('#example1').dataTable();
+                        oSettings = table.fnSettings();
+
+                        table.fnClearTable(this);
+                        table.fnDestroy();
+                        var content = '';
+                        //content += '<tbody>'; -- **superfluous**
+                        for (var i = 0; i < data.length; i++) {
+                            content += '<tr>';
+                            content += '<td>' + data[i].Name + '</td>';
+                            content += '<td>' + data[i].Address + '</td>';
+                            content += '<td>' + data[i].Lat + '</td>';
+                            content += '<td>' + data[i].Lng + '</td>';
+                            content += '</tr>';
+                        }
+                        // content += '</tbody>';-- **superfluous**
+                        //$('table tbody').replaceWith(content);  **incorrect..**
+                        $('#example1 tbody').html(content);
+                        $("#example1").DataTable();
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                })
+            }
+        });
+
+    </script>
+<script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
+ 
+}
+
+
+

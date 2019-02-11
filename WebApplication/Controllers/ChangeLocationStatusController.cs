@@ -7,6 +7,7 @@ using QconzLocateService.QconzLocateInterface;
 using QconzLocateService.QconzLocateService;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -32,11 +33,11 @@ namespace QconzLocate.Controllers
             int onlineStatus = 0;
 
             onlineStatus = (int)x.SelectToken("timeInterval");
-
-            if (HttpContext.Current.Request.Headers.Get("authToken") != null)
-            {
-                token = Convert.ToString(HttpContext.Current.Request.Headers.Get("authToken"));
-            }
+            token = (string)x.SelectToken("token");
+            //if (HttpContext.Current.Request.Headers.Get("authToken") != null)
+            //{
+            //    token = Convert.ToString(HttpContext.Current.Request.Headers.Get("authToken"));
+            //}
 
             var y = _ILoginService.ValidateToken(token.Replace(' ', '+'));
             if (y != null)
@@ -92,21 +93,24 @@ namespace QconzLocate.Controllers
                 }
                 if (message == null && message1 == null)
                 {
+                    
+                    var OnlineStatusChangedTime = currentDateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'", DateTimeFormatInfo.InvariantInfo);
+
                     searchdetails += "{";
-                    searchdetails += "\"Status\":1,\"Message\":\"Success\",";
-                    searchdetails += "\"Content\":";
-                    searchdetails = searchdetails + "[{\"onlineStatus\":" + onlineStatus + ",\"onlineStatusChangedTime\":" + "\"" + currentDateTime + "\"";
+                    searchdetails += "\"status\":1,\"message\":\"Success\",";
+                    searchdetails += "\"content\":";
+                    searchdetails = searchdetails + "[{\"onlineStatus\":" + onlineStatus + ",\"onlineStatusChangedTime\":" + "\"" + OnlineStatusChangedTime + "\"";
                     searchdetails += "}],";
-                    searchdetails += "\"ErrorCode\":0";
+                    searchdetails += "\"errorCode\":0";
                     searchdetails += "}";
                 }
                 else
                 {
                     searchdetails += "{";
-                    searchdetails += "\"Status\":0,\"Message\":\"Failed\",";
-                    searchdetails += "\"Content\":";
+                    searchdetails += "\"status\":0,\"message\":\"Failed\",";
+                    searchdetails += "\"content\":";
                     searchdetails = searchdetails + "[{}]";
-                    searchdetails += ",\"ErrorCode\":1";
+                    searchdetails += ",\"errorCode\":1";
                     searchdetails += "}";
                 }
                 var resp = new HttpResponseMessage()
@@ -121,10 +125,10 @@ namespace QconzLocate.Controllers
             else
             {
                 searchdetails += "{";
-                searchdetails += "\"Status\":-1,\"Message\":\"Login Failed\",";
-                searchdetails += "\"Content\":";
+                searchdetails += "\"status\":-1,\"message\":\"Login Failed\",";
+                searchdetails += "\"content\":";
                 searchdetails = searchdetails + "[{}]";
-                searchdetails += ",\"ErrorCode\":1";
+                searchdetails += ",\"errorCode\":1";
                 searchdetails += "}";
 
                 var resp = new HttpResponseMessage()

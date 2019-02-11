@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Override";
+}
+
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/Roster/Roster/menu")
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Active Override List</h3>
+            </div>
+            <div class="box-body">
+                <div style="padding-bottom:10px;">
+                    <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                    <button onclick="window.location.href= '@Url.Action("RosterDetails", "Roster", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Override</th>
+                            <th>Override Detail </th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th></th>
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.RosterList)
+                        {
+
+                            <tr>
+                                <td>
+                                    @item.Override
+                                </td>
+                                <td>
+                                    @item.OverrideDetails
+                                </td>
+                                <td>
+                                    @item.StartDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.StartTime.ToString("hh:mm tt")
+                                </td>
+                                <td>
+                                    @item.EndDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @item.FinishTime.ToString("hh:mm tt")
+                                </td>
+                               
+                                <td width="5%">
+                                    <button type="button" onclick="window.location.href= '@Url.Action("RosterDetails", "Roster", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                </td>
+                                @*<td width="5%">
+                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>*@
+                            </tr>
+
+                        }
+                    </tbody>
+                    @*<tfoot>
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                        </tfoot>*@
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var i = 'N'
+    function clickevent() {
+        if (i == 'N') {
+            $('#btn').text('Show Active');
+            $('h3.box-title').text('Archived Override List')
+            GetData(i);
+            i = 'A';
+        }
+        else {
+            $('#btn').text('Show Archive');
+            $('h3.box-title').text('Active Override List')
+            GetData(i);
+            i = 'N';
+        }
+    }
+
+    function GetData(status) {
+        var url = '@Url.Action("GetRosterReport", "Roster")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify({ Status: status }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (json) {
+                var table = $('#example1').dataTable();
+                table.fnClearTable(this);
+                table.fnDestroy();
+                var content = '';
+                for (var i = 0; i < json.length; i++) {
+                    content += '<tr>';
+                    content += '<td>' + json[i].Override + '</td>';
+                    content += '<td>' + json[i].OverrideDetails + '</td>';
+                    var startDate = new Date(parseInt(json[i].StartDate.replace(/\/Date\((\d+)\)\//g, "$1")))
+                    var endDate = new Date(parseInt(json[i].EndDate.replace(/\/Date\((\d+)\)\//g, "$1")))
+                    var startTime = new Date(parseInt(json[i].StartTime.replace(/\/Date\((\d+)\)\//g, "$1")))
+                    var endTime = new Date(parseInt(json[i].FinishTime.replace(/\/Date\((\d+)\)\//g, "$1")))
+                    content += '<td>' + moment.utc(startDate).format('DD/MM/YYYY');  + '</td>';
+                    content += '<td>' + moment.utc(startTime).format("hh:mm:ss a") + '</td>';
+                    content += '<td>' + moment.utc(endDate).format('DD/MM/YYYY'); + '</td>';
+                    content += '<td>' + moment.utc(endTime).format("hh:mm:ss a") + '</td>';
+                    content += '<td >  <button type="button" onclick="window.location.href=\'../Roster/RosterDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                    content += '</tr>';
+                }
+
+                $('#example1 tbody').html(content);
+                $("#example1").DataTable();
+            },
+            error: function () {
+                // alert("Error while inserting data");
+            }
+        })
+    }
+</script>
+@section Scripts {
+    <script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/AdminLTE/plugins/momentjs/js/moment.min.js"></script>
+    @Scripts.Render("~/Scripts/Bundle/User/Data")
+}
+

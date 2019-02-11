@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Groups";
+    ViewBag.SubTitle = "Team Map";
+}
+
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/Team/Team/menu")
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Active Group List</h3>
+            </div>
+            <div class="box-body">
+                <div style="padding-bottom:10px;">
+                    <button id="btn"  onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                    <button  onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Group name</th>
+                                <th>Company</th>
+                                <th></th>
+                                @*<th></th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @item.TeamName
+                                    </td>
+                                    <td>
+                                        @item.CompanyName
+                                    </td>
+                                    <td width="5%">
+                                        <button type="button" onclick="window.location.href= '@Url.Action("TeamDetails", "Team", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                    </td>
+                                    @*<td width="5%">
+                                <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>*@
+                                </tr>
+
+                            }
+                        </tbody>
+                        @*<tfoot>
+                    <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                    </tr>
+                </tfoot>*@
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var i='N'
+    function clickevent()
+    {
+        if(i=='N')
+        {
+            $('#btn').text('Show Active');
+            $('h3.box-title').text('Archived Group List')
+            GetData(i);
+            i = 'A';
+        }
+        else {
+            $('#btn').text('Show Archive');
+            $('h3.box-title').text('Active Group List')
+            GetData(i);
+            i = 'N';
+        }
+    }
+
+    function GetData(status)
+    {
+        var url = '@Url.Action("GetTeamReport", "Team")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify({ Status: status }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (json) {
+                var table = $('#example1').dataTable();
+                table.fnClearTable(this);
+                table.fnDestroy();
+                var content = '';
+                for (var i = 0; i < json.length; i++) {
+                    content += '<tr>';
+                    content += '<td>' + json[i].TeamName + '</td>';
+                    content += '<td>' + json[i].CompanyName + '</td>';
+                    content += '<td >  <button type="button" onclick="window.location.href=\'../Team/TeamDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                    content += '</tr>';
+                }
+                $('#example1 tbody').html(content);
+                $("#example1").DataTable();
+            },
+            error: function () {
+                // alert("Error while inserting data");
+            }
+        })
+    }
+</script>
+@section Scripts {
+    @*@Scripts.Render("~/AdminLTE/Bundle/plugins/datatables/js")*@
+    <script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/Bundle/Team/Data")
+}

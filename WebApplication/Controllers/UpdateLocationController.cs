@@ -24,33 +24,44 @@ namespace QconzLocate.Controllers
         private IUserLocationService _IUserLocationService = new UserLocationService();
 
         [HttpPost]
-        public HttpResponseMessage Post(JArray jsonResult)
+        public HttpResponseMessage Post([FromBody]ApiUpdateLocationViewModel location)
         {
-            var x = jsonResult;
-            string token = null;
+            //var x = jsonResult;
+            //string token = null;
             var searchdetails = "";
 
-            if (HttpContext.Current.Request.Headers.Get("authToken") != null)
-            {
-                token = Convert.ToString(HttpContext.Current.Request.Headers.Get("authToken"));
-            }
+            //token = (string)x.SelectToken("token");
+            //if (HttpContext.Current.Request.Headers.Get("authToken") != null)
+            //{
+            //    token = Convert.ToString(HttpContext.Current.Request.Headers.Get("authToken"));
+            //}
+            var y = _ILoginService.ValidateToken(location.token.Replace(' ', '+'));
+           
 
-            var y = _ILoginService.ValidateToken(token.Replace(' ', '+'));
             if (y != null)
             {
                 int userid = y.UserId;
                 //int userid = 2;
                 string message = "";
 
-                foreach (JObject item in jsonResult.Children())
+                var UserLog = new List<UserLocationServiceModel>();
+                UserLog = location.locations.Select(c => new UserLocationServiceModel()
                 {
-                    var itemProperties = item.Children<JProperty>();
-                    var LatitudeElement = itemProperties.FirstOrDefault(z => z.Name == "latitude");
-                    var latitude = LatitudeElement.Value;
-                    var longitudeElement = itemProperties.FirstOrDefault(z => z.Name == "longitude");
-                    var longitude = longitudeElement.Value;
-                    var DateTimeElement = itemProperties.FirstOrDefault(z => z.Name == "timestamp");
-                    string datetime1 = Convert.ToString(DateTimeElement.Value);
+                    DateTime = c.timestamp,
+                    Latitude = c.latitude,
+                    Longitude = c.longitude,
+                    UserId = y.UserId
+                }).ToList();
+
+                foreach (var item in UserLog)
+                {
+                    //var itemProperties = item.Children<JProperty>();
+                    //var LatitudeElement = itemProperties.FirstOrDefault(z => z.Name == "latitude");
+                    var latitude = item.Latitude;
+                    //var longitudeElement = itemProperties.FirstOrDefault(z => z.Name == "longitude");
+                    var longitude = item.Longitude;
+                    var DateTimeElement = item.DateTime;
+                    string datetime1 = Convert.ToString(DateTimeElement);
 
                     string date = datetime1.Substring(0, 10);
                     string time = datetime1.Substring(11, 8);
@@ -71,20 +82,20 @@ namespace QconzLocate.Controllers
                 if (message == null)
                 {
                     searchdetails += "{";
-                    searchdetails += "\"Status\":1,\"Message\":\"Success\",";
-                    searchdetails += "\"Content\":\"Success\"";
+                    searchdetails += "\"status\":1,\"message\":\"Success\",";
+                    searchdetails += "\"content\":\"Success\"";
                     //searchdetails = searchdetails + "[{onlineStatus:" + "" + ",onlineStatusChangedTime:";
                     //searchdetails += "}],";
-                    searchdetails += ",\"ErrorCode\":0";
+                    searchdetails += ",\"errorCode\":0";
                     searchdetails += "}";
                 }
                 else
                 {
                     searchdetails += "{";
-                    searchdetails += "\"Status\":0,\"Message\":\"Failed\",";
-                    searchdetails += "\"Content\":\"Failed\"";
+                    searchdetails += "\"status\":0,\"message\":\"Failed\",";
+                    searchdetails += "\"content\":\"Failed\"";
                     //searchdetails = searchdetails + "[{}]";
-                    searchdetails += "\"ErrorCode\":1";
+                    searchdetails += "\"errorCode\":1";
                     searchdetails += "}";
                 }
                 var resp = new HttpResponseMessage()
@@ -99,10 +110,10 @@ namespace QconzLocate.Controllers
             else
             {
                 searchdetails += "{";
-                searchdetails += "\"Status\":0,\"Message\":\"Login Failed\",";
-                searchdetails += "\"Content\":\"Failed\"";
+                searchdetails += "\"status\":0,\"message\":\"Login Failed\",";
+                searchdetails += "\"content\":\"Failed\"";
                 //searchdetails = searchdetails + "[{}]";
-                searchdetails += ",\"ErrorCode\":1";
+                searchdetails += ",\"errorCode\":1";
                 searchdetails += "}";
 
                 var resp = new HttpResponseMessage()

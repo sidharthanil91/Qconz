@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    ViewBag.SubTitle = "Team Map";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/Customer/Customer/menu")
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/datatables/css")
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Active Customer List</h3>
+            </div>
+          
+            <div class="box-body">
+                @*<div class="pull-right">*@
+                <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
+
+                    <div class=" pull-right" style="position: relative;contain: content;padding-left:15px;padding-right:15px;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                    margin-bottom: 10px;padding-top: 15px;background-color: #ddd;">
+                        @using (Html.BeginForm("Upload", "Customer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+
+                            <div class="form-group pull-right">
+                                <input type="submit" value="Upload" class="btn btn-default" />
+                            </div>
+                            <div class="form-group pull-right">
+                                <input class="form-control" type="file" id="dataFile" name="upload" />
+                            </div>
+
+
+                        }
+                        <button class="btn btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'">
+                            @*<input type="button" style="width:35px" class="btn btn-block btn-primary pull-right" onclick="location.href='@Url.Action("DownloadExcel", "Customer")'" />*@
+                            <span style="padding-right:10px;" class="fa fa-file-excel-o"> </span>Download Template
+                        </button>
+                    </div>
+                    <div class=" pull-left" style="padding-bottom: 15px;margin-bottom: 10px;padding-top: 15px;">
+                        <button id="btn" onclick="clickevent()" type="button" class="btn btn-primary">Show Archive</button>
+                        <button style="width:35px" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = 0 })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+                       
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Customer Code</th>
+                                    <th>Customer Name</th>
+                                    <th>Contact Name</th>
+                                    <th>Landline</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                    @*<th></th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @item.CustomerCode
+                                        </td>
+                                        <td>
+                                            @item.OfficeName
+                                        </td>
+                                        <td>
+                                            @item.FirstName
+                                        </td>
+                                        <td>
+                                            @item.Phone1
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td width="5%">
+                                            <button type="button" onclick="window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = item.Id })'" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+                                        </td>
+                                        @*<td width="5%">
+                                        <button type="button" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>*@
+                                    </tr>
+
+                                }
+                            </tbody>
+                            @*<tfoot>
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                        </tfoot>*@
+                        </table>
+                    </div>
+                </div>
+            </div>
+</div>
+<script>
+    var i='N'
+    function clickevent()
+    {
+        if(i=='N')
+        {
+            $('#btn').text('Show Active');
+            $('h3.box-title').text('Archived Customer List')
+            GetData(i);
+            i = 'A';
+        }
+        else {
+            $('#btn').text('Show Archive');
+            $('h3.box-title').text('Active Customer List')
+            GetData(i);
+            i = 'N';
+        }
+    }
+
+    function GetData(status)
+    {
+        var url = '@Url.Action("GetCustomerReport", "Customer")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify({ Status: status }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (json) {
+                var table = $('#example1').dataTable();
+                table.fnClearTable(this);
+                table.fnDestroy();
+                var content = '';
+                for (var i = 0; i < json.length; i++) {
+                    content += '<tr>';
+                    content += '<td>' + json[i].CustomerCode + '</td>';
+                    content += '<td>' + json[i].OfficeName + '</td>';
+                    content += '<td>' + json[i].FirstName + '</td>';
+                    content += '<td>' + json[i].Phone1 + '</td>';
+                    content += '<td>' + json[i].Email + '</td>';
+                    content += '<td >  <button type="button" onclick="window.location.href=\'../Customer/CustomerDetails/' + json[i].Id + '\'"class="btn btn-block btn-primary"><span class="glyphicon glyphicon-edit"></span></button></td>';
+                    content += '</tr>';
+                }
+                $('#example1 tbody').html(content);
+                $("#example1").DataTable();
+            },
+            error: function () {
+                // alert("Error while inserting data");
+            }
+        })
+    }
+</script>
+@section Scripts {
+    @*@Scripts.Render("~/AdminLTE/Bundle/plugins/datatables/js")*@
+    <script src="~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/Bundle/Customer/Data")
+}
+
+
+
+

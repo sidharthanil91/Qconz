@@ -113,9 +113,9 @@ namespace QconzLocateDAL.QConzRepository
                 DateTime LastLocationTime = lastlocation.LOGTIME;
                 //lastlocationtime = Convert.ToString(lastlocation.LOGTIME);
 
-                lastlocationtime = LastLocationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'sss'Z'", DateTimeFormatInfo.InvariantInfo);
+                lastlocationtime = LastLocationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'", DateTimeFormatInfo.InvariantInfo);
                 //lastlocationtime = LastLocationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'", DateTimeFormatInfo.InvariantInfo);
-                
+
 
                 return lastlocationtime;
             }

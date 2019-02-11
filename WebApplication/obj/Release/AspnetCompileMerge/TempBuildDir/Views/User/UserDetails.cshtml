@@ -1,0 +1,370 @@
+﻿
+@{
+    ViewBag.Title = "User Details";
+    ViewBag.SubTitle = "Team Map";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/User/User/menu")
+}
+
+@Styles.Render("~/Styles/Bundle/Elements/Modals")
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
+<link rel="stylesheet" href="~/AdminLTE/plugins/clock/css/clockface.css">
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        @*<h3 class="box-title">Select2</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>*@
+    </div>
+    <form id="form1" name="form1">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First name</label>
+                            <input type="text" class="form-control" id="FirstName" tabindex="1" name="FirstName" value="@Model.UserDetails.FirstName" placeholder="Enter first name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="text" class="form-control" id="Email" tabindex="3" name="Email" value="@Model.UserDetails.Email" placeholder="Enter email">
+                        </div>
+                    </div>
+                    @if (User.IsInRole("SUPER"))
+                    {
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select id="Company" class="form-control select2" name="Company" tabindex="5" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select id="Company" class="form-control select2" disabled name="Company" tabindex="5" value="@Model.UserDetails.CompanyId" style="width: 100%;"></select>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Groups</label>
+                            <select id="Groups" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select groups" style="width: 100%;"></select>
+                            @*<input type="text" class="form-control" id="Email" name="Group" value="@Model.UserDetails.UserTeamId" placeholder="Enter group">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" >
+                            <label for="exampleInputEmail1">Contractor</label>
+                            <div class="input-group input-group-sm">
+                                <input id="IsContractor" type="checkbox" @(Model.UserDetails.IsContractor=="Y" ? "checked" : "") class="minimal" tabindex="9" id="IsContractor" style="width:20px;height:20px" name="ShowDetail" >
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="form-group">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Start time</label>
+                                <div class="input-group">
+                                    <input type="text" id="StartTime" data-format="hh:mm A" tabindex="11" value="@Model.UserDetails.StartTime.ToString("hh:mm tt")" class="form-control ">
+                                    <div id="startclock" class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Emergency contact name</label>
+                            <input type="text" class="form-control" tabindex="13" id="EmergencyContact" name="EmergencyContact" value="@Model.UserDetails.EmergencyContact" placeholder="Enter emergency contact name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Base/Office latitude</label>
+                            <input type="text" class="form-control" tabindex="15" id="BaseLatitude" name="BaseLatitude" value="@Model.UserDetails.BaseLatitude" placeholder="Enter Base/Office latitude">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="Status" name="Status" class="form-control select2" value="@Model.UserDetails.UserStatus" style="width: 100%;">
+                            <option value="A">Active</option>
+                            <option value="N">Archived</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Surname</label>
+                            <input type="text" class="form-control" tabindex="2" id="SurName" name="SurName" value="@Model.UserDetails.SurName" placeholder="Enter surname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Cellphone</label>
+                            <input type="text" class="form-control" tabindex="4" id="Cellphone" name="Cellphone" value="@Model.UserDetails.Cellphone" placeholder="Enter cellphone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="Type" class="form-control select2" name="Type" tabindex="6" value="@Model.UserDetails.UserType" style="width: 100%;">
+                            <option value="2">Company Admin</option>
+                            <option value="3">Dashboard and App</option>
+                            <option value="4">App Only</option>
+                            <option value="5">Web Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Default group</label>
+                            <select id="DefaultGroup" class="form-control select2" tabindex="8" value="@Model.UserDetails.DefaultGroup" data-placeholder="Select default group" style="width: 100%;"></select>
+                            @*<input type="text" class="form-control" id="Email" name="Group" value="@Model.UserDetails.UserTeamId" placeholder="Enter group">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Working days</label>
+                            <select id="WorkingDays" class="form-control select2" tabindex="10" multiple="multiple" data-placeholder="Select working days" style="width: 100%;">
+                                <option value="1">Mon</option>
+                                <option value="2">Tue</option>
+                                <option value="3">Wed</option>
+                                <option value="4">Thu</option>
+                                <option value="5">Fri</option>
+                                <option value="6">Sat</option>
+                                <option value="7">Sun</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>End time</label>
+                                <div class="input-group">
+                                    <input type="text" id="EndTime" tabindex="12" data-format="hh:mm A" value="@Model.UserDetails.EndTime.ToString("hh:mm tt")" class="form-control ">
+                                    <div id="EndTimeClock" class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Emergency contact cellphone</label>
+                            <input type="text" class="form-control" tabindex="14" id="EmergencyContactNo" name="EmergencyContactNo" value="@Model.UserDetails.EmergencyContactNo" placeholder="Enter emergency contact cellphone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Base/Office longitude</label>
+                            <input type="text" class="form-control" tabindex="16" id="BaseLongitude" name="BaseLongitude" value="@Model.UserDetails.BaseLongitude" placeholder="Enter Base/Office longitude">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Password</label>
+                            <input type="password" class="form-control" tabindex="18" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/User/Advanced")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    <script src="~/AdminLTE/plugins/clock/js/clockface.js"></script>
+    <script type="text/javascript">
+
+
+        $('#startclock').click(function(e){
+            //$(document).ready(function(){
+            //  $("#StartTime").timepicker().focus();
+            e.stopPropagation();
+
+            $('#StartTime').clockface('toggle');
+            //});
+        });
+        $('#EndTimeClock').click(function(e){
+            //$(document).ready(function(){
+            e.stopPropagation();
+            $("#EndTime").clockface('toggle');
+            // });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $('#StartTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+
+        $('#EndTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+
+        $("#Type").val("@Model.UserDetails.UserType").trigger("change");
+        //$('#WorkingDays').select2();
+        //$('#WorkingDays').val("[1,2,4]").trigger("change");
+        var array = '@Model.UserDetails.WorkingDays'.split(',')
+        $('#WorkingDays').select2().val(array).trigger("change")
+        var jsontext = '@Html.Raw(Json.Encode(Model.CompanyList))';
+        var data = JSON.parse(jsontext);
+        $('#Company').select2({
+            data: data
+        })
+        $("#Company").val("@Model.UserDetails.CompanyId").trigger("change");
+
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.GroupList))';
+        var data1 = JSON.parse(jsontext1);
+        $('#Groups').select2({
+            data: data1
+        })
+        $('#DefaultGroup').select2({
+            data: data1
+        })
+        var array1 = '@Model.UserDetails.UserGroups'.split(',')
+        $('#Groups').select2().val(array1).trigger("change")
+        $('#Status').select2({
+
+        })
+        $("#Status").val("@Model.UserDetails.UserStatus").trigger("change");
+        $(document).ready(function () {
+            // 1. prepare the validation rules and messages.
+
+            $("#form1").validate({
+                rules: {
+                    FirstName: {
+                        required: true,
+                    },
+                   
+                    Password: {
+                        required: true,
+                    },
+                    Company: {
+                        required: true,
+                    },
+                    Type: {
+                        required: true
+                    },
+                },
+                messages: {
+                    FirstName: "First name is required",
+                  
+                    Password: "Password is required",
+                    Company: "Select company",
+                    Type: "Select user type",
+                }
+            });
+            $('#savebtn').click(function(){
+                if( !$("#form1").valid())
+                {
+                    return
+                }
+                $('#myModal').modal('hide');
+                var UserGroupsVal=$('#Groups').val()==null?null:$('#Groups').val().toString();
+                var WorkingDaysVal=$('#WorkingDays').val()==null?null:$('#WorkingDays').val().toString();
+                var data={ Id : @Model.UserDetails.Id,
+                    Cellphone : $('#Cellphone').val(),
+                    CompanyId : $('#Company').val(),
+                    UserGroups: UserGroupsVal,
+                    EmergencyContact : $('#EmergencyContact').val(),
+                    EmergencyContactNo : $('#EmergencyContactNo').val(),
+                    Email : $('#Email').val(),
+                    EndTime : $('#EndTime').val(),
+                    FirstName : $('#FirstName').val(),
+                    Password : $('#Password').val(),
+                    StartTime : $('#StartTime').val(),
+                    SurName : $('#SurName').val(),
+                   
+                    UserStatus : $('#Status').val(),
+                    UserTeamId : $('#UserTeamId').val(),
+                    UserType : $('#Type').val(),
+                    WorkingDays : WorkingDaysVal,
+                    BaseLatitude : $('#BaseLatitude').val(),
+                    BaseLongitude : $('#BaseLongitude').val(),
+                    DefaultGroup : $('#DefaultGroup').val(),
+                    IsContractor : $('#IsContractor').is(':checked')?"Y":"N",
+                }
+
+                var url='@Url.Action("SaveDetails", "User")';
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    data: JSON.stringify(data) ,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (Messeage) {
+                        if(Messeage.Success){
+                            window.location.href= '@Url.Action("UserReport", "User")';
+                        }
+                        else{
+                            alert(Messeage.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                })
+            });
+        });
+    </script>
+
+}

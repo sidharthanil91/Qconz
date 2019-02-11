@@ -30,36 +30,44 @@ namespace QconzLocate.Controllers
             string token = null;
             var searchdetails = "";
 
-            if (HttpContext.Current.Request.Headers.Get("authToken") != null)
-            {
-                token = Convert.ToString(HttpContext.Current.Request.Headers.Get("authToken"));
-            }
+            token = (string)x.SelectToken("token");
+
+            //if (HttpContext.Current.Request.Headers.Get("authToken") != null)
+            //{
+            //    token = Convert.ToString(HttpContext.Current.Request.Headers.Get("authToken"));
+            //}
 
             var y = _ILoginService.ValidateToken(token.Replace(' ', '+'));
             if (y != null)
             {
                 int userid = y.UserId;
-                var c = _IUserService.GetUserDetails(userid);
-                var lastlocationtime = _ILocationService.GetUserLastLocationTime(userid);
-                if (c != null)
+                var result = _IUserService.GetUserTeamDetails(userid);
+                if (result != null)
                 {
                     searchdetails += "{";
-                    searchdetails += "\"Status\":1,\"Message\":\"Success\",";
-                    searchdetails += "\"Content\":";
-                    searchdetails = searchdetails + "[{\"UserId\":" + userid + ",\"FirstName\":" + "\"" + c.FirstName + "\"" + ",\"LastName\":" + "\"" +
-                        c.SurName + "\"" + ",\"Latitude\":" + "\"" + c.BaseLatitude + "\"" + ",\"Longitude\":" + "\"" + c.BaseLongitude + "\"" + ",\"PhoneNumber\":" + "\"" +
-                        c.Cellphone + "\"" + ",\"LastLocationTime\":" + "\"" + lastlocationtime + "\"";
-                    searchdetails += "}],";
-                    searchdetails += "\"ErrorCode\":0";
+                    searchdetails += "\"status\":1,\"message\":\"Success\",";
+                    searchdetails += "\"content\":[";
+                    foreach (var c in result)
+                    {
+                        var lastlocationtime = _ILocationService.GetUserLastLocationTime(c.Id);
+                       
+                        searchdetails = searchdetails + "{\"userId\":" + c.Id + ",\"firstName\":" + "\"" + c.FirstName + "\"" + ",\"lastName\":" + "\"" +
+                            c.SurName + "\"" + ",\"latitude\":" + "\"" + c.BaseLatitude + "\"" + ",\"longitude\":" + "\"" + c.BaseLongitude + "\"" + ",\"phoneNumber\":" + "\"" +
+                            c.Cellphone + "\"" + ",\"lastLocationTime\":" + "\"" + lastlocationtime + "\"";
+                        searchdetails += "},";
+                       
+                    }
+                    searchdetails = searchdetails.Substring(0, searchdetails.Length - 1);
+                    searchdetails += "],\"errorCode\":0";
                     searchdetails += "}";
                 }
                 else
                 {
                     searchdetails += "{";
-                    searchdetails += "\"Status\":0,\"Message\":\"Failed\",";
-                    searchdetails += "\"Content\":";
+                    searchdetails += "\"status\":0,\"message\":\"Failed\",";
+                    searchdetails += "\"content\":";
                     searchdetails = searchdetails + "[{}]";
-                    searchdetails += ",\"ErrorCode\":1";
+                    searchdetails += ",\"errorCode\":1";
                     searchdetails += "}";
                 }
                 var resp = new HttpResponseMessage()
@@ -74,10 +82,10 @@ namespace QconzLocate.Controllers
             else
             {
                 searchdetails += "{";
-                searchdetails += "\"Status\":0,\"Message\":\"Failed\",";
-                searchdetails += "\"Content\":";
+                searchdetails += "\"status\":0,\"message\":\"Failed\",";
+                searchdetails += "\"content\":";
                 searchdetails = searchdetails + "[{}]";
-                searchdetails += ",\"ErrorCode\":1";
+                searchdetails += ",\"errorCode\":1";
                 searchdetails += "}";
 
                 var resp = new HttpResponseMessage()

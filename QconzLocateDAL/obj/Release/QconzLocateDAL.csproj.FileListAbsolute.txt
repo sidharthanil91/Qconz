@@ -32,3 +32,13 @@ F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.csproj.Co
 F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.csproj.CopyComplete
 F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.dll
 F:\Prasanth\Qloctae\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\QconzLocateDAL.dll.config
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\EntityFramework.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\EntityFramework.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Release\QconzLocateDAL.pdb

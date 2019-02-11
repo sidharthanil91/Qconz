@@ -1,0 +1,304 @@
+﻿
+@{
+    ViewBag.Title = "Override Details";
+}
+
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/colorpicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/timepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css")
+@Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
+@Styles.Render("~/Styles/Bundle/Elements/Modals")
+<link rel="stylesheet" href="~/AdminLTE/plugins/clock/css/clockface.css">
+
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h2 class="box-title">*Rosters will override the usual hours setting for people selected and track their phones during the dates and hours below.</h2>
+        @*<div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>*@
+    </div>
+    <form id="form1" name="form1">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Override</label>
+
+                            <input type="text" class="form-control" id="Override" tabindex="1" name="Override" value="@Model.Roster.Override" placeholder="Enter override ">
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Start Date</label>
+                            <div class="input-group">
+                                <input type="text" id="StartDate" name="StartDate" tabindex="3" value="@Model.Roster.StartDate.ToString("dd/MM/yyyy")" class="form-control datepicker">
+                                <div id="StartDateC" class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Start time</label>
+                                <div class="input-group">
+                                    <input type="text" id="StartTime" name="StartTime" data-format="hh:mm A" tabindex="5" value="@Model.Roster.StartTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <div id="startclock" class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Users</label>
+                            <select id="Users" name="Users" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="Status" name="Status" class="form-control select2" value="@Model.Roster.Status" style="width: 100%;">
+                            <option value="A">Active</option>
+                            <option value="N">Archived</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Override Details</label>
+
+                            <input type="text" class="form-control" id="OverrideDetails" tabindex="2" name="OverrideDetails" value="@Model.Roster.OverrideDetails" placeholder="Enter override details">
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">End Date</label>
+                            <div class="input-group">
+                                <input type="text" id="EndDate" name="EndDate" tabindex="4" value="@Model.Roster.EndDate.ToString("dd/MM/yyyy")" class="form-control datepicker">
+                                <div id="EndDateC" class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>End time</label>
+                                <div class="input-group">
+                                    <input type="text" id="FinishTime" name="FinishTime" data-format="hh:mm A" tabindex="6" value="@Model.Roster.FinishTime.ToString("hh:mm tt")" class="form-control timepicker">
+                                    <div id="FinishTimeClock" class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Groups</label>
+                            <select id="Groups" name="Groups" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select groups" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="box-footer">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+    </div>
+    @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>*@
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    Save changes?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="savebtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/colorpicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/timepicker/js")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/icheck/js")
+    @Scripts.Render("~/Scripts/Bundle/Company/Advanced")
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-validate/js")
+    <script src="~/AdminLTE/plugins/clock/js/clockface.js"></script>
+    <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+
+    $('#startclock').click(function(e){
+       //$(document).ready(function(){
+        //  $("#StartTime").timepicker().focus();
+        e.stopPropagation();
+
+           $('#StartTime').clockface('toggle');
+       //});
+    });
+    $('#FinishTimeClock').click(function(e){
+        //$(document).ready(function(){
+        e.stopPropagation();
+        $("#FinishTime").clockface('toggle');
+       // });
+    });
+    $('#StartDateC').click(function(){
+        $(document).ready(function(){
+            $("#StartDate").datepicker().focus();
+        });
+    });
+    $('#EndDateC').click(function(){
+        $(document).ready(function(){
+            $("#EndDate").datepicker().focus();
+        });
+    });
+
+    </script>
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        //$(".timepicker").timepicker({
+        //    showInputs: false
+        //});
+        $('#StartTime').clockface();
+        $('#StartTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+
+        $('#FinishTime').clockface({
+            format: 'H:mm tt',
+            trigger: 'manual'
+
+        });
+
+
+        var jsontext = '@Html.Raw(Json.Encode(Model.UserList))';
+        var data = JSON.parse(jsontext);
+        $('#Users').select2({
+            data: data
+        })
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.GroupList))';
+        var data1 = JSON.parse(jsontext1);
+        $('#Groups').select2({
+            data: data1
+        })
+        $('#Status').select2({
+
+        })
+        var array = '@Model.Roster.UserId'.split(',')
+        var array1 = '@Model.Roster.TeamId'.split(',')
+        $('#Users').select2().val(array).trigger("change")
+        $('#Groups').select2().val(array1).trigger("change")
+        $("#Status").val("@Model.Roster.Status").trigger("change");
+        $(document).ready(function () {
+            // 1. prepare the validation rules and messages.
+
+            $("#form1").validate({
+                rules: {
+                    StartDate: {
+                        required: true,
+                       //date: true
+                    },
+                    StartTime: {
+                        required: true,
+                       // time: true
+                    },
+                    EndDate: {
+                        required: true,
+                       // date: true,
+                       // greaterThan: "#StartDate"
+                    },
+                    FinishTime: {
+                        required: true,
+                       // time: true
+                    },
+                    Users: {
+                        required: true
+                    },
+                },
+                messages: {
+                    StartDate: "Start date is required",
+                    StartTime: "Start time is required",
+                    EndDate: "End date is required",
+                    FinishTime: "End time is required",
+                    Users: "Select at least one user",
+                }
+            });
+        $('#savebtn').click(function(){
+            if( !$("#form1").valid())
+            {
+                return
+            }
+	    var from = $("#StartDate").val().split("/");
+
+var f = new Date(from[2], from[1] - 1, from[0]);
+	    var to= $("#EndDate").val().split("/");
+
+var t= new Date(to[2], to[1] - 1, to[0]);
+            var StartDateVal=$('#StartDate').val();
+            var EndDateVal=$('#EndDate').val();
+            var UserIdVal=$('#Users').val()==null?null: $('#Users').val().toString()
+            var TeamIdVal=$('#Groups').val()==null?null: $('#Groups').val().toString()
+            var data={ Id : @Model.Roster.Id,
+                StartDate :f,
+                EndDate : t,
+                StartTime: $('#StartTime').val(),
+                FinishTime : $('#FinishTime').val(),
+                OverrideDetails:$('#OverrideDetails').val(),
+                Override:$('#Override').val(),
+                UserId : UserIdVal,
+                TeamId : TeamIdVal,
+                Status:$('#Status').val()
+            }
+            var url='@Url.Action("SaveDetails", "Roster")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    window.location.href= '@Url.Action("RosterReport", "Roster")';
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        });
+        });
+
+    </script>
+
+}
+

@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "Locator";
+    ViewBag.SubTitle = "Team Map";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Bundle/Locator/Locator/menu")
+
+}
+@Styles.Render("~/AdminLTE/Bundle/plugins/select2/css")
+
+@*@Styles.Render("~/AdminLTE/Bundle/plugins/morris/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/jvectormap/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/daterangepicker/css")
+@Styles.Render("~/AdminLTE/Bundle/plugins/bootstrap-wysihtml5/css")*@
+<style>
+    hr {
+        margin: 0.1em auto;
+    }
+</style>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Customer search</label>
+                    @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
+                   
+                    @*<div class="input-group input-group-sm">*@
+                    @*<input type="text" class="form-control" id="CustomerCode" name="CustomerCode" value="" placeholder="Enter customer code">*@
+                        <select id="Customers" name="Customers" class="form-control select2" tabindex="10" multiple="multiple" data-placeholder="Select customers" style="width: 80%;"></select>
+                        @*<span class="input-group-btn">*@
+                            <button type="button" id="savebtn" class="btn btn-primary">Search</button>
+                        @*</span>*@
+                    @*</div>*@
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Show name</label>
+                    @*<div class="input-group input-group-sm">*@
+                    <select id="User" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*</div>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Show group</label>
+                    @*<input type="text" class="typeahead tt-query form-control" autocomplete="off" id="CustomerCode" name="CustomerCode" spellcheck="false">*@
+
+                    @*<div class="input-group input-group-sm">*@
+                    <select id="Group" class="form-control select2" value="" style="width: 100%;"></select>
+                    @*</div>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Show details</label>
+
+                    <div class="input-group input-group-sm">
+                        <input type="checkbox" class="minimal" id="ShowDetail" style="width:20px;height:20px" name="ShowDetail" checked>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="googleMap" style="width:100%;height:575px;"></div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/Bundle/plugins/jquery-ui/js")
+@Scripts.Render("~/AdminLTE/Bundle/plugins/select2/js")
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script>
+        var infoWindows=[];
+        $('.select2').select2();
+        var allmarkers=[];
+        var jsontext = '@Html.Raw(Json.Encode(Model.GroupLists))';
+        var data = JSON.parse(jsontext);
+        $('#Group').select2({
+            data: data
+        })
+        var jsontext1 = '@Html.Raw(Json.Encode(Model.UserLists))';
+        var data1 = JSON.parse(jsontext1);
+        $('#User').select2({
+            data: data1
+        })
+
+        var jsontext2 = '@Html.Raw(Json.Encode(Model.CustomerLists))';
+        var data2 = JSON.parse(jsontext2);
+        $('#Customers').select2({
+            data: data2
+        })
+
+        var allmarkers=[];
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+            C: {
+                icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+            },
+            U: {
+                icon:''// iconBase + 'library_maps.png'
+            }
+        };
+        $(document).ready(function(){
+            deleteCookie("myMapCookie1")
+            var markers = @Html.Raw(ViewBag.Markers);
+            InitializeMap(markers);
+
+
+
+            function InitializeMap (markers) {
+                for (var i = 0; i < allmarkers.length; i++) {
+                    allmarkers[i].setMap(null);
+                }
+                allmarkers = [];
+            var mapOptions = {
+                center: new google.maps.LatLng(-39.9006,174.8860),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+            x=map;
+            var gotCookieString=getCookie("myMapCookie1"); 
+            var splitStr = gotCookieString.split("_");
+            var savedMapLat = parseFloat(splitStr[0]);
+            var savedMapLng = parseFloat(splitStr[1]);
+            var savedMapZoom = parseFloat(splitStr[2]);
+            if ((!isNaN(savedMapLat)) && (!isNaN(savedMapLng)) && (!isNaN(savedMapZoom))) {
+                map.setCenter(new google.maps.LatLng(savedMapLat,savedMapLng));
+                map.setZoom(savedMapZoom);
+            }
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.Lat, data.Lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    icon: icons[data.Type].icon,
+                    map: map,
+                    title: data.Address
+                });
+                if($('#ShowDetail').prop('checked')==true)
+                {
+                    var infowindow1 = new google.maps.InfoWindow();
+                    infowindow1.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
+                    infowindow1.open(map, marker);
+                    infoWindows.push(infowindow1); 
+                }
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "mouseover", function (e) {
+                        infoWindow.setContent('<h5><strong>'+data.Name+'</strong></h5><hr><h5><strong>'+data.Address+'</strong></h5>');
+                        infoWindow.open(map, marker);
+                    });
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        if(data.Type=='U')
+                            window.location.href= '@Url.Action("History", "Home", new { id = "ID" })'.replace("ID",data.UserId);
+                        else
+                            window.location.href= '@Url.Action("CustomerDetails", "Customer", new { id = "ID" })'.replace("ID",data.UserId);
+                    });
+                })(marker, data);
+                allmarkers.push(marker);
+            }
+        }
+            $('#ShowDetail').change(function(){
+                if($('#ShowDetail').prop('checked')==false)
+                {
+                    for (var i=0;i<infoWindows.length;i++) {
+                        infoWindows[i].close();
+                    }
+                }
+                else{
+                    var mapZoom=x.getZoom(); 
+                    var mapCentre=x.getCenter(); 
+                    var mapLat=mapCentre.lat(); 
+                    var mapLng=mapCentre.lng(); 
+                    var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom; 
+                    setCookie("myMapCookie1",cookiestring, 30); 
+                    filter();
+                }
+            });
+            $('#Group').change(function(){
+                filter();
+            });
+            $('#User').change(function(){
+                filter();
+            });
+        $('#savebtn').click(function(){
+
+            filter();
+
+        });
+        function filter(){
+            var Group = $('#Group').val();
+            var User = $('#User').val();
+            var Customer=$('#Customers').val()==null?null: $('#Customers').val().toString()
+            var url='@Url.Action("Search", "Home")';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:JSON.stringify({Customer:Customer,UserId:User,GroupId:Group}) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    debugger;
+                    InitializeMap(data);
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            })
+        }
+
+            function setCookie(c_name,value,exdays) {
+                var exdate=new Date();
+                exdate.setDate(exdate.getDate() + exdays);
+                var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+                document.cookie=c_name + "=" + c_value;
+            }
+
+            function getCookie(c_name) {
+                var i,x,y,ARRcookies=document.cookie.split(";");
+                for (i=0;i<ARRcookies.length;i++)
+                {
+                    x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+                    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+                    x=x.replace(/^\s+|\s+$/g,"");
+                    if (x==c_name)
+                    {
+                        return unescape(y);
+                    }
+                }
+                return "";
+            }
+            function deleteCookie(cname) {
+                var d = new Date(); //Create an date object
+                d.setTime(d.getTime() - (1000*60*60*24)); //Set the time to the past. 1000 milliseonds = 1 second
+                var expires = "expires=" + d.toGMTString(); //Compose the expirartion date
+                window.document.cookie = cname+"="+"; "+expires;//Set the cookie with name and the expiration date
+ 
+            }
+        });
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB32wOR-yJr_vAgPL2xj7uWevYRemqPwV0&callback=myMap"></script>
+    @*@Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")*@
+        @Scripts.Render("~/AdminLTE/Bundle/plugins/typeahead/js")
+ 
+}
+

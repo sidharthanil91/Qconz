@@ -51,6 +51,6 @@ C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\Entit
 C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.xml
 C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojResolveAssemblyReference.cache
 C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.dll
 C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateDAL\obj\Debug\QconzLocateDAL.csprojResolveAssemblyReference.cache

@@ -173,6 +173,7 @@ namespace QconzLocateDAL.QConzRepository
                     y.DEFAULT_GROUP = UserModel.DefaultGroup;
                     y.ONLINESTATUS = UserModel.OnlineStatus;
                     y.ONLINESTATUSCHANGETIME = UserModel.OnlineStatusChangeTime;
+                    entity.SaveChanges();
                     if (GroupIds != null)
                     {
                         var UserTeam = y.tblUserTeams.ToList();
@@ -254,6 +255,46 @@ namespace QconzLocateDAL.QConzRepository
 
                 y.UserGroups = string.Join(",", ((from t in entity.tblUserTeams where t.USERID == y.Id select t.TEAMID).ToArray()));
 
+                return y;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<UserModel> GetUserTeamDetails(int userId)
+        {
+            try
+            {
+                var x = (int)(from t in entity.tblUserMasters where t.ID == userId select t.DEFAULT_GROUP).FirstOrDefault();
+                var y = (from t in entity.tblUserMasters
+                         join t1 in entity.tblUserTeams on t.ID equals t1.USERID where t1.TEAMID == x && t.ID != userId && t.USERSTATUS == "A" && t.USERTYPE > 1 && t.USERTYPE != 5
+               
+                         select new UserModel
+                         {
+                             Id = t.ID,
+                             Cellphone = t.CELLPHONE,
+                             CompanyId = t.COMPANYID,
+                             EmergencyContact = t.EMERGENCYCONTACT,
+                             EmergencyContactNo = t.EMERGENCYCONTACTNO,
+                             Email = t.EMAIL,
+                             EndTime = t.ENDTIME,
+                             FirstName = t.FIRSTNAME,
+                             Password = t.PASSWORD,
+                             StartTime = t.STARTTIME,
+                             SurName = t.SURNAME,
+                             UserName = t.USERNAME,
+                             UserStatus = t.USERSTATUS,
+                             UserTeamId = t.USERTEAMID,
+                             UserToken = t.USERTOKEN,
+                             UserType = t.USERTYPE,
+                             WorkingDays = t.WORKINGDAYS,
+                             BaseLatitude = t.BASE_LATITUDE,
+                             BaseLongitude = t.BASE_LONGITUDE,
+                             DefaultGroup = t.DEFAULT_GROUP,
+                             IsContractor = t.ISCONTRACTOR
+                         }).ToList();
                 return y;
             }
             catch (Exception ex)

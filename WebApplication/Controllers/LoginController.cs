@@ -56,6 +56,8 @@ namespace QconzLocate.Controllers
         //    return Login;
         //}
 
+        
+
         [HttpPost]
         public HttpResponseMessage Post(JObject jsonResult)
         {
@@ -79,35 +81,34 @@ namespace QconzLocate.Controllers
                 DeviceType = deviceType
             };
             var y = _ILoginService.ValidateUser(LoginDetails);
-            if (y != null)
+            if (y != null && y.Status!="0")
             {
                 //int userid = y.UserId;
                 //int userid = 2;
-
-                var c = _IUserService.GetUserDetailsByName(email, password);
-
-                DateTime OnlineStatusChangedTime = Convert.ToDateTime(c.OnlineStatusChangeTime);
-                var lastlocationtime = OnlineStatusChangedTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'", DateTimeFormatInfo.InvariantInfo);
+                var c = _IUserService.GetUserDetailsByName(email, password);           
                 
                 if (c != null)
                 {
+                    DateTime OnlineStatusChangedTime = Convert.ToDateTime(c.OnlineStatusChangeTime);
+                    var lastlocationtime = OnlineStatusChangedTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'", DateTimeFormatInfo.InvariantInfo);
                     searchdetails += "{";
-                    searchdetails += "\"Status\":1,\"Message\":\"Success\",";
-                    searchdetails += "\"Content\":";
-                    searchdetails = searchdetails + "{\"UserId\":" + c.Id + ",\"FirstName\":" + "\"" + c.FirstName + "\"" + ",\"LastName\":" + "\"" +
-                        c.SurName + "\"" + ",\"UserType\":" + c.UserType + ",\"Latitude\":" + "\"" + c.BaseLatitude + "\"" + ",\"Longitude\":" + "\"" + c.BaseLongitude + "\"" + ",\"PhoneNumber\":" + "\"" +
-                        c.Cellphone + "\"" + ",\"OnlineStatus\":" + c.OnlineStatus + ",\"OnlineStatusChangedTime\":" + "\"" + lastlocationtime + "\"" ;
+                    searchdetails += "\"status\":1,\"message\":\"Success\",";
+                    searchdetails += "\"content\":";
+                    searchdetails = searchdetails + "{\"userId\":" + c.Id + ",\"firstName\":" + "\"" + c.FirstName + "\"" + ",\"lastName\":" + "\"" +
+                        c.SurName + "\"" + ",\"userType\":" + c.UserType + ",\"latitude\":" + "\"" + c.BaseLatitude + "\"" + ",\"longitude\":" + "\"" + c.BaseLongitude + "\"" + ",\"phoneNumber\":" + "\"" +
+                        c.Cellphone + "\"" + ",\"onlineStatus\":" + "\"" + c.OnlineStatus + "\"" + ",\"onlineStatusChangedTime\":" + "\"" + lastlocationtime + "\"" ;
                     searchdetails += "}";
-                    searchdetails += ",\"ErrorCode\":0";
+                    searchdetails += ",\"errorCode\":0";
+                    searchdetails += ",\"token\":"+ "\""+y.Token + "\"";
                     searchdetails += "}";
                 }
                 else
                 {
                     searchdetails += "{";
-                    searchdetails += "\"Status\":0,\"Message\":\"User Details not found\",";
-                    searchdetails += "\"Content\":";
+                    searchdetails += "\"status\":0,\"message\":\"User Details not found\",";
+                    searchdetails += "\"content\":";
                     searchdetails = searchdetails + "[{}]";
-                    searchdetails += ",\"ErrorCode\":1";
+                    searchdetails += ",\"errorCode\":1";
                     searchdetails += "}";
                 }
 
@@ -116,7 +117,7 @@ namespace QconzLocate.Controllers
                     Content = new StringContent(searchdetails)
                 };
                 resp.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                resp.Content.Headers.Add("authToken", y.Token);
+                //resp.Content.Headers.Add("authToken", y.Token);
                 return resp;
 
                 //System.Web.HttpContext.Current.Response.Headers.Add("authToken", y.Token);
@@ -125,10 +126,10 @@ namespace QconzLocate.Controllers
             else
             {
                 searchdetails += "{";
-                searchdetails += "\"Status\":-1,\"Message\":\"Login Failed\",";
-                searchdetails += "\"Content\":";
+                searchdetails += "\"status\":-1,\"message\":\"Login Failed\",";
+                searchdetails += "\"content\":";
                 searchdetails = searchdetails + "[{}]";
-                searchdetails += ",\"ErrorCode\":1";
+                searchdetails += ",\"errorCode\":1";
                 searchdetails += "}";
 
                 var resp = new HttpResponseMessage()

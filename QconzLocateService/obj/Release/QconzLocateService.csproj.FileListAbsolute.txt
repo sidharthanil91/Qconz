@@ -31,3 +31,12 @@ F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Release\QconzLocateService.c
 F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Release\QconzLocateService.csproj.CopyComplete
 F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Release\QconzLocateService.dll
 F:\Prasanth\Qloctae\QconzApi\QconzLocateService\obj\Release\QconzLocateService.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Release\QconzLocateService.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Release\QconzLocateService.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Release\QconzLocateDAL.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Release\EntityFramework.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Release\QconzLocateDAL.pdb
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\bin\Release\EntityFramework.xml
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\obj\Release\QconzLocateService.csprojResolveAssemblyReference.cache
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\obj\Release\QconzLocateService.dll
+C:\Users\MyPc\Desktop\QZO\New folder (2)\QconzApi\QconzLocateService\obj\Release\QconzLocateService.pdb

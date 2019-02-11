@@ -217,6 +217,7 @@
     <Compile Include="Models\ApiHomePageSearchViewModel.cs" />
     <Compile Include="Models\ApiLoginViewModel.cs" />
     <Compile Include="Models\ApiResponseViewModel.cs" />
+    <Compile Include="Models\ApiUpdateLocationViewModel.cs" />
     <Compile Include="Models\ApiUserLocationViewModel.cs" />
     <Compile Include="Models\CompanyListViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
@@ -590,6 +591,9 @@
       <Project>{a54c694c-bcda-430c-9e92-bd0bc4a97845}</Project>
       <Name>QconzLocateService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

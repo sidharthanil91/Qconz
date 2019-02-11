@@ -153,9 +153,46 @@ namespace QconzLocateService.QconzLocateService
                     BaseLongitude = c.BaseLongitude,
                     DefaultGroup = c.DefaultGroup,
                     IsContractor = c.IsContractor,
-                    OnlineStatus=c.OnlineStatus,
+                    OnlineStatus=c.OnlineStatus==null?0:1,
                     OnlineStatusChangeTime=c.OnlineStatusChangeTime
                 };
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public List<UserServiceModel> GetUserTeamDetails(int UserId)
+        {
+            try
+            {
+                var t = _IUserRepository.GetUserTeamDetails(UserId).Select(c => new UserServiceModel
+                {
+                    Id = c.Id,
+                    Cellphone = c.Cellphone,
+                    CompanyId = c.CompanyId,
+                    EmergencyContact = c.EmergencyContact,
+                    EmergencyContactNo = c.EmergencyContactNo,
+                    Email = c.Email,
+                    EndTime = c.EndTime,
+                    FirstName = c.FirstName,
+                    Password = c.Password,
+                    StartTime = c.StartTime,
+                    SurName = c.SurName,
+                    UserGroups = c.UserGroups,
+                    UserName = c.UserName,
+                    UserStatus = c.UserStatus,
+                    UserTeamId = c.UserTeamId,
+                    UserToken = c.UserToken,
+                    UserType = c.UserType,
+                    WorkingDays = c.WorkingDays,
+                    BaseLatitude = c.BaseLatitude,
+                    BaseLongitude = c.BaseLongitude,
+                    DefaultGroup = c.DefaultGroup,
+                    IsContractor = c.IsContractor
+                }).ToList();
+                return t;
             }
             catch
             {
