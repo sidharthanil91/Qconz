@@ -37,7 +37,7 @@ namespace QconzLocateService.ApiQconzLocateService
                         CompanyId = 1
                     };
                     var token = GenerateToken(UserData);
-                    _ILoginRepository.SaveToken(token, Status);
+                    _ILoginRepository.SaveToken(token, Status,Login.DeviceId);
                     ClientToken.Token = token;
                     ClientToken.Message = "Success";
                     ClientToken.Status = "1";

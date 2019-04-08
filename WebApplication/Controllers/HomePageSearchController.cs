@@ -42,7 +42,7 @@ namespace QconzLocate.Controllers
             {
                 int userid = y.UserId;
                 var result = _IUserService.GetUserTeamDetails(userid);
-                if (result != null)
+                if (result != null && result.Count>0)
                 {
                     searchdetails += "{";
                     searchdetails += "\"status\":1,\"message\":\"Success\",";

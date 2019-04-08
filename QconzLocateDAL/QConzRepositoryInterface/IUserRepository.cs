@@ -14,5 +14,6 @@ namespace QconzLocateDAL.QConzRepositoryInterface
         string SaveUserDetails(UserModel UserModel);
         UserModel GetUserDetailsByName(string username, string password);
         List<UserModel> GetUserTeamDetails(int userId);
+        string SaveNotificationToken(string notificationToken, int userId);
     }
 }

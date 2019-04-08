@@ -12,6 +12,8 @@ namespace QconzLocateDAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class QCONZEntities : DbContext
     {
@@ -26,15 +28,21 @@ namespace QconzLocateDAL
         }
     
         public virtual DbSet<tblCustomer> tblCustomers { get; set; }
+        public virtual DbSet<tblEmergency> tblEmergencies { get; set; }
+        public virtual DbSet<tblNotification> tblNotifications { get; set; }
         public virtual DbSet<tblOrganization> tblOrganizations { get; set; }
         public virtual DbSet<tblRoaster> tblRoasters { get; set; }
+        public virtual DbSet<tblStopTracking> tblStopTrackings { get; set; }
+        public virtual DbSet<tblTeamRoaster> tblTeamRoasters { get; set; }
         public virtual DbSet<tblTeam> tblTeams { get; set; }
         public virtual DbSet<tblUserLog> tblUserLogs { get; set; }
         public virtual DbSet<tblUserMaster> tblUserMasters { get; set; }
         public virtual DbSet<tblUserRoaster> tblUserRoasters { get; set; }
         public virtual DbSet<tblUserTeam> tblUserTeams { get; set; }
-        public virtual DbSet<tblTeamRoaster> tblTeamRoasters { get; set; }
-        public virtual DbSet<tblEmergency> tblEmergencies { get; set; }
-        public virtual DbSet<tblStopTracking> tblStopTrackings { get; set; }
+    
+        public virtual ObjectResult<get_notification_users_Result> get_notification_users()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_notification_users_Result>("get_notification_users");
+        }
     }
 }

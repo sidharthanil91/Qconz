@@ -26,13 +26,13 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Team name</label>
-                            <input type="text" class="form-control" id="TeamName" name="TeamName" value="@Model.SingleTeam.TeamName" placeholder="Enter team name">
+                            <input type="text" class="form-control" id="TeamName" tabindex="1" name="TeamName" value="@Model.SingleTeam.TeamName" placeholder="Enter team name">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" rows="4" id="Teamdesc" value="@Model.SingleTeam.Teamdesc" placeholder="Enter description"></textarea>
+                            <textarea class="form-control" rows="4" id="Teamdesc" tabindex="3" value="@Model.SingleTeam.Teamdesc" placeholder="Enter description"></textarea>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                         </div>*@
                     <div class="form-group">
                         <label>Company</label>
-                        <select id="Company" name="Company" class="form-control select2" value="@Model.SingleTeam.CompanyId" style="width: 100%;"></select>
+                        <select id="Company" tabindex="2" name="Company" class="form-control select2" value="@Model.SingleTeam.CompanyId" style="width: 100%;"></select>
                     </div>
 
                 </div>
@@ -54,7 +54,7 @@
 
                     <div class="form-group">
                         <label>Users</label>
-                        <select id="Users" name="Users" class="form-control select2" tabindex="7" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
+                        <select id="Users" name="Users" class="form-control select2" tabindex="4" multiple="multiple" data-placeholder="Select users" style="width: 100%;"></select>
                     </div>
 
                 </div>
@@ -62,7 +62,7 @@
         
                     <div class="form-group">
                         <label>Status</label>
-                        <select id="Status" name="Status" class="form-control select2" value="@Model.SingleTeam.TeamStatus" style="width: 100%;">
+                        <select id="Status" name="Status" tabindex="6" class="form-control select2" value="@Model.SingleTeam.TeamStatus" style="width: 100%;">
                             <option value="A">Active</option>
                             <option value="N">Archived</option>
                         </select>

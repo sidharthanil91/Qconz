@@ -22,10 +22,10 @@ namespace QconzLocateDAL.QConzRepository
             location = y.Select(c => new LocationModel
             {
                 UserId = c.ID,
-                Name = c.OFFICENAME,
+                Name =c.CUSTOMERCODE+" - "+ c.OFFICENAME,
                 Lat = c.LAT,
                 Lng = c.LNG,
-                Contact = c.FIRSTNAME + (c.PHONE_1==null?"":(" - Ph:"+c.PHONE_1))+(c.EMAIL == null ? "" : (" - Email:" + c.EMAIL)),
+                Contact = c.FIRSTNAME + (c.PHONE_1==null||c.PHONE_1==""?"":(" - Ph:"+c.PHONE_1))+(c.EMAIL == null||c.EMAIL=="" ? "" : (" - Email:" + c.EMAIL)),
                 Address=c.ADDRESS1+" "+c.ADDRESS2+" "+c.CITY,
                 Type = "C"
             }

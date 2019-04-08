@@ -12,7 +12,7 @@ namespace QconzLocateDAL.ApiQconzRepository
     {
         QCONZEntities entity = new QCONZEntities();
 
-        public void SaveToken(string Token, int UserId)
+        public void SaveToken(string Token, int UserId,string DeviceId)
         {
             var y = entity.tblUserMasters.Where(t => t.ID == UserId).Select(x => x).FirstOrDefault();
             y.USERTOKEN = Token;
@@ -30,7 +30,7 @@ namespace QconzLocateDAL.ApiQconzRepository
 
         public int ValidateUser(LoginModel Login)
         {
-            if(entity.tblUserMasters.Where(t=>t.EMAIL.ToLower()==Login.UserName.ToLower() &&(t.USERTYPE==4 || t.USERTYPE==3)&& t.PASSWORD==Login.Password && t.USERSTATUS=="A").Count()>0)
+            if(entity.tblUserMasters.Where(t=>t.EMAIL.ToLower()==Login.UserName.ToLower() &&(t.USERTYPE==4 || t.USERTYPE==3 || t.USERTYPE == 2) && t.PASSWORD==Login.Password && t.USERSTATUS=="A").Count()>0)
             {
                 return entity.tblUserMasters.Where(t=>t.EMAIL==Login.UserName).Select(x=>x.ID).FirstOrDefault();
             }

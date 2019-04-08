@@ -60,12 +60,12 @@ namespace QconzLocate.Controllers
                     var latitude = item.Latitude;
                     //var longitudeElement = itemProperties.FirstOrDefault(z => z.Name == "longitude");
                     var longitude = item.Longitude;
-                    var DateTimeElement = item.DateTime;
-                    string datetime1 = Convert.ToString(DateTimeElement);
+                    //var DateTimeElement = item.DateTime;
+                    //string datetime1 = Convert.ToString(DateTimeElement);
 
-                    string date = datetime1.Substring(0, 10);
-                    string time = datetime1.Substring(11, 8);
-                    string datetime = date + " " + time;
+                    //string date = datetime1.Substring(0, 10);
+                    //string time = datetime1.Substring(11, 8);
+                    DateTime datetime = item.DateTime;
                     //UserLocationServiceModel UserLog;
                     var UserLocationDetails = new UserLocationServiceModel();
                     UserLocationDetails = new UserLocationServiceModel()

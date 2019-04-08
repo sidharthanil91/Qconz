@@ -19,6 +19,11 @@
     hr {
         margin: 0.1em auto;
     }
+     a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
 </style>
 <div class="box-body">
     <div class="row">
@@ -133,7 +138,10 @@
             var mapOptions = {
                 center: new google.maps.LatLng(-39.9006,174.8860),
                 zoom: 5,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                streetViewControl: false,
+                fullscreenControl: false
             };
             var infoWindow = new google.maps.InfoWindow();
             var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);

@@ -199,5 +199,18 @@ namespace QconzLocateService.QconzLocateService
                 return null;
             }
         }
+
+        public string SaveNotificationDetails(string notificationToken, int userId)
+        {
+            try
+            {
+                var t = _IUserRepository.SaveNotificationToken( notificationToken,  userId);
+                return t;
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
     }
 }

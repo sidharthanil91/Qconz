@@ -194,7 +194,7 @@ namespace QconzLocate.Controllers
                    CustomerCode=r["CustomerCode"].ToString(),
                    FirstName=r["FirstName"].ToString(),
                    LastName= r["LastName"].ToString(),
-                   OfficeName=r["OfficeName"].ToString(),
+                   OfficeName=r["CustomerName"].ToString(),
                    Email =  r["Email"].ToString(),
                    Lat = r["Lat"].ToString(),
                    Lng = r["Lng"].ToString(),

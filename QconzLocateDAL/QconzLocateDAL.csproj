@@ -57,6 +57,9 @@
     <Compile Include="ApiQconzRepository\LoginRepository.cs" />
     <Compile Include="ApiQconzRepository\UserLocationRepository.cs" />
     <Compile Include="ApiQconzRepository\UserWorkRepository.cs" />
+    <Compile Include="get_notification_users_Result.cs">
+      <DependentUpon>QconzModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QconzModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -106,6 +109,9 @@
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEmergency.cs">
+      <DependentUpon>QconzModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblNotification.cs">
       <DependentUpon>QconzModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblOrganization.cs">

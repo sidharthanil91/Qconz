@@ -33,6 +33,15 @@
     <Property Name="LNG" Type="varchar" MaxLength="20" />
     <Property Name="LOGTIME" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblNotification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="int" Nullable="false" />
+    <Property Name="TOKEN" Type="varchar(max)" />
+    <Property Name="DEVICEID" Type="varchar(max)" />
+  </EntityType>
   <EntityType Name="tblOrganizations">
     <Key>
       <PropertyRef Name="ID" />
@@ -175,6 +184,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="tblEmergency">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNotification_USERID_tblUserMaster_ID">
+    <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+    <End Role="tblNotification" Type="Self.tblNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblNotification">
         <PropertyRef Name="USERID" />
       </Dependent>
     </ReferentialConstraint>
@@ -323,9 +344,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="get_notification_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="QCONZModelStoreContainer">
     <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmergency" EntityType="Self.tblEmergency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNotification" EntityType="Self.tblNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOrganizations" EntityType="Self.tblOrganizations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblRoaster" EntityType="Self.tblRoaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStopTracking" EntityType="Self.tblStopTracking" Schema="dbo" store:Type="Tables" />
@@ -342,6 +365,10 @@
     <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="Self.FK_tblEmergency_USERID_tblUserMaster_ID">
       <End Role="tblUserMaster" EntitySet="tblUserMaster" />
       <End Role="tblEmergency" EntitySet="tblEmergency" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNotification_USERID_tblUserMaster_ID" Association="Self.FK_tblNotification_USERID_tblUserMaster_ID">
+      <End Role="tblUserMaster" EntitySet="tblUserMaster" />
+      <End Role="tblNotification" EntitySet="tblNotification" />
     </AssociationSet>
     <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
       <End Role="tblOrganizations" EntitySet="tblOrganizations" />

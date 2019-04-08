@@ -16,7 +16,12 @@
 @Styles.Render("~/AdminLTE/Bundle/dist/css")
 @Styles.Render("~/AdminLTE/Bundle/dist/css/skins")
 <link rel="stylesheet" href="~/AdminLTE/plugins/clock/css/clockface.css">
-
+<style>
+     .error {
+      color: red;
+      background-color: #acf;
+   }
+</style>
 <div class="box box-default">
     <div class="box-header with-border">
         @*<h3 class="box-title">Select2</h3>
@@ -31,13 +36,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">First name</label>
+                            <label for="exampleInputEmail1">First name<font color="red">*</font></label>
                             <input type="text" class="form-control" id="FirstName" tabindex="1" name="FirstName" value="@Model.UserDetails.FirstName" placeholder="Enter first name">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email</label>
+                            <label for="exampleInputEmail1">Email<font color="red">*</font></label>
                             <input type="text" class="form-control" id="Email" tabindex="3" name="Email" value="@Model.UserDetails.Email" placeholder="Enter email">
                         </div>
                     </div>
@@ -182,7 +187,7 @@
                     </div>
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Password</label>
+                            <label for="exampleInputEmail1">Password<font color="red">*</font></label>
                             <input type="password" class="form-control" tabindex="18" id="Password" name="Password" value="@Model.UserDetails.Password" placeholder="Enter password">
                         </div>
                     </div>
@@ -191,7 +196,7 @@
         </div>
     </form>
     <div class="box-footer">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+        <button class="btn btn-primary" id="Submit" type="submit" value="Submit" onclick="OnSubmit()">Save</button>
     </div>
     @*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
             Launch demo modal
@@ -280,12 +285,25 @@
         $('#DefaultGroup').select2({
             data: data1
         })
+        $("#DefaultGroup").val("@Model.UserDetails.DefaultGroup").trigger("change");
         var array1 = '@Model.UserDetails.UserGroups'.split(',')
         $('#Groups').select2().val(array1).trigger("change")
         $('#Status').select2({
 
         })
         $("#Status").val("@Model.UserDetails.UserStatus").trigger("change");
+
+        function OnSubmit()
+        {
+            if( !$("#form1").valid())
+            {
+                return
+            }
+            else{
+                $('#myModal').modal('show');
+            }
+        }
+
         $(document).ready(function () {
             // 1. prepare the validation rules and messages.
 
@@ -294,7 +312,11 @@
                     FirstName: {
                         required: true,
                     },
-                   
+                    Email: {
+                        required: true,
+                        email: true,
+                    },
+
                     Password: {
                         required: true,
                     },
@@ -307,17 +329,15 @@
                 },
                 messages: {
                     FirstName: "First name is required",
-                  
+                    //Email: "Email is required",
                     Password: "Password is required",
                     Company: "Select company",
                     Type: "Select user type",
                 }
             });
+
             $('#savebtn').click(function(){
-                if( !$("#form1").valid())
-                {
-                    return
-                }
+                
                 $('#myModal').modal('hide');
                 var UserGroupsVal=$('#Groups').val()==null?null:$('#Groups').val().toString();
                 var WorkingDaysVal=$('#WorkingDays').val()==null?null:$('#WorkingDays').val().toString();
@@ -333,7 +353,7 @@
                     Password : $('#Password').val(),
                     StartTime : $('#StartTime').val(),
                     SurName : $('#SurName').val(),
-                   
+
                     UserStatus : $('#Status').val(),
                     UserTeamId : $('#UserTeamId').val(),
                     UserType : $('#Type').val(),

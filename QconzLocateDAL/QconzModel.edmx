@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QCONZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QCONZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblCustomers">
           <Key>
             <PropertyRef Name="ID" />
@@ -37,6 +37,15 @@
           <Property Name="LAT" Type="varchar" MaxLength="20" />
           <Property Name="LNG" Type="varchar" MaxLength="20" />
           <Property Name="LOGTIME" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblNotification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERID" Type="int" Nullable="false" />
+          <Property Name="TOKEN" Type="varchar(max)" />
+          <Property Name="DEVICEID" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tblOrganizations">
           <Key>
@@ -180,6 +189,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblEmergency">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblNotification_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblNotification" Type="Self.tblNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblNotification">
               <PropertyRef Name="USERID" />
             </Dependent>
           </ReferentialConstraint>
@@ -328,9 +349,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="get_notification_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QCONZModelStoreContainer">
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmergency" EntityType="Self.tblEmergency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNotification" EntityType="Self.tblNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrganizations" EntityType="Self.tblOrganizations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoaster" EntityType="Self.tblRoaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStopTracking" EntityType="Self.tblStopTracking" Schema="dbo" store:Type="Tables" />
@@ -347,6 +370,10 @@
           <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="Self.FK_tblEmergency_USERID_tblUserMaster_ID">
             <End Role="tblUserMaster" EntitySet="tblUserMaster" />
             <End Role="tblEmergency" EntitySet="tblEmergency" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNotification_USERID_tblUserMaster_ID" Association="Self.FK_tblNotification_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMaster" />
+            <End Role="tblNotification" EntitySet="tblNotification" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
@@ -397,7 +424,8 @@
             <End Role="tblUserTeam" EntitySet="tblUserTeam" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QCONZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -425,6 +453,27 @@
           <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblCustomers" ToRole="tblOrganizations" />
         </EntityType>
+        <EntityType Name="tblEmergency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" Nullable="false" />
+          <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblEmergency" ToRole="tblUserMaster" />
+        </EntityType>
+        <EntityType Name="tblNotification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" Nullable="false" />
+          <Property Name="TOKEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DEVICEID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblNotification_USERID_tblUserMaster_ID" FromRole="tblNotification" ToRole="tblUserMaster" />
+        </EntityType>
         <EntityType Name="tblOrganization">
           <Key>
             <PropertyRef Name="ID" />
@@ -443,12 +492,12 @@
           <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
           <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IMAGE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblCustomers" Relationship="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblCustomers" />
           <NavigationProperty Name="tblRoasters" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblRoaster" />
           <NavigationProperty Name="tblTeams" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblTeams" />
           <NavigationProperty Name="tblUserMasters" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblOrganizations" ToRole="tblUserMaster" />
-          <Property Name="CITY" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="IMAGE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblRoaster">
           <Key>
@@ -465,8 +514,30 @@
           <Property Name="OVERRIDE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="OVERIDEDETAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID" FromRole="tblRoaster" ToRole="tblOrganizations" />
+          <NavigationProperty Name="tblTeamRoasters" Relationship="Self.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblTeamRoaster" />
           <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblUserRoaster" />
-          <NavigationProperty Name="tblTeamRoasters" Relationship="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblRoaster" ToRole="tblTeamRoaster" />
+        </EntityType>
+        <EntityType Name="tblStopTracking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" Nullable="false" />
+          <Property Name="HOURS" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblUserMaster" Relationship="Self.FK_tblStopTracking_USERID_tblUserMaster_ID" FromRole="tblStopTracking" ToRole="tblUserMaster" />
+        </EntityType>
+        <EntityType Name="tblTeamRoaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TEAMID" Type="Int32" Nullable="false" />
+          <Property Name="ROASTERID" Type="Int32" Nullable="false" />
+          <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblRoaster" Relationship="Self.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblTeamRoaster" ToRole="tblRoaster" />
+          <NavigationProperty Name="tblTeam" Relationship="Self.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeamRoaster" ToRole="tblTeams" />
         </EntityType>
         <EntityType Name="tblTeam">
           <Key>
@@ -479,9 +550,9 @@
           <Property Name="TEAMSTATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="COMPANYID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblTeams_COMPANYID_tblOrganizations_ID" FromRole="tblTeams" ToRole="tblOrganizations" />
+          <NavigationProperty Name="tblTeamRoasters" Relationship="Self.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeams" ToRole="tblTeamRoaster" />
+          <NavigationProperty Name="tblUserMasters" Relationship="Self.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" FromRole="tblTeams" ToRole="tblUserMaster" />
           <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserTeam_ID" FromRole="tblTeams" ToRole="tblUserTeam" />
-          <NavigationProperty Name="tblTeamRoasters" Relationship="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeam" ToRole="tblTeamRoaster" />
-          <NavigationProperty Name="tblUserMasters" Relationship="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" FromRole="tblTeam" ToRole="tblUserMaster" />
         </EntityType>
         <EntityType Name="tblUserLog">
           <Key>
@@ -515,19 +586,20 @@
           <Property Name="ENDTIME" Type="DateTime" Precision="3" />
           <Property Name="EMERGENCYCONTACT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EMERGENCYCONTACTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblUserMaster" ToRole="tblOrganizations" />
-          <NavigationProperty Name="tblUserLogs" Relationship="Self.FK_tblUserLog_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserLog" />
-          <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserRoaster" />
-          <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserTeam" />
-          <NavigationProperty Name="tblEmergencies" Relationship="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblEmergency" />
           <Property Name="ONLINESTATUS" Type="Int32" />
           <Property Name="ONLINESTATUSCHANGETIME" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblStopTrackings" Relationship="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblStopTracking" />
           <Property Name="ISCONTRACTOR" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="BASE_LATITUDE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="BASE_LONGITUDE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DEFAULT_GROUP" Type="Int32" />
-          <NavigationProperty Name="tblTeam" Relationship="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" FromRole="tblUserMaster" ToRole="tblTeam" />
+          <NavigationProperty Name="tblEmergencies" Relationship="Self.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblEmergency" />
+          <NavigationProperty Name="tblNotifications" Relationship="Self.FK_tblNotification_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblNotification" />
+          <NavigationProperty Name="tblOrganization" Relationship="Self.FK_tblUserMaster_COMPANYID_tblOrganizations_ID" FromRole="tblUserMaster" ToRole="tblOrganizations" />
+          <NavigationProperty Name="tblStopTrackings" Relationship="Self.FK_tblStopTracking_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblStopTracking" />
+          <NavigationProperty Name="tblTeam" Relationship="Self.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" FromRole="tblUserMaster" ToRole="tblTeams" />
+          <NavigationProperty Name="tblUserLogs" Relationship="Self.FK_tblUserLog_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserLog" />
+          <NavigationProperty Name="tblUserRoasters" Relationship="Self.FK_tblUserRoaster_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserRoaster" />
+          <NavigationProperty Name="tblUserTeams" Relationship="Self.FK_tblUserTeam_USERID_tblUserMaster_ID" FromRole="tblUserMaster" ToRole="tblUserTeam" />
         </EntityType>
         <EntityType Name="tblUserRoaster">
           <Key>
@@ -560,6 +632,30 @@
             </Principal>
             <Dependent Role="tblCustomers">
               <PropertyRef Name="COMPANYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmergency_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblEmergency" Type="Self.tblEmergency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblEmergency">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblNotification_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblNotification" Type="Self.tblNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblNotification">
+              <PropertyRef Name="USERID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -599,6 +695,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+          <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="1" />
+          <End Role="tblTeamRoaster" Type="Self.tblTeamRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTeamRoaster">
+              <PropertyRef Name="ROASTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
           <End Role="tblRoaster" Type="Self.tblRoaster" Multiplicity="1" />
           <End Role="tblUserRoaster" Type="Self.tblUserRoaster" Multiplicity="*" />
@@ -608,6 +716,42 @@
             </Principal>
             <Dependent Role="tblUserRoaster">
               <PropertyRef Name="ROASTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStopTracking_USERID_tblUserMaster_ID">
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="1" />
+          <End Role="tblStopTracking" Type="Self.tblStopTracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblStopTracking">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+          <End Role="tblTeams" Type="Self.tblTeam" Multiplicity="1" />
+          <End Role="tblTeamRoaster" Type="Self.tblTeamRoaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTeamRoaster">
+              <PropertyRef Name="TEAMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID">
+          <End Role="tblTeams" Type="Self.tblTeam" Multiplicity="0..1" />
+          <End Role="tblUserMaster" Type="Self.tblUserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblUserMaster">
+              <PropertyRef Name="DEFAULT_GROUP" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -661,8 +805,12 @@
         </Association>
         <EntityContainer Name="QCONZEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblEmergencies" EntityType="Self.tblEmergency" />
+          <EntitySet Name="tblNotifications" EntityType="Self.tblNotification" />
           <EntitySet Name="tblOrganizations" EntityType="Self.tblOrganization" />
           <EntitySet Name="tblRoasters" EntityType="Self.tblRoaster" />
+          <EntitySet Name="tblStopTrackings" EntityType="Self.tblStopTracking" />
+          <EntitySet Name="tblTeamRoasters" EntityType="Self.tblTeamRoaster" />
           <EntitySet Name="tblTeams" EntityType="Self.tblTeam" />
           <EntitySet Name="tblUserLogs" EntityType="Self.tblUserLog" />
           <EntitySet Name="tblUserMasters" EntityType="Self.tblUserMaster" />
@@ -671,6 +819,14 @@
           <AssociationSet Name="FK_tblCustomers_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblCustomers_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblCustomers" EntitySet="tblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="Self.FK_tblEmergency_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+            <End Role="tblEmergency" EntitySet="tblEmergencies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNotification_USERID_tblUserMaster_ID" Association="Self.FK_tblNotification_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+            <End Role="tblNotification" EntitySet="tblNotifications" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRoaster_COMPANYID_tblOrganizations_ID" Association="Self.FK_tblRoaster_COMPANYID_tblOrganizations_ID">
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
@@ -684,9 +840,25 @@
             <End Role="tblOrganizations" EntitySet="tblOrganizations" />
             <End Role="tblUserMaster" EntitySet="tblUserMasters" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" Association="Self.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
+            <End Role="tblRoaster" EntitySet="tblRoasters" />
+            <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblUserRoaster_ROASTERID_tblRoaster_ID" Association="Self.FK_tblUserRoaster_ROASTERID_tblRoaster_ID">
             <End Role="tblRoaster" EntitySet="tblRoasters" />
             <End Role="tblUserRoaster" EntitySet="tblUserRoasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStopTracking_USERID_tblUserMaster_ID" Association="Self.FK_tblStopTracking_USERID_tblUserMaster_ID">
+            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
+            <End Role="tblStopTracking" EntitySet="tblStopTrackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID" Association="Self.FK_tblTeamRoaster_TEAMID_tblTeams_ID">
+            <End Role="tblTeams" EntitySet="tblTeams" />
+            <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" Association="Self.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID">
+            <End Role="tblTeams" EntitySet="tblTeams" />
+            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
           </AssociationSet>
           <AssociationSet Name="FK_tblUserTeam_USERID_tblUserTeam_ID" Association="Self.FK_tblUserTeam_USERID_tblUserTeam_ID">
             <End Role="tblTeams" EntitySet="tblTeams" />
@@ -704,123 +876,38 @@
             <End Role="tblUserMaster" EntitySet="tblUserMasters" />
             <End Role="tblUserTeam" EntitySet="tblUserTeams" />
           </AssociationSet>
-          <EntitySet Name="tblTeamRoasters" EntityType="QCONZModel.tblTeamRoaster" />
-          <AssociationSet Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" Association="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
-            <End Role="tblRoaster" EntitySet="tblRoasters" />
-            <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID" Association="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID">
-            <End Role="tblTeam" EntitySet="tblTeams" />
-            <End Role="tblTeamRoaster" EntitySet="tblTeamRoasters" />
-          </AssociationSet>
-          <EntitySet Name="tblEmergencies" EntityType="QCONZModel.tblEmergency" />
-          <AssociationSet Name="FK_tblEmergency_USERID_tblUserMaster_ID" Association="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID">
-            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
-            <End Role="tblEmergency" EntitySet="tblEmergencies" />
-          </AssociationSet>
-          <EntitySet Name="tblStopTrackings" EntityType="QCONZModel.tblStopTracking" />
-          <AssociationSet Name="FK_tblStopTracking_USERID_tblUserMaster_ID" Association="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID">
-            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
-            <End Role="tblStopTracking" EntitySet="tblStopTrackings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID" Association="QCONZModel.FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID">
-            <End Role="tblTeam" EntitySet="tblTeams" />
-            <End Role="tblUserMaster" EntitySet="tblUserMasters" />
-          </AssociationSet>
+          <FunctionImport Name="get_notification_users" ReturnType="Collection(QCONZModel.get_notification_users_Result)" />
         </EntityContainer>
-        <EntityType Name="tblTeamRoaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TEAMID" Type="Int32" Nullable="false" />
-          <Property Name="ROASTERID" Type="Int32" Nullable="false" />
-          <Property Name="ARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="tblRoaster" Relationship="QCONZModel.FK_tblTeamRoaster_ROASTERID_tblRoaster_ID" FromRole="tblTeamRoaster" ToRole="tblRoaster" />
-          <NavigationProperty Name="tblTeam" Relationship="QCONZModel.FK_tblTeamRoaster_TEAMID_tblTeams_ID" FromRole="tblTeamRoaster" ToRole="tblTeam" />
-        </EntityType>
-        <Association Name="FK_tblTeamRoaster_ROASTERID_tblRoaster_ID">
-          <End Type="QCONZModel.tblRoaster" Role="tblRoaster" Multiplicity="1" />
-          <End Type="QCONZModel.tblTeamRoaster" Role="tblTeamRoaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRoaster">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblTeamRoaster">
-              <PropertyRef Name="ROASTERID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblTeamRoaster_TEAMID_tblTeams_ID">
-          <End Type="QCONZModel.tblTeam" Role="tblTeam" Multiplicity="1" />
-          <End Type="QCONZModel.tblTeamRoaster" Role="tblTeamRoaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblTeam">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblTeamRoaster">
-              <PropertyRef Name="TEAMID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tblEmergency">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USERID" Type="Int32" Nullable="false" />
-          <Property Name="LAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="tblUserMaster" Relationship="QCONZModel.FK_tblEmergency_USERID_tblUserMaster_ID" FromRole="tblEmergency" ToRole="tblUserMaster" />
-        </EntityType>
-        <Association Name="FK_tblEmergency_USERID_tblUserMaster_ID">
-          <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="1" />
-          <End Type="QCONZModel.tblEmergency" Role="tblEmergency" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUserMaster">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblEmergency">
-              <PropertyRef Name="USERID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tblStopTracking">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USERID" Type="Int32" Nullable="false" />
-          <Property Name="HOURS" Type="Int32" />
-          <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="LOGTIME" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="tblUserMaster" Relationship="QCONZModel.FK_tblStopTracking_USERID_tblUserMaster_ID" FromRole="tblStopTracking" ToRole="tblUserMaster" />
-        </EntityType>
-        <Association Name="FK_tblStopTracking_USERID_tblUserMaster_ID">
-          <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="1" />
-          <End Type="QCONZModel.tblStopTracking" Role="tblStopTracking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUserMaster">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblStopTracking">
-              <PropertyRef Name="USERID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblUserMaster_DEFAULT_GROUP_tblTeams_ID">
-          <End Type="QCONZModel.tblTeam" Role="tblTeam" Multiplicity="0..1" />
-          <End Type="QCONZModel.tblUserMaster" Role="tblUserMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblTeam">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblUserMaster">
-              <PropertyRef Name="DEFAULT_GROUP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="get_notification_users_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="USERTYPE" Nullable="false" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="PASSWORD" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="USERSTATUS" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="USERTEAMID" Nullable="true" />
+          <Property Type="Int32" Name="COMPANYID" Nullable="true" />
+          <Property Type="String" Name="USERTOKEN" Nullable="true" />
+          <Property Type="String" Name="FIRSTNAME" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="SURNAME" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="EMAIL" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="CELLPHONE" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WORKINGDAYS" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="STARTTIME" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ENDTIME" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EMERGENCYCONTACT" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EMERGENCYCONTACTNO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ONLINESTATUS" Nullable="true" />
+          <Property Type="DateTime" Name="ONLINESTATUSCHANGETIME" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ISCONTRACTOR" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="BASE_LATITUDE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BASE_LONGITUDE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="DEFAULT_GROUP" Nullable="true" />
+          <Property Type="Int32" Name="ID1" Nullable="true" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="String" Name="LAT" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LNG" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="LOGTIME" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -851,11 +938,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblEmergencies">
+            <EntityTypeMapping TypeName="QCONZModel.tblEmergency">
+              <MappingFragment StoreEntitySet="tblEmergency">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="LAT" ColumnName="LAT" />
+                <ScalarProperty Name="LNG" ColumnName="LNG" />
+                <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNotifications">
+            <EntityTypeMapping TypeName="QCONZModel.tblNotification">
+              <MappingFragment StoreEntitySet="tblNotification">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TOKEN" ColumnName="TOKEN" />
+                <ScalarProperty Name="DEVICEID" ColumnName="DEVICEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblOrganizations">
             <EntityTypeMapping TypeName="QCONZModel.tblOrganization">
               <MappingFragment StoreEntitySet="tblOrganizations">
-                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
-                <ScalarProperty Name="CITY" ColumnName="CITY" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITLE" ColumnName="TITLE" />
                 <ScalarProperty Name="CONTACTNAME" ColumnName="CONTACTNAME" />
@@ -870,6 +976,8 @@
                 <ScalarProperty Name="LNG" ColumnName="LNG" />
                 <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -886,6 +994,27 @@
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
                 <ScalarProperty Name="OVERRIDE" ColumnName="OVERRIDE" />
                 <ScalarProperty Name="OVERIDEDETAIL" ColumnName="OVERIDEDETAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStopTrackings">
+            <EntityTypeMapping TypeName="QCONZModel.tblStopTracking">
+              <MappingFragment StoreEntitySet="tblStopTracking">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="HOURS" ColumnName="HOURS" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTeamRoasters">
+            <EntityTypeMapping TypeName="QCONZModel.tblTeamRoaster">
+              <MappingFragment StoreEntitySet="tblTeamRoaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
+                <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -915,12 +1044,6 @@
           <EntitySetMapping Name="tblUserMasters">
             <EntityTypeMapping TypeName="QCONZModel.tblUserMaster">
               <MappingFragment StoreEntitySet="tblUserMaster">
-                <ScalarProperty Name="DEFAULT_GROUP" ColumnName="DEFAULT_GROUP" />
-                <ScalarProperty Name="BASE_LONGITUDE" ColumnName="BASE_LONGITUDE" />
-                <ScalarProperty Name="BASE_LATITUDE" ColumnName="BASE_LATITUDE" />
-                <ScalarProperty Name="ISCONTRACTOR" ColumnName="ISCONTRACTOR" />
-                <ScalarProperty Name="ONLINESTATUSCHANGETIME" ColumnName="ONLINESTATUSCHANGETIME" />
-                <ScalarProperty Name="ONLINESTATUS" ColumnName="ONLINESTATUS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="USERTYPE" ColumnName="USERTYPE" />
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
@@ -938,6 +1061,12 @@
                 <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
                 <ScalarProperty Name="EMERGENCYCONTACT" ColumnName="EMERGENCYCONTACT" />
                 <ScalarProperty Name="EMERGENCYCONTACTNO" ColumnName="EMERGENCYCONTACTNO" />
+                <ScalarProperty Name="ONLINESTATUS" ColumnName="ONLINESTATUS" />
+                <ScalarProperty Name="ONLINESTATUSCHANGETIME" ColumnName="ONLINESTATUSCHANGETIME" />
+                <ScalarProperty Name="ISCONTRACTOR" ColumnName="ISCONTRACTOR" />
+                <ScalarProperty Name="BASE_LATITUDE" ColumnName="BASE_LATITUDE" />
+                <ScalarProperty Name="BASE_LONGITUDE" ColumnName="BASE_LONGITUDE" />
+                <ScalarProperty Name="DEFAULT_GROUP" ColumnName="DEFAULT_GROUP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -961,38 +1090,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblTeamRoasters">
-            <EntityTypeMapping TypeName="QCONZModel.tblTeamRoaster">
-              <MappingFragment StoreEntitySet="tblTeamRoaster">
-                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
-                <ScalarProperty Name="ROASTERID" ColumnName="ROASTERID" />
-                <ScalarProperty Name="TEAMID" ColumnName="TEAMID" />
+          <FunctionImportMapping FunctionImportName="get_notification_users" FunctionName="QCONZModel.Store.get_notification_users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QCONZModel.get_notification_users_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblEmergencies">
-            <EntityTypeMapping TypeName="QCONZModel.tblEmergency">
-              <MappingFragment StoreEntitySet="tblEmergency">
-                <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
-                <ScalarProperty Name="LNG" ColumnName="LNG" />
+                <ScalarProperty Name="USERTYPE" ColumnName="USERTYPE" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+                <ScalarProperty Name="USERTEAMID" ColumnName="USERTEAMID" />
+                <ScalarProperty Name="COMPANYID" ColumnName="COMPANYID" />
+                <ScalarProperty Name="USERTOKEN" ColumnName="USERTOKEN" />
+                <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CELLPHONE" ColumnName="CELLPHONE" />
+                <ScalarProperty Name="WORKINGDAYS" ColumnName="WORKINGDAYS" />
+                <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
+                <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
+                <ScalarProperty Name="EMERGENCYCONTACT" ColumnName="EMERGENCYCONTACT" />
+                <ScalarProperty Name="EMERGENCYCONTACTNO" ColumnName="EMERGENCYCONTACTNO" />
+                <ScalarProperty Name="ONLINESTATUS" ColumnName="ONLINESTATUS" />
+                <ScalarProperty Name="ONLINESTATUSCHANGETIME" ColumnName="ONLINESTATUSCHANGETIME" />
+                <ScalarProperty Name="ISCONTRACTOR" ColumnName="ISCONTRACTOR" />
+                <ScalarProperty Name="BASE_LATITUDE" ColumnName="BASE_LATITUDE" />
+                <ScalarProperty Name="BASE_LONGITUDE" ColumnName="BASE_LONGITUDE" />
+                <ScalarProperty Name="DEFAULT_GROUP" ColumnName="DEFAULT_GROUP" />
+                <ScalarProperty Name="ID1" ColumnName="ID1" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
                 <ScalarProperty Name="LAT" ColumnName="LAT" />
-                <ScalarProperty Name="USERID" ColumnName="USERID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblStopTrackings">
-            <EntityTypeMapping TypeName="QCONZModel.tblStopTracking">
-              <MappingFragment StoreEntitySet="tblStopTracking">
+                <ScalarProperty Name="LNG" ColumnName="LNG" />
                 <ScalarProperty Name="LOGTIME" ColumnName="LOGTIME" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="HOURS" ColumnName="HOURS" />
-                <ScalarProperty Name="USERID" ColumnName="USERID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

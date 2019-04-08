@@ -220,6 +220,34 @@ namespace QconzLocateDAL.QConzRepository
             }
         }
 
+        public string SaveNotificationToken(string notificationToken,int userId)
+        {
+            try
+            {
+                if (entity.tblNotifications.Any(t => t.USERID ==userId))
+                {
+                    var y = entity.tblNotifications.FirstOrDefault(t => t.USERID == userId);
+                    y.TOKEN = notificationToken;
+                }
+                else
+                {
+                    var notification = new tblNotification()
+                    {
+                        USERID = userId,
+                        TOKEN = notificationToken
+                    };
+                    entity.tblNotifications.Add(notification);
+                }
+               
+                entity.SaveChanges();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return "Error";
+            }
+        }
+
         public UserModel GetUserDetailsByName(string username,string password)
         {
             try
@@ -267,34 +295,66 @@ namespace QconzLocateDAL.QConzRepository
         {
             try
             {
+                List<tblUserLog> userLog = entity.tblUserLogs.GroupBy(u => u.USERID).Select(t => t.OrderByDescending(c => c.ID).Where(t1 => t1.LAT.ToLower() != "unknown" && t1.LNG.ToLower() != "unknown").FirstOrDefault()).ToList();
+                userLog.RemoveAll(item => item == null);
                 var x = (int)(from t in entity.tblUserMasters where t.ID == userId select t.DEFAULT_GROUP).FirstOrDefault();
-                var y = (from t in entity.tblUserMasters
-                         join t1 in entity.tblUserTeams on t.ID equals t1.USERID where t1.TEAMID == x && t.ID != userId && t.USERSTATUS == "A" && t.USERTYPE > 1 && t.USERTYPE != 5
-               
+                var y = (from t in userLog
+                         join t1 in entity.tblUserMasters on t.USERID equals t1.ID
+                         join t2 in entity.tblUserTeams on t1.ID equals t2.USERID
+                         where t2.TEAMID == x && t1.ID != userId && t1.USERSTATUS == "A" && t1.USERTYPE > 1 && t1.USERTYPE != 5
                          select new UserModel
                          {
-                             Id = t.ID,
-                             Cellphone = t.CELLPHONE,
-                             CompanyId = t.COMPANYID,
-                             EmergencyContact = t.EMERGENCYCONTACT,
-                             EmergencyContactNo = t.EMERGENCYCONTACTNO,
-                             Email = t.EMAIL,
-                             EndTime = t.ENDTIME,
-                             FirstName = t.FIRSTNAME,
-                             Password = t.PASSWORD,
-                             StartTime = t.STARTTIME,
-                             SurName = t.SURNAME,
-                             UserName = t.USERNAME,
-                             UserStatus = t.USERSTATUS,
-                             UserTeamId = t.USERTEAMID,
-                             UserToken = t.USERTOKEN,
-                             UserType = t.USERTYPE,
-                             WorkingDays = t.WORKINGDAYS,
-                             BaseLatitude = t.BASE_LATITUDE,
-                             BaseLongitude = t.BASE_LONGITUDE,
-                             DefaultGroup = t.DEFAULT_GROUP,
-                             IsContractor = t.ISCONTRACTOR
+                             Id = t1.ID,
+                             Cellphone = t1.CELLPHONE,
+                             CompanyId = t1.COMPANYID,
+                             EmergencyContact = t1.EMERGENCYCONTACT,
+                             EmergencyContactNo = t1.EMERGENCYCONTACTNO,
+                             Email = t1.EMAIL,
+                             EndTime = t1.ENDTIME,
+                             FirstName = t1.FIRSTNAME,
+                             Password = t1.PASSWORD,
+                             StartTime = t1.STARTTIME,
+                             SurName = t1.SURNAME,
+                             UserName = t1.USERNAME,
+                             UserStatus = t1.USERSTATUS,
+                             UserTeamId = t1.USERTEAMID,
+                             UserToken = t1.USERTOKEN,
+                             UserType = t1.USERTYPE,
+                             WorkingDays = t1.WORKINGDAYS,
+                             BaseLatitude = t.LAT,
+                             BaseLongitude = t.LNG,
+                             DefaultGroup = t1.DEFAULT_GROUP,
+                             IsContractor = t1.ISCONTRACTOR
                          }).ToList();
+
+
+                //var y = (from t in entity.tblUserMasters
+                //         join t1 in entity.tblUserTeams on t.ID equals t1.USERID where t1.TEAMID == x && t.ID != userId && t.USERSTATUS == "A" && t.USERTYPE > 1 && t.USERTYPE != 5
+                //         join t2 in userLog on t.ID equals t2.USERID
+                //         select new UserModel
+                //         {
+                //             Id = t.ID,
+                //             Cellphone = t.CELLPHONE,
+                //             CompanyId = t.COMPANYID,
+                //             EmergencyContact = t.EMERGENCYCONTACT,
+                //             EmergencyContactNo = t.EMERGENCYCONTACTNO,
+                //             Email = t.EMAIL,
+                //             EndTime = t.ENDTIME,
+                //             FirstName = t.FIRSTNAME,
+                //             Password = t.PASSWORD,
+                //             StartTime = t.STARTTIME,
+                //             SurName = t.SURNAME,
+                //             UserName = t.USERNAME,
+                //             UserStatus = t.USERSTATUS,
+                //             UserTeamId = t.USERTEAMID,
+                //             UserToken = t.USERTOKEN,
+                //             UserType = t.USERTYPE,
+                //             WorkingDays = t.WORKINGDAYS,
+                //             BaseLatitude = t2.LAT,
+                //             BaseLongitude = t2.LNG,
+                //             DefaultGroup = t.DEFAULT_GROUP,
+                //             IsContractor = t.ISCONTRACTOR
+                //         }).ToList();
                 return y;
             }
             catch (Exception ex)

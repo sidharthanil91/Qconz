@@ -15,6 +15,18 @@
 @Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")*@
 <style>
     hr { margin: 0.1em auto; }
+    textarea {
+    resize: none;
+}
+    a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
 </style>
 <div class="box-body">
     <div class="row" style="margin-bottom:15px;">
@@ -24,7 +36,7 @@
                     <label for="exampleInputEmail1">Customer search</label>
                     @*<div class="input-group input-group-sm">*@
                         <select id="User" class="form-control select2" value="" style="width: 100%;">
-                            <option></option>
+                            <option value="-1">Select Any</option>
                         </select>
                     @*</div>*@
                 </div>
@@ -225,7 +237,10 @@
                     zoom: 6,
                     //center: new google.maps.LatLng(markers[0].Lat, markers[0].Lng),
                     center: new google.maps.LatLng(-39.9006,174.8860),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    fullscreenControl: false
                 };
                 var map = new google.maps.Map(document.getElementById('googleMap'),
                    mapOptions);
@@ -235,7 +250,10 @@
             var mapOptions = {
                 center: new google.maps.LatLng(-38.9006,174.8860),
                 zoom: 5,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                streetViewControl: false,
+                fullscreenControl: false
             };
            
             var infoWindow = new google.maps.InfoWindow();

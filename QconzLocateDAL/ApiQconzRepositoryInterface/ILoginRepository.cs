@@ -10,7 +10,7 @@ namespace QconzLocateDAL.ApiQconzRepositoryInterface
     public interface ILoginRepository
     {
         int ValidateUser(LoginModel Login);
-        void SaveToken(string Token,int UserId);
+        void SaveToken(string Token,int UserId, string DevicId);
         bool ValidateToken(string Token, int UserId);
     }
 }

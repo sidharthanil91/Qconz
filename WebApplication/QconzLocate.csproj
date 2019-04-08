@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HomePageSearchController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationTokenController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Controllers\SessionExpireFilterAttribute.cs" />
     <Compile Include="Controllers\StopTrackingController.cs" />

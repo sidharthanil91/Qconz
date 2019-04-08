@@ -12,6 +12,7 @@ namespace QconzLocateService.QconzLocateInterface
         List<UserServiceModel> GetAllUsers(int CompanyId,string Status);
         UserServiceModel GetUserDetails(int Id);
         List<UserServiceModel> GetUserTeamDetails(int UserId);
+        string SaveNotificationDetails(string notificationToken, int userId);
         string SaveUserDetails(UserServiceModel UserModel);
         UserServiceModel GetUserDetailsByName(string username,string password);
         

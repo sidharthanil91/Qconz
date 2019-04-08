@@ -144,10 +144,10 @@ namespace QconzLocateDAL.QConzRepository
             {
                 var CompanyId = CustomerModel.Select(t => t.CompanyId).FirstOrDefault();
                 var customers = entity.tblCustomers.Where(c => c.COMPANYID == CompanyId);
-                foreach (var item in customers)
-                {
-                    entity.tblCustomers.Remove(item);
-                }
+                //foreach (var item in customers)
+                //{
+                //    entity.tblCustomers.Remove(item);
+                //}
                 foreach (var item in CustomerModel)
                 {
                     var customer = new tblCustomer()
